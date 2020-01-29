@@ -1,7 +1,7 @@
 # The primary author of this blog.
 # Must be the same as `author` in `_config.yml`.
 # Change `qwtel` to your shortname (used in the front matter to set a page's author, e.g. `author: qwtel`).
-인생을 여행처럼: # 여기에 블로그 제목 넣기
+jjang-kor: # 여기에 블로그 제목 넣기
   name:              yoonseo
   email:             ysjang0926@gmail.com
 
