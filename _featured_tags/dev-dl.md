@@ -4,5 +4,5 @@ title: Deep Learning
 slug: dl
 category: dev
 menu: false
-order: 2
+order: 3
 ---
