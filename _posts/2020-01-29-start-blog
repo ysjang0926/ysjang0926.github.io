@@ -1,8 +1,9 @@
 ---
 layout: post
-title: "Test Posting"
-subtitle: "Test Posting 입니다."
+title:  "[Jekyll Blog] GitHub & Jekyll 사용법"
+subtitle:   "GitHub & Jekyll"
 categories: think
+tags: blog github 
 comments: true
 ---
 
