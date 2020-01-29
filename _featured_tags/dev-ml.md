@@ -1,6 +1,6 @@
 ---
 layout: tag-blog
-title: ML
+title: Machine Learning
 slug: ml
 category: dev
 menu: false
