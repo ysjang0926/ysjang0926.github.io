@@ -8,7 +8,7 @@ jjang-kor: # 여기에 블로그 제목 넣기
   # Used at the bottom of each page and at the top of the `about` layout
   # Markdown enabled, can use multiple paragraphs (enabled by `|`)
   about:             |
-    꼬꼬마 데이터 분석가.
+    나는야 우주의 먼지 👩‍🚀
 
   # This photo will be used in the about section
   picture:
