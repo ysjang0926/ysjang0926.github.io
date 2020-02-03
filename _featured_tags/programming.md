@@ -1,7 +1,7 @@
 ---
 layout: tag-blog
-title: Review
-slug: review
+title: rogramming
+slug: programming
 category: review
 menu: false
 order: 1
