@@ -1,6 +1,6 @@
 ---
 layout: tag-blog
-title: rogramming
+title: Programming
 slug: programming
 category: review
 menu: false
