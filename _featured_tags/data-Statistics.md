@@ -1,7 +1,7 @@
 ---
 layout: tag-blog
-title: Statistics & R
-slug: r
+title: Statistics
+slug: stat
 category: data
 menu: false
 order: 1
