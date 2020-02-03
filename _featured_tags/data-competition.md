@@ -2,7 +2,7 @@
 layout: tag-blog
 title: Kaggle
 slug: kaggle
-category: dev
+category: data
 menu: false
 order: 4
 ---
