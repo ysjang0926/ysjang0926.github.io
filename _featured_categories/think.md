@@ -6,5 +6,5 @@ menu: true
 submenu: false
 order: 2
 description: >
-  일기장과 평소 쓰고 싶었던 글.  
+  평소 쓰고 싶었던 글(+일기장).  
 ---
