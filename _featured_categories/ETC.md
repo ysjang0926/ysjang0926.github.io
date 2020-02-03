@@ -1,7 +1,7 @@
 ---
 layout: list
-title: Favorites
-slug: favorites
+title: ETC
+slug: etc
 menu: true
 submenu: false
 order: 4
