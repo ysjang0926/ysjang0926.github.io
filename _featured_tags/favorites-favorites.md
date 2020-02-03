@@ -1,8 +1,8 @@
 ---
 layout: tag-blog
-title: Favorites
-slug: favorites
-category: favorites
+title: ETC
+slug: etc
+category: etc
 menu: false
 order: 1
 ---
