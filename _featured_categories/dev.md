@@ -6,5 +6,5 @@ menu: true
 submenu: true
 order: 1
 description: >
-  분석에 관련된 모든 것.  
+  데이터와 관련된 글.
 ---
