@@ -2,7 +2,7 @@
 layout: tag-blog
 title: Statistics & R
 slug: r
-category: dev
+category: data
 menu: false
 order: 1
 ---
