@@ -12,7 +12,7 @@ comments: true
 [해커랭크(HackerRank)](https://www.hackerrank.com)에 대한 설명은 아래와 같다.
 
 ![hackerrank_intro](https://user-images.githubusercontent.com/54492747/75644241-f7242100-5c84-11ea-8ac5-cc024d37e3a3.PNG)
-(출처: https://ko.wikipedia.org/wiki/%ED%95%B4%EC%BB%A4%EB%9E%AD%ED%81%AC)
+(출처: <https://ko.wikipedia.org/wiki/%ED%95%B4%EC%BB%A4%EB%9E%AD%ED%81%AC>)
 <br>
 
 여러 프로그래밍 언어(Python, SQL, etc.)로 주어진 문제들을 풀면서 점수(Hackos)도 쌓고 프로그래밍 실력을 키울 수 있는 좋은 사이트이다. 또한 **문제가 영어**로 되어있어서 영어 독해 실력도 늘릴 겸 좋은 것 같다.
