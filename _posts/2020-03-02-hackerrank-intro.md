@@ -70,8 +70,8 @@ Solve Challenge를 누르면 아래와 같이 뜨며, Current Buffer에 답안�
 * Current Buffer : 답안 쓰는 공간 
 ![hackerrank_solve](https://user-images.githubusercontent.com/54492747/75650853-825be180-5c9a-11ea-814d-a366b55e1503.PNG)
 
-이것 외에도 [내 계정>Hackos]를 클릭하면 나의 전체 점수(Hackos)와 내가 풀었던 문제와 그에 해당하는 점수를 확인할 수 있고, [내 계정>Profile>Submissions]에서 git처럼 커밋 잔디를 심어서 문제를 푼 날짜와 횟수를 확인할 수 있습니다.
+이것 외에도 [내 계정>Hackos]를 클릭하면 나의 전체 점수(Hackos)와 내가 풀었던 문제와 그에 해당하는 점수를 확인할 수 있고, [내 계정>Profile>Submissions]에서 git처럼 커밋 잔디를 심어서 문제를 푼 날짜와 횟수를 확인할 수 있다.
 
 <br>
 
-매일 초록 잔디를 심을 수 !🌱
+매일 초록 잔디를 심을 수 있길!🌱
