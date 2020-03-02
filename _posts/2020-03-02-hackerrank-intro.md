@@ -1,3 +1,3 @@
-![](../assets/img/programming/hackerrank_intro.PNG "하얀 강아지")
+![해커랭크](../assets/img/programming/hackerrank_intro.PNG "하얀 강아지")
 haha
 {:.figure}
