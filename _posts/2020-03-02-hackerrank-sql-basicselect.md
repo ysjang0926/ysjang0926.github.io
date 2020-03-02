@@ -22,6 +22,7 @@ SELECT*
 FROM CITY
 WHERE POPULATION>=100000 AND COUNTRYCODE='USA'
 ```
+
 ---
 
 ###  <font color = "#EFC050"> Revising the Select Query 2 </font>    
@@ -41,6 +42,7 @@ WHERE POPULATION>=120000 AND COUNTRYCODE='USA'
   
 [문제 링크](https://www.hackerrank.com/challenges/select-all-sql/problem) <br>
 CITY 테이블에서 모든 행에 대한 모든 열(속성)을 조회.
+
 ```sql  
 SELECT *
 FROM CITY
@@ -51,6 +53,7 @@ FROM CITY
   
 [문제 링크](https://www.hackerrank.com/challenges/select-by-id/problem) <br>
 CITY 테이블에서 ID가 1661인  도시의 모든 열을 조회.
+
 ```sql  
 SELECT *
 FROM CITY
@@ -62,6 +65,7 @@ WHERE ID=1661
   
 [문제 링크](https://www.hackerrank.com/challenges/japanese-cities-attributes/problem) <br>
 CITY 테이블에서 모든 일본 도시의 속성을 조회. 일본의 국가코드(CountryCode)는 'JPN'.
+
 ```sql  
 SELECT *
 FROM CITY
@@ -73,6 +77,7 @@ WHERE COUNTRYCODE='JPN'
   
 [문제 링크](https://www.hackerrank.com/challenges/japanese-cities-name/problem) <br>
 CITY 테이블에서 모든 일본 도시 이름(Name)들을 조회. 일본의 국가코드(CountryCode)는 'JPN'.
+
 ```sql  
 SELECT NAME
 FROM CITY
@@ -84,6 +89,7 @@ WHERE COUNTRYCODE='JPN'
   
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-1/problem) <br>
 STATION 테이블에서 CITY와 STATE 목록을 조회.
+
 ```sql  
 SELECT CITY, STATE
 FROM STATION 
@@ -94,6 +100,7 @@ FROM STATION
   
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-2/problem) <br>
 STATION 테이블에서 CITY와 STATE를 조회.
+
 ```sql  
 SELECT CITY, STATE
 FROM STATION 
@@ -106,6 +113,7 @@ FROM STATION
 STATION 테이블에서 ID값이 짝수인 CITY 이름(Name)을 조회 (단, 중복된 값은 제외) 
 * `DISTINCT` : 지정한 열의 데이터가 중복될 경우 중복된 값을 제거하고 한개씩만 반환
 * `MOD(m,n)` : m을 n으로 나누었을 때 나머지를 반환
+
 ```sql  
 SELECT DISTINCT CITY
 FROM STATION
@@ -117,10 +125,12 @@ WHERE MOD(ID,2)=0
   
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-4/problem)  <br>
 STATION 테이블에서 CITY 이름의 총 개수와 중복된 CITY 이름을 제외한 개수의 차이값을 조회. 
+
 ```sql  
 SELECT COUNT(CITY)-COUNT(DISTINCT CITY) AS DIFF
 FROM STATION
-```    
+```  
+
 ---
 
 ###  <font color = "#EFC050"> Weather Observation Station5 </font>    
@@ -139,6 +149,7 @@ FROM STATION
 ORDER BY LENGTH(CITY) DESC, CITY ASC
 LIMIT 1
 ```
+
 <U>(2) 가장 짧은 CITY 이름과 길이</U>
 ```sql
 SELECT CITY, LENGTH(CITY) AS LEN
@@ -157,6 +168,7 @@ STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작�
 
  <U>SOL1) SUBSTR 답안 </U>
 * `SUBSTR("문자열","시작위치","길이")` : 문자단위로 시작위치와 자를 길이를 지정하여 문자열을 자름
+
 ```sql   
 SELECT DISTINCT CITY 
 FROM STATION
@@ -174,15 +186,18 @@ WHERE SUBSTR(CITY, 1, 1) IN ('A', 'E', 'I', 'O', 'U')
 		* A를 포함하는 문자 찾기 : '%A%' 
 		* A로 시작하는 두글자 문자 찾기 : 'A_'
 		* 첫번째 문자가 'A'가 아닌 모든 문자열 찾기 : '[^A]'    
+
 ```sql   
 SELECT DISTINCT CITY 
 FROM STATION
 WHERE CITY LIKE 'A%' OR CITY LIKE 'E%' OR # A% = A로 시작하는 문자를 찾기
         CITY LIKE 'I%' OR CITY LIKE 'O%' OR CITY LIKE 'U%';
 ```  
+
 <U>SOL3) REGEXP 답안  </U>
 * `REGEXP` 연산자 : 정규 표현식을 토대로 하는 패턴 매칭 연산을 제공
 	* [연산자 패턴](http://tcpschool.com/mysql/mysql_operator_patternMatching)
+
 ```sql  
 SELECT DISTINCT CITY
 FROM STATION
@@ -195,13 +210,14 @@ WHERE CITY REGEXP '^[aeiou]'
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-7/problem)  <br>
 STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 끝나는 것만 조회. 중복없이 출력할 것. 
 
- <U>SOL1) SUBSTR 답안 </U>
+<U>SOL1) SUBSTR 답안 </U>
 ```sql
 SELECT DISTINCT CITY 
 FROM STATION
 WHERE SUBSTR(CITY, -1, 1) IN ('A', 'E', 'I', 'O', 'U')
 ``` 
- <U>SOL2) REGEXP 답안 </U>
+
+<U>SOL2) REGEXP 답안 </U>
 ```sql   
 SELECT DISTINCT CITY FROM STATION
 WHERE CITY REGEXP '[aeiou]$'
@@ -213,13 +229,14 @@ WHERE CITY REGEXP '[aeiou]$'
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-8/problem)  <br>
 STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하고 끝나는 것을 조회. 중복없이 출력할 것. 
 
- <U>SOL1) SUBSTR 답안 </U>
+U>SOL1) SUBSTR 답안 </U>
 ```sql
 SELECT DISTINCT CITY 
 FROM STATION
 WHERE SUBSTR(CITY, -1, 1) IN ('A', 'E', 'I', 'O', 'U') AND SUBSTR(CITY, 1, 1) IN ('A', 'E', 'I', 'O', 'U')
 ``` 
- <U>SOL2) REGEXP 답안 </U>      
+
+<U>SOL2) REGEXP 답안 </U>      
 ```sql   
 SELECT DISTINCT CITY
 FROM STATION
@@ -233,12 +250,13 @@ WHERE CITY REGEXP '^[aeiou]' AND CITY REGEXP '[aeiou]$'
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-9/problem)  <br> 
 STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하지 않는 것만 조회. 중복없이 출력할 것.  
 
- <U>SOL1) SUBSTR 답안 </U>
+<U>SOL1) SUBSTR 답안 </U>
 ```sql   
 SELECT DISTINCT CITY 
 FROM STATION
 WHERE SUBSTR(CITY, 1, 1) NOT IN ('A', 'E', 'I', 'O', 'U')
-```  
+```
+
 <U>SOL2) LIKE 답안 </U>   
 ```sql   
 SELECT DISTINCT CITY 
@@ -246,6 +264,7 @@ FROM STATION
 WHERE NOT (CITY LIKE 'A%' OR CITY LIKE 'E%' OR
            CITY LIKE 'I%' OR CITY LIKE 'O%' OR CITY LIKE 'U%')
 ```  
+
 <U>SOL3) REGEXP 답안  </U>
 ```sql  
 SELECT DISTINCT CITY FROM STATION
@@ -259,13 +278,14 @@ WHERE CITY NOT REGEXP '^[aeiou]'
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-10/problem)  <br>
 STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 끝나지 않는 것만 조회. 중복없이 출력할 것. 
 
- <U>SOL1) SUBSTR 답안 </U>
+<U>SOL1) SUBSTR 답안 </U>
 ```sql
 SELECT DISTINCT CITY 
 FROM STATION
 WHERE SUBSTR(CITY, -1, 1) NOT IN ('A', 'E', 'I', 'O', 'U')
-``` 
- <U>SOL2) REGEXP 답안 </U>
+```
+
+<U>SOL2) REGEXP 답안 </U>
 ```sql   
 SELECT DISTINCT CITY FROM STATION
 WHERE CITY NOT REGEXP '[aeiou]$'
@@ -278,13 +298,14 @@ WHERE CITY NOT REGEXP '[aeiou]$'
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-11/problem)  <br>
 STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하지 않거나 끝나지 않는 것을 조회. 중복없이 출력할 것. 
 
- <U>SOL1) SUBSTR 답안 </U>
+<U>SOL1) SUBSTR 답안 </U>
 ```sql
 SELECT DISTINCT CITY 
 FROM STATION
 WHERE SUBSTR(CITY, -1, 1) NOT IN ('A', 'E', 'I', 'O', 'U') OR SUBSTR(CITY, 1, 1) NOT IN ('A', 'E', 'I', 'O', 'U')
 ``` 
- <U>SOL2) REGEXP 답안 </U>      
+
+<U>SOL2) REGEXP 답안 </U>      
 ```sql   
 SELECT DISTINCT CITY
 FROM STATION
@@ -298,14 +319,14 @@ WHERE CITY NOT REGEXP '^[aeiou]' OR CITY NOT REGEXP '[aeiou]$'
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-12/problem)  <br>
 STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하지 않고 끝나지 않는 것을 조회. 중복없이 출력할 것. 
 
-
- <U>SOL1) SUBSTR 답안 </U>
+<U>SOL1) SUBSTR 답안 </U>
 ```sql
 SELECT DISTINCT CITY 
 FROM STATION
 WHERE SUBSTR(CITY, -1, 1) NOT IN ('A', 'E', 'I', 'O', 'U') AND SUBSTR(CITY, 1, 1) NOT IN ('A', 'E', 'I', 'O', 'U')
 ``` 
- <U>SOL2) REGEXP 답안 </U>      
+
+<U>SOL2) REGEXP 답안 </U>      
 ```sql   
 SELECT DISTINCT CITY
 FROM STATION
@@ -319,6 +340,7 @@ WHERE CITY NOT REGEXP '^[aeiou]' AND CITY NOT REGEXP '[aeiou]$'
 [문제 링크](https://www.hackerrank.com/challenges/more-than-75-marks/problem)   <br>
 STUDNETS 테이블에서 점수(MARKS)가 75점보다 큰 학생들의 이름을 조회.
 이름(NAME)에서 마지막 3문자를 기준으로 정렬하고 만약 마지막 3문자가 같은 학생이 두 명 이상 있으면(i.e.: Bobby, Robby, etc.) ID를 기준으로 증가하는 순으로 정렬.
+
 ```sql  
 SELECT NAME
 FROM STUDENTS
@@ -332,6 +354,7 @@ ORDER BY SUBSTR(NAME,-3) ASC, ID ASC
   
 [문제 링크](https://www.hackerrank.com/challenges/name-of-employees/problem)     <br>   
 EMPLOYEE 테이블에서 모든 직원들의 이름을 알파벳 순서대로(A→Z) 조회.  
+
 ```sql    
 SELECT NAME
 FROM EMPLOYEE
