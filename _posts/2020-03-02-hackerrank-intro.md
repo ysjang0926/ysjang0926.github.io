@@ -42,6 +42,7 @@ For Developers의 [Sign Up & Code] 부분을 클릭하면 따로 가입할 필�
 - 구글
 - 링크드인
 - Git hub
+
 ![hackerrank_login](https://user-images.githubusercontent.com/54492747/75649572-ebd9f100-5c96-11ea-94ee-b3d48b700e80.PNG)
 
 #### 3. Dashboard
