@@ -16,7 +16,6 @@ SQL 퀴즈 중 제일 간단한 파트인 **Basic Select**이다.
      
 [문제 링크](https://www.hackerrank.com/challenges/revising-the-select-query/problem) <br>
 CITY 테이블에서 인구(Population)가 100,000보다 많은 모든 미국 도시 데이터들을 조회. 미국의 국가코드(CountryCode)는 'USA'.
-     
 ```sql  
 SELECT*
 FROM CITY
