@@ -317,12 +317,13 @@ WHERE CITY NOT REGEXP '^[aeiou]' AND CITY NOT REGEXP '[aeiou]$'
 ###  <font color = "#EFC050"> Higher Than 75 Marks </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/more-than-75-marks/problem)   <br>
-STUDNETS 테이블에서 점수가 75점보다 큰 학생들의 이름을 조회.  
-이름에서 마지막 3문자를 기준으로 정렬하고, 만약 이름의 끝 3글자가 같은 학생이 있으면(ex: Bobby, Robby)   
-ID를 기준으로 증가하는 순으로 정렬.   
+STUDNETS 테이블에서 점수(MARKS)가 75점보다 큰 학생들의 이름을 조회.
+이름(NAME)에서 마지막 3문자를 기준으로 정렬하고 만약 마지막 3문자가 같은 학생이 두 명 이상 있으면(i.e.: Bobby, Robby, etc.) ID를 기준으로 증가하는 순으로 정렬.
 ```sql  
-SELECT NAME FROM STUDENTS WHERE MARKS > 75
-ORDER BY SUBSTR(NAME, -3) ASC, ID ASC;
+SELECT NAME
+FROM STUDENTS
+WHERE MARKS>75
+ORDER BY SUBSTR(NAME,-3) ASC, ID ASC
 ```
 
 ---
