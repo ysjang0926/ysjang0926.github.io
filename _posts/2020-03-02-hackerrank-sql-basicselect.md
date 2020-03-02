@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "HackerRank: SQL Basic Select"
+title:  "[HackerRank] SQL Basic Select"
 subtitle:   "HackerRank: SQL Basic Select"
 categories: programming
 tags: sql
 comments: true
 ---
 
-## HackerRank: SQL(Basic Select)
+## HackerRank - SQL Basic Select
 - - -
 
 SQL 퀴즈 중 제일 간단한 파트인 **Basic Select**이다.
