@@ -104,7 +104,7 @@ SELECT DISTINCT CITY
 FROM STATION
 WHERE MOD(ID,2)=0
 ```
-- - -    
+---    
 ###  <font color = "#EFC050"> Weather Observation Station4 </font>    
   
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-4/problem) 
@@ -113,7 +113,7 @@ STATION 테이블에서 CITY 이름의 총 개수와 중복된 CITY 이름을 �
 SELECT COUNT(CITY)-COUNT(DISTINCT CITY) AS DIFF
 FROM STATION
 ```    
-- - -  
+--- 
 ###  <font color = "#EFC050"> Weather Observation Station5 </font>    
     
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-5/problem) 
@@ -122,12 +122,13 @@ STATION 테이블에서 가장 짧은 CITY 이름과 가장 긴 CITY 이름과 �
 * 이 문제는 나름 헤맸다...
 * HANA SQL은 `TOP 1`을 통해 첫 번째 행을 추출할 수 있는데 MySQL은 `LIMIT 1`을 사용해야한다.
 * ORDER BY에서 `DESC`는 내림차순(큰 값부터 작은 값 쪽으로의 순서)이고 `ASC`는 오름차순(작은 값부터 큰 값 쪽으로의 순서)이다.
+
 ```sql
 # 가장 긴 CITY 이름과 길이   
 SELECT CITY, LENGTH(CITY) AS LEN
 FROM STATION
 ORDER BY LENGTH(CITY) DESC, CITY ASC
-LIMIT 1;
+LIMIT 1
 
 # 가장 짧은 CITY 이름과 길이
 SELECT CITY, LENGTH(CITY) AS LEN
@@ -135,6 +136,7 @@ FROM STATION
 ORDER BY LENGTH(CITY), CITY ASC
 LIMIT 1
 ``` 
+
 - - -      
 ###  <font color = "#EFC050"> Weather Observation Station6 </font>    
    
@@ -149,6 +151,7 @@ SELECT DISTINCT CITY
 FROM STATION
 WHERE SUBSTR(CITY, 1, 1) IN ('A', 'E', 'I', 'O', 'U')
 ```  
+
 <U>SOL2) LIKE 답안 </U>   
 * `WHERE [컬럼명] LIKE [조건]`  : 쿼리문 WHERE절에 주로 사용되며 부분적으로 일치하는 칼럼을 찾을때 사용
 * [조건]에 들어가는 것은 아래와 같다.
