@@ -7,7 +7,7 @@ tags: hackerrank
 comments: true
 ---
 
-올해부터는 꾸준히 **해커랭크(HackerRank)** 라는 온라인 코딩 문제풀이 사이트를 통해 공부를 하려고 한다.
+올해부터는 꾸준히 **해커랭크(HackerRank)**라는 온라인 코딩 문제풀이 사이트를 통해 공부를 하려고 한다.
 
 [해커랭크(HackerRank)](https://www.hackerrank.com)에 대한 설명은 아래와 같다.
 
