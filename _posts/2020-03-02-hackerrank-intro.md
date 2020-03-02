@@ -59,6 +59,7 @@ For Developers의 [Sign Up & Code] 부분을 클릭하면 따로 가입할 필�
 * STATUS : 문제 도전 여부(Solved/Solve Challenge)
 * DIFFICULTY : 문제의 난이도(Easy/Medium/Hard)
 * SUBDOMAINS : 하위 도메인(Basic Select/Advanced Select/...)
+
 SUBDOMIANS의 경우 SQL 내 문제들을 각 하위 도메인에 맞게 분류되어 있다. 예를 들어 join 부분을 더 익히고 싶다면 Basic Join이나 Advanced Join을 선택하여 문제를 풀면 된다.
 ![hackerrank_sql](https://user-images.githubusercontent.com/54492747/75650180-930b5800-5c98-11ea-8f97-95d2d5a4dbae.PNG)
 
