@@ -228,7 +228,7 @@ WHERE CITY REGEXP '[aeiou]$'
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-8/problem)  <br>
 STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하고 끝나는 것을 조회. 중복없이 출력할 것. 
 
-U>SOL1) SUBSTR 답안 </U>
+<U>SOL1) SUBSTR 답안 </U>
 ```sql
 SELECT DISTINCT CITY 
 FROM STATION
