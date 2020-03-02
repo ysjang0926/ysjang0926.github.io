@@ -176,12 +176,11 @@ SELECT DISTINCT CITY
 FROM STATION
 WHERE CITY REGEXP '^[aeiou]'
 ```     
-------
+---
 ### <font color = "#EFC050"> Weather Observation Station7 </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-7/problem)  <br>
-STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 끝나는 것만 조회.  
-중복없이 출력할 것. 
+STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 끝나는 것만 조회. 중복없이 출력할 것. 
 
  <U>SOL1) SUBSTR 답안 </U>
 ```sql
@@ -198,8 +197,7 @@ WHERE CITY REGEXP '[aeiou]$'
 ### <font color = "#EFC050"> Weather Observation Station8 </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-8/problem)  <br>
-STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하고 끝나는 것을 조회.  
-중복없이 출력할 것. 
+STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하고 끝나는 것을 조회. 중복없이 출력할 것. 
 
  <U>SOL1) SUBSTR 답안 </U>
 ```sql
@@ -218,8 +216,7 @@ WHERE CITY REGEXP '^[aeiou]' AND CITY REGEXP '[aeiou]$'
 ###  <font color = "#EFC050"> Weather Observation Station9 </font>    
 
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-9/problem)  <br> 
-STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하지 않는 것만 조회.  
-중복없이 출력할 것.  
+STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하지 않는 것만 조회. 중복없이 출력할 것.  
 
  <U>SOL1) SUBSTR 답안 </U>
 ```sql   
@@ -243,8 +240,7 @@ WHERE CITY NOT REGEXP '^[aeiou]'
 ### <font color = "#EFC050"> Weather Observation Station10 </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-10/problem)  <br>
-STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 끝나지 않는 것만 조회.  
-중복없이 출력할 것. 
+STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 끝나지 않는 것만 조회. 중복없이 출력할 것. 
 
  <U>SOL1) SUBSTR 답안 </U>
 ```sql
@@ -261,8 +257,7 @@ WHERE CITY NOT REGEXP '[aeiou]$'
 ###  <font color = "#EFC050"> Weather Observation Station11 </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-11/problem)  <br>
-STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하지 않거나 끝나지 않는 것을 조회.
-중복없이 출력할 것. 
+STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하지 않거나 끝나지 않는 것을 조회. 중복없이 출력할 것. 
 
  <U>SOL1) SUBSTR 답안 </U>
 ```sql
@@ -280,8 +275,7 @@ WHERE CITY NOT REGEXP '^[aeiou]' OR CITY NOT REGEXP '[aeiou]$'
 ###  <font color = "#EFC050"> Weather Observation Station12 </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-12/problem)  <br>
-STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하지 않고 끝나지 않는 것을 조회.
-중복없이 출력할 것. 
+STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하지 않고 끝나지 않는 것을 조회. 중복없이 출력할 것. 
 
 
  <U>SOL1) SUBSTR 답안 </U>
@@ -323,8 +317,7 @@ ORDER BY NAME
 ###  <font color = "#EFC050"> Employee Salaries </font>     
    
 [문제 링크](https://www.hackerrank.com/challenges/salary-of-employees/problem)   <br>
-EMPLOYEE 테이블에서 month 값이 10(달)보다 작으면서 급여(SALARY )가 2,000$보다 큰 모든 직원들의 이름을 조회.  
-EMPLOYEE_ID 기준 오름차순으로 정렬.  
+EMPLOYEE 테이블에서 month 값이 10(달)보다 작으면서 급여(SALARY )가 2,000$보다 큰 모든 직원들의 이름을 조회. EMPLOYEE_ID 기준 오름차순으로 정렬.  
 ```sql  
 SELECT NAME
 FROM EMPLOYEE
