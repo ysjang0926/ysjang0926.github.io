@@ -7,7 +7,7 @@ tags: sql
 comments: true
 ---
 
-> HackerRank - SQL Basic Select
+## HackerRank - SQL Basic Select
 
 SQL 퀴즈 중 제일 간단한 파트인 **Basic Select**이다.
 맛보기 용으로 뚝딱하고 다음 레벨 퀴즈 도전하는 걸로 고고!
@@ -104,7 +104,7 @@ SELECT DISTINCT CITY
 FROM STATION
 WHERE MOD(ID,2)=0
 ```
----    
+---
 ###  <font color = "#EFC050"> Weather Observation Station4 </font>    
   
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-4/problem) 
@@ -123,21 +123,22 @@ STATION 테이블에서 가장 짧은 CITY 이름과 가장 긴 CITY 이름과 �
 * HANA SQL은 `TOP 1`을 통해 첫 번째 행을 추출할 수 있는데 MySQL은 `LIMIT 1`을 사용해야한다.
 * ORDER BY에서 `DESC`는 내림차순(큰 값부터 작은 값 쪽으로의 순서)이고 `ASC`는 오름차순(작은 값부터 큰 값 쪽으로의 순서)이다.
 
+<U>(1) 가장 긴 CITY 이름과 길이</U>
 ```sql
-# 가장 긴 CITY 이름과 길이   
 SELECT CITY, LENGTH(CITY) AS LEN
 FROM STATION
 ORDER BY LENGTH(CITY) DESC, CITY ASC
 LIMIT 1
-
-# 가장 짧은 CITY 이름과 길이
+```
+<U>(2) 가장 짧은 CITY 이름과 길이</U>
+```sql
 SELECT CITY, LENGTH(CITY) AS LEN
 FROM STATION
 ORDER BY LENGTH(CITY), CITY ASC
 LIMIT 1
 ``` 
 
-- - -      
+------
 ###  <font color = "#EFC050"> Weather Observation Station6 </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-6/problem)   
@@ -177,8 +178,8 @@ SELECT DISTINCT CITY
 FROM STATION
 WHERE CITY REGEXP '^[aeiou]'
 ```     
-- - -         
-###  <font color = "#EFC050"> Weather Observation Station7 </font>    
+------
+### <font color = "#EFC050"> Weather Observation Station7 </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-7/problem)  
 STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 끝나는 것만 조회.  
@@ -195,8 +196,8 @@ WHERE SUBSTR(CITY, -1, 1) IN ('A', 'E', 'I', 'O', 'U')
 SELECT DISTINCT CITY FROM STATION
 WHERE CITY REGEXP '[aeiou]$'
 ```   
-- - -         
-###  <font color = "#EFC050"> Weather Observation Station8 </font>    
+------
+### <font color = "#EFC050"> Weather Observation Station8 </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-8/problem)  
 STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하고 끝나는 것을 조회.  
@@ -214,8 +215,10 @@ SELECT DISTINCT CITY
 FROM STATION
 WHERE CITY REGEXP '^[aeiou]' AND CITY REGEXP '[aeiou]$'
 ```   
+
+------
 ###  <font color = "#EFC050"> Weather Observation Station9 </font>    
-   
+
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-9/problem)   
 STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하지 않는 것만 조회.  
 중복없이 출력할 것.  
@@ -238,8 +241,8 @@ WHERE NOT (CITY LIKE 'A%' OR CITY LIKE 'E%' OR
 SELECT DISTINCT CITY FROM STATION
 WHERE CITY NOT REGEXP '^[aeiou]'
 ```     
-- - -         
-###  <font color = "#EFC050"> Weather Observation Station10 </font>    
+------
+### <font color = "#EFC050"> Weather Observation Station10 </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-10/problem)  
 STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 끝나지 않는 것만 조회.  
@@ -256,7 +259,7 @@ WHERE SUBSTR(CITY, -1, 1) NOT IN ('A', 'E', 'I', 'O', 'U')
 SELECT DISTINCT CITY FROM STATION
 WHERE CITY NOT REGEXP '[aeiou]$'
 ```   
-- - -         
+------    
 ###  <font color = "#EFC050"> Weather Observation Station11 </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-11/problem)  
@@ -275,7 +278,7 @@ SELECT DISTINCT CITY
 FROM STATION
 WHERE CITY NOT REGEXP '^[aeiou]' OR CITY NOT REGEXP '[aeiou]$'
 ```   
-- - -         
+------    
 ###  <font color = "#EFC050"> Weather Observation Station12 </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-12/problem)  
@@ -295,7 +298,7 @@ SELECT DISTINCT CITY
 FROM STATION
 WHERE CITY NOT REGEXP '^[aeiou]' AND CITY NOT REGEXP '[aeiou]$'
 ```    
-- - -     
+------
 ###  <font color = "#EFC050"> Higher Than 75 Marks </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/more-than-75-marks/problem)   
@@ -307,7 +310,7 @@ SELECT NAME FROM STUDENTS WHERE MARKS > 75
 ORDER BY SUBSTR(NAME, -3) ASC, ID ASC;
 ```
 
-- - -    
+------
 ###  <font color = "#EFC050"> Employee Names </font>    
   
 [문제 링크](https://www.hackerrank.com/challenges/name-of-employees/problem)        
@@ -316,8 +319,9 @@ EMPLOYEE 테이블에서 모든 직원들의 이름을 알파벳 순서대로(A�
 SELECT NAME
 FROM EMPLOYEE
 ORDER BY NAME
-```    
-- - -  
+```
+
+------
 ###  <font color = "#EFC050"> Employee Salaries </font>     
    
 [문제 링크](https://www.hackerrank.com/challenges/salary-of-employees/problem)   
