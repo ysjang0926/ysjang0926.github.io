@@ -7,8 +7,6 @@ tags: sql
 comments: true
 ---
 
-## HackerRank - SQL Basic Select
-
 SQL 퀴즈 중 제일 간단한 파트인 **Basic Select**이다.
 맛보기 용으로 뚝딱하고 다음 레벨 퀴즈 도전하는 걸로 고고!
 
@@ -16,7 +14,7 @@ SQL 퀴즈 중 제일 간단한 파트인 **Basic Select**이다.
     
 ###  <font color = "#EFC050"> Revising the Select Query 1 </font>    
      
-[문제 링크](https://www.hackerrank.com/challenges/revising-the-select-query/problem)
+[문제 링크](https://www.hackerrank.com/challenges/revising-the-select-query/problem) <br>
 CITY 테이블에서 인구(Population)가 100,000보다 많은 모든 미국 도시 데이터들을 조회. 미국의 국가코드(CountryCode)는 'USA'.
      
 ```sql  
@@ -27,7 +25,7 @@ WHERE POPULATION>=100000 AND COUNTRYCODE='USA'
 - - - 
 ###  <font color = "#EFC050"> Revising the Select Query 2 </font>    
    
-[문제 링크](https://www.hackerrank.com/challenges/revising-the-select-query-2/problem) 
+[문제 링크](https://www.hackerrank.com/challenges/revising-the-select-query-2/problem)  <br>
 CITY 테이블에서 인구(Population)가 120,000보다 많은 모든 미국 도시 이름(Name)들을 조회. 미국의 국가코드(CountryCode)는 'USA'.
        
 ```sql  
@@ -38,7 +36,7 @@ WHERE POPULATION>=120000 AND COUNTRYCODE='USA'
 - - - 
 ###  <font color = "#EFC050"> Select All </font>    
   
-[문제 링크](https://www.hackerrank.com/challenges/select-all-sql/problem)
+[문제 링크](https://www.hackerrank.com/challenges/select-all-sql/problem) <br>
 CITY 테이블에서 모든 행에 대한 모든 열(속성)을 조회.
 ```sql  
 SELECT *
@@ -47,7 +45,7 @@ FROM CITY
 - - - 
 ###  <font color = "#EFC050"> Select By ID</font>    
   
-[문제 링크](https://www.hackerrank.com/challenges/select-by-id/problem)
+[문제 링크](https://www.hackerrank.com/challenges/select-by-id/problem) <br>
 CITY 테이블에서 ID가 1661인  도시의 모든 열을 조회.
 ```sql  
 SELECT *
@@ -57,7 +55,7 @@ WHERE ID=1661
 - - - 
 ###  <font color = "#EFC050"> Japanese Cities' Attributes</font>    
   
-[문제 링크](https://www.hackerrank.com/challenges/japanese-cities-attributes/problem)
+[문제 링크](https://www.hackerrank.com/challenges/japanese-cities-attributes/problem) <br>
 CITY 테이블에서 모든 일본 도시의 속성을 조회. 일본의 국가코드(CountryCode)는 'JPN'.
 ```sql  
 SELECT *
@@ -67,7 +65,7 @@ WHERE COUNTRYCODE='JPN'
 - - - 
 ###  <font color = "#EFC050"> Japanese Cities' Names</font>    
   
-[문제 링크](https://www.hackerrank.com/challenges/japanese-cities-name/problem)
+[문제 링크](https://www.hackerrank.com/challenges/japanese-cities-name/problem) <br>
 CITY 테이블에서 모든 일본 도시 이름(Name)들을 조회. 일본의 국가코드(CountryCode)는 'JPN'.
 ```sql  
 SELECT NAME
@@ -77,7 +75,7 @@ WHERE COUNTRYCODE='JPN'
 ---
 ###  <font color = "#EFC050"> Weather Observation Station1 </font>    
   
-[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-1/problem)
+[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-1/problem) <br>
 STATION 테이블에서 CITY와 STATE 목록을 조회.
 ```sql  
 SELECT CITY, STATE
@@ -86,7 +84,7 @@ FROM STATION
 ---
 ###  <font color = "#EFC050"> Weather Observation Station2 </font>    
   
-[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-2/problem)
+[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-2/problem) <br>
 STATION 테이블에서 CITY와 STATE를 조회.
 ```sql  
 SELECT CITY, STATE
@@ -95,7 +93,7 @@ FROM STATION
 ---
 ###  <font color = "#EFC050"> Weather Observation Station3 </font>    
   
-[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-3/problem)
+[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-3/problem) <br>
 STATION 테이블에서 ID값이 짝수인 CITY 이름(Name)을 조회 (단, 중복된 값은 제외) 
 * `DISTINCT` : 지정한 열의 데이터가 중복될 경우 중복된 값을 제거하고 한개씩만 반환
 * `MOD(m,n)` : m을 n으로 나누었을 때 나머지를 반환
@@ -107,7 +105,7 @@ WHERE MOD(ID,2)=0
 ---
 ###  <font color = "#EFC050"> Weather Observation Station4 </font>    
   
-[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-4/problem) 
+[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-4/problem)  <br>
 STATION 테이블에서 CITY 이름의 총 개수와 중복된 CITY 이름을 제외한 개수의 차이값을 조회. 
 ```sql  
 SELECT COUNT(CITY)-COUNT(DISTINCT CITY) AS DIFF
@@ -116,7 +114,7 @@ FROM STATION
 --- 
 ###  <font color = "#EFC050"> Weather Observation Station5 </font>    
     
-[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-5/problem) 
+[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-5/problem)  <br>
 STATION 테이블에서 가장 짧은 CITY 이름과 가장 긴 CITY 이름과 각각의 길이(ex. 이름의 문자수)를 조회.
 만약 가장 짧거나 긴 이름을 가진 도시가 두 개 이상인 경우 알파벳 순으로 선택했을 때 가장 먼저 나오는 것으로 선택.
 * 이 문제는 나름 헤맸다...
@@ -141,7 +139,7 @@ LIMIT 1
 ------
 ###  <font color = "#EFC050"> Weather Observation Station6 </font>    
    
-[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-6/problem)   
+[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-6/problem)   <br>
 STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하는 것만 조회.  
 중복없이 출력할 것.  
 
@@ -181,7 +179,7 @@ WHERE CITY REGEXP '^[aeiou]'
 ------
 ### <font color = "#EFC050"> Weather Observation Station7 </font>    
    
-[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-7/problem)  
+[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-7/problem)  <br>
 STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 끝나는 것만 조회.  
 중복없이 출력할 것. 
 
@@ -199,7 +197,7 @@ WHERE CITY REGEXP '[aeiou]$'
 ------
 ### <font color = "#EFC050"> Weather Observation Station8 </font>    
    
-[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-8/problem)  
+[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-8/problem)  <br>
 STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하고 끝나는 것을 조회.  
 중복없이 출력할 것. 
 
@@ -219,7 +217,7 @@ WHERE CITY REGEXP '^[aeiou]' AND CITY REGEXP '[aeiou]$'
 ------
 ###  <font color = "#EFC050"> Weather Observation Station9 </font>    
 
-[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-9/problem)   
+[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-9/problem)  <br> 
 STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하지 않는 것만 조회.  
 중복없이 출력할 것.  
 
@@ -244,7 +242,7 @@ WHERE CITY NOT REGEXP '^[aeiou]'
 ------
 ### <font color = "#EFC050"> Weather Observation Station10 </font>    
    
-[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-10/problem)  
+[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-10/problem)  <br>
 STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 끝나지 않는 것만 조회.  
 중복없이 출력할 것. 
 
@@ -262,7 +260,7 @@ WHERE CITY NOT REGEXP '[aeiou]$'
 ------    
 ###  <font color = "#EFC050"> Weather Observation Station11 </font>    
    
-[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-11/problem)  
+[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-11/problem)  <br>
 STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하지 않거나 끝나지 않는 것을 조회.
 중복없이 출력할 것. 
 
@@ -281,7 +279,7 @@ WHERE CITY NOT REGEXP '^[aeiou]' OR CITY NOT REGEXP '[aeiou]$'
 ------    
 ###  <font color = "#EFC050"> Weather Observation Station12 </font>    
    
-[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-12/problem)  
+[문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-12/problem)  <br>
 STATION 테이블에서 CITY 이름이 모음(i.e. a, e, i, o, u)으로 시작하지 않고 끝나지 않는 것을 조회.
 중복없이 출력할 것. 
 
@@ -301,7 +299,7 @@ WHERE CITY NOT REGEXP '^[aeiou]' AND CITY NOT REGEXP '[aeiou]$'
 ------
 ###  <font color = "#EFC050"> Higher Than 75 Marks </font>    
    
-[문제 링크](https://www.hackerrank.com/challenges/more-than-75-marks/problem)   
+[문제 링크](https://www.hackerrank.com/challenges/more-than-75-marks/problem)   <br>
 STUDNETS 테이블에서 점수가 75점보다 큰 학생들의 이름을 조회.  
 이름에서 마지막 3문자를 기준으로 정렬하고, 만약 이름의 끝 3글자가 같은 학생이 있으면(ex: Bobby, Robby)   
 ID를 기준으로 증가하는 순으로 정렬.   
@@ -313,7 +311,7 @@ ORDER BY SUBSTR(NAME, -3) ASC, ID ASC;
 ------
 ###  <font color = "#EFC050"> Employee Names </font>    
   
-[문제 링크](https://www.hackerrank.com/challenges/name-of-employees/problem)        
+[문제 링크](https://www.hackerrank.com/challenges/name-of-employees/problem)     <br>   
 EMPLOYEE 테이블에서 모든 직원들의 이름을 알파벳 순서대로(A→Z) 조회.  
 ```sql    
 SELECT NAME
@@ -324,7 +322,7 @@ ORDER BY NAME
 ------
 ###  <font color = "#EFC050"> Employee Salaries </font>     
    
-[문제 링크](https://www.hackerrank.com/challenges/salary-of-employees/problem)   
+[문제 링크](https://www.hackerrank.com/challenges/salary-of-employees/problem)   <br>
 EMPLOYEE 테이블에서 month 값이 10(달)보다 작으면서 급여(SALARY )가 2,000$보다 큰 모든 직원들의 이름을 조회.  
 EMPLOYEE_ID 기준 오름차순으로 정렬.  
 ```sql  
