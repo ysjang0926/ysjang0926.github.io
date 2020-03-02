@@ -22,7 +22,8 @@ SELECT*
 FROM CITY
 WHERE POPULATION>=100000 AND COUNTRYCODE='USA'
 ```
-- - - 
+---
+
 ###  <font color = "#EFC050"> Revising the Select Query 2 </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/revising-the-select-query-2/problem)  <br>
@@ -32,8 +33,10 @@ CITY 테이블에서 인구(Population)가 120,000보다 많은 모든 미국 �
 SELECT NAME
 FROM CITY
 WHERE POPULATION>=120000 AND COUNTRYCODE='USA'
-``` 
-- - - 
+```
+
+---
+
 ###  <font color = "#EFC050"> Select All </font>    
   
 [문제 링크](https://www.hackerrank.com/challenges/select-all-sql/problem) <br>
@@ -42,7 +45,8 @@ CITY 테이블에서 모든 행에 대한 모든 열(속성)을 조회.
 SELECT *
 FROM CITY
 ```
-- - - 
+---
+
 ###  <font color = "#EFC050"> Select By ID</font>    
   
 [문제 링크](https://www.hackerrank.com/challenges/select-by-id/problem) <br>
@@ -52,7 +56,8 @@ SELECT *
 FROM CITY
 WHERE ID=1661
 ```
-- - - 
+---
+
 ###  <font color = "#EFC050"> Japanese Cities' Attributes</font>    
   
 [문제 링크](https://www.hackerrank.com/challenges/japanese-cities-attributes/problem) <br>
@@ -62,7 +67,8 @@ SELECT *
 FROM CITY
 WHERE COUNTRYCODE='JPN'
 ```
-- - - 
+---
+
 ###  <font color = "#EFC050"> Japanese Cities' Names</font>    
   
 [문제 링크](https://www.hackerrank.com/challenges/japanese-cities-name/problem) <br>
@@ -73,6 +79,7 @@ FROM CITY
 WHERE COUNTRYCODE='JPN'
 ```
 ---
+
 ###  <font color = "#EFC050"> Weather Observation Station1 </font>    
   
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-1/problem) <br>
@@ -82,6 +89,7 @@ SELECT CITY, STATE
 FROM STATION 
 ``` 
 ---
+
 ###  <font color = "#EFC050"> Weather Observation Station2 </font>    
   
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-2/problem) <br>
@@ -91,6 +99,7 @@ SELECT CITY, STATE
 FROM STATION 
 ``` 
 ---
+
 ###  <font color = "#EFC050"> Weather Observation Station3 </font>    
   
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-3/problem) <br>
@@ -103,6 +112,7 @@ FROM STATION
 WHERE MOD(ID,2)=0
 ```
 ---
+
 ###  <font color = "#EFC050"> Weather Observation Station4 </font>    
   
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-4/problem)  <br>
@@ -111,7 +121,8 @@ STATION 테이블에서 CITY 이름의 총 개수와 중복된 CITY 이름을 �
 SELECT COUNT(CITY)-COUNT(DISTINCT CITY) AS DIFF
 FROM STATION
 ```    
---- 
+---
+
 ###  <font color = "#EFC050"> Weather Observation Station5 </font>    
     
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-5/problem)  <br>
@@ -136,7 +147,8 @@ ORDER BY LENGTH(CITY), CITY ASC
 LIMIT 1
 ``` 
 
-------
+---
+
 ###  <font color = "#EFC050"> Weather Observation Station6 </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-6/problem)   <br>
@@ -177,6 +189,7 @@ FROM STATION
 WHERE CITY REGEXP '^[aeiou]'
 ```     
 ---
+
 ### <font color = "#EFC050"> Weather Observation Station7 </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-7/problem)  <br>
@@ -193,7 +206,8 @@ WHERE SUBSTR(CITY, -1, 1) IN ('A', 'E', 'I', 'O', 'U')
 SELECT DISTINCT CITY FROM STATION
 WHERE CITY REGEXP '[aeiou]$'
 ```   
-------
+---
+
 ### <font color = "#EFC050"> Weather Observation Station8 </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-8/problem)  <br>
@@ -212,7 +226,8 @@ FROM STATION
 WHERE CITY REGEXP '^[aeiou]' AND CITY REGEXP '[aeiou]$'
 ```   
 
-------
+---
+
 ###  <font color = "#EFC050"> Weather Observation Station9 </font>    
 
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-9/problem)  <br> 
@@ -235,8 +250,10 @@ WHERE NOT (CITY LIKE 'A%' OR CITY LIKE 'E%' OR
 ```sql  
 SELECT DISTINCT CITY FROM STATION
 WHERE CITY NOT REGEXP '^[aeiou]'
-```     
-------
+```  
+
+---
+
 ### <font color = "#EFC050"> Weather Observation Station10 </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-10/problem)  <br>
@@ -253,7 +270,9 @@ WHERE SUBSTR(CITY, -1, 1) NOT IN ('A', 'E', 'I', 'O', 'U')
 SELECT DISTINCT CITY FROM STATION
 WHERE CITY NOT REGEXP '[aeiou]$'
 ```   
-------    
+
+----
+
 ###  <font color = "#EFC050"> Weather Observation Station11 </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-11/problem)  <br>
@@ -271,7 +290,9 @@ SELECT DISTINCT CITY
 FROM STATION
 WHERE CITY NOT REGEXP '^[aeiou]' OR CITY NOT REGEXP '[aeiou]$'
 ```   
-------    
+
+---
+
 ###  <font color = "#EFC050"> Weather Observation Station12 </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/weather-observation-station-12/problem)  <br>
@@ -290,7 +311,9 @@ SELECT DISTINCT CITY
 FROM STATION
 WHERE CITY NOT REGEXP '^[aeiou]' AND CITY NOT REGEXP '[aeiou]$'
 ```    
-------
+
+---
+
 ###  <font color = "#EFC050"> Higher Than 75 Marks </font>    
    
 [문제 링크](https://www.hackerrank.com/challenges/more-than-75-marks/problem)   <br>
@@ -302,7 +325,8 @@ SELECT NAME FROM STUDENTS WHERE MARKS > 75
 ORDER BY SUBSTR(NAME, -3) ASC, ID ASC;
 ```
 
-------
+---
+
 ###  <font color = "#EFC050"> Employee Names </font>    
   
 [문제 링크](https://www.hackerrank.com/challenges/name-of-employees/problem)     <br>   
@@ -313,7 +337,8 @@ FROM EMPLOYEE
 ORDER BY NAME
 ```
 
-------
+---
+
 ###  <font color = "#EFC050"> Employee Salaries </font>     
    
 [문제 링크](https://www.hackerrank.com/challenges/salary-of-employees/problem)   <br>
