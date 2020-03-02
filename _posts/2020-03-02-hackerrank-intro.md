@@ -2,7 +2,7 @@
 layout: post
 title:  "해커랭크 소개"
 subtitle:   "HackerRank"
-categories: programming
+categories: sql
 tags: hackerrank
 comments: true
 ---
