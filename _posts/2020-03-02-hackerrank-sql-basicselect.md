@@ -1,3 +1,12 @@
+---
+layout: post
+title:  "HackerRank: SQL Basic Select"
+subtitle:   "HackerRank: SQL Basic Select"
+categories: programming
+tags: sql
+comments: true
+---
+
 ## HackerRank: SQL(Basic Select)
 - - -
 
