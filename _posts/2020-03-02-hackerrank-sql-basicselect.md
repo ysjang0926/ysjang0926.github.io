@@ -7,12 +7,12 @@ tags: sql
 comments: true
 ---
 
-## HackerRank - SQL Basic Select
-- - -
+> HackerRank - SQL Basic Select
 
 SQL 퀴즈 중 제일 간단한 파트인 **Basic Select**이다.
 맛보기 용으로 뚝딱하고 다음 레벨 퀴즈 도전하는 걸로 고고!
-    
+
+<br>
     
 ###  <font color = "#EFC050"> Revising the Select Query 1 </font>    
      
