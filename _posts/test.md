@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "[HackerRank] SQL Basic Select"
-subtitle:   "HackerRank: SQL Basic Select"
+title:  "R test"
+subtitle:   "R test"
 categories: programming
 tags: sql
 comments: true
