@@ -1,7 +1,11 @@
-2020-03-15-change-point\`
-================
-ysjang
-2020 3 3
+---
+layout: post
+title:  "[HackerRank] SQL Basic Select"
+subtitle:   "HackerRank: SQL Basic Select"
+categories: programming
+tags: sql
+comments: true
+---
 
 #### <http://datum.io/rrstudiogithub-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0/>
 
