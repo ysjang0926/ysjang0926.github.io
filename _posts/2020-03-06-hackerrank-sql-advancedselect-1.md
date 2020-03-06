@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[HackerRank] SQL Advanced Select - Type of Triangle (CASE WHEN 주의하기)"
+title:  "[HackerRank] SQL Advanced Select - Type of Triangle (CASE WHEN 순서 주의)"
 subtitle:   "HackerRank: SQL Advanced Select - Type of Triangle"
 categories: programming
 tags: sql
