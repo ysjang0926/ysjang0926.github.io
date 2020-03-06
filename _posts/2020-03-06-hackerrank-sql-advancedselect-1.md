@@ -44,6 +44,7 @@ FROM TRIANGLES ;
 ```
 
 문제에 사용된 TRIANGLES 테이블을 `SELECT * FROM TRIANGLES`를 통해 보니 아래와 같게 나온다.
+
 ![triangle table](https://user-images.githubusercontent.com/54492747/76059612-a4b76d00-5fc2-11ea-8800-ffba7339ce5a.png){: .align-center}
 
 위의 코드 Output과 해당 테이블을 하나씩 비교해보니 (20,20,40)가 문제였다. <br>
