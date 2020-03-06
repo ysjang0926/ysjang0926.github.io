@@ -138,3 +138,9 @@ tipue_search:
     categories: []
     tags: []
     
+# Conversion - MathJax로 수학식 표시
+markdown: kramdown
+highlighter: rouge
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false
