@@ -50,7 +50,7 @@ FROM TRIANGLES ;
 위의 코드 Output과 해당 테이블을 하나씩 비교해보니 (20,20,40)가 문제였다. <br>
 Isosceles 조건문을 Not A Triangle 조건문 위에 놓으니, (20,20,40)이 'Isosceles'으로 결과가 나오게 된 것이다. 하지만 (20,20,40)은 $A+B<=C$이므로 'Not A Triangle'이 되어야 한다.
 
-위의 코드처럼 그냥 CASE WHEN문을 사용하여 조건문을 걸면 된다고 생각했는데 그게 아니었다. <br>
+위의 코드처럼 그냥 CASE WHEN문을 사용하여 순서 상관없이 조건문들을 걸면 된다고 생각했는데 그게 아니었다. <br>
 우선 CASE WHEN은 다음과 같이 작성되며, CASE 문 안에는 여러 개의 WHEN과 THEN을 추가할 수 있다.
 * 데이터를 조회할 때의 조건은 WHERE문을 사용하여 조건 걸어 가져올 수 있음
 * 하지만 가져온 값에 추가적인 변환이 필요할 경우에는 CASE WHEN문을 사용함
@@ -63,7 +63,7 @@ SELECT CASE <컬럼명> WHEN <값1> THEN <컬럼이 값1일 때 결과>
 	   END
 ```
 여기서 중요한 것은 만약 컬럼명이 값1과 매치되면 **값2와 값3에 대한 매치는 수행하지 않는다**는 것이다. 즉, 나의 위의 코드는 'Not A Triangle'보다 'Isosceles' 조건을 먼저 걸어주었기 때문에 (20,20,40)에 대한 결과가 'Isosceles'로 나온 것이다. <br>
-CASE WHEN문은 나름 자주 쓴다고 생각했는데, 사실 이러한 조건(?)이 걸려있을 줄이야..! 새로운 것을 알게 된 것 같아 기분 좋았다. <br>
+CASE WHEN문은 나름 자주 쓴다고 생각했는데, **순서 조건**이 걸려있을 줄이야..! 새로운 것을 알게 된 것 같아 기분 좋았다. <br>
 CASE WHEN에 대해 구글링 하다가 [leeoh04님 블로그 글](https://blog.naver.com/PostView.nhn?blogId=leeoh04&logNo=20099476933&proxyReferer=https%3A%2F%2Fwww.google.com%2F)에 많은 도움을 받았다. CASE WHEN문에 더 알고 싶으면 해당 링크를 참고하면 될 것 같다.
 
 그리하여 최종적인 답은 아래와 같다.
