@@ -45,6 +45,7 @@ FROM TRIANGLES ;
 <br>
 
 문제에 사용된 TRIANGLES 테이블을 `SELECT * FROM TRIANGLES`를 통해 보니 아래와 같게 나온다.
+
 | A  | B  | C  |   |   |
 |----|----|----|---|---|
 | 20 | 20 | 23 |   |   |
