@@ -51,8 +51,7 @@ FROM TRIANGLES ;
 
 <br>
 
-위의 코드 Output과 해당 테이블을 하나씩 비교해보니 (20,20,40)가 문제였다. <br>
-Isosceles 조건문을 Not A Triangle 조건문 위에 놓으니, (20,20,40)이 'Isosceles'으로 결과가 나오게 된 것이다. 하지만 (20,20,40)은 $A+B<=C$이므로 'Not A Triangle'이 되어야 한다.
+위의 코드 Output과 해당 테이블을 하나씩 비교해보니 (20,20,40)가 문제였다. (20,20,40)은 $A+B<=C$이므로 'Not A Triangle'이 되어야 하는데, 'Isosceles'으로 결과가 나온 것이다. 
 
 위의 코드처럼 그냥 CASE WHEN문을 사용하여 순서 상관없이 조건문들을 걸면 된다고 생각했는데 그게 아니었다. <br>
 우선 CASE WHEN은 다음과 같이 작성되며, CASE 문 안에는 여러 개의 WHEN과 THEN을 추가할 수 있다.
