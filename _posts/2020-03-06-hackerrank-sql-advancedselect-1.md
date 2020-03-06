@@ -5,6 +5,7 @@ subtitle:   "HackerRank: SQL Advanced Select - Type of Triangle"
 categories: programming
 tags: sql
 comments: true
+use_math: true
 ---
 
 SQL 퀴즈 중 **Advanced Select**파트의 첫 문제인 'Type of Triangle'이다.
