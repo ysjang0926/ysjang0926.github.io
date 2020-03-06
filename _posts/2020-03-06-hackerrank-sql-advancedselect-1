@@ -1,0 +1,23 @@
+---
+layout: post
+title:  "[HackerRank] SQL Advanced Select - Type of Triangle (CASE WHEN 주의하기)"
+subtitle:   "HackerRank: SQL Advanced Select - Type of Triangle"
+categories: programming
+tags: sql
+comments: true
+---
+
+SQL 퀴즈 중 **Advanced Select**파트의 첫 문제인 'Type of Triangle'이다.
+이번 파트도 쉬울줄 알았는데 나름 생각을 하고 퀴즈를 풀어야 했다. 문제 풀다가 얻은 삽질 과정도 모두 적어보았다.
+
+<br>
+    
+###  <font color = "#EFC050"> Type of Triangle </font>    
+     
+[문제 링크](https://www.hackerrank.com/challenges/what-type-of-triangle/problem) <br>
+CITY 테이블에서 인구(Population)가 100,000보다 많은 모든 미국 도시 데이터들을 조회. 미국의 국가코드(CountryCode)는 'USA'.
+```sql  
+SELECT*
+FROM CITY
+WHERE POPULATION>=100000 AND COUNTRYCODE='USA'
+```
