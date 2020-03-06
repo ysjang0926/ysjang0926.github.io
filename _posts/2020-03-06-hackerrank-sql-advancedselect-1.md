@@ -99,4 +99,6 @@ SELECT CASE WHEN A + B <= C THEN 'Not A Triangle'
 FROM TRIANGLES
 ```
 
+<br>
+
 문제도 풀면서 글도 쓰려니 생각보다 시간이 오래 걸린다😂 시간 단축하며 효율성 높게 포스팅할 방법을 찾아야겠다.
