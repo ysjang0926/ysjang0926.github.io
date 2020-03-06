@@ -11,7 +11,7 @@ use_math: true
 SQL 퀴즈 중 **Advanced Select**파트의 첫 문제인 'Type of Triangle'이다. <br>
 이번 파트도 쉬울 줄 알았는데 나름 생각을 하고 퀴즈를 풀어야 했다. 문제 풀다가 얻은 삽질 과정도 모두 적어보았다.
 
-key point : CASE WHEN 순서 조심!
+* 이번 문제의 key point : CASE WHEN 순서 조심!
 
 ---------
 ###  <font color = "#EFC050"> Type of Triangle </font>    
