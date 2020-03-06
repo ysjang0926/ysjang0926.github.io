@@ -49,6 +49,8 @@ FROM TRIANGLES ;
 
 ![triangle table](https://user-images.githubusercontent.com/54492747/76059612-a4b76d00-5fc2-11ea-8800-ffba7339ce5a.png){: .align-center}
 
+<br>
+
 위의 코드 Output과 해당 테이블을 하나씩 비교해보니 (20,20,40)가 문제였다. <br>
 Isosceles 조건문을 Not A Triangle 조건문 위에 놓으니, (20,20,40)이 'Isosceles'으로 결과가 나오게 된 것이다. 하지만 (20,20,40)은 $A+B<=C$이므로 'Not A Triangle'이 되어야 한다.
 
