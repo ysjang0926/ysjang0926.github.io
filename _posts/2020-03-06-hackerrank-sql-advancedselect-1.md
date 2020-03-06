@@ -21,8 +21,13 @@ TRIANGLES 테이블에서 세 변의 길이를 나타내는 칼럼을 사용하�
 * Not A Triangle : 세 변의 길이가 삼각형을 형성하지 않음
 
 TRIANGLES 테이블은 삼각형의 세 변의 길이를 나타내는 A, B, C 변수를 가지고 있으며, 테이블 형태의 예시는 아래와 같다.<br>
-![sample output](https://user-images.githubusercontent.com/54492747/76062973-18a94380-5fca-11ea-96f2-50125bad46f0.png){: .align-center}
-
+| A  | B  | C  |
+|----|----|----|
+| 20 | 20 | 23 |
+| 20 | 20 | 20 |
+| 20 | 21 | 22 |
+| 13 | 14 | 30 |
+{: .table}
 
 예시 테이블을 기준으로 삼각형의 유형은 다음과 같다.
 * (20, 20, 23)의 삼각형 유형은 'Isosceles'  → $A=B$
@@ -45,15 +50,6 @@ FROM TRIANGLES ;
 <br>
 
 문제에 사용된 TRIANGLES 테이블을 `SELECT * FROM TRIANGLES`를 통해 보니 아래와 같게 나온다.
-
-| A  | B  | C  |   |   |
-|----|----|----|---|---|
-| 20 | 20 | 23 |   |   |
-| 20 | 20 | 20 |   |   |
-| 20 | 21 | 22 |   |   |
-| 13 | 14 | 30 |   |   |
-{: .table}
-
 ![triangle table](https://user-images.githubusercontent.com/54492747/76059612-a4b76d00-5fc2-11ea-8800-ffba7339ce5a.png){: .align-center}
 
 <br>
