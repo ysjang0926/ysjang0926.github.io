@@ -37,7 +37,7 @@ TRIANGLES 테이블은 삼각형의 세 변의 길이를 나타내는 A, B, C �
 * (20, 20, 23)의 삼각형 유형은 'Isosceles'  → $A=B$
 * (20,20,20)의 삼각형 유형은 'Equilateral' → $A=B=C$
 * (20,21,22)의 삼각형 유형은 'Scalene' → $A\neq B\neq C$
-* (13,14,30)의 삼각형 유형은 'Not A Triangle'→ $A+B<=C$
+* (13,14,30)의 삼각형 유형은 'Not A Triangle'→ $A+B\leq C$
 
 -------
 <br>
@@ -60,7 +60,7 @@ FROM TRIANGLES ;
 
 <br>
 
-위의 코드 Output과 해당 테이블을 하나씩 비교해보니 (20,20,40)가 문제였다. (20,20,40)은 $A+B<=C$이므로 'Not A Triangle'이 되어야 하는데, 'Isosceles'으로 결과가 나온 것이다. 
+위의 코드 Output과 해당 테이블을 하나씩 비교해보니 (20,20,40)가 문제였다. (20,20,40)은 $A+B\leq C$이므로 'Not A Triangle'이 되어야 하는데, 'Isosceles'으로 결과가 나온 것이다. 
 
 위의 코드처럼 그냥 CASE WHEN문을 사용하여 순서 상관없이 조건문들을 걸면 된다고 생각했는데 그게 아니었다.
 
