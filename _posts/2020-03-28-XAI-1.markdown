@@ -103,11 +103,13 @@ XAI를 만드는 방법은 아래와 같습니다.
 ### 1. Sensitivity Analysis(SA)
 * 특징 : **how much do changes in each pixel affect the prediction** <br>
 
-딥러닝 모델에서 국소적(local)인 입력 변화에 대한 예측 결과의 변화량을 정량화하여 입력 이미지의 어떤 부분이 딥러닝 모델의 결과 도출에 큰 영향을 미쳤는지 설명하는 방법입니다. 즉, 모델의 locally evaluated gradient를 기반으로 한 예측을 설명합니다. <br>
-SA는 각 입력 변수 i (ex: 이미지 픽셀)의 중요도를 다음과 같이 편미분의 norm으로 계산합니다.<br>
-: $R_i = || \frac{\partial}{\partial x_i}  f(x)||$ <br>
-여기서 편미분은 network의 레이어를 통해 역전파 방법을 실행하고 연쇄법칙을 사용하여 얻을 수 있습니다.<br>
-: $\frac{\partial f}{\partial x^{(l)}}=\frac{\partial x^{(l+1)}}{\partial x^{(l)}}\frac{\partial f}{\partial x^{(l+1)}}$ <br>
+딥러닝 모델에서 국소적(local)인 입력 변화에 대한 예측 결과의 변화량을 정량화하여 입력 이미지의 어떤 부분이 딥러닝 모델의 결과 도출에 큰 영향을 미쳤는지 설명하는 방법입니다. 즉, 모델의 locally evaluated gradient를 기반으로 한 예측을 설명합니다.
+
+SA는 각 입력 변수 i (ex: 이미지 픽셀)의 중요도를 다음과 같이 편미분의 norm으로 계산합니다. <br>
+$R_i = || \frac{\partial}{\partial x_i}  f(x)||$ <br>
+
+여기서 편미분은 network의 레이어를 통해 역전파 방법을 실행하고 연쇄법칙을 사용하여 얻을 수 있습니다. <br>
+$\frac{\partial f}{\partial x^{(l)}}=\frac{\partial x^{(l+1)}}{\partial x^{(l)}}\frac{\partial f}{\partial x^{(l+1)}}$ <br>
 
 이때 가장 관련성이 높은 입력 특징(input feature)이 가장 민감한 특징이라 가정하고, SA는 함수값 f(x) 자체를 설명하는 것이 아니라 함수 값의 변동(=이미지의 예측값을 높이거나 낮추는 것은 무엇인지)을 설명합니다. <br>
 SA로 계산된 히트맵은 이미지를 예측된 클래스와 비슷하거나 덜 비슷하게 보이게 하기 위해 어떤 픽셀을 변경해야 하는지를 나타냅니다.
