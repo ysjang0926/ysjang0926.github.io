@@ -114,3 +114,9 @@ SA로 계산된 히트맵은 이미지를 예측된 클래스와 비슷하거나
 ![수탉](https://user-images.githubusercontent.com/54492747/77829275-63028800-7164-11ea-9be5-1306c99a01e3.PNG)
 위의 그림에서 변경해야하는 픽셀들은 수탉의 일부를 가리고 있는 노란꽃 부분입니다. 해당 픽셀을 특정 방법으로 바꾸면 수탉의 가려진 부분을 재구성할 수 있으며, 이를 통해 수탉이 더 많이 보일 것이기 때문에 분류 평가점수(classification score)를 높일 수 있습니다. <br>
 하지만 히트맵은 수탉 예측에 실제로 어떤 픽셀이 중요한지 나타내지 않는 단점이 있기 때문에, SA는 AI 시스템의 예측을 설명하는 데 있어 최적의 방법이 될 수 없습니다.
+
+<br>
+
+### 2. Layer-Wise Relevance Propagation(LRP)
+* 특징 : how much does each pixel contribute to prediction
+
