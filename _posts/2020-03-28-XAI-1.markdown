@@ -5,6 +5,7 @@ subtitle:   "HackerRank: SQL Basic Select"
 categories: data
 tags: dl
 comments: true
+use_math: true
 ---
 
 * 최근 [XAI 설명 가능한 인공지능, 인공지능을 해부하다](https://wikibook.co.kr/xai/) 책이 출간되어 주문한 기념으로, Explainable AI(설명 가능한 인공지능)를 소개하는 글을 쓰게 되었습니다.
