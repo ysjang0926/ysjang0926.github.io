@@ -126,7 +126,7 @@ SA로 계산된 히트맵은 이미지를 예측된 클래스와 비슷하거나
 
 <br>
 AI 시스템의 예측을 분해하기 위해  feed-forward neural networks, long-short term memory의 프레임워크를 활용합니다. SA와 달리 LRP는 최대 불확실성(maximum uncertainty) 상태에 대한 예측을 설명하며, 수탉이라고 예측하는 데 있어 중요한 픽셀이 무엇인지 찾아냅니다. <br>
-📢 SA가 편미분을 이용해서 히트맵을 추출하고 이미지를 인식한다면, LRP는 분해로 분류기의 결정을 설명하는 방식입니다. 
+📢 SA가 편미분을 이용해서 히트맵을 추출하고 이미지를 인식한다면, LRP는 분해로 분류기의 결정을 설명하는 방식입니다. <br>
 
 LRP는 local redistribution rule을 이용하여 각 입력변수(ex. 이미지 픽셀)에 관련성 점수(relevance score) $R_i$를 할당할 때까지 계속해서 거꾸로 재분배합니다. 재분배 과정의 주요 특징은 관련성 보존이며, 딥러닝의 모든 레이어에서 총 관련성인 예측 f(x)가 보존됩니다. <br>
 $$\sum_{i}R_i=...=\sum_{j}R_j=\sum_{k}R_k=...=f(x)$$ <br>
