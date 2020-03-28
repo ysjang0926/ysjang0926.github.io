@@ -147,14 +147,8 @@ $R_j=\sum_{k} \frac{x_j w_{jk}}{\sum_{j} x_j w_{jk} + \epsilon} R_k$
 * $\epsilon$ : 0으로 나눠지는 것을 막는 역할
 	* 관련성 보존으로 인해 0을 유지함
 
-<br>
-
 관련성 보존은 제약조건인 $\alpha - \beta = 1$이라는 공식에 의해 시행되며, $\alpha = 1$인 경우에는 재분배 규칙 신경망은 ReLU 뉴런으로 구성되게 됩니다.
-A way to obtain conservation and as well as stabilization is by using the alpha-beta rule instead:
 ![알파베타룰](https://user-images.githubusercontent.com/54492747/77831522-0a86b700-7173-11ea-9466-66f85e908de2.PNG)
-
-
-
 
 <br>
 
