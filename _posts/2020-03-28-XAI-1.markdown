@@ -34,7 +34,8 @@ comments: true
 ### 🔮 설명가능한 AI
 * 사용자가 인공지능 시스템의 동작과 최종 결과를 이해하고 올바르게 해석하여 결과물이 생성되는 과정을 설명 가능하도록 해주는 기술
 * 모델이 내부적으로 작동하는 방식을 이해할 수 있게 해줌
-* 예를 들어 AI 시스템이 고양이 이미지를 분류할 경우, 기존 시스템은 입력된 이미지의 고양이 여부만을 도출하지만 XAI는 고양이 여부를 도출하고 털과 콧수염, 발톱 등으로 고양이로 판단한 근거까지 사용자에게 제공함
+🌱 예시 : AI 시스템이 고양이 이미지를 분류할 경우 <br>
+기존 시스템은 입력된 이미지의 고양이 여부만을 도출하지만 XAI는 고양이 여부를 도출하고 털과 콧수염, 발톱 등으로 고양이로 판단한 근거까지 사용자에게 제공함
 ![xai](https://user-images.githubusercontent.com/54492747/77825570-72c2a200-714d-11ea-9cb7-653a69acf785.PNG)
 (사진 출처: [https://www.darpa.mil/attachments/DARPA-BAA-16-53.pdf](https://www.darpa.mil/attachments/DARPA-BAA-16-53.pdf))  
 
@@ -55,7 +56,7 @@ AI의 설명가능성을 찬성하는 총 4가지의 주장이 있으며 다음�
 
 **1. 시스템 검증 (Verification of the system)** <br>
 기본적으로 블랙박스 시스템을 전적으로 신뢰하면 안됩니다. 예를 들어, 의료 분야에서는 의료 전문가들에 의해 해석되고 검증될 수 있는 모델을 사용하는 것이 절대적으로 필요합니다. <br>
-예시 : 사람의 폐렴 위험을 예측하도록 훈련된 AI 시스템 ([논문](https://www.aminer.cn/pub/5736973b6e3b12023e62b254/intelligible-models-for-healthcare-predicting-pneumonia-risk-and-hospital-day-readmission))
+🌱 예시 : 사람의 폐렴 위험을 예측하도록 훈련된 AI 시스템 ([논문](https://www.aminer.cn/pub/5736973b6e3b12023e62b254/intelligible-models-for-healthcare-predicting-pneumonia-risk-and-hospital-day-readmission))
 * 사전정보) 천식 또는 심장병 환자들은 전문가에 의해 엄격한 관리를 받고 환자들의 민감성이 증가함에 따라 사망 확률이 낮습니다.
 * 위의 사전 정보를 모르고 AI 시스템은 건강한 사람과 대조적으로 체계적으로 편향된 데이터(biased data)를 학습하게 되며, 사망확률이 건강한 사람이 천식 환자보다 더 높다는 잘못된 결론에 도달하게 됩니다.
 ![부작용](https://user-images.githubusercontent.com/54492747/77824131-98e34480-7143-11ea-8a38-3df91342c838.PNG)
