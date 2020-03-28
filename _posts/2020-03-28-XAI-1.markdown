@@ -135,7 +135,21 @@ $$\sum_{i}R_i=...=\sum_{j}R_j=\sum_{k}R_k=...=f(x)$$ <br>
 
 <br>
 
+다음은 feed-forward neural networks에 대한 LRP 재분배 과정에 대한 설명입니다. backward로 레이어 k=l+1에서 레이어 l로 관련성을 재분배하는 방식이며, 뉴런의 활성화 함수 $x_j$와 연결의 강도를 나타내는 가중치 $w_{jk}$에 따라 재분배됩니다. <br>
+$$R_j=\sum_{k} \frac{x_j w_{jk}}{\sum_{j} x_j w_{jk} + \epsilon} R_k$$
+* $x_j$ : 레이어 l에서의 뉴런 활성화 함수
+	* 더 많이 활성화된 뉴런이 더 큰 관련성 평가점수를 부여받게 됨 
+* $R_k$ : 레이어 l+1에서 뉴런과의 관련성 점수
+* $w_{jk}$ : 뉴런 j와 뉴런 k를 연결하는 가중치
+	* 더욱 두드러진 연결을 발생할수록 더 많은 관련성이 흐르게 됨
+* $\epsilon$ : 0으로 나눠지는 것을 막는 역할
+	* 관련성 보존으로 인해 0을 유지함
 
+<br>
+
+관련성 보존은 제약조건인 $\alpha - \beta = 1$이라는 공식에 의해 시행되며, $\alpha = 1$인 경우에는 재분배 규칙 신경망은 ReLU 뉴런으로 구성되게 됩니다.
+A way to obtain conservation and as well as stabilization is by using the alpha-beta rule instead:
+![알파베타룰](https://user-images.githubusercontent.com/54492747/77831522-0a86b700-7173-11ea-9466-66f85e908de2.PNG)
 
 
 
