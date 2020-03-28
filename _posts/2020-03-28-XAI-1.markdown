@@ -120,3 +120,6 @@ SA로 계산된 히트맵은 이미지를 예측된 클래스와 비슷하거나
 ### 2. Layer-Wise Relevance Propagation(LRP)
 * 특징 : how much does each pixel contribute to prediction
 
+
+-----
+분량 조절 실패로 평가 방법과 실제 사례는 다음 글에 이어서 쓰도록 하겠습니다😂 논문의 양은 많지 않은데 추가적으로 내용을 포함시키니 시간이 많이 걸리네요!
