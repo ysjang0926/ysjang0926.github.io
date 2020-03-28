@@ -107,8 +107,7 @@ XAI를 만드는 방법은 아래와 같습니다.
 
 SA는 각 입력 변수 i (ex: 이미지 픽셀)의 중요도를 다음과 같이 편미분의 norm으로 계산합니다. <br>
 $R_i = || \frac{\partial}{\partial x_i}  f(x)||$ <br>
-
-여기서 편미분은 network의 레이어를 통해 역전파 방법을 실행하고 연쇄법칙을 사용하여 얻을 수 있습니다. <br>
+* 여기서 편미분은 network의 레이어를 통해 역전파 방법을 실행하고 연쇄법칙을 사용하여 얻을 수 있습니다. <br>
 $\frac{\partial f}{\partial x^{(l)}}=\frac{\partial x^{(l+1)}}{\partial x^{(l)}}\frac{\partial f}{\partial x^{(l+1)}}$ <br>
 
 이때 가장 관련성이 높은 입력 특징(input feature)이 가장 민감한 특징이라 가정하고, SA는 함수값 f(x) 자체를 설명하는 것이 아니라 함수 값의 변동(=이미지의 예측값을 높이거나 낮추는 것은 무엇인지)을 설명합니다. <br>
