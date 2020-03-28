@@ -36,7 +36,7 @@ comments: true
 * 모델이 내부적으로 작동하는 방식을 이해할 수 있게 해줌
 
 🌱 예시 : AI 시스템이 고양이 이미지를 분류할 경우 <br>
-기존 시스템은 입력된 이미지의 고양이 여부만을 도출하지만 XAI는 고양이 여부를 도출하고 털과 콧수염, 발톱 등으로 고양이로 판단한 근거까지 사용자에게 제공함
+* 기존 시스템은 입력된 이미지의 고양이 여부만을 도출하지만 XAI는 고양이 여부를 도출하고 털과 콧수염, 발톱 등으로 고양이로 판단한 근거까지 사용자에게 제공함
 ![xai](https://user-images.githubusercontent.com/54492747/77825570-72c2a200-714d-11ea-9cb7-653a69acf785.PNG)
 (사진 출처: [https://www.darpa.mil/attachments/DARPA-BAA-16-53.pdf](https://www.darpa.mil/attachments/DARPA-BAA-16-53.pdf))  
 
