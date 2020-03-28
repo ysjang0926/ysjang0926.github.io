@@ -79,8 +79,8 @@ AI 시스템은 법적 질문과 그 결정의 이유에 대한 만족스러운 
 
 ## 3. Methods for Visualizing, Interpreting and Explaining Deep learning models
 XAI를 만드는 방법은 아래와 같습니다.
-* Sensitivity Analysis
-* Layer-Wise Relevance Propagation
+* Sensitivity Analysis(SA)
+* Layer-Wise Relevance Propagation(LRP)
 * LIME
 * Decision trees
 * Deep Taylor Decomposition
@@ -88,11 +88,7 @@ XAI를 만드는 방법은 아래와 같습니다.
 * KT-method
 * Validity Internal analysis
 
-본 논문에서는 딥러닝 모델의 설명 및 예측을 위한 대표적인 2가지 해석 기법을 소개합니다.
-* Sensitivity Analysis(SA)
-* Layer-Wise Relevance Propagation(LRP)
-
-AI 시스템의 예측을 설명하는 프로세스는 아래의 그림에 요약되어 있습니다.
+본 논문에서는 딥러닝 모델의 설명 및 예측을 위한 대표적인 2가지 해석 기법(SA, LRP)을 소개하며, AI 시스템의 예측을 설명하는 프로세스는 아래의 그림에 요약되어 있습니다.
 * 먼저 AI 시스템은 입력 이미지를 '수탉'으로 올바르게 분류합니다.
 * 그런 다음 입력 변수 관점에서 해당 결정에 도달한 이유를 설명하기 위해 SA 또는 LRP와 같은 방법을 적용합니다.
 * 이 설명의 결과는 예측에 대한 각 픽셀의 중요성을 시각화한 히트맵입니다.
