@@ -10,6 +10,8 @@ use_math: true
 
 **<font color = "#aba9a6">이번 글은 내용이 조금 길어져서 두 번으로 나누어서 포스팅하도록 하겠습니다.</font>**😅 <br>
 
+> "Interpretability is the degree to which a human can understand the cause of a decision." (Miller 2017)
+
 * 최근 [XAI 설명 가능한 인공지능, 인공지능을 해부하다](https://wikibook.co.kr/xai/) 책이 출간되어 주문한 기념으로, Explainable AI(설명 가능한 인공지능)를 소개하는 글을 쓰게 되었습니다.
 * [Explainable Artificial Intelligence: Understanding, Visualizing and Interpreting Deep Learning Models](https://arxiv.org/abs/1708.08296) 논문을 정리하고 조금의 추가적인 내용을 덧붙인 글입니다.
 
