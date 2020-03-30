@@ -130,10 +130,9 @@ SA로 계산된 히트맵은 이미지를 예측된 클래스와 비슷하거나
 3) Propagation : 역전파 기술
 * 특징 : how much does each pixel contribute to prediction <br>
 
+딥러닝 모델에서 예측 결과로부터 역전파 형태로 신경망의 각 레이어별 기여도를 측정할 수 있는 방법입니다. 이러한 방식은 딥러닝 모델의 부분 모듈인 각 계층의 기여도를 히트맵 형태로 시각화하여 직관적으로 이해할 수 있습니다. 
 ![relevance](https://user-images.githubusercontent.com/54492747/77909281-0c15c380-72c8-11ea-8da0-12764c6134e0.png)
 (출처 : [Explaining nonlinear classification decisions with deep Taylor decomposition](https://www.sciencedirect.com/science/article/pii/S0031320316303582))
-
-딥러닝 모델에서 예측 결과로부터 역전파 형태로 신경망의 각 레이어별 기여도를 측정할 수 있는 방법입니다. 이러한 방식은 딥러닝 모델의 부분 모듈인 각 계층의 기여도를 히트맵 형태로 시각화하여 직관적으로 이해할 수 있습니다. 
 
 <br>
 AI 시스템의 예측을 분해하기 위해  feed-forward neural networks, long-short term memory의 프레임워크를 활용합니다. SA와 달리 LRP는 최대 불확실성(maximum uncertainty) 상태에 대한 예측을 설명하며, 수탉이라고 예측하는 데 있어 중요한 픽셀이 무엇인지 찾아냅니다. <br>
