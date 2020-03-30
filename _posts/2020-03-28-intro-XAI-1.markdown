@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Introduction to Explainable AI (1)"
-subtitle:   "HackerRank: SQL Basic Select"
+subtitle:   "Introduction to Explainable AI"
 categories: data
 tags: dl
 comments: true
