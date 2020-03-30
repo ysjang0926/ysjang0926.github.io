@@ -125,9 +125,9 @@ SA로 계산된 히트맵은 이미지를 예측된 클래스와 비슷하거나
 ### 2. Layer-Wise Relevance Propagation(LRP)
 ※ [파이콘 한국 2019 튜토리얼 - LRP (Part 2)](https://www.slideshare.net/OpenXAI/2019-lrp-part-2)에 자세히 설명되어 있습니다.
 
-1) Layer-Wise : 레이어 단위로
-2) Relevance : 결과에 영향을 주는 관련성을 구하는
-3) Propagation : 역전파 기술
+1) Layer-Wise : 레이어 단위로 <br>
+2) Relevance : 결과에 영향을 주는 관련성을 구하는 <br>
+3) Propagation : 역전파 기술 <br>
 * 특징 : how much does each pixel contribute to prediction <br>
 
 딥러닝 모델에서 예측 결과로부터 역전파 형태로 신경망의 각 레이어별 기여도를 측정할 수 있는 방법입니다. 이러한 방식은 딥러닝 모델의 부분 모듈인 각 계층의 기여도를 히트맵 형태로 시각화하여 직관적으로 이해할 수 있습니다. 
