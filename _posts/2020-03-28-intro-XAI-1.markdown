@@ -8,7 +8,7 @@ comments: true
 use_math: true
 ---
 
-**<font color = "#EFC050">이번 글은 내용이 조금 길어져서 두 번으로 나누어서 포스팅하도록 하겠습니다.</font>**😅
+**<font color = "#aba9a6">이번 글은 내용이 조금 길어져서 두 번으로 나누어서 포스팅하도록 하겠습니다.</font>**😅
 
 <br>
 
