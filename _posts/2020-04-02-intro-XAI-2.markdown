@@ -18,7 +18,7 @@ use_math: true
 * XAI에 필요한 특성 : **설명성(Explainability)**
 	* `해석성(Interpretability)` : 시스템의 구조를 사람이 이해할 수 있도록 설명하는 것
 	* `정확성(Completeness)` : 시스템이 돌아가는 원리를 정확한 방법으로 설명하는 것￼
-![xai](https://user-images.githubusercontent.com/54492747/77902089-9a377d00-72bb-11ea-9093-7df40390bb95.PNG) <br>
+![xai](https://user-images.githubusercontent.com/54492747/77902089-9a377d00-72bb-11ea-9093-7df40390bb95.PNG)
 (출처 : [조현욱, "못 믿겠다 AI, 설계자도 심층신경망 작동 방식 몰라", 중앙SUNDAY, 2018. 2. 25](https://news.joins.com/article/22394025))
 <br>
 
@@ -36,16 +36,19 @@ use_math: true
 
 아래 이미지를 통해 Gradient, SmoothGrad 등과 같은 다양한 방법들의 결과와 입력값과 모델의 학습에 전혀 관계 없는 Edge Detector의 결과가 차이가 크지 않은 것을 볼 수 있습니다.  이러한 이유로 시각적인 요소로 모델을 평가 및 비교하는 것보다 객관적인 측정값의 필요함을 느낄 수 있습니다.￼
 
-![heatmap](https://user-images.githubusercontent.com/54492747/78141560-9f84fb00-7466-11ea-8119-9040bca57c65.png)(출처 : [Sanity checks for saliency maps](https://dl.acm.org/doi/10.5555/3327546.3327621))
+![heatmap](https://user-images.githubusercontent.com/54492747/78141560-9f84fb00-7466-11ea-8119-9040bca57c65.png)
+(출처 : [Sanity checks for saliency maps](https://dl.acm.org/doi/10.5555/3327546.3327621))
+
+<br>
 
 본 논문에서는 [섭동 이론(perturbation theory)](https://namu.wiki/w/%EC%84%AD%EB%8F%99%20%EC%9D%B4%EB%A1%A0)에 기초한 품질 측정을 제안합니다. <br>
 * '섭동 이론'이란 물리학 전반에서 정확한 해가 잘 알려진 어떤 계에 미세한 변화를 줬을 때 그 해가 어떻게 변화하는지를 수학적으로 풀어내기 위한 도구입니다.
-* 여기선 이해하기 쉽게 편의상 'perturbation = 미세변화' 라고 하겠습니다.
+* 여기선 이해하기 쉽게 편의상 'perturbation = 미세변화' 라고 하겠습니다. <br>
 
 해당 방법은 다음의 세 가지 아이디어를 기반으로 합니다.
 
 1. 예측에 매우 중요한 입력 변수의 perturbation은 덜 중요한 입력 변수들의 perturbation보다 크다. <br>
-	* perturbation of input variables which are highly important > the perturbation of input dimensions which are of lesser importance.
+	* perturbation of input variables which are highly important > the perturbation of input dimensions which are of lesser importance
 	* 그렇기 때문에 중요한 입력 변수의 미세변화가 일어날수록 **예측 점수가 더 급격하게 감소**하게 됩니다.
 
 2. SA와 LRP와 같은 설명 방법은 모든 입력 변수에 점수를 제공합니다. <br>
@@ -72,12 +75,12 @@ use_math: true
 * SA 히트맵 : LRP에 비해 노이즈가 많으며 해석하기 어려움
 * LRP 히트맵 : 커피의 경우 컵의 타원체 모양으로 커피와 관련된 특징임을 잡아내고, 산의 경우 산의 솟은 형태로 화산과 관련된 특징을 잡아낸 것을 보여줌
 
-이를 통해 LRP와 달리 SA는 각 픽셀이 예측에 얼마나 기여하는지를 나타내지 않고 입력 변화에 대한 모델의 민감도를 측정하기 때문에, LRP가 SA보다 모델의 예측에 대해 더 나은 설명을 제공한다고 할 수 있습니다.
+이를 통해 LRP와 달리 SA는 각 픽셀이 예측에 얼마나 기여하는지를 나타내지 않고 입력 변화에 대한 모델의 민감도를 측정하기 때문에, LRP가 SA보다 모델의 예측에 대해 더 나은 설명을 제공한다고 할 수 있습니다. <br>
 
 ![coffee - 복사본](https://user-images.githubusercontent.com/54492747/77971257-3055bc80-7329-11ea-8df6-cc2bf94e5fd7.PNG)
 
 위의 그림은 perturbation 분석 결과를 그래프로 표현한 것입니다. y축은 ILSVRC2012 데이터 셋의 5,040개 이미지에 대한 예측 점수 평균의 상대적 감소를 나타냅니다. 예를 들어 0.8은 원래 점수가 평균 20% 감소했음을 의미합니다.
-* SA heatmap < LRP heatmap : LRP가 SA보다 더욱 점수가 급격하게 줄어든 점을 볼 수 있으며, 그만큼 특정을 더 잘 추출한 것을 알 수 있음
+* SA heatmap < LRP heatmap : LRP가 SA보다 더욱 점수가 급격하게 줄어든 점을 볼 수 있으며, 그만큼 특정을 더 잘 추출한 것을 알 수 있음 <br>
 
 #### 2. Text document classification
 텍스트 문서 분류에 대한 설명 가능한 방법의 적용에 대한 예시입니다. ([관련 논문](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5553725/))
@@ -88,12 +91,12 @@ use_math: true
 단어 임베딩(word-embedding) CNN 모델을 사용하여 [20Newsgroup](http://qwone.com/~jason/20Newsgroups/) 데이터셋으로 텍스트 문서를 분류하였으며, 위의 텍스트 문서는 `sci.med` 항목으로 의료과 관련된 글입니다. SA와 LRP를 통해 시각화한 히트맵은 위의 그림과 같으며, 관련성 점수 $R_i$가 모든 단어에 할당되어 표시된 것을 확인할 수 있습니다. <br>
 SA와 LRP 모두 `body`, `discomfort`, `sickness` 등과 같은 단어가 분류를 결정하는데 있어 중요하다고 판단하였습니다.
 * SA 히트맵 : 의학과 관련된 단어를 빨간색으로 표현하였으며, LRP와 달리 해당 주제와 다른 범주에 포함되는 단어를 구별하지 못함
-* LRP 히트맵 : SA과 달리 의학과 관련된 단어를 빨간색, 의학과 관련되지 않은 단어를 파란색으로 표현하였음. 이를 통해 주제와 다른 범주를 구별할 수 있다는 것을 알 수 있음
+* LRP 히트맵 : SA과 달리 의학과 관련된 단어를 빨간색, 의학과 관련되지 않은 단어를 파란색으로 표현하였음. 이를 통해 주제와 다른 범주를 구별할 수 있다는 것을 알 수 있음 <br>
 
 ![text - 복사본](https://user-images.githubusercontent.com/54492747/77971345-62671e80-7329-11ea-9003-1ab8161ef320.PNG)
 
 위의 그림은 분류에 대한 정확도를 그래프로 표현한 것입니다. y축은 20Newsgroup 데이터 셋의 4,154개 텍스트에 대한 예측 정확도의 상대적 감소를 나타냅니다. 즉, 모든 perturbation 단계에서 해당 입력 값을 0으로 설정하여 SA와 LRP 점수에 따른 가장 중요한 단어를 순차적으로 삭제하며 정확도에 대한 변화를 의미합니다.
-* LRP가 SA보다 더욱 주제에 맞는 단어를 잘 잡아내고, 이러한 단어를 삭제함에 따라 예측 정확도가 더 빨리 낮아진다는 것을 확인할 수 있음
+* LRP가 SA보다 더욱 주제에 맞는 단어를 잘 잡아내고, 이러한 단어를 삭제함에 따라 예측 정확도가 더 빨리 낮아진다는 것을 확인할 수 있음 <br>
 
 #### 3. Human action recognition in videos
 동작 벡터 특징(motion vector features)에 기초한 인간 행동 인식 분류에 대한 설명 가능한 방법의 적용에 대한 예시입니다. ([관련 논문](https://ieeexplore.ieee.org/abstract/document/7952445))
@@ -119,6 +122,8 @@ SVM 모델을 사용하여 [HMDB51](https://ieeexplore.ieee.org/document/6126543
 -------
 ### Next
 제가 주로 맡았던 분석 프로젝트는 대부분 통계적 방법론이나 머신러닝 등에 대한 이해도가 낮은 현업들의 문제 해결을 위한 의뢰로 진행되는 경우가 많았습니다. 그리하여 분석 결과에 대한 직관적인 설명과 이를 시각적으로 표현해야 하는 것이 필수적이라 생각하여, 분석 결과를 어떤 방식으로 잘 전달할 수 있을지 많이 고민했었던 기억이 납니다. 물론 지금 진행하고 있는 프로젝트에서도 마찬가지이구요! <br>
-XAI에 대한 관심은 작년부터 딥러닝에 대해 공부하면서 작동하는 원리와 그 결과에 대한 원인을 시각적으로 보고 싶다는 생각으로 시작된 것 같습니다. 만약 양품과 불량품에 대한 이미지 분류를 진행할 때 현업에게 예측 결과를 설명해야하는 경우 어떻게 쉽게 설명이 가능하게끔 방향을 잡아야할지에 대한 고민이 먼저 생기더라구요. 관련 내용 공부를 조금씩 시작하고 있어서, 그러한 기념(?)으로 Explainable AI(설명 가능한 인공지능)를 소개하는 글을 쓰게 되었습니다. 역시 관심있는 주제로 공부를 시작하니 시간 가는 줄 모르겠네요🤣 <br>
-또한 해당 [XAI 논문](https://arxiv.org/abs/1708.08296)에 대해 포스팅을 하는 동안,  [XAI 설명 가능한 인공지능, 인공지능을 해부하다](https://wikibook.co.kr/xai/) 책이 집에 도착했습니다!!🤗 다음 포스팅은 책을 다 읽고 중요 내용을 간략하게 정리하며 책 리뷰 포스팅을 하려고 합니다. <br>
+XAI에 대한 관심은 작년부터 딥러닝에 대해 공부하면서 작동하는 원리와 그 결과에 대한 원인을 시각적으로 보고 싶다는 생각으로 시작된 것 같습니다. 만약 양품과 불량품에 대한 이미지 분류를 진행할 때 현업에게 예측 결과를 설명해야하는 경우 어떻게 쉽게 설명이 가능하게끔 방향을 잡아야할지에 대한 고민이 먼저 생기더라구요. 관련 내용 공부를 조금씩 시작하고 있어서, 그러한 기념(?)으로 Explainable AI(설명 가능한 인공지능)를 소개하는 글을 쓰게 되었습니다. <br>
+또한 해당 [XAI 논문](https://arxiv.org/abs/1708.08296)에 대해 포스팅을 하는 동안,  [XAI 설명 가능한 인공지능, 인공지능을 해부하다](https://wikibook.co.kr/xai/) 책이 집에 도착했습니다!!🤗 다음 포스팅은 책을 다 읽고 중요 내용을 간략하게 정리하며 책 리뷰 포스팅을 하려고 합니다.
+<br>
+
 긴 글 읽어주셔서 감사합니다. 조금 덕후 같지만 오늘 하루도 장수와 번영하시길 바랍니다(Live Long and Prosper) 🖖
