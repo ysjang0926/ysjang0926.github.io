@@ -33,7 +33,7 @@ use_math: true
 ## 4. Evaluating the quality of explanations
 딥러닝 모델을 설명하기 위해 SA, LRP와 같은 많은 방법들이 있습니다. 이러한 방법들이 모델을 얼마나 잘 설명하는지(ex. 히트맵) 비교하기 위해서는 설명의 품질(quality)에 대한 객관적인 측정이 필요합니다.
 
-아래 이미지를 통해 Gradient, SmoothGrad 등과 같은 다양한 방법들의 결과와 입력값과 모델의 학습에 전혀 관계 없는 Edge Detector의 결과가 차이가 크지 않은 것을 볼 수 있습니다.  이러한 이유로 시각적인 요소로 모델을 평가 및 비교하는 것보다 객관적인 측정값의 필요함을 느낄 수 있습니다.￼
+아래 이미지를 통해 Gradient, SmoothGrad 등과 같은 다양한 방법들의 결과와 입력값과 모델의 학습에 전혀 관계 없는 Edge Detector의 결과가 차이가 크지 않은 것을 볼 수 있습니다.  이러한 이유로 시각적인 요소로 모델을 평가 및 비교하는 것보다 객관적인 측정값의 필요함을 느낄 수 있습니다.
 
 ![heatmap](https://user-images.githubusercontent.com/54492747/78141560-9f84fb00-7466-11ea-8119-9040bca57c65.png)
 (출처 : [Sanity checks for saliency maps](https://dl.acm.org/doi/10.5555/3327546.3327621))
