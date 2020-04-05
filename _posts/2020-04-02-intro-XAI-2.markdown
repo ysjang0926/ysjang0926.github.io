@@ -18,6 +18,7 @@ use_math: true
 * XAI에 필요한 특성 : **설명성(Explainability)**
 	* `해석성(Interpretability)` : 시스템의 구조를 사람이 이해할 수 있도록 설명하는 것
 	* `정확성(Completeness)` : 시스템이 돌아가는 원리를 정확한 방법으로 설명하는 것￼
+
 ![xai](https://user-images.githubusercontent.com/54492747/77902089-9a377d00-72bb-11ea-9093-7df40390bb95.PNG)
 (출처 : [조현욱, "못 믿겠다 AI, 설계자도 심층신경망 작동 방식 몰라", 중앙SUNDAY, 2018. 2. 25](https://news.joins.com/article/22394025))
 <br>
