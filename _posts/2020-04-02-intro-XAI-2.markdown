@@ -114,6 +114,11 @@ SVM 모델을 사용하여 [HMDB51](https://ieeexplore.ieee.org/document/6126543
 
 <br>
 
+## 6. Conclusion
+블랙박스 모델이 특정 분야(ex. 의료 영역)에 허용되지 않는 이유로 인해 나오게 된 AI의 설명 가능성(XAI) 방법에 대해서 알아보았습니다. 설명 가능성(explainability)은 모델의 결함과 데이터의 편향을 감지하고, 예측을 검증하고, 모델을 개선하며, 최종적으로 문제에 대한 새로운 통찰력을 얻을 수 있는 강력한 도구입니다. SA와 LRP와 같은 대표적인 2가지 설명 방법을 소개하고, 세 가지 문제(이미지, 텍스트 문서, 영상)에 적용한 결과를 통해 SA와 LRP 방법을 평가한 내용을 설명하였습니다. 세 가지 예시에서 모두 LRP가 SA보다 모델의 예측에 대해 더 나은 설명을 제공함을 확인할 수 있었습니다.
+
+<br>
+
 ### Reference
 * [Explainable Artificial Intelligence: Understanding, Visualizing and Interpreting Deep Learning Models](https://arxiv.org/abs/1708.08296)
 * [DARPA - Explainable Artificial Intelligence(XAI) 보고서](https://www.darpa.mil/attachments/DARPA-BAA-16-53.pdf)
@@ -123,6 +128,7 @@ SVM 모델을 사용하여 [HMDB51](https://ieeexplore.ieee.org/document/6126543
 * [Youtube 딥러닝논문읽기모임 채널 - XAI 논문 발표](https://www.youtube.com/watch?v=1WeLdfhRocI&t=431s)
 
 -------
+
 ### Next
 제가 주로 맡았던 분석 프로젝트는 대부분 통계적 방법론이나 머신러닝 등에 대한 이해도가 낮은 현업들의 문제 해결을 위한 의뢰로 진행되는 경우가 많았습니다. 그리하여 **분석 결과에 대한 직관적인 설명**과 이를 **시각적으로 표현**해야 하는 것이 필수적이라 생각하여, **분석 결과를 어떤 방식으로 잘 전달**할 수 있을지 많이 고민했었던 기억이 납니다. 물론 지금 진행하고 있는 프로젝트에서도 마찬가지이구요! <br>
 XAI에 대한 관심은 작년부터 딥러닝에 대해 공부하면서 작동하는 원리와 그 결과에 대한 원인을 시각적으로 보고 싶다는 생각으로 시작된 것 같습니다. 만약 양품과 불량품에 대한 이미지 분류를 진행할 때 현업에게 예측 결과를 설명해야하는 경우, 어떻게 쉽게 설명이 가능하게끔 방향을 잡아야할지에 대한 고민이 먼저 생기더라구요. 관련 내용 공부를 조금씩 시작하고 있어서, 그러한 기념(?)으로 Explainable AI(설명 가능한 인공지능)를 소개하는 글을 쓰게 되었습니다. <br>
