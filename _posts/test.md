@@ -1,11 +1,11 @@
 ---
 layout: post
 title: "Test"
+categories: data
+tags: dl
 author: "chacha"
 date: 2020-01-17
 ---
-
-
 
 ## R Markdown
 
