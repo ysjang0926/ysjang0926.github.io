@@ -17,7 +17,7 @@ comments: true
 {:toc}
 ---
 
-## 1. Introduction
+## Introduction
 
 ![emergency](https://user-images.githubusercontent.com/54492747/79099267-bac50400-7d9e-11ea-8049-f7ad1cbe30aa.jpg)
 
@@ -41,12 +41,12 @@ comments: true
         + **각 거주지에 대한 히트맵**에 따른 결과
     + 향후 사고 발생 횟수 **예측**
     
-<br><br>
+<br>
 
-### 1.1 Loading packages and Attributes of data
+### Loading packages and Attributes of data
 `ggplot2`, `dplyr`와 같은 대표적인 Package를 포함하여 EDA를 하는데 사용한 모든 Package를 불러오도록 하겠습니다. Package 옆에 간단한 주석을 달아놨습니다.
 
-```{r, message=FALSE, warning=FALSE}
+```{r}
 # Load packages
 library(dplyr) # Data manipulation
 library(tidyr) # Data manipulation
@@ -74,7 +74,8 @@ str(call) # 626350 obs. of  9 variables
 
 <br>
 
-변수명과 클래스 유형은 위와 같으며, 총 626350개의 관측치와 9개의 변수가 있습니다. 변수에 대한 간단한 설명은 다음과 같습니다. 
+변수명과 클래스 유형은 위와 같으며, 총 626350개의 관측치와 9개의 변수가 있습니다. 변수에 대한 간단한 설명은 다음과 같습니다.
+
 변수명        | 설명
 --------------|----------------------------------------------------
 lat           | 위도(Latitude)
@@ -91,7 +92,7 @@ e             | 더미변수(always 1)
 
 ---------------------------
 
-### 1.2 Handling Data
+### Handling Data
 
 기존 변수에서 새로운 몇 개의 변수를 만들기 위해 필요하지 않은 변수 제거 등의 전처리 작업을 거쳤습니다.
 
@@ -118,11 +119,11 @@ knitr::kable(head(calls,n=3))
 str(calls) # 123884 obs. of  14 variables
 ```
 
-<br>
+-----
 
-## 2. Exploratory Data Analysis
+## Exploratory Data Analysis
 
-### 2.1 Brief Explanation on "Accident Distribution"
+### Brief Explanation on "Accident Distribution"
 
 ```{r}
 call_map <- leaflet() %>% addTiles() %>% setView(lng=-75.2, lat=40.1, zoom=10) %>% addMarkers(data=calls, lng= ~lng, lat= ~lat, clusterOptions = markerClusterOptions())
@@ -134,11 +135,9 @@ call_map
 
 <br>
 
-------------------------------
+### 911 Calls in Montgomery County, Generally
 
-### 2.2 911 Calls in Montgomery County, Generally
-
-#### 2.2.1 Percentage of Types of 911 Calls
+#### Percentage of Types of 911 Calls
 사고의 종류에 따라 그에 맞는 전문가가 필요합니다. 파이 차트를 통해 세 가지 유형의 통화 비율을 확인했습니다.
 
 ```{r}
@@ -163,9 +162,7 @@ plot_ly(freqt.calls,labels=~Var1,values=~Freq,type='pie',
 
 <br>
 
-------------------------------------
-
-#### 2.2.2 How the number of 911 Calls varies as the time goes by (for each types)
+#### How the number of 911 Calls varies as the time goes by (for each types)
 EMS 통화량이 특정 기간 내에도 다른 변수보다 많을지 궁금하여, 시계열 그래프를 사용하여 보았습니다.
 
 ```{r}
@@ -201,12 +198,10 @@ dyOptions(colors=c('rgb(0,204,102)','rgb(211,94,96)','rgb(51,153,255)')) # Alloc
 
 <br>
 
-----------------------------------
-
-#### 2.2.3 Correlation among Types of 911 Calls
+#### Correlation among Types of 911 Calls
 세 가지 유형의 상관관계를 확인하기 위해 상관관계 행렬을 만들었습니다. 사각형 상자에 **마우스를 올려** 놓으면 **상관계수**를 확인할 수 있고, 이것을 **클릭**하면 이에 따른 **산점도**을 볼 수 있습니다.
 
-```{r message=FALSE}
+```{r}
 month <- as.data.frame(calls %>% select(-timeStamp) %>% group_by(Month, Types) %>% summarise(N=n()) %>% spread(Types, N))
 
 day <- as.data.frame(calls %>% select(-timeStamp) %>% group_by(Day, Types) %>% summarise(N=n()) %>% spread(Types, N))
@@ -243,14 +238,13 @@ dd<-rbind(dnr,dnn)
 
 ggplot(dd, aes(time, value, fill = name)) + geom_bar(position = "dodge",stat="identity")+labs(title="What Happened in 2 Mar, 2018?",x="Hour",y="Traffic Freq")+theme_bw()+scale_fill_discrete(name="Date")
 ```
+
 - 2일의 Trffic 911 통화량은 1일보다 현저히 많습니다.
 - 오후 3~6시에 중대한 Traffic 사고가 있었던 것으로 보여집니다.
 
 <br>
 
--------------------------------------
-
-####  2.2.4 911 Call Trend by Month, Day, Hour
+#### 911 Call Trend by Month, Day, Hour
 
 **⚫ Calls - Monthly**
 
@@ -332,9 +326,7 @@ plot_ly(week, x = ~Week, y = ~EMS, type = 'bar', name = 'EMS') %>%
 
 <br>
 
-----------------------------------------
-
-#### 2.2.5 Summarized Result, by Heat Map
+#### Summarized Result, by Heat Map
 
 히트맵은 데이터 값이 색으로 표현되게끔 3차원적으로 표현한 그래프입니다. 월별, 일별, 시간별로 911 통화의 히트맵을 보겠습니다. 사각형 색상이 노란색으로 가까워질수록 911 통화 수는 더 커집니다.
 
