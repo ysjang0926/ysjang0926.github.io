@@ -215,7 +215,7 @@ iplotCorr(hour[,2:4], reorder=TRUE, chartOpts=list(cortitle="Hour", scattitle="S
 
 <br>
 
-❔ What happened in 2016-01-23? <br>
+**❔ What happened in 2016-01-23? <br>**
 2018년 3월 2일에 큰 Traffic 사고가 발생했을 것 같습니다. 1일과 2일에 발생한 사고 건수를 시간대별로 비교해봤습니다. 2일에 중대한 Traffic 사고가 발생했다면, 특정 시간에 교통사고 911 통화 건수가 상당히 많을 것으로 생각합니다.
 
 ```{r}
@@ -505,7 +505,7 @@ ggplot(dayhour.sub, aes(Day, Hour, fill = sqrt(N))) + geom_tile(color = "white",
 
 <br>
 
-## 2.4 Forecasting the number of accidents in the future
+## Forecasting the number of accidents in the future
 
 이제 앞으로 발생할 수 있는 사고의 수를 예측해 보겠습니다. 여기에서는 시계열 분석이 사용되었습니다. 
 
@@ -516,8 +516,6 @@ ggplot(dayhour.sub, aes(Day, Hour, fill = sqrt(N))) + geom_tile(color = "white",
 셋째, 귀무가설에 대해 Dickey-Fuller 테스트를 수행했으며 데이터가 비정상성(non-stationary)을 갖는 것을 확인했습니다. 그러므로 귀무가설을 기각할 수 있습니다.
 
 마지막으로, AIC, AICc, BIC 값으로 최고의 ARIMA 모델을 찾으려고 했습니다.
-
-<br>
 
 ```{r}
 date <- as.data.frame(calls %>% select(-timeStamp) %>% group_by(Date, Types) %>% summarise(N=n()) %>% spread(Types, N))
