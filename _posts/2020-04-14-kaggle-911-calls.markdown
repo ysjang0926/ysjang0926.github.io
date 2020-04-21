@@ -9,6 +9,7 @@ comments: true
 
 * Kaggle의 [Emergency - 911 Calls](https://www.kaggle.com/mchirico/montcoalert) 데이터를 이용한 탐색적 데이터 분석(Exploratory Data Analysis, EDA)을 하고자 합니다.
 * 해당 포스팅에서 사용한 전체 코드와 그래프는 해당 [Kernel](https://www.kaggle.com/ysjang0926/eda-911-calls-kor)에서도 확인하실 수 있습니다.🤗
+
 ---
 ## **Contents**
 {:.no_toc}
