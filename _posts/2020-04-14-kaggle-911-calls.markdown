@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "캐글 Emergency - 911 Calls : Exploratory Data Analysis"
+title: "캐글 Emergency - 911 Calls : Exploratory Data Analysis (1)"
 subtitle: "kaggle 911 Calls - EDA"
 categories: data
 tags: kaggle
