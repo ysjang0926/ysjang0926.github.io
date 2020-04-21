@@ -5,6 +5,8 @@ subtitle: "kaggle 911 Calls - EDA"
 categories: data
 tags: kaggle
 comments: true
+toc: true
+toc_sticky: true
 ---
 
 * Kaggle의 [Emergency - 911 Calls](https://www.kaggle.com/mchirico/montcoalert) 데이터를 이용한 탐색적 데이터 분석(Exploratory Data Analysis, EDA)을 하고자 합니다.
