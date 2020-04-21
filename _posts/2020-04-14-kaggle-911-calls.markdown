@@ -1,0 +1,612 @@
+---
+layout: post
+title: "캐글 Emergency - 911 Calls : Exploratory Data Analysis"
+subtitle: "kaggle 911 Calls - EDA"
+categories: data
+tags: kaggle
+comments: true
+---
+
+* Kaggle의 [Emergency - 911 Calls](https://www.kaggle.com/mchirico/montcoalert) 데이터를 이용한 탐색적 데이터 분석(Exploratory Data Analysis, EDA)을 하고자 합니다.
+* 해당 포스팅에서 사용한 전체 코드와 그래프는 해당 [Kernel](https://www.kaggle.com/ysjang0926/eda-911-calls-kor)에서도 확인하실 수 있습니다.🤗
+---
+## **Contents**
+{:.no_toc}
+0. this unordered seed list will be replaced by toc as unordered list
+{:toc}
+---
+
+## 1. Introduction
+
+![emergency](https://user-images.githubusercontent.com/54492747/79099267-bac50400-7d9e-11ea-8049-f7ad1cbe30aa.jpg)
+
+**Montgomery County의 911 통화**에서 수집된 데이터에 대한 EDA(Exploratory Data Analysis)를 하였습니다.
+
+구조대원들은 그들이 일하는 동안 항상 많은 사람들의 생명을 구조합니다. 한 번의 작은 실수가 죽음을 초래할 수 있기에, 그들의 작업은 오랜 시간 동안 엄청난 집중력을 필요로 합니다. 하지만 앞으로 어떤 종류의 사고가 일어날지 알 수 없기 때문에 일정 수의 구조대원이 항상 필요합니다. 향후 일반적인 사고 발생 건수를 예측할 수 있다면 적절한 시기에 적절한 구조 인력을 배치하는 것이 더 쉬울 것이라 생각합니다. 이는 또한 구조대원들의 적절한 휴식 시간으로도 이어질 수 있을 것입니다.
+
+`911.csv` 데이터의 출처는 [http://montcoalert.org/](http://montcoalert.org/)입니다. 이 홈페이지는 Montgomery County의 911 통화에 대한 정보를 제공합니다. Montgomery County는 펜실베니아 연방에 위치하고 있습니다. 데이터는 2015년 12월 10일부터 2020년 4월 8일까지 수집되어 있습니다. (주기적으로 데이터가 업데이트 되고 있는 것 같습니다.)
+
+- 해당 글의 구성은 아래와 같습니다.
+    + **지도**를 통해 사고 분포에 대한 간략한 설명
+    + Montgomery County에서의 **911 통화**, 일반적으로
+        + 911 통화 유형의 **백분율**
+        + **시간이 경과함에 따라** 911 통화 수가 어떻게 달라지는가
+        + 911 통화 유형 간의 **상관 관계**
+        + 월, 일, 시간별 **911 통화 트렌드**
+        + **히트맵**에 따른 결과
+    + **거주지(township)**에 따른  Montgomery County에서의 911 통화
+        + 911 통화 유형별 **모자이크 플롯**
+        + 911 통화의 하위 유형별 **모자이크 플롯**
+        + **각 거주지에 대한 히트맵**에 따른 결과
+    + 향후 사고 발생 횟수 **예측**
+    
+<br><br>
+
+### 1.1 Loading packages and Attributes of data
+`ggplot2`, `dplyr`와 같은 대표적인 Package를 포함하여 EDA를 하는데 사용한 모든 Package를 불러오도록 하겠습니다. Package 옆에 간단한 주석을 달아놨습니다.
+```{r, message=FALSE, warning=FALSE}
+# Load packages
+library(dplyr) # Data manipulation
+library(tidyr) # Data manipulation
+library(xts) # Creating xts's object
+library(lubridate) #Helps dealing with dates a little easier
+library(qtlcharts) # Making plot of correlation table
+library(forecast) # Time series Forecast
+library(tseries) # Time series analysis
+library(leaflet) # Visualization
+library(ggplot2) # Visualization
+library(plotly) # Visualization
+library(dygraphs) # Visualization
+library(viridis) # Colormap
+library(graphics) # Mosaic plot
+```
+
+필요한 모든 Package를 불러왔으며, 데이터 속성을 확인해보겠습니다.
+
+```{r}
+# Check data
+call <- read.csv("../input/montcoalert/911.csv")
+knitr::kable(head(call,n=3))
+str(call) # 626350 obs. of  9 variables
+``` 
+
+<br>
+
+변수명과 클래스 유형은 위와 같으며, 총 626350개의 관측치와 9개의 변수가 있습니다. 변수에 대한 간단한 설명은 다음과 같습니다. 
+변수명        | 설명
+--------------|----------------------------------------------------
+lat           | 위도(Latitude)
+lng           | 경도(Longitude)
+desc          | 응급 통화에 대한 설명(EMS: 응급의료 서비스, Fire: 화재, Traffic: 교통사고)
+zip           | 우편번호(Zipcode)
+title         | 통화 제모
+timeStamp     | YYYY-MM-DD HH:MM:SS
+twp           | 군구(Township, county 아래의 행정 구역 단위)
+addr          | 주소
+e             | 더미변수(always 1)
+
+<br>
+
+---------------------------
+
+### 1.2 Handling Data
+
+기존 변수에서 새로운 몇 개의 변수를 만들기 위해 필요하지 않은 변수 제거 등의 전처리 작업을 거쳤습니다.
+
+```{r}
+calls <- separate(call,title,c("Types","Subtypes"),sep=":")
+# Separate Title into Types and Subtypes.
+
+calls$timeStamp <- as.POSIXlt(call$timeStamp)
+calls$Date <- as.Date(calls$timeStamp)
+calls$Year<-factor(year(calls$Date))
+calls$Month<-factor(month(calls$Date))
+calls$Day<-factor(day(calls$Date))
+calls$Hour <- factor(calls$timeStamp$hour)
+calls$zip<-factor(calls$zip)
+calls$Subtypes<-factor(calls$Subtypes)
+calls$Types<-factor(calls$Types)
+# Handling timestamp variable and change the classes of some variables into factor.
+
+calls<-calls[,-10]
+# Erase unnecessary dummy variable, e, as it is always 1.
+
+knitr::kable(head(calls,n=3))
+
+str(calls) # 123884 obs. of  14 variables
+```
+
+<br>
+
+## 2. Exploratory Data Analysis
+
+### 2.1 Brief Explanation on "Accident Distribution"
+```{r}
+call_map <- leaflet() %>% addTiles() %>% setView(lng=-75.2, lat=40.1, zoom=10) %>% addMarkers(data=calls, lng= ~lng, lat= ~lat, clusterOptions = markerClusterOptions())
+call_map
+```
+
+- 위에서 설명한 것과 같이, 데이터는 **Montgomery County**에 위치해있습니다.
+- 911 통화의 대부분은 **Norristown(185,052)**, 그 다음으로 **Abington(92,658)**, **Lansdale(88,947)**입니다.
+
+<br>
+
+------------------------------
+
+### 2.2 911 Calls in Montgomery County, Generally
+
+#### 2.2.1 Percentage of Types of 911 Calls
+사고의 종류에 따라 그에 맞는 전문가가 필요합니다. 파이 차트를 통해 세 가지 유형의 통화 비율을 확인했습니다.
+
+```{r}
+freqt.calls <-as.data.frame(table(calls$Type))
+freqt.calls
+
+plot_ly(freqt.calls,labels=~Var1,values=~Freq,type='pie',
+        textposition='inside',
+        textinfo='label+percent',
+        insidetextfont=list(color='#FFFFFF',size=20),
+        hoverinfo='text',
+        marker=list(colors=c('rgb(0,204,102)','rgb(211,94,96)','rgb(51,153,255)'),
+                    line=list(color='#FFFFFF',width=1)),
+                    showlegend = FALSE)%>%
+  layout(title="Frequency of Three Types of 911 calls",
+         xaxis=list(showgrid=F,zeroline=F,showticklabels=F),
+         yaxis=list(showgrid=F,zeroline=F,showticklabels=F))
+```
+
+- **EMS**가 **49.2%**를 차지했으며, 다음으로 **Traffic(35.2%)*, **Fire(15%)**입니다.
+- EMS가 가장 많았으며, 아마도 사고 유형에 상관없이 사람들이 대부분의 사고에서 다치기 때문일 것이라 생각합니다.
+
+<br>
+
+------------------------------------
+
+#### 2.2.2 How the number of 911 Calls varies as the time goes by (for each types)
+EMS 통화량이 특정 기간 내에도 다른 변수보다 많을지 궁금하여, 시계열 그래프를 사용하여 보았습니다.
+
+```{r}
+fre.calls.ems <-as.data.frame(table(calls[calls$Types=="EMS",]$Date))
+fre.calls.fire <-as.data.frame(table(calls[calls$Types=="Fire",]$Date))
+fre.calls.traffic <-as.data.frame(table(calls[calls$Types=="Traffic",]$Date)) 
+fre.calls.ems$Var1 <- as.Date(fre.calls.ems$Var1)
+fre.calls.fire$Var1 <- as.Date(fre.calls.fire$Var1)
+fre.calls.traffic$Var1 <- as.Date(fre.calls.traffic$Var1) 
+# Convert between character representations and objects of class "Date"
+
+ems.ts <- xts(fre.calls.ems$Freq, fre.calls.ems$Var1)
+fire.ts <- xts(fre.calls.fire$Freq, fre.calls.fire$Var1)
+traffic.ts <- xts(fre.calls.traffic$Freq, fre.calls.traffic$Var1) 
+# Creating an extensible time-series object
+
+names(ems.ts) <- "EMS"
+names(fire.ts) <- "FIRE"
+names(traffic.ts) <- "TRAFFIC" # Specify a column name 
+
+ts.types <- cbind(ems.ts, fire.ts, traffic.ts)
+
+dygraph(ts.types, main="Three Types of 911 calls") %>% 
+dyRangeSelector() %>% # Choosing a range becomes available
+dyOptions(colors=c('rgb(0,204,102)','rgb(211,94,96)','rgb(51,153,255)')) # Allocates each line's  colors
+```
+
+- 전반적으로 EMS 통화량이 다른 통화량보다 많습니다. 
+- Traffic에 대한 통화 수가 EMS에 대한 통화 수를 초과한 경우는 거의 없습니다.
+- 특히 **2018년 3월 2일**과 **2018년 11월 15일**의 Traffic 통화 수가 현저히 높았습니다.
+- 세 가지 유형의 911 통화 수는 서로 상관관계가 있는 것으로 보입니다.
+- 그래프는 주기적인 trend는 보이지 않는 것 같습니다.
+
+<br>
+
+----------------------------------
+
+#### 2.2.3 Correlation among Types of 911 Calls
+세 가지 유형의 상관관계를 확인하기 위해 상관관계 행렬을 만들었습니다. 사각형 상자에 **마우스를 올려** 놓으면 **상관계수**를 확인할 수 있고, 이것을 **클릭**하면 이에 따른 **산점도**을 볼 수 있습니다.
+
+```{r message=FALSE}
+month <- as.data.frame(calls %>% select(-timeStamp) %>% group_by(Month, Types) %>% summarise(N=n()) %>% spread(Types, N))
+
+day <- as.data.frame(calls %>% select(-timeStamp) %>% group_by(Day, Types) %>% summarise(N=n()) %>% spread(Types, N))
+
+hour <- as.data.frame(calls %>% select(-timeStamp) %>% group_by(Hour, Types) %>% summarise(N=n()) %>% spread(Types, N))
+
+
+iplotCorr(month[,2:4], reorder=TRUE, chartOpts=list(cortitle="Month", scattitle="Scatterplot"))
+iplotCorr(day[,2:4], reorder=TRUE, chartOpts=list(cortitle="Day", scattitle="Scatterplot"))
+iplotCorr(hour[,2:4], reorder=TRUE, chartOpts=list(cortitle="Hour", scattitle="Scatterplot"))
+```
+
+- 911 통화의 모든 유형은 월, 일, 시간에 관계없이 상당히 큰 상관 계수를 보였습니다.
+- 이를 통해 모든 유형의 사고들은 **상호적으로 연관**되어 있다고 가정할 수 있습니다.
+
+<br>
+
+❔ What happened in 2016-01-23?
+2018년 3월 2일에 큰 Traffic 사고가 발생했을 것 같습니다. 1일과 2일에 발생한 사고 건수를 시간대별로 비교해봤습니다. 2일에 중대한 Traffic 사고가 발생했다면, 특정 시간에 교통사고 911 통화 건수가 상당히 많을 것으로 생각합니다.
+
+```{r}
+nr<-c()
+nn<-c()
+for (i in 0:23){
+nr[i+1]<-nrow(calls[calls$Date=="2018-03-02" & calls$Types=="Traffic"&calls$Hour==i,])
+nn[i+1]<-nrow(calls[calls$Date=="2018-03-01" & calls$Types=="Traffic"&calls$Hour==i,])
+}
+nrn<-0:23
+dnr<-data.frame(time=nrn,value=nr)
+dnn<-data.frame(time=nrn,value=nn)
+dnr$name<-"2018-03-02"
+dnn$name<-"2018-03-01"
+dd<-rbind(dnr,dnn)
+
+ggplot(dd, aes(time, value, fill = name)) + geom_bar(position = "dodge",stat="identity")+labs(title="What Happened in 2 Mar, 2018?",x="Hour",y="Traffic Freq")+theme_bw()+scale_fill_discrete(name="Date")
+```
+- 2일의 Trffic 911 통화량은 1일보다 현저히 많습니다.
+- 오후 3~6시에 중대한 Traffic 사고가 있었던 것으로 보여집니다.
+
+<br>
+
+-------------------------------------
+
+####  2.2.4 911 Call Trend by Month, Day, Hour
+
+**⚫ Calls - Monthly**
+```{r}
+#month$Month<-c(1:10,12)
+#month<-month[c(11,1:10),]
+
+plot_ly(month, x = ~Month, y = ~EMS, type = 'bar', name = 'EMS') %>%
+  add_trace(y = ~Traffic, name = 'Traffic') %>% add_trace(y = ~Fire, name = 'Fire') %>% 
+  layout(title="911 Calls -Monthly", yaxis = list(title = 'Count'), barmode = 'stack' ,xaxis=list(type = "category",  categoryorder = "array",
+  categoryarray = c(1:12)))
+```
+- 12월과 1~3월이 다른 달에 비해 911 통화량이 높습니다.
+- 그에 반면, 4~11월의 911 통화량은 유사합니다.
+
+<br>
+
+**⚫ Calls - Daily**
+```{r}
+plot_ly(day, x = ~Day, y = ~EMS, type = 'bar', name = 'EMS') %>%
+  add_trace(y = ~Traffic, name = 'Traffic') %>% add_trace(y = ~Fire, name = 'Fire') %>% 
+  layout(title="911 Calls -Daily", yaxis = list(title = 'Count'), barmode = 'stack')
+```
+- 911 통화 빈도는 2일과 15일이 제일 높으며, 27일부터 31일까지 낮습니다.
+- 31일 911 통화 빈도가 현저히 낮은 이유는, 31일로 구성되지 않은 달의 데이터가 적기 때문일 수 있습니다.
+- 2일과 15일의 경우 2018년 3월 2일과 11월 15일에 Traffic 911 통화가 상당히 많이 걸려왔기 때문에, 2일과 15일의 911 통화 빈도가 매우 높습니다.
+- 이러한 요인을 고려할 때, 일별 통화 빈도의 트렌드는 보이지 않는 것 같습니다.
+
+<br>
+
+**⚫ Calls - Hourly**
+```{r}
+plot_ly(hour, x = ~Hour, y = ~EMS, type = 'bar', name = 'EMS') %>%
+  add_trace(y = ~Traffic, name = 'Traffic') %>% add_trace(y = ~Fire, name = 'Fire') %>% 
+  layout(title="911 Calls - Hourly", yaxis = list(title = 'Count'), barmode = 'stack')
+```
+- 911 통화 빈도는 오전 7시부터 오후 9시까지 확실히 더 높습니다.
+- 사람들은 낮 시간에 주로 활동을 하기 때문에 이 기간 동안 사고가 더 자주 발생할 가능성이 높습니다.
+- 또한 911 통화 빈도가 월, 일보다는 시간별로 차이가 있음을 확인할 수 있습니다.
+
+<br>
+
+**⚫ Calls - Weekly**
+```{r}
+date_calls<-unique(calls$Date)
+
+thurs<-date_calls[seq(from=1,to=321,by=7)]
+fris<-date_calls[seq(from=2,to=321,by=7)]
+sats<-date_calls[seq(from=3,to=321,by=7)]
+suns<-date_calls[seq(from=4,to=321,by=7)]
+mons<-date_calls[seq(from=5,to=321,by=7)]
+tues<-date_calls[seq(from=6,to=321,by=7)]
+weds<-date_calls[seq(from=7,to=321,by=7)]
+
+calls$Week[is.element(calls$Date,thurs)==TRUE]<-"Thursday"
+calls$Week[is.element(calls$Date,fris)==TRUE]<-"Friday"
+calls$Week[is.element(calls$Date,sats)==TRUE]<-"Saturday"
+calls$Week[is.element(calls$Date,suns)==TRUE]<-"Sunday"
+calls$Week[is.element(calls$Date,mons)==TRUE]<-"Monday"
+calls$Week[is.element(calls$Date,tues)==TRUE]<-"Tuesday"
+calls$Week[is.element(calls$Date,weds)==TRUE]<-"Wednesday"
+calls$Week<-as.factor(calls$Week)
+levels(calls$Week)<-c("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")
+str(calls$Week)
+
+week <- as.data.frame(calls %>% select(-timeStamp) %>% group_by(Week, Types) %>% summarise(N=n()) %>% spread(Types, N))
+
+plot_ly(week, x = ~Week, y = ~EMS, type = 'bar', name = 'EMS') %>%
+  add_trace(y = ~Traffic, name = 'Traffic') %>% add_trace(y = ~Fire, name = 'Fire') %>% 
+  layout(title="911 Calls -Weekly", yaxis = list(title = 'Count'), barmode = 'stack')
+```
+
+- 주말이 평일보다 911 통화 빈도가 낮을 것으로 예상했는데, 오히려 수요일이 훨씬 낮아서 조금 놀랐습니다.
+- 그외에도 사고 유형별로도 큰 차이를 보이고 있지 않습니다.평일 동안 총 911 통화 빈도와 유형 비율은 모두 비슷합니다.
+- 수요일에 Traffic 통화량이 다른 요일보다 낮은 것으로 보여집니다.
+
+<br>
+
+----------------------------------------
+
+#### 2.2.5 Summarized Result, by Heat Map
+
+히트맵은 데이터 값이 색으로 표현되게끔 3차원적으로 표현한 그래프입니다. 월별, 일별, 시간별로 911 통화의 히트맵을 보겠습니다. 사각형 색상이 노란색으로 가까워질수록 911 통화 수는 더 커집니다.
+
+**⚫ 911 Calls by "Day and Hour" & "Month and Hour"**
+```{r}
+day_hour <- as.data.frame(calls[, c("Day", "Hour")] %>% group_by(Day, Hour) %>% summarise(N = n()))
+
+ggplotly(ggplot(day_hour, aes(Day, Hour, fill = N)) + geom_tile(color = "white", size = 0.1) + scale_fill_viridis(name="Number of Calls") + coord_equal() + labs(title="911 Calls by Day and Hour"))
+```
+```{r}
+month_hour <- as.data.frame(calls[, c("Month", "Hour")] %>% group_by(Month, Hour) %>% summarise(N = n()))
+levels(month_hour$Month) <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec")
+
+ggplotly(ggplot(month_hour, aes(Month, Hour, fill = N)) + geom_tile(color = "white") + scale_fill_viridis(name="Number of Calls") + coord_equal() + labs(title="911 Calls by Month and Hour"))
+```
+- 위의 두 히트맵 그래프를 보면, 대부분의 노란색 사각형이 그래프 중간에 가로로 집중되어 있기 때문에 대부분의 통화가 낮 시간이라고 가정할 수 있습니다.
+
+<br>
+
+**⚫ 911 Calls by Day and Month**
+- 2월, 4월, 6월, 9월은 31일로 구성되어 있지 않기 때문에 빈칸이 있습니다.
+
+```{r}
+day_hour <- as.data.frame(calls[, c("Day", "Month")] %>% group_by(Day, Month) %>% summarise(N = n()))
+levels(day_hour$Month) <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+
+ggplotly(ggplot(day_hour, aes(Day,Month, fill = N)) + geom_tile(color = "white", size = 0.1) + scale_fill_viridis(name="Number of Calls") + coord_equal() + labs(title="911 Calls by Day and Hour"))
+```
+
+- 일별과 월별 히트맵 그래프에서는 패턴을 찾을 수 없습니다.
+- 일별과 월별보다는 주로 시간에 따라 911 통화가 이뤄지는 것으로 보입니다.
+
+<br>
+
+----------------------------
+
+<br>
+
+### 2.3 911 Calls in Montgomery County, by Townships
+
+#### 2.3.1 Mosaic Plot by Types of 911 Calls 
+
+```{r}
+town_type <- as.data.frame(calls %>% select(Types, twp))
+freq.town <- as.data.frame(table(calls$twp)) %>% arrange(desc(Freq))
+top<-as.character(freq.town[1:10,1])
+top_town<-town_type[is.element(town_type$twp,top),]
+topab<-c("LM", "ABING", "NORRIS", "UM", "CHEL", "POTT", "UML", "LP", "PLY", "HOR")
+top_town$twp <- as.character(top_town$twp)
+top_town$twp<-factor(top_town$twp,levels=top)
+levels(top_town$twp)<-topab
+table_1 <- with(top_town, table(twp,Types))
+mosaicplot(table_1, main="Mosaic Plot by Types and Top 10 townships",color=c('light green','tomato','light blue'),cex.axis =1,off=3,border="white",xlab="Township",ylab="Type")
+```
+
+<br>
+
+- 약어에 대한 간단한 설명은 아래와 같습니다. :
+    + `LM` : LOWER MERION
+    + `ABING` : ABINGTON
+    + `NORRIS` : NORRISTOWN
+    + `UM` : UPPER MERION
+    + `CHEL` : CHELTENHAM
+    + `POTT` : POTTSTOWN
+    + `UML` : UPPER MORELAND
+    + `LP` : LOWER PROVIDENCE
+    + `PLY` : PLYMOUTH
+    + `HOR` : HORSHAM
+
+- 위의 그래프는 상위 10개 군구(township)이 보유한 911 통화 유형의 비율을 나타냅니다.
+- 일반적으로 EMS 통화 빈도가 가장 높고 Traffic 및 Fire가 뒤를 잇습니다.
+- 하지만 비율은 각 군구(township)마다 차이가 있습니다.
+- County 의회는 이것에 맞게 각 군구(township)에 비례하여 구조 대원들을 할당해야 합니다.
+
+<br>
+
+-------------------------------------
+
+#### 2.3.2 How does the Top 5 subtypes vary among top 10 township?
+
+5️⃣ Top 5 Subtypes
+```{r}
+ems.subtype <- as.data.frame(table(calls[calls$Types=="EMS",]$Subtypes)) %>% arrange(desc(Freq))
+ems.subtype$Var1<-paste(ems.subtype$Var1,"E",sep=" - ")
+
+fire.subtype <- as.data.frame(table(calls[calls$Types=="Fire",]$Subtypes)) %>% arrange(desc(Freq))
+fire.subtype$Var1<-paste(fire.subtype$Var1,"F",sep=" - ")
+
+traffic.subtype <- as.data.frame(table(calls[calls$Types=="Traffic",]$Subtypes)) %>% arrange(desc(Freq))
+traffic.subtype$Var1<-paste(traffic.subtype$Var1,"T")
+
+freq.sub <- rbind(ems.subtype,fire.subtype,traffic.subtype)%>%arrange(desc(Freq))
+
+freq.sub %>% head(5) %>% ggplot(aes(reorder(Var1,Freq), Freq)) + geom_bar(stat = "identity", aes(fill=Var1)) + coord_flip() + theme_bw() + ggtitle("911 Calls") + xlab("Top 5 Subtypes") + ylab("Frequency") + theme(legend.position = "none") + geom_text(aes(label=Freq, y= Freq + 2*sign(Freq),size=2)) 
+```
+
+- 이들은 가장 큰 빈도를 가진 상위 5가지 하위 유형입니다.
+- 차량과 관련된 하위 유형이 1, 2위를 차지합니다.
+- EMS의 하위 유형은 Traffic의 하위 유형보다 훨씬 낮습니다.
+
+<br>
+
+**⚫ Mosaic plot by Subtypes of 911 Calls**
+```{r}
+ems.sub <- as.data.frame(calls[calls$Types=="EMS",] %>% select(Subtypes, twp))
+ems.sub$Subtypes <- paste(ems.sub$Subtypes,"E",sep=" - ")
+fire.sub <- as.data.frame(calls[calls$Types=="Fire",] %>% select(Subtypes, twp))
+fire.sub$Subtypes <- paste(fire.sub$Subtypes,"F",sep=" - ")
+traffic.sub <- as.data.frame(calls[calls$Types=="Traffic",] %>% select(Subtypes, twp))
+traffic.sub$Subtypes <- paste(traffic.sub$Subtypes,"T")
+
+mosaic.sub <- rbind(ems.sub, fire.sub, traffic.sub)
+top <- as.character(freq.town[1:10,1]) # Top 10 township
+topp <- as.character(freq.sub[1:5,1]) # Top 5 Subtypes
+mosaic.sub <- mosaic.sub[is.element(mosaic.sub$twp,top),]
+mosaic.sub <- mosaic.sub[is.element(mosaic.sub$Subtypes,topp),]
+topabc <- c("VA-T","DV-T","FA-F","RE-E","CE-E")
+topab <- c("LM", "ABING", "NORRIS", "UM", "CHEL", "POTT", "UML", "LP", "PLY", "HOR")
+mosaic.sub$twp <- as.character(mosaic.sub$twp)
+mosaic.sub$Subtypes <- as.character(mosaic.sub$Subtypes)
+mosaic.sub$twp <- factor(mosaic.sub$twp,levels=top)
+mosaic.sub$Subtypes <- factor(mosaic.sub$Subtypes,levels=topp)
+levels(mosaic.sub$twp)<-topab
+levels(mosaic.sub$Subtypes)<-topabc
+table_2 <- with(mosaic.sub, table(twp,Subtypes))
+mosaicplot(table_2, las=1,main="Mosaic Plot by Top 5 Subtypes and Top 10 townships", cex.axis =1,off=3,border="white",xlab="Township",ylab="Subtype",color=c('orange','sky blue','green','steelblue4','tomato1'))
+```
+
+- 약어에 대한 간단한 설명은 아래와 같습니다. :
+    + `VA-T` : VEHICLE ACCIDENT (Traffic)
+    + `DV-T` : DISABLED VEHICLE (Traffic)
+    + `FA-F` : FIRE ALARM (Fire)
+    + `RE-E` : RESPIRATORY EMERGENCY (EMS)
+    + `CE-E` : CARDIAC EMERGENCY (EMS)
+
+<br>
+
+- 그래프를 볼 때 Traffic에 대한 911 통화 빈도가 가장 높습니다.
+- POTTSTOWN과 LOWER PROVIDENCE은 Trffic에 대한 911 통화 비율이 상대적으로 낮았습니다.
+- POTTSTOWN은 County의 가장자리에 위치해 있습니다. 따라서 낮은 빈도의 교통사고가 일어난 것으로 보입니다.
+
+<br>
+
+-------------------------------------------------
+
+<br>
+
+#### 2.3.3 Summarized Result, by Heat Map for Each Townships
+
+<br>
+
+**⚫ 911 Calls by "Month and Hour" & "Day and Hour" (without transformation)**
+
+```{r}
+monthhour.sub <- as.data.frame(calls[, c("Month", "Hour","twp")] %>% group_by(Month, Hour,twp) %>% summarise(N = n()))
+top<-as.character(freq.town[1:10,1])
+monthhour.sub <- monthhour.sub[is.element(monthhour.sub$twp,top),]
+levels(monthhour.sub$Month) <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec")
+
+ggplot(monthhour.sub, aes(Month, Hour, fill = N)) + geom_tile(color = "white", size = 0.1) + scale_fill_viridis(name="Number of Calls") + coord_equal() + labs(title="911 Calls by Month and Hour") + facet_wrap(~twp, ncol=5) + theme(legend.position="bottom") 
+```
+
+```{r}
+dayhour.sub <- as.data.frame(calls[, c("Day", "Hour","twp")] %>% group_by(Day, Hour,twp) %>% summarise(N = n()))
+top<-as.character(freq.town[1:10,1])
+dayhour.sub <- dayhour.sub[is.element(dayhour.sub$twp,top),]
+
+ggplot(dayhour.sub, aes(Day, Hour, fill = N)) + geom_tile(color = "white", size = 0.1) + scale_fill_viridis(name="Number of Calls") + coord_equal() + labs(title="911 Calls by Day and Hour") + facet_wrap(~twp, ncol=5) + theme(legend.position="bottom")
+```
+
+- Lower Merion에서는 총 911 통화의 빈도가 상대적으로 너무 높습니다. 그에 반면 다른 군구(township)는 빈도가 낮기 때문에 전체적인 패턴을 알기 어렵습니다.
+
+<br>
+
+**⚫ 911 Calls by "Month and Hour" & "Day and Hour" (with square-rooted frequency)**
+
+```{r}
+ggplot(monthhour.sub, aes(Month, Hour, fill = sqrt(N) )) + geom_tile(color = "white", size = 0.1) + scale_fill_viridis(name="Number of Calls") + coord_equal() + labs(title="911 Calls by Month and Hour") + facet_wrap(~twp, ncol=5) + theme(legend.position="bottom") 
+```
+```{r} 
+ggplot(dayhour.sub, aes(Day, Hour, fill = sqrt(N))) + geom_tile(color = "white", size = 0.1) + scale_fill_viridis(name="Number of Calls") + coord_equal() + labs(title="911 Calls by Day and Hour") + facet_wrap(~twp, ncol=5) + theme(legend.position="bottom")
+```
+- 군구(township) 간 911 통화 빈도의 차이를 낮추기 위해 각 도시의 빈도를 제곱하였습니다.
+- 그 전에 비해 명백한 패턴을 볼 수 있었으며, 군구(township)에 상관없이 모든 히트맵은 중앙에 노란색으로 더 진하게 표시되었습니다.
+- 각 군구(township)별 히트맵을 보면 911 통화 빈도는 대부분 시간에 따라 차이가 납니다.
+
+<br>
+
+-------------------------------
+
+### 2.4 Forecasting the number of accidents in the future
+
+이제 앞으로 발생할 수 있는 사고의 수를 예측해 보겠습니다. 여기에서는 시계열 분석이 사용되었습니다. 
+
+먼저 **자기상관함수(autocorrelation function)와 편자기상관함수(partial autocorrelation function)**를 계산하여, 데이터가 정상성(stationary)을 갖는지 여부를 간단하게 확인했습니다. 
+
+둘째, `niffs`함수를 사용하여 차분(differences)이 필요한지 확인했습니다.
+
+셋째, 귀무가설에 대해 Dickey-Fuller 테스트를 수행했으며 데이터가 비정상성(non-stationary)을 갖는 것을 확인했습니다. 그러므로 귀무가설을 기각할 수 있습니다.
+
+마지막으로, AIC, AICc, BIC 값으로 최고의 ARIMA 모델을 찾으려고 했습니다.
+
+<br>
+
+```{r, include=FALSE}
+date <- as.data.frame(calls %>% select(-timeStamp) %>% group_by(Date, Types) %>% summarise(N=n()) %>% spread(Types, N))
+
+ems_ts <- ts(date[,2],frequency=7)
+fire_ts <- ts(date[,3],frequency=7) 
+traffic_ts <- ts(date[,4],frequency=7)
+# create time-series objects
+
+acf(ems_ts) # lag.max: maximum lag at which to calculate the acf
+pacf(ems_ts)
+acf(fire_ts) 
+pacf(fire_ts)
+acf(traffic_ts) 
+pacf(traffic_ts)
+# Computes Autocorrelation function & Partial autocorrelation function
+
+ndiffs(ems_ts)
+ndiffs(fire_ts)
+ndiffs(traffic_ts)
+# Estimate the number of differences required to make a given time series stationary
+
+adf.test(ems_ts)
+adf.test(fire_ts)
+adf.test(traffic_ts)
+# Computes the Dickey-Fuller test for the null-hypothesis that the data are non-stationary
+
+fitted_ems <- auto.arima(ems_ts)
+fitted_fire <- auto.arima(fire_ts)
+fitted_traffic <- auto.arima(traffic_ts)
+# Finds best ARIMA model according to either AIC, AICc or BIC value
+```
+
+```{r}
+forecasted_ems <- forecast(fitted_ems,15)
+forecasted_fire <- forecast(fitted_fire,15)
+forecasted_traffic <- forecast(fitted_traffic,15)
+# forecasting from time series
+
+op <- par(mfrow = c(3,1),
+          mar = c(2,4,1,2)+.1, pty='m')
+plot(forecasted_ems, main="Forecast: Emergency Medical Service", xlab="Time",xaxt = "n")
+axis(1, at=1:51, labels=seq(1,357,by=7))
+plot(forecasted_fire, main="Forecast: Fire", xlab="Time",xaxt="n")
+axis(1, at=1:51, labels=seq(1,357,by=7))
+plot(forecasted_traffic, main="Forecast: Traffic", xlab="Time",xaxt="n")
+axis(1, at=1:51, labels=seq(1,357,by=7))
+par(op)
+```
+
+```{r}
+Date <- c("2020-04-09", "2020-04-10", "2020-04-11", "2020-04-12", "2020-04-13", "2020-04-14", "2020-04-15")
+EMS <- round(as.data.frame(forecast(fitted_ems,7))[,1],2)
+Fire <- round(as.data.frame(forecast(fitted_fire,7))[,1],2)
+Traffic <- round(as.data.frame(forecast(fitted_traffic,7))[,1],2)
+forecast_day <- data.frame(Date, EMS, Fire, Traffic)
+
+knitr::kable(forecast_day)
+```
+
+- 각각 7일(1주) 동안 3가지 유형에 대한 911 통화의 예상 횟수입니다.
+- 솔직히 예측의 결과는 초기 목적에서 많이 빗나가고 있습니다. 예측된 결과를 사용하여 구조대원들을 적절히 배치하고 싶었습니다. 하지만 이 예측만으로는 충분하지 않다고 생각합니다.
+- 분석한 데이터는 매일 수집되는 시계열 데이터이며, 또한 이것은 사고에 대한 데이터입니다. 비록 비정상성(non-stationary) 조건을 만족했지만 패턴이 없었고 데이터에 설명할 수 없는 변동이 존재하였습니다.
+- 따라서 위에서 진행된 시계열 분석은 이 데이터를 분석하는 데 크게 의미가 없다고 생각합니다.
+- Anomaly Detection 등 다른 방법을 써서 예측을 한번 해보고 싶습니다. (희망사항..)
+
+<br>
+
+---
+
+## 3. Conclusion
+
+- 이 데이터만을 사용하여 911 통화 빈도를 예측하는 것은 불가능하였습니다.
+    * 사고를 예측하기 위해 베이지안 분석 등 다른 분석 방법론을 이용하는 것도 좋을 것 같다고 생각합니다.
+    * 베이지안 분석을 위해 각 사고 유형(유동 인구, 날씨 등)의 발생과 밀접하게 관련된 변수를 더 많이 수집해야 하며, 이 데이터만으로는 충분하지 않습니다.
+
+- 이 데이터를 분석하는 동안, 구조대원들의 사회에 대한 헌신에 다시 한 번 생각할 수 있었습니다. 대부분의 작업은 성수기와 비수기를 가지고 있습니다. 하지만 구조대원들에게는 매일이 바쁜 시즌이며, 일부는 야간 근무를 해야 하는 것을 알 수 있었습니다.
+    * 그들을 깊이 존경해야 한다고 말하고 싶으며, 수많은 나라에서 그들에게 높은 수준의 복지와 혜택을 제공했으면 좋겠다는 생각이 가득합니다.
+    * 모든 유형의 사고는 서로 밀접하게 관련되어 있습니다. 사고가 더 많이 발생함을 방지하기 위해, 우리 모두 사고가 발생하지 않게 주의를 기울여야 할 것 같습니다.
