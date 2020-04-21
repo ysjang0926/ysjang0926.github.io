@@ -45,6 +45,7 @@ comments: true
 
 ### 1.1 Loading packages and Attributes of data
 `ggplot2`, `dplyr`와 같은 대표적인 Package를 포함하여 EDA를 하는데 사용한 모든 Package를 불러오도록 하겠습니다. Package 옆에 간단한 주석을 달아놨습니다.
+
 ```{r, message=FALSE, warning=FALSE}
 # Load packages
 library(dplyr) # Data manipulation
@@ -122,6 +123,7 @@ str(calls) # 123884 obs. of  14 variables
 ## 2. Exploratory Data Analysis
 
 ### 2.1 Brief Explanation on "Accident Distribution"
+
 ```{r}
 call_map <- leaflet() %>% addTiles() %>% setView(lng=-75.2, lat=40.1, zoom=10) %>% addMarkers(data=calls, lng= ~lng, lat= ~lat, clusterOptions = markerClusterOptions())
 call_map
@@ -251,6 +253,7 @@ ggplot(dd, aes(time, value, fill = name)) + geom_bar(position = "dodge",stat="id
 ####  2.2.4 911 Call Trend by Month, Day, Hour
 
 **⚫ Calls - Monthly**
+
 ```{r}
 #month$Month<-c(1:10,12)
 #month<-month[c(11,1:10),]
@@ -266,6 +269,7 @@ plot_ly(month, x = ~Month, y = ~EMS, type = 'bar', name = 'EMS') %>%
 <br>
 
 **⚫ Calls - Daily**
+
 ```{r}
 plot_ly(day, x = ~Day, y = ~EMS, type = 'bar', name = 'EMS') %>%
   add_trace(y = ~Traffic, name = 'Traffic') %>% add_trace(y = ~Fire, name = 'Fire') %>% 
@@ -279,6 +283,7 @@ plot_ly(day, x = ~Day, y = ~EMS, type = 'bar', name = 'EMS') %>%
 <br>
 
 **⚫ Calls - Hourly**
+
 ```{r}
 plot_ly(hour, x = ~Hour, y = ~EMS, type = 'bar', name = 'EMS') %>%
   add_trace(y = ~Traffic, name = 'Traffic') %>% add_trace(y = ~Fire, name = 'Fire') %>% 
@@ -291,6 +296,7 @@ plot_ly(hour, x = ~Hour, y = ~EMS, type = 'bar', name = 'EMS') %>%
 <br>
 
 **⚫ Calls - Weekly**
+
 ```{r}
 date_calls<-unique(calls$Date)
 
@@ -333,6 +339,7 @@ plot_ly(week, x = ~Week, y = ~EMS, type = 'bar', name = 'EMS') %>%
 히트맵은 데이터 값이 색으로 표현되게끔 3차원적으로 표현한 그래프입니다. 월별, 일별, 시간별로 911 통화의 히트맵을 보겠습니다. 사각형 색상이 노란색으로 가까워질수록 911 통화 수는 더 커집니다.
 
 **⚫ 911 Calls by "Day and Hour" & "Month and Hour"**
+
 ```{r}
 day_hour <- as.data.frame(calls[, c("Day", "Hour")] %>% group_by(Day, Hour) %>% summarise(N = n()))
 
@@ -409,7 +416,8 @@ mosaicplot(table_1, main="Mosaic Plot by Types and Top 10 townships",color=c('li
 
 #### 2.3.2 How does the Top 5 subtypes vary among top 10 township?
 
-5️⃣ Top 5 Subtypes
+**5️⃣ Top 5 Subtypes**
+
 ```{r}
 ems.subtype <- as.data.frame(table(calls[calls$Types=="EMS",]$Subtypes)) %>% arrange(desc(Freq))
 ems.subtype$Var1<-paste(ems.subtype$Var1,"E",sep=" - ")
@@ -432,6 +440,7 @@ freq.sub %>% head(5) %>% ggplot(aes(reorder(Var1,Freq), Freq)) + geom_bar(stat =
 <br>
 
 **⚫ Mosaic plot by Subtypes of 911 Calls**
+
 ```{r}
 ems.sub <- as.data.frame(calls[calls$Types=="EMS",] %>% select(Subtypes, twp))
 ems.sub$Subtypes <- paste(ems.sub$Subtypes,"E",sep=" - ")
@@ -508,6 +517,7 @@ ggplot(dayhour.sub, aes(Day, Hour, fill = N)) + geom_tile(color = "white", size 
 ```{r}
 ggplot(monthhour.sub, aes(Month, Hour, fill = sqrt(N) )) + geom_tile(color = "white", size = 0.1) + scale_fill_viridis(name="Number of Calls") + coord_equal() + labs(title="911 Calls by Month and Hour") + facet_wrap(~twp, ncol=5) + theme(legend.position="bottom") 
 ```
+
 ```{r} 
 ggplot(dayhour.sub, aes(Day, Hour, fill = sqrt(N))) + geom_tile(color = "white", size = 0.1) + scale_fill_viridis(name="Number of Calls") + coord_equal() + labs(title="911 Calls by Day and Hour") + facet_wrap(~twp, ncol=5) + theme(legend.position="bottom")
 ```
