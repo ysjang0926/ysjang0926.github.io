@@ -72,8 +72,6 @@ knitr::kable(head(call,n=3))
 str(call) # 626350 obs. of  9 variables
 ``` 
 
-<br>
-
 변수명과 클래스 유형은 위와 같으며, 총 626350개의 관측치와 9개의 변수가 있습니다. 변수에 대한 간단한 설명은 다음과 같습니다.
 
 변수명        | 설명
@@ -89,8 +87,6 @@ addr          | 주소
 e             | 더미변수(always 1)
 
 <br>
-
----------------------------
 
 ### Handling Data
 
@@ -219,7 +215,7 @@ iplotCorr(hour[,2:4], reorder=TRUE, chartOpts=list(cortitle="Hour", scattitle="S
 
 <br>
 
-❔ What happened in 2016-01-23?
+❔ What happened in 2016-01-23? <br>
 2018년 3월 2일에 큰 Traffic 사고가 발생했을 것 같습니다. 1일과 2일에 발생한 사고 건수를 시간대별로 비교해봤습니다. 2일에 중대한 Traffic 사고가 발생했다면, 특정 시간에 교통사고 911 통화 건수가 상당히 많을 것으로 생각합니다.
 
 ```{r}
@@ -362,10 +358,6 @@ ggplotly(ggplot(day_hour, aes(Day,Month, fill = N)) + geom_tile(color = "white",
 
 <br>
 
-----------------------------
-
-<br>
-
 ### 2.3 911 Calls in Montgomery County, by Townships
 
 #### 2.3.1 Mosaic Plot by Types of 911 Calls 
@@ -404,9 +396,7 @@ mosaicplot(table_1, main="Mosaic Plot by Types and Top 10 townships",color=c('li
 
 <br>
 
--------------------------------------
-
-#### 2.3.2 How does the Top 5 subtypes vary among top 10 township?
+#### How does the Top 5 subtypes vary among top 10 township?
 
 **5️⃣ Top 5 Subtypes**
 
@@ -473,11 +463,7 @@ mosaicplot(table_2, las=1,main="Mosaic Plot by Top 5 Subtypes and Top 10 townshi
 
 <br>
 
--------------------------------------------------
-
-<br>
-
-#### 2.3.3 Summarized Result, by Heat Map for Each Townships
+#### Summarized Result, by Heat Map for Each Townships
 
 <br>
 
@@ -519,8 +505,6 @@ ggplot(dayhour.sub, aes(Day, Hour, fill = sqrt(N))) + geom_tile(color = "white",
 
 <br>
 
--------------------------------
-
 ### 2.4 Forecasting the number of accidents in the future
 
 이제 앞으로 발생할 수 있는 사고의 수를 예측해 보겠습니다. 여기에서는 시계열 분석이 사용되었습니다. 
@@ -535,7 +519,7 @@ ggplot(dayhour.sub, aes(Day, Hour, fill = sqrt(N))) + geom_tile(color = "white",
 
 <br>
 
-```{r, include=FALSE}
+```{r}
 date <- as.data.frame(calls %>% select(-timeStamp) %>% group_by(Date, Types) %>% summarise(N=n()) %>% spread(Types, N))
 
 ems_ts <- ts(date[,2],frequency=7)
