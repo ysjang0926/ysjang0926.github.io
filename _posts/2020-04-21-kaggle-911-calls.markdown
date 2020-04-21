@@ -39,7 +39,9 @@ Kaggle에 있는 **Montgomery County의 911 통화**에서 수집된 데이터�
         + 911 통화의 하위 유형별 **모자이크 플롯**
         + **각 거주지에 대한 히트맵**에 따른 결과
     + 향후 사고 발생 횟수 **예측**
-    
+
+이번 글은 내용이 조금 길어질 것 같아 두 번으로 나누어서 포스팅하도록 하겠습니다.
+
 <br>
 
 ## 1.2 Loading packages and Attributes of data
@@ -211,7 +213,7 @@ dyOptions(colors=c('rgb(0,204,102)','rgb(211,94,96)','rgb(51,153,255)')) # Alloc
 
 ### 🚑 Correlation among Types of 911 Calls
 세 가지 유형의 상관관계를 확인하기 위해 상관관계 행렬을 만들었습니다. <br>
-해당 [Kernel](https://www.kaggle.com/ysjang0926/eda-911-calls-kor)로 들어가셔서, 사각형 상자에 **마우스를 올려** 놓으면 **상관계수**를 확인할 수 있고, 이것을 **클릭**하면 이에 따른 **산점도**을 볼 수 있습니다.
+해당 [Kernel](https://www.kaggle.com/ysjang0926/eda-911-calls-kor)로 들어가시면, 사각형 상자에 **마우스를 올려** 놓으면 **상관계수**를 확인하실 수 있고 사각형 상자를 **클릭**하면 이에 따른 **산점도**를 볼 수 있습니다.
 
 ```{r}
 month <- as.data.frame(calls %>% select(-timeStamp) %>% group_by(Month, Types) %>% summarise(N=n()) %>% spread(Types, N))
@@ -316,7 +318,7 @@ plot_ly(hour, x = ~Hour, y = ~EMS, type = 'bar', name = 'EMS') %>%
 
 <br>
 
-#### 📞 Calls - Weekly**
+#### 📞 Calls - Weekly
 
 ```{r}
 date_calls<-unique(calls$Date)
@@ -358,7 +360,7 @@ plot_ly(week, x = ~Week, y = ~EMS, type = 'bar', name = 'EMS') %>%
 
 히트맵은 데이터 값이 색으로 표현되게끔 3차원적으로 표현한 그래프입니다. 월별, 일별, 시간별로 911 통화의 히트맵을 보겠습니다. 사각형 색상이 노란색으로 가까워질수록 911 통화 수는 더 커집니다.
 
-**⚫ 911 Calls by "Day and Hour" & "Month and Hour"**
+#### 📞 911 Calls by "Day and Hour" & "Month and Hour"
 
 ```{r}
 day_hour <- as.data.frame(calls[, c("Day", "Hour")] %>% group_by(Day, Hour) %>% summarise(N = n()))
@@ -375,7 +377,7 @@ ggplotly(ggplot(month_hour, aes(Month, Hour, fill = N)) + geom_tile(color = "whi
 
 <br>
 
-**⚫ 911 Calls by Day and Month**
+#### 📞 911 Calls by Day and Month
 - 2월, 4월, 6월, 9월은 31일로 구성되어 있지 않기 때문에 빈칸이 있습니다.
 
 ```{r}
@@ -390,9 +392,9 @@ ggplotly(ggplot(day_hour, aes(Day,Month, fill = N)) + geom_tile(color = "white",
 
 <br>
 
-## 911 Calls in Montgomery County, by Townships
+## 2.3 911 Calls in Montgomery County, by Townships
 
-### Mosaic Plot by Types of 911 Calls 
+### 🚑 Mosaic Plot by Types of 911 Calls 
 
 ```{r}
 town_type <- as.data.frame(calls %>% select(Types, twp))
@@ -407,7 +409,7 @@ table_1 <- with(top_town, table(twp,Types))
 mosaicplot(table_1, main="Mosaic Plot by Types and Top 10 townships",color=c('light green','tomato','light blue'),cex.axis =1,off=3,border="white",xlab="Township",ylab="Type")
 ```
 
-<br>
+![캐글_모자익](https://user-images.githubusercontent.com/54492747/79868413-d1accb80-841a-11ea-8da5-8c2067ff4ab7.JPG)
 
 - 약어에 대한 간단한 설명은 아래와 같습니다. :
     + `LM` : LOWER MERION
@@ -428,9 +430,9 @@ mosaicplot(table_1, main="Mosaic Plot by Types and Top 10 townships",color=c('li
 
 <br>
 
-### How does the Top 5 subtypes vary among top 10 township?
+### 🚑 How does the Top 5 subtypes vary among top 10 township?
 
-**5️⃣ Top 5 Subtypes**
+#### 📞 Top 5 Subtypes
 
 ```{r}
 ems.subtype <- as.data.frame(table(calls[calls$Types=="EMS",]$Subtypes)) %>% arrange(desc(Freq))
@@ -447,13 +449,15 @@ freq.sub <- rbind(ems.subtype,fire.subtype,traffic.subtype)%>%arrange(desc(Freq)
 freq.sub %>% head(5) %>% ggplot(aes(reorder(Var1,Freq), Freq)) + geom_bar(stat = "identity", aes(fill=Var1)) + coord_flip() + theme_bw() + ggtitle("911 Calls") + xlab("Top 5 Subtypes") + ylab("Frequency") + theme(legend.position = "none") + geom_text(aes(label=Freq, y= Freq + 2*sign(Freq),size=2)) 
 ```
 
+![캐글_탑5](https://user-images.githubusercontent.com/54492747/79868538-028d0080-841b-11ea-8f6f-b61a3bc00f65.JPG)
+
 - 이들은 가장 큰 빈도를 가진 상위 5가지 하위 유형입니다.
 - 차량과 관련된 하위 유형이 1, 2위를 차지합니다.
 - EMS의 하위 유형은 Traffic의 하위 유형보다 훨씬 낮습니다.
 
 <br>
 
-**⚫ Mosaic plot by Subtypes of 911 Calls**
+#### 📞 Mosaic plot by Subtypes of 911 Calls**
 
 ```{r}
 ems.sub <- as.data.frame(calls[calls$Types=="EMS",] %>% select(Subtypes, twp))
@@ -480,6 +484,8 @@ table_2 <- with(mosaic.sub, table(twp,Subtypes))
 mosaicplot(table_2, las=1,main="Mosaic Plot by Top 5 Subtypes and Top 10 townships", cex.axis =1,off=3,border="white",xlab="Township",ylab="Subtype",color=c('orange','sky blue','green','steelblue4','tomato1'))
 ```
 
+![캐글_모자익_세부](https://user-images.githubusercontent.com/54492747/79868620-1df80b80-841b-11ea-9a11-8557237d9dca.JPG)
+
 - 약어에 대한 간단한 설명은 아래와 같습니다. :
     + `VA-T` : VEHICLE ACCIDENT (Traffic)
     + `DV-T` : DISABLED VEHICLE (Traffic)
@@ -487,19 +493,15 @@ mosaicplot(table_2, las=1,main="Mosaic Plot by Top 5 Subtypes and Top 10 townshi
     + `RE-E` : RESPIRATORY EMERGENCY (EMS)
     + `CE-E` : CARDIAC EMERGENCY (EMS)
 
-<br>
-
 - 그래프를 볼 때 Traffic에 대한 911 통화 빈도가 가장 높습니다.
 - POTTSTOWN과 LOWER PROVIDENCE은 Trffic에 대한 911 통화 비율이 상대적으로 낮았습니다.
 - POTTSTOWN은 County의 가장자리에 위치해 있습니다. 따라서 낮은 빈도의 교통사고가 일어난 것으로 보입니다.
 
 <br>
 
-### Summarized Result, by Heat Map for Each Townships
+### 🚑 Summarized Result, by Heat Map for Each Townships
 
-<br>
-
-**⚫ 911 Calls by "Month and Hour" & "Day and Hour" (without transformation)**
+#### 📞911 Calls by "Month and Hour" & "Day and Hour" (without transformation)**
 
 ```{r}
 monthhour.sub <- as.data.frame(calls[, c("Month", "Hour","twp")] %>% group_by(Month, Hour,twp) %>% summarise(N = n()))
@@ -518,11 +520,14 @@ dayhour.sub <- dayhour.sub[is.element(dayhour.sub$twp,top),]
 ggplot(dayhour.sub, aes(Day, Hour, fill = N)) + geom_tile(color = "white", size = 0.1) + scale_fill_viridis(name="Number of Calls") + coord_equal() + labs(title="911 Calls by Day and Hour") + facet_wrap(~twp, ncol=5) + theme(legend.position="bottom")
 ```
 
+![캐글_히트맵_1_1](https://user-images.githubusercontent.com/54492747/79868884-8f37be80-841b-11ea-9477-a9cc85e95bfb.JPG)
+![캐글_히트맵_1_2](https://user-images.githubusercontent.com/54492747/79868888-9068eb80-841b-11ea-8c2b-a5bf4d35d7cc.JPG)
+
 - Lower Merion에서는 총 911 통화의 빈도가 상대적으로 너무 높습니다. 그에 반면 다른 군구(township)는 빈도가 낮기 때문에 전체적인 패턴을 알기 어렵습니다.
 
 <br>
 
-**⚫ 911 Calls by "Month and Hour" & "Day and Hour" (with square-rooted frequency)**
+#### 📞911 Calls by "Month and Hour" & "Day and Hour" (with square-rooted frequency)**
 
 ```{r}
 ggplot(monthhour.sub, aes(Month, Hour, fill = sqrt(N) )) + geom_tile(color = "white", size = 0.1) + scale_fill_viridis(name="Number of Calls") + coord_equal() + labs(title="911 Calls by Month and Hour") + facet_wrap(~twp, ncol=5) + theme(legend.position="bottom") 
@@ -531,13 +536,17 @@ ggplot(monthhour.sub, aes(Month, Hour, fill = sqrt(N) )) + geom_tile(color = "wh
 ```{r} 
 ggplot(dayhour.sub, aes(Day, Hour, fill = sqrt(N))) + geom_tile(color = "white", size = 0.1) + scale_fill_viridis(name="Number of Calls") + coord_equal() + labs(title="911 Calls by Day and Hour") + facet_wrap(~twp, ncol=5) + theme(legend.position="bottom")
 ```
+
+![캐글_히트맵_2_1](https://user-images.githubusercontent.com/54492747/79868890-9068eb80-841b-11ea-9dd5-20eeec9843e5.JPG)
+![캐글_히트맵_2_2](https://user-images.githubusercontent.com/54492747/79868895-91018200-841b-11ea-8819-453293f5f4c8.JPG)
+
 - 군구(township) 간 911 통화 빈도의 차이를 낮추기 위해 각 도시의 빈도를 제곱하였습니다.
 - 그 전에 비해 명백한 패턴을 볼 수 있었으며, 군구(township)에 상관없이 모든 히트맵은 중앙에 노란색으로 더 진하게 표시되었습니다.
 - 각 군구(township)별 히트맵을 보면 911 통화 빈도는 대부분 시간에 따라 차이가 납니다.
 
 <br>
 
-## Forecasting the number of accidents in the future
+## 2.4 Forecasting the number of accidents in the future
 
 이제 앞으로 발생할 수 있는 사고의 수를 예측해 보겠습니다. 여기에서는 시계열 분석이 사용되었습니다. 
 
@@ -608,6 +617,9 @@ forecast_day <- data.frame(Date, EMS, Fire, Traffic)
 knitr::kable(forecast_day)
 ```
 
+![캐글_시계열예측](https://user-images.githubusercontent.com/54492747/79868905-952d9f80-841b-11ea-86d6-c5c1afed2d53.JPG)
+![캐글_시계열예측값](https://user-images.githubusercontent.com/54492747/79868911-95c63600-841b-11ea-88bf-d358f7723c33.JPG)
+
 - 각각 7일(1주) 동안 3가지 유형에 대한 911 통화의 예상 횟수입니다.
 - 솔직히 예측의 결과는 초기 목적에서 많이 빗나가고 있습니다. 예측된 결과를 사용하여 구조대원들을 적절히 배치하고 싶었습니다. 하지만 이 예측만으로는 충분하지 않다고 생각합니다.
 - 분석한 데이터는 매일 수집되는 시계열 데이터이며, 또한 이것은 사고에 대한 데이터입니다. 비록 비정상성(non-stationary) 조건을 만족했지만 패턴이 없었고 데이터에 설명할 수 없는 변동이 존재하였습니다.
@@ -618,7 +630,7 @@ knitr::kable(forecast_day)
 
 ---
 
-# Conclusion
+# 3. Conclusion
 
 - 이 데이터만을 사용하여 911 통화 빈도를 예측하는 것은 불가능하였습니다.
     * 사고를 예측하기 위해 베이지안 분석 등 다른 분석 방법론을 이용하는 것도 좋을 것 같다고 생각합니다.
