@@ -8,7 +8,6 @@ comments: true
 toc: true
 toc_sticky: true
 ---
-
 * Kaggle의 [Emergency - 911 Calls](https://www.kaggle.com/mchirico/montcoalert) 데이터를 이용한 탐색적 데이터 분석(Exploratory Data Analysis, EDA)을 진행하였습니다.
 * 해당 포스팅에서 사용한 전체 코드와 그래프는 해당 [Kernel](https://www.kaggle.com/ysjang0926/eda-911-calls-kor)에서도 확인하실 수 있습니다.🤗
     * plotly와 github 간의 연동에 실패해서(ㅠㅠ..), plotly만의 interactive 그래프를 클릭하면서 보고 싶으시면 위의 커널로 보시는걸 추천드립니다.
