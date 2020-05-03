@@ -8,7 +8,6 @@ comments: true
 ---
 
 ![tensorflow bedge](https://user-images.githubusercontent.com/54492747/80908887-9ab1b080-8d5e-11ea-9be3-f513221ec3b2.png)
-Tensorflow Certificate
 
 **Tensorflow Certificate**란 구글에서 공인하는 일종의 텐서플로우 자격증입니다. 본 인증 시험은 2020년 3월 12일에 런칭되었으며, 온라인으로 진행되는 인증 시험입니다.
 
