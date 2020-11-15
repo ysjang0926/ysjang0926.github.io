@@ -1,4 +1,4 @@
---
+---
 layout: post
 title:  "하반기 회고 및 글또 5기 다짐글 "
 subtitle:   "Geultto 5"
