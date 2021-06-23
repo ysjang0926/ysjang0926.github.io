@@ -15,9 +15,9 @@ CITY 테이블에서 인구(Population)가 100,000보다 많은 모든 미국 �
 ###  출력
 두 줄에 걸쳐 "강한친구 대한육군"을 한 줄에 한 번씩 출력한다.
 
-<br>
+--------
 
-###  <font color = "#EFC050"> 해결 </font>  
+##  <font color = "#EFC050"> 해결 </font>  
 
 ```python
 print("Hello World!)
