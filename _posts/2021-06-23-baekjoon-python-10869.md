@@ -35,4 +35,9 @@ print(a%b)
 
 ## <font color = "#EFC050"> 다른 사람 답안 </font>  
 ```python
+numbers = input().split()
+operators = ['+', '-', '*', '//', '%']
+for operator in operators:
+	print(eval(operator.join(numbers)))
 ```
+
