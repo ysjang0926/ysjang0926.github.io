@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[백준] 입출력과 사칙연산 - 10430번 사칙연산"
+title:  "[백준] 입출력과 사칙연산 - 10430번 곱셈"
 subtitle:   "Bakejoon: python 10430"
 categories: programming
 tags: python
