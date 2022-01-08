@@ -91,7 +91,7 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 위와 같이 작성했다면 다음과 같이 원하는 형식의 Python 뱃지를 성공적으로 생성할 수 있습니다.<br>
 <img src="https://img.shields.io/badge/Python-3766AB?style=flat-square&logo=Python&logoColor=white"/>
 
-<br>
+---
 
 ### 2. 프로필 꾸미기(2) - 방문자수(조회수) 표시
 > hits를 표시하여 방문자 수 확인하기
@@ -108,22 +108,15 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 제공된 MARKDOWN을 복사하여 README.md에 그대로 복붙해주면 아래와 같이 생성됩니다. <br>
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fysjang0926&count_bg=%23D7D265&title_bg=%23252222&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com) <br>
 
-이때 가운데에 위치하도록 하고 싶다면 `div align=center`를 사용하면 됩니다.
-
-<div align=center>	
-
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fysjang0926&count_bg=%23D7D265&title_bg=%23252222&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
-
-</div>
-
+이때 가운데에 위치하고 싶다면, `div align=center`를 사용하면 됩니다.
 ```
 <div align=center>	
-
+  
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fysjang0926&count_bg=%23D7D265&title_bg=%23252222&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
-
+  
 </div>
 ```
 
+---
 
-
-ㅇㅇㅇㅇㅇ
+### 2. 프로필 꾸미기(3) - 방문자수(조회수) 표시
