@@ -81,8 +81,10 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 * 스타일옵션(=일반) : `flat-square`
 * 로고(=Python로고) : `Python`
 * 로고색(=흰색) : `white` <br>
-`<img src="https://img.shields.io/badge/Python-3766AB?style=flat-square&logo=Python&logoColor=white"/>` <br>
+```
+`<img src="https://img.shields.io/badge/Python-3766AB?style=flat-square&logo=Python&logoColor=white"/>`
+```
 
-위와 같이 작성했다면 다음과 같이 원하는 형식의 Python 뱃지를 성공적으로 생성할 수 있습니다.
-<img src="https://img.shields.io/badge/Python-3766AB?style=flat-square&logo=Python&logoColor=white"/></a>&nbsp <br>
+위와 같이 작성했다면 다음과 같이 원하는 형식의 Python 뱃지를 성공적으로 생성할 수 있습니다.<br>
+<img src="https://img.shields.io/badge/Python-3766AB?style=flat-square&logo=Python&logoColor=white"/> <br>
 
