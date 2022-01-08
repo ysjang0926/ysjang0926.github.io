@@ -47,16 +47,29 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 ![image](https://user-images.githubusercontent.com/54492747/148634844-cf9b871a-03fe-4fba-9ab5-4f80dda0c67b.png)<br>
 
 위와 같이 입력한 다음 [Create a new repository]를 클릭하여 repository를 생성하면, 위와 같이 기본으로 "Hi there 👋"가 입력된 README 파일이 자동 생성됩니다.<br>
-우측을 보면 "ysjang0926/ysjang0926 is a special repository. Its README.md will appear on your public profile!"라는 문구와 함께 [Edit Readme]와 [Visit Profile]이 있습니다. <br>
+우측을 보면 "ysjang0926/ysjang0926 is a special repository. Its README.md will appear on your public profile!"라는 문구와 함께 [Edit Readme]와 [Visit Profile] 버튼이 있습니다. <br>
 ![image](https://user-images.githubusercontent.com/54492747/148634929-f973fda5-1801-4a07-ba6c-6deb0bdf30de.png)<br>
 
 [Visit Profile]를 클릭하면, 나의 메인 화면으로 가게 되어 위의 README.md 파일과 같은 내용으로 프로필 영역이 생성된 것을 볼 수 있습니다. <br>
-![image](https://user-images.githubusercontent.com/54492747/148635069-c511bb2a-04bc-4171-b8c7-7793ce5100f5.png)
+![image](https://user-images.githubusercontent.com/54492747/148635069-c511bb2a-04bc-4171-b8c7-7793ce5100f5.png)<br>
 
-이제 생성된 README.md 파일을 자신의 취향에 맞게 수정하여 Girhub Prifile을 작성하면 됩니다.
+이제 생성된 README.md 파일을 자신의 취향에 맞게 수정하여 Girhub Prifile을 작성하면 됩니다.🤟
 
 ---
 
 ### 2. 프로필 꾸미기(1) - 본문 내용
-* 저는 간단한 소개와 스킬셋 기술을 위해 `Shields.io`를 사용해서 뱃지를 넣었습니다.
+> 저는 간단한 소개와 스킬셋 기술을 위해 `Shields.io`를 사용해서 뱃지(Badge)를 넣었습니다.
+
+본문 내용으로 먼저 자신에 대한 간단한 소개, 스킬셋 기술을 작성하기 위해, Shields.io(링크)를 사용해서 뱃지를 넣었습니다.<br>
+
+보통 두가지 방법이 있다고 하는데(이미 만들어져 있는 깃허브 링크에서 그대로 들고오는 방법 & Shields.it를 사용하는 방법), <br>
+저는 아이콘과 컬러를 커스터마이징하고 싶어서 Shields.io(링크)를 사용하였습니다! <br>
+
+`https://img.shields.io/badge/<LABEL>-<MESSAGE>-<COLOR>` 형태로 파라미터 값을 넣으면 원하는 모양의 뱃지 이미지가 생성되며, 이때 `logo`, `logoColor`, `labelColor` 등을 커스터마이징할 수 있습니다. <br>
+무슨 말인지 모르겠죠? 저도 그랬습니다..😂 저와 함께 천천히 따라해보아요!<br> 
+
+예를들어 위처럼 안드로이드 로고와 ‘Android’ 문구가 들어간 연두색의 뱃지를 생성하려면 아래 형식으로 가능하다.
+
+<img src="https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=Android&logoColor=white"/>
+색상코드와 사용가능한 로고의 목록은 simpleicons.org에서 확인할 수 있다.
 
