@@ -66,10 +66,9 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 저는 아이콘과 컬러를 커스터마이징하고 싶어서 Shields.io(링크)를 사용하였습니다! <br>
 
 `https://img.shields.io/badge/<LABEL>-<MESSAGE>-<COLOR>` 형태로 파라미터 값을 넣으면 원하는 모양의 뱃지 이미지가 생성되며, 이때 `logo`, `logoColor`, `labelColor` 등을 커스터마이징할 수 있습니다. <br>
-무슨 말인지 모르겠죠? 저도 그랬습니다..😂 저와 함께 천천히 따라해보아요!<br> 
+무슨 말인지 모르겠죠? 저도 그랬습니다..😂 포기하지말고 저와 함께 천천히 따라해보아요!<br> 
 
-예를들어 위처럼 안드로이드 로고와 ‘Android’ 문구가 들어간 연두색의 뱃지를 생성하려면 아래 형식으로 가능하다.
-
-<img src="https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=Android&logoColor=white"/>
+예를 들어 아래처럼 파이썬 로고와 ‘Python’ 문구가 들어간 파란색의 뱃지를 생성하려면 아래 형식으로 가능합니다.<br>
+<img src="https://img.shields.io/badge/Python-3766AB?style=flat-square&logo=Python&logoColor=white"/></a>&nbsp
 색상코드와 사용가능한 로고의 목록은 simpleicons.org에서 확인할 수 있다.
 
