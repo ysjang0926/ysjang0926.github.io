@@ -58,6 +58,8 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 ---
 
 ### 2. 프로필 꾸미기(1) - 본문 내용
+
+### 뱃지 삽입
 > 간단한 소개와 스킬셋 기술을 위해 `Shields.io`를 사용해서 뱃지(Badge) 삽입하기
 
 본문 내용으로 먼저 자신에 대한 간단한 소개, 스킬셋 기술을 작성하기 위해 뱃지를 넣었습니다.<br>
@@ -91,9 +93,11 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 위와 같이 작성했다면 다음과 같이 원하는 형식의 Python 뱃지를 성공적으로 생성할 수 있습니다.<br>
 <img src="https://img.shields.io/badge/Python-3766AB?style=flat-square&logo=Python&logoColor=white"/>&nbsp
 
----
+<br>
 
-### 2. 프로필 꾸미기(2) - 본문 내용
+### 뱃지 삽입
+
+
 
 
 
