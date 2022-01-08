@@ -43,14 +43,14 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 
 위의 순서로 repository를 만들면, 아래와 같이 "You found a secret!"라는 문구와 함께 README.md 파일로 Github Profile을 작성할 수 있음을 알려줍니다.<br>
 * Profile 입력을 위해 **Public**으로 지정해야한다고 합니다.
-* 저는 `Add a README file` 옵션을 활성화하여 README.md 파일이 함께 생성되도록 하였습니다. (직접 만들어도 된다고 하니 참고 부탁드립니다.)
+* 저는 `Add a README file` 옵션을 활성화하여 README.md 파일이 함께 생성되도록 하였습니다. (직접 만들어도 된다고 하니 참고 부탁드립니다.) <br>
 ![image](https://user-images.githubusercontent.com/54492747/148634844-cf9b871a-03fe-4fba-9ab5-4f80dda0c67b.png)<br>
 
 위와 같이 입력한 다음 [Create a new repository]를 클릭하여 repository를 생성하면, 위와 같이 기본으로 "Hi there 👋"가 입력된 README 파일이 자동 생성됩니다.<br>
-우측을 보면 "ysjang0926/ysjang0926 is a special repository. Its README.md will appear on your public profile!"라는 문구와 함께 [Edit Readme]와 [Visit Profile]이 있습니다.
+우측을 보면 "ysjang0926/ysjang0926 is a special repository. Its README.md will appear on your public profile!"라는 문구와 함께 [Edit Readme]와 [Visit Profile]이 있습니다. <br>
 ![image](https://user-images.githubusercontent.com/54492747/148634929-f973fda5-1801-4a07-ba6c-6deb0bdf30de.png)<br>
 
-[Visit Profile]를 클릭하면, 나의 메인 화면으로 가게 되어 위의 README.md 파일과 같은 내용으로 프로필 영역이 생성된 것을 볼 수 있습니다.
+[Visit Profile]를 클릭하면, 나의 메인 화면으로 가게 되어 위의 README.md 파일과 같은 내용으로 프로필 영역이 생성된 것을 볼 수 있습니다. <br>
 ![image](https://user-images.githubusercontent.com/54492747/148635069-c511bb2a-04bc-4171-b8c7-7793ce5100f5.png)
 
 이제 생성된 README.md 파일을 자신의 취향에 맞게 수정하여 Girhub Prifile을 작성하면 됩니다.
