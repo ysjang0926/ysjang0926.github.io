@@ -93,6 +93,18 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 
 <br>
 
-### 2. 프로필 꾸미기(2) - 방문자수 표시
-> 
+### 2. 프로필 꾸미기(2) - 방문자수(조회수) 표시
+> hits를 표시하여 방문자 수 확인하기
+
+한국인이란 자고로 기록의 민족 아니겠습니까🔥 <br>
+방문자수(조회수)를 확인하는 기능(`hits`)을 추가하면, Github에 방문한 사람수를 확인할 수 있습니다. <br>
+
+여러 hits 옵션이 있는데, 저는 대표적으로 쓰이는 옵션을 사용하였으며 [TODAY/TOTAL]을 확인할 수 있습니다. <br>
+
+먼저 hits 홈페이지(https://hits.seeyoufarm.com/)로 접속한 후, Github 주소(URL)를 복사하여 **TARGET URL**에 입력해줍니다.<br>
+그런 다음 원하는 옵션(title, count 색상)을 설정하면 아래에 자동으로 MARKDOWN, HTML LINK 등이 생성됩니다. <br>
+![image](https://user-images.githubusercontent.com/54492747/148637495-cc08753f-e8c4-4ba0-94a3-94e9411f1699.png) <br>
+
+제공된 MARKDOWN을 복사하여 README.md에 그대로 복붙해주면 아래와 같이 생성됩니다.
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fysjang0926&count_bg=%23D7D265&title_bg=%23252222&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
