@@ -105,6 +105,22 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 그런 다음 원하는 옵션(title, count 색상)을 설정하면 아래에 자동으로 MARKDOWN, HTML LINK 등이 생성됩니다. <br>
 ![image](https://user-images.githubusercontent.com/54492747/148637495-cc08753f-e8c4-4ba0-94a3-94e9411f1699.png) <br>
 
-제공된 MARKDOWN을 복사하여 README.md에 그대로 복붙해주면 아래와 같이 생성됩니다.
+제공된 MARKDOWN을 복사하여 README.md에 그대로 복붙해주면 아래와 같이 생성됩니다. <br>
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fysjang0926&count_bg=%23D7D265&title_bg=%23252222&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com) <br>
+
+이때 가운데에 위치하도록 하고 싶다면 `div align=center`를 사용하면 됩니다.
+```
+<div align=center>	
+
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fysjang0926&count_bg=%23D7D265&title_bg=%23252222&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 
+</div>
+```
+<div align=center>	
+
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fysjang0926&count_bg=%23D7D265&title_bg=%23252222&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+
+</div>
+
+
+ㅇㅇㅇㅇㅇ
