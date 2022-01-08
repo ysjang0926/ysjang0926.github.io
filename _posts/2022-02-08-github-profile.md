@@ -35,17 +35,15 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 ---
 
 ### 1. 프로필 생성하기
-* 내 username과 동일한 새로운 repository 생성
+> 내 username과 동일한 새로운 repository 생성
 
 자신의 Github username과 동일한 이름의 repository를 생성하면, Github Profile을 작성할 수 있습니다. <br>
-(GitHub 이스터에그 중 하나라고 하네요!)
+(GitHub 이스터에그 중 하나라고 하네요!)<br>
 
 **Github 접속 > Repository > New 클릭 > 신규 repository 생성 > 본인의 username과 동일하게 입력 > Create a new repository 클릭**
 
-> Github 접속 > Repository > New 클릭 > 신규 repository 생성 > 본인의 username과 동일하게 입력 > Create a new repository 클릭
-
 위의 순서로 repository를 만들면, 아래와 같이 "You found a secret!"라는 문구와 함께 README.md 파일로 Github Profile을 작성할 수 있음을 알려줍니다.<br>
-![image](https://user-images.githubusercontent.com/54492747/148634844-cf9b871a-03fe-4fba-9ab5-4f80dda0c67b.png)
+![image](https://user-images.githubusercontent.com/54492747/148634844-cf9b871a-03fe-4fba-9ab5-4f80dda0c67b.png)<br>
 
 Profile 입력을 해야하니 Public으로 지정하였고,<br>
 저는 `Add a README file` 옵션을 활성화하여 README.md 파일이 함께 생성되도록 하였습니다. (직접 만들어도 된다고 하니 참고 부탁드립니다.)<br>
