@@ -58,24 +58,26 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 ---
 
 ### 2. 프로필 꾸미기(1) - 본문 내용
-> 저는 간단한 소개와 스킬셋 기술을 위해 `Shields.io`를 사용해서 뱃지(Badge)를 넣었습니다.
+> 간단한 소개와 스킬셋 기술을 위해 `Shields.io`를 사용해서 뱃지(Badge) 삽입하기
 
-본문 내용으로 먼저 자신에 대한 간단한 소개, 스킬셋 기술을 작성하기 위해, Shields.io(링크)를 사용해서 뱃지를 넣었습니다.<br>
+본문 내용으로 먼저 자신에 대한 간단한 소개, 스킬셋 기술을 작성하기 위해 뱃지를 넣었습니다.<br>
 
 보통 두가지 방법이 있다고 하는데(이미 만들어져 있는 깃허브 링크에서 그대로 들고오는 방법 & Shields.it를 사용하는 방법), <br>
 저는 아이콘과 컬러를 커스터마이징하고 싶어서 Shields.io(링크)를 사용하였습니다! <br>
 
 `https://img.shields.io/badge/<LABEL>-<MESSAGE>-<COLOR>` 형태로 파라미터 값을 넣으면 원하는 모양의 뱃지 이미지가 생성되며, 이때 `logo`, `logoColor`, `labelColor` 등을 커스터마이징할 수 있습니다.<br>
-무슨 말인지 모르겠죠? 저도 그랬습니다..😂 포기하지말고 저와 함께 천천히 따라해보아요!
+무슨 말인지 모르겠죠? 저도 그랬습니다😂 포기하지말고 저와 함께 천천히 따라해보아요!
 
-`https://img.shields.io/badge/`뒤에 **작성하고싶은 단어-색상?-스타일옵션** 순으로 입력하면 됩니다.<br>
-* 색상코드와 사용가능한 로고는 Simple Icons(https://simpleicons.org/)에서 확인하여 손쉽게 사용할 수 있습니다.
+`https://img.shields.io/badge/`뒤에 `작성하고싶은 단어-색상?-스타일옵션` 순으로 입력하면 됩니다.
+* 색상코드와 사용가능한 로고는 Simple Icons(https://simpleicons.org/)에서 확인하여 손쉽게 사용할 수 있습니다.<br>
 
 예를 들어 파이썬 로고와 ‘Python’ 문구가 들어간 파란색의 뱃지를 생성하고 싶으면,<br>
-먼저 Simple Icons(https://simpleicons.org/)에서 `python`을 검색하여 색상코드를 확인합니다.(색상코드 : #3766AB) <br>
+먼저 Simple Icons(https://simpleicons.org/)에서 `python`을 검색하여 색상코드를 확인합니다.
+* 색상코드 : #3766AB
+* 로고 : Python <br>
 ![image](https://user-images.githubusercontent.com/54492747/148636281-4e85c6f7-3ec3-4943-8bf3-6a92e87ca820.png) <br>
 
-그런 다음 자신이 원하는 형식으로 아래와 같이 작성하면 됩니다.<br>
+그런 다음 자신이 원하는 형식으로 아래와 같이 작성하면 됩니다.
 * 작성하고싶은 단어(=Python) : `Python`
 * 색상(=파이썬 파란색) : `3766AB`
 * 스타일옵션(=일반) : `flat-square`
