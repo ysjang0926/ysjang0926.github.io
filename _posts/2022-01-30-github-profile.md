@@ -189,15 +189,11 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 * 테마 : [https://github.com/anuraghazra/github-readme-stats/blob/master/themes/README.md](https://github.com/anuraghazra/github-readme-stats/blob/master/themes/README.md)
 ![image](https://user-images.githubusercontent.com/54492747/151702823-45bc11ee-2e98-4837-956f-648df7b47510.png)
 
-다음과 같이 ?theme=THEME_NAME 속성을 이용하면 됩니다.
 ```
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&show_icons=true&theme=radical)
 ```
 
 <br>
-
-랭크는 **S+**(상위 1%), **S**(상위 25%), **A++**(상위 45%), **A+**(상위 60%), 그리고 **B+**(전체)로 구성되어 있습니다. (B+부터 시작하는 매우 후한 등급 매기기 아닌가요?🤣) <br>
-랭크의 경우 커밋의 수(commits), 기여도(contribution), 이슈의 수(issues), 즐겨찾기(star), 작업내용 반영 요청(Pull Request), 팔로워 수, 그리고 보유 중인 저장소 등의 항목들에 대해 누적 분포 함수를 이용해 계산된다고 합니다. <br>
 
 제 껄로 적용하면 다음과 같이 제 Github의 Stats가 표시되는 것을 확인할 수 있습니다. 부끄럽게도 18번 밖에 커밋을 안했네요😂 앞으로 더욱더 열심히 쓰는 것을 다짐하며...!
 ```
@@ -206,6 +202,9 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 </p>
 ```
 ![image](https://user-images.githubusercontent.com/54492747/151701820-f5ac5bba-1f4e-46f0-a99c-183800f119a9.png)
+
+랭크는 **S+**(상위 1%), **S**(상위 25%), **A++**(상위 45%), **A+**(상위 60%), 그리고 **B+**(전체)로 구성되어 있습니다. (B+부터 시작하는 매우 후한 등급 매기기 아닌가요?🤣) <br>
+랭크의 경우 커밋의 수(commits), 기여도(contribution), 이슈의 수(issues), 즐겨찾기(star), 작업내용 반영 요청(Pull Request), 팔로워 수, 그리고 보유 중인 저장소 등의 항목들에 대해 누적 분포 함수를 이용해 계산된다고 합니다. <br>
 
 ----
 
@@ -216,15 +215,15 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 #### 1) solved.ac 티어 표시
 만약 백준을 자주 쓴다면, 아래 라이브러리를 활용해서 solved.ac를 백준과 연동하여 자신의 등급을 표시해줄 수도 있습니다.
 * Github 링크 : [https://github.com/mazassumnida/mazassumnida](https://github.com/mazassumnida/mazassumnida)
-* 참고 블로그 : [https://madplay.github.io/post/design-github-profile-using-readme-md](https://madplay.github.io/post/design-github-profile-using-readme-md)
-예시는 아래와 같습니다.
+* 참고 블로그 : [https://madplay.github.io/post/design-github-profile-using-readme-md](https://madplay.github.io/post/design-github-profile-using-readme-md)<br>
+예시는 아래와 같습니다.<br>
 ![image](https://user-images.githubusercontent.com/54492747/151703470-5b965c8e-6f5e-4fa2-b8f5-99e1fe840d29.png)
 
 #### 2) Daily 코딩 시간 기록
 내가 아침, 오전, 오후, 밤 중 어떤 시간에 가장 커밋을 많이 하는지 손쉽게 기록할 수 있는 오픈소스입니다. 하지만 이것은 Github Profile에서 적용하는 것이 아니라 pinned repo로 추가할 수 있다고 하니 참고 부탁드립니다.
 * Github 링크 : [https://github.com/techinpark/productive-box](https://github.com/techinpark/productive-box)
-* 참고 블로그 : [https://fernando.kr/develop/2020-05-02-github-gist-posting/](https://fernando.kr/develop/2020-05-02-github-gist-posting/)
-예시는 아래와 같습니다.
+* 참고 블로그 : [https://fernando.kr/develop/2020-05-02-github-gist-posting/](https://fernando.kr/develop/2020-05-02-github-gist-posting/)<br>
+예시는 아래와 같습니다.<br>
 ![image](https://user-images.githubusercontent.com/54492747/151703640-6960c454-704c-407e-b97c-6e93f09f579e.png)
 
 
