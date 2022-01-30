@@ -24,13 +24,13 @@ md는 markdown의 약자이다보니, README.md 파일은 markdown 문법으로 
 Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 내용을 넣게 되며 자신에 대한 간단한 소개, 스킬셋 기술, 커밋 통계 등을 넣는 편입니다. <br>
 나를 대표할 수 있는 또다른 얼굴(?)이라 할 수 있는 Github이기에, 이러한 Github Profile을 이용해서 자신을 소개하는 것도 참 좋은 것 같습니다.
 
-전 극한의 J(mbti)라 이런 기록들을 너무 좋아하기도 하고, <br>
+전 극한의 J(MBTI)라 이런 기록들을 너무 좋아하기도 하고, <br>
 게을러서 작성을 많이 하지는 않는지라(😭) 이리저리 찾아본 괜찮았던 것들 중 저한테 필요한 부분 위주로 들고와서 꾸며보았습니다. 
 
 제 최종 프로필은 아래와 같으며, 우측 공간에 작성한 Profile이 생기게 됩니다.
-* 제 깃헙 주소 : https://github.com/ysjang0926
+* 제 깃헙 주소 : [https://github.com/ysjang0926](https://github.com/ysjang0926)
 
-~사진 첨부해~
+![image](https://user-images.githubusercontent.com/54492747/151699609-1acc55a7-1dbe-4de0-8e52-acd5f2d78fd8.png)
 
 ---
 
