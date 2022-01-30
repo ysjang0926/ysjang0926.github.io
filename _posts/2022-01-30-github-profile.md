@@ -125,23 +125,40 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 ---
 
 ### 2. 프로필 꾸미기(3) - 문구 쓰기
-> 쓰고싶은 말 작성하기
+> 가운데 정렬 + 글자크기 조절
 
 내가 작성하고 싶은 글을 쓰고 싶을 때는 html 또는 markdown 쓰는 것처럼 작성하면 됩니다.<br>
 하지만 저는 이와 같은 기본적인 내용을 몰라서 버벅거렸는데, HOXY 저와 같이 가운데 정렬 또는 header 기능을 쓰고 싶으신 분들을 위해 간단히 설명을 적어보겠습니다.
 
 #### 1) 가운데 정렬하기
-p태그에 center 정렬 속성을 줘서 내가 원하는 글을 추가하면 되며, 예시는 아래와 같습니다. 
-
-![image](https://user-images.githubusercontent.com/54492747/151700608-8cfbce3a-35b8-4b39-bb25-22da72cbaccc.png)
-
+태그에 속성이라는 것을 이용해서 여러가지 특성을 부여할 수 있으며, `<태그속성 = 값>` 형식으로 사용됩니다. <br>
+문자를 정렬하려면 align 속성을 사용하면 되고 align은 각 값에 따로 가운데, 오른쪽, 왼쪽으로 정렬하도록 `center`, `right`, `left`를 사용할 수 있습니다. <br> 
+가운데 정렬을 할 때에는 <p> 태그에 center 정렬 속성을 줘서 내가 원하는 글을 추가하면 되며, 예시는 아래와 같습니다. 
 ```
 <p align="center">
 🚀 저는 4년차 분석가이며, 항상 우주의 별 먼지와 같은 존재라고 생각합니다. 👩‍🚀
 </p>
 ```
 
-#### 2) 
+위와 같이 작성했다면 다음과 같이 가운데 정렬 형식으로 글이 작성된 것을 확인할 수 있습니다.
+![image](https://user-images.githubusercontent.com/54492747/151700608-8cfbce3a-35b8-4b39-bb25-22da72cbaccc.png)
+
+
+#### 2) 글자크기 조절
+글자 크기를 조절하는 <H> 태그는 총 6단계로 설정되어 있으며, 태그 안의 숫자가 커질수록 글자 크기가 작아집니다. <br>
+또한 <H> 태그에 center 정렬 속성을 줘서 내가 원하는 글을 추가하면 되며, 예시는 아래와 같습니다. 
+```
+<h1 align="center"> 🛠 Tech Stack 🛠 </h1>
+<h2 align="center"> 🛠 Tech Stack 🛠 </h2>
+<h3 align="center"> 🛠 Tech Stack 🛠 </h3>
+<h4 align="center"> 🛠 Tech Stack 🛠 </h4>
+<h5 align="center"> 🛠 Tech Stack 🛠 </h5>
+<h6 align="center"> 🛠 Tech Stack 🛠 </h6>
+```
+
+위와 같이 작성했다면 다음과 같이 가운데 정렬 형식으로 글이 작성된 것을 확인할 수 있습니다. (크기 비교!)
+![image](https://user-images.githubusercontent.com/54492747/151701051-838bc562-84b0-499a-a266-dfd38bc9ff8d.png)
+
 
 ---
 
