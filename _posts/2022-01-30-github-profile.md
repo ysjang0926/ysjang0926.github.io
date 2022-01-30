@@ -96,6 +96,12 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 위와 같이 작성했다면 다음과 같이 원하는 형식의 Python 뱃지를 성공적으로 생성할 수 있습니다.<br>
 <img src="https://img.shields.io/badge/Python-3766AB?style=flat-square&logo=Python&logoColor=white"/>
 
+<br>
+(+추가)
+구글링을 해보니 [해당 깃허브](https://github.com/Ileriayo/markdown-badges)에 정리가 잘되어있더라구요! 원하는 것을 골라서 복붙하시기만 하면 됩니다!
+* 깃허브 주소 : [https://github.com/Ileriayo/markdown-badges](https://github.com/Ileriayo/markdown-badges)
+![image](https://user-images.githubusercontent.com/54492747/151701725-47b91b1a-334a-44cc-9316-bc744fc5b2db.png)
+
 ---
 
 ### 2. 프로필 꾸미기(2) - 방문자수(조회수) 표시
@@ -162,13 +168,70 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 
 ---
 
-### 2. 프로필 꾸미기(4) - 
-> 
+### 2. 프로필 꾸미기(4) - Github Stats
+> 나의 Github Stats 확인하기 (feat.B+부터 시작하는 후한 등급 순서)
+
+[Github Stats Card](https://github.com/anuraghazra/github-readme-stats)를 통해서 Stats를 추가하는 방법도 있습니다. <br>
+아래의 깃허브를 클릭하여 원하는 부분을 골라서 복사해서 붙여넣기를 해주면 됩니다.
+* 깃허브 주소 : [https://github.com/anuraghazra/github-readme-stats](https://github.com/anuraghazra/github-readme-stats)
+
+이때 해야하는 것은 1) `username`부분을 본인의 Github 계정명으로 바꿔주고, 2) `theme` 부분에는 원하는 테마 옵션을 넣는 것입니다.
+![image](https://user-images.githubusercontent.com/54492747/151702973-bd0f0b47-7c41-4ccd-82bb-e415eb0841f3.png)
+
+#### 1) Github 사용자명 변경
+아래 코드를 복사해서 markdown 파일에 붙여넣으면 되는 아주 간단한 방법입니다. `?username=` 속성의 값을 Github 계정의 사용자명(닉네임)으로 바꿔줍니다.
+```
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra)](https://github.com/anuraghazra/github-readme-stats)
+```
+
+#### 2) 테마 화면 설정
+다양한 테마별 화면이 제공되니, 마음에 드는 것을 골라서 `theme=`부분에 넣어주면 됩니다.
+* 테마 : [https://github.com/anuraghazra/github-readme-stats/blob/master/themes/README.md](https://github.com/anuraghazra/github-readme-stats/blob/master/themes/README.md)
+![image](https://user-images.githubusercontent.com/54492747/151702823-45bc11ee-2e98-4837-956f-648df7b47510.png)
+
+다음과 같이 ?theme=THEME_NAME 속성을 이용하면 됩니다.
+```
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&show_icons=true&theme=radical)
+```
+
+<br>
+
+랭크는 **S+**(상위 1%), **S**(상위 25%), **A++**(상위 45%), **A+**(상위 60%), 그리고 **B+**(전체)로 구성되어 있습니다. (B+부터 시작하는 매우 후한 등급 매기기 아닌가요?🤣) <br>
+랭크의 경우 커밋의 수(commits), 기여도(contribution), 이슈의 수(issues), 즐겨찾기(star), 작업내용 반영 요청(Pull Request), 팔로워 수, 그리고 보유 중인 저장소 등의 항목들에 대해 누적 분포 함수를 이용해 계산된다고 합니다. <br>
+
+제 껄로 적용하면 다음과 같이 제 Github의 Stats가 표시되는 것을 확인할 수 있습니다. 부끄럽게도 18번 밖에 커밋을 안했네요😂 앞으로 더욱더 열심히 쓰는 것을 다짐하며...!
+```
+<p align="center"> 
+  <img src="https://github-readme-stats.vercel.app/api?username=ysjang0926&theme=vue&show_icons=true"/></a>
+</p>
+```
+![image](https://user-images.githubusercontent.com/54492747/151701820-f5ac5bba-1f4e-46f0-a99c-183800f119a9.png)
+
+----
+
+### 3. 그 외 옵션
+제 Github Profile에 적용한 내용은 위와 같은데, 이것 말고도 정말 많은 옵션들이 있더라구요! <br>
+혹시 도움되실까하여 제가 찾은 선에서 공유드립니다!
+
+#### 1) solved.ac 티어 표시
+만약 백준을 자주 쓴다면, 아래 라이브러리를 활용해서 solved.ac를 백준과 연동하여 자신의 등급을 표시해줄 수도 있습니다.
+* Github 링크 : [https://github.com/mazassumnida/mazassumnida](https://github.com/mazassumnida/mazassumnida)
+* 참고 블로그 : [https://madplay.github.io/post/design-github-profile-using-readme-md](https://madplay.github.io/post/design-github-profile-using-readme-md)
+예시는 아래와 같습니다.
+![image](https://user-images.githubusercontent.com/54492747/151703470-5b965c8e-6f5e-4fa2-b8f5-99e1fe840d29.png)
+
+#### 2) Daily 코딩 시간 기록
+내가 아침, 오전, 오후, 밤 중 어떤 시간에 가장 커밋을 많이 하는지 손쉽게 기록할 수 있는 오픈소스입니다. 하지만 이것은 Github Profile에서 적용하는 것이 아니라 pinned repo로 추가할 수 있다고 하니 참고 부탁드립니다.
+* Github 링크 : [https://github.com/techinpark/productive-box](https://github.com/techinpark/productive-box)
+* 참고 블로그 : [https://fernando.kr/develop/2020-05-02-github-gist-posting/](https://fernando.kr/develop/2020-05-02-github-gist-posting/)
+예시는 아래와 같습니다.
+![image](https://user-images.githubusercontent.com/54492747/151703640-6960c454-704c-407e-b97c-6e93f09f579e.png)
 
 
+---
 
-
-
+간단한 Profile 작성에도 이렇게 시간이 오래 걸릴줄이야😅 부디 이 포스팅이 Github Profile 작성을 하시는데 도움이 되었으면 좋겠네요! <br>
+이 글을 읽으시는 분들 모두 맘에 드시는 Github Profile 만드시길 바라며 이만..!🐱‍👓
 
 ----
 
