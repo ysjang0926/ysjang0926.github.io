@@ -74,7 +74,7 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 * 색상코드와 사용가능한 로고는 [Simple Icons](https://simpleicons.org/)에서 확인하여 손쉽게 사용할 수 있습니다.<br>
 
 예를 들어 파이썬 로고와 ‘Python’ 문구가 들어간 파란색의 뱃지를 생성하고 싶으면,<br>
-먼저 Simple Icons(https://simpleicons.org/)에서 `python`을 검색하여 색상코드를 확인합니다.
+먼저 [Simple Icons](https://simpleicons.org/)에서 `python`을 검색하여 색상코드를 확인합니다.
 * 색상코드 : #3766AB
 * 로고 : Python <br>
 ![image](https://user-images.githubusercontent.com/54492747/148636281-4e85c6f7-3ec3-4943-8bf3-6a92e87ca820.png) <br>
@@ -97,7 +97,7 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 <img src="https://img.shields.io/badge/Python-3766AB?style=flat-square&logo=Python&logoColor=white"/>
 
 <br>
-(+추가)
+(+추가) <br>
 구글링을 해보니 [해당 깃허브](https://github.com/Ileriayo/markdown-badges)에 정리가 잘되어있더라구요! 원하는 것을 골라서 복붙하시기만 하면 됩니다!
 * 깃허브 주소 : [https://github.com/Ileriayo/markdown-badges](https://github.com/Ileriayo/markdown-badges)
 ![image](https://user-images.githubusercontent.com/54492747/151701725-47b91b1a-334a-44cc-9316-bc744fc5b2db.png)
@@ -162,7 +162,7 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 <h6 align="center"> 🛠 Tech Stack 🛠 </h6>
 ```
 
-위와 같이 작성했다면 다음과 같이 가운데 정렬 형식으로 글이 작성된 것을 확인할 수 있습니다. (크기 비교!)
+위와 같이 작성했다면 다음과 같이 6단계에 맞게 글이 작성된 것을 확인할 수 있습니다. (크기 비교!)
 ![image](https://user-images.githubusercontent.com/54492747/151701051-838bc562-84b0-499a-a266-dfd38bc9ff8d.png)
 
 
@@ -175,8 +175,9 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 아래의 깃허브를 클릭하여 원하는 부분을 골라서 복사해서 붙여넣기를 해주면 됩니다.
 * 깃허브 주소 : [https://github.com/anuraghazra/github-readme-stats](https://github.com/anuraghazra/github-readme-stats)
 
+<br>
+
 이때 해야하는 것은 1) `username`부분을 본인의 Github 계정명으로 바꿔주고, 2) `theme` 부분에는 원하는 테마 옵션을 넣는 것입니다.
-![image](https://user-images.githubusercontent.com/54492747/151702973-bd0f0b47-7c41-4ccd-82bb-e415eb0841f3.png)
 
 #### 1) Github 사용자명 변경
 아래 코드를 복사해서 markdown 파일에 붙여넣으면 되는 아주 간단한 방법입니다. `?username=` 속성의 값을 Github 계정의 사용자명(닉네임)으로 바꿔줍니다.
