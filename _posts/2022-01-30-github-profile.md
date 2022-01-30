@@ -85,6 +85,7 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 * 스타일옵션(=일반) : `flat-square`
 * 로고(=Python로고) : `Python`
 * 로고색(=흰색) : `white` <br>
+
 ![image](https://user-images.githubusercontent.com/54492747/151700073-94f78a9a-80ec-4b23-aa4a-7cef76ee756d.png)
 
 ```
@@ -105,7 +106,7 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 
 여러 hits 옵션이 있는데, 저는 대표적으로 쓰이는 옵션을 사용하였으며 [TODAY/TOTAL]을 확인할 수 있습니다. <br>
 
-먼저 hits 홈페이지(https://hits.seeyoufarm.com/)로 접속한 후, Github 주소(URL)를 복사하여 **TARGET URL**에 입력해줍니다.<br>
+먼저 [hits 홈페이지](https://hits.seeyoufarm.com/)로 접속한 후, Github 주소(URL)를 복사하여 **TARGET URL**에 입력해줍니다.<br>
 그런 다음 원하는 옵션(title, count 색상)을 설정하면 아래에 자동으로 MARKDOWN, HTML LINK 등이 생성됩니다. <br>
 ![image](https://user-images.githubusercontent.com/54492747/148637495-cc08753f-e8c4-4ba0-94a3-94e9411f1699.png) <br>
 
