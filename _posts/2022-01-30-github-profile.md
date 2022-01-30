@@ -164,3 +164,15 @@ Github Profile에는 사람마다 다르지만, 보통 자신을 소개하는 �
 
 ### 2. 프로필 꾸미기(4) - 
 > 
+
+
+
+
+
+
+----
+
+### ✔ 참고한 블로그
+* [Github Profile 꾸미기](http://blog.cowkite.com/blog/2102241544/)
+* [[Github] README.md로 Github 프로필 꾸미기](https://excited-hyun.tistory.com/132)
+* [[GitHub] 내가 보려고 정리하는 GitHub README 작성법 + 꾸미기 꿀팁](https://mini-min-dev.tistory.com/56)
