@@ -269,4 +269,4 @@ sub.to_csv('sub.csv', index = False) # index = 0
 
 -----
 
-다음 포스팅에서는 유명한 대회 중 하나인 [Bike Sharing Demand](https://www.kaggle.com/c/bike-sharing-demand/overview)를 다뤄보도록 하겠습니다.
+다음 포스팅에서는 유명한 대회 중 하나인 [Bike Sharing Demand](https://www.kaggle.com/c/bike-sharing-demand/overview)를 다뤄보도록 하겠습니다.🚴‍♂️
