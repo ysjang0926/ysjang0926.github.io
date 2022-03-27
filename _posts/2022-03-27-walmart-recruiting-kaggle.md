@@ -46,6 +46,7 @@ for dirname, _, filenames in os.walk('/kaggle/input'):
 # You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
 # You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
 ```
+![image](https://user-images.githubusercontent.com/54492747/160290122-2ba81d5b-c5b0-414f-bd01-70e93b1c3ef2.png)
 
 ### train 출력 결과
 * 421570 rows × 5 columns
