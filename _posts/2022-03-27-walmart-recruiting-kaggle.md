@@ -156,12 +156,11 @@ test2
 
 ---------------
 
-## 3. EDA (Month vs Weekly_Sales)
+## 3. EDA (Month vs. Weekly_Sales)
 * Box-plot을 통해 Month column이 Weekly_Sales column과 유의미한 관계가 존재하는지 확인하였습니다.
     * seaborn과 matplotlib.pyplot을 import하고, `plt.figure()`과 `sns.boxplot()`을 사용하면 Box-plot을 그릴 수 있습니다.
     * `plt.figure()` 함수에 `figsize = (가로, 세로)` 파라미터를 넣어주면 그림 크기를 조정할 수 있습니다.
     * 이때 Month column과 Weekly_Sales column 사이의 유의미한 관계가 존재하는를 알아보기 위함이니, `sns.boxplot()` 함수의 파라미터로 Month column과 Weekly_Sales column을 넣어주었습니다.
-
 
 ```python
 import seaborn as sns
