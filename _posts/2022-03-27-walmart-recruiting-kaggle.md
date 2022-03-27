@@ -185,6 +185,7 @@ sns.boxplot(train['Month'], train['Weekly_Sales'], showfliers = False)
     * 월별로 꽤 유의미한 차이가 존재한다는 것을 알 수 있습니다.
     * 또한 최솟값 중에서 마이너스인 값들이 일부 존재하는데, 실제 판매량보다 반품 또는 환불이 많아 수익이 나지 않은 경우 마이너스 값으로 들어왔을 것이라 추측하였습니다.
 <br>
+
 ※ Overview에서 [Evaluation](https://www.kaggle.com/competitions/walmart-recruiting-store-sales-forecasting/overview/evaluation)을 보면, 휴일 주의 가중치를 다른 주의 가중치보다 5배 더 높게 부여한 것을 확인할 수 있습니다.
 
 ![image](https://user-images.githubusercontent.com/54492747/160285717-2aa6794f-106c-43ce-bf93-974c7ef68896.png)
