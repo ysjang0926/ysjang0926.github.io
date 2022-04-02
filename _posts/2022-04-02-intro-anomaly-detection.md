@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Introduction to Anomaly Detection"
-subtitle:   "Introduction to Anomaly Detection"
+title: "Introduction to Anomaly Detection"
+subtitle: "Introduction to Anomaly Detection"
 categories: data
 tags: dl
 comments: true
