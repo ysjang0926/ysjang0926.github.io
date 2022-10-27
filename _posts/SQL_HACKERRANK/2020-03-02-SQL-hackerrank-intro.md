@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "해커랭크 소개"
-subtitle:   "HackerRank"
+subtitle:   "HackerRank Intro"
 categories: programming
 tags: sql_hackerrank
 comments: true
