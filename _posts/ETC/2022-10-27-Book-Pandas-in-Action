@@ -1,4 +1,13 @@
-python으로 데이터 분석을 한다고 하면 필수적으로 쓸 수 밖에 없는 것이 pandas라고 생각한다. csv 데이터 처리부터 머신러닝, 딥러닝에 필요한 데이터프레임 처리까지 다양한 작업을 할 수 있기 때문이다.
+---
+layout: post
+title:  "[책리뷰] 판다스 인 액션 (feat. 최고의 pandas 가이드 문서)"
+subtitle:   "pandas in action"
+categories: etc
+tags: python 
+comments: true
+---
+
+Python으로 데이터 분석을 한다고 하면 필수적으로 쓸 수 밖에 없는 것이 pandas라고 생각한다. csv 데이터 처리부터 머신러닝, 딥러닝에 필요한 데이터프레임 처리까지 다양한 작업을 할 수 있기 때문이다.
 
 **판다스 인 액션** 책은 pandas를 디테일하게 잘 설명한 책이라고 추천 받게 되어 읽어보게 되었다.
 
