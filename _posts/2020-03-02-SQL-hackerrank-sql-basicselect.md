@@ -3,7 +3,7 @@ layout: post
 title:  "[HackerRank] SQL Basic Select"
 subtitle:   "HackerRank: SQL Basic Select"
 categories: programming
-tags: sql
+tags: sql_hackerrank
 comments: true
 ---
 
