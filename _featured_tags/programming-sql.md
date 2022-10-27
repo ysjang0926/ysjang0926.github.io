@@ -1,6 +1,6 @@
 ---
 layout: tag-blog
-title: SQL
+title: SQL정리
 slug: sql
 category: programming
 menu: false
