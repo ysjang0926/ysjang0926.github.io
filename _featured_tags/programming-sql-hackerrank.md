@@ -1,6 +1,6 @@
 ---
 layout: tag-blog
-title: [SQL]HackerRank
+title: SQL - HackerRank
 slug: sql_hackerrank
 category: programming
 menu: false
