@@ -3,7 +3,7 @@ layout: post
 title:  "[HackerRank] SQL Advanced Select - Type of Triangle"
 subtitle:   "HackerRank: SQL Advanced Select - Type of Triangle"
 categories: programming
-tags: sql
+tags: sql_hackerrank
 comments: true
 use_math: true
 ---
