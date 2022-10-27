@@ -3,7 +3,7 @@ layout: post
 title:  "[백준] 입출력과 사칙연산 - 1001번 A-B"
 subtitle:   "Bakejoon: python 1001"
 categories: programming
-tags: python
+tags: python_baekjoon
 comments: true
 ---
 ##  <font color = "#EFC050"> 문제 </font>    
