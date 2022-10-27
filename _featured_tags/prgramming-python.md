@@ -1,7 +1,7 @@
 ---
 layout: tag-blog
-title: PYTHON
-slug: python
+title: PYTHON_Baekjoon
+slug: python_baekjoon
 category: programming
 menu: false
 order: 4
