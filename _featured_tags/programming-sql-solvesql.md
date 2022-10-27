@@ -1,6 +1,6 @@
 ---
 layout: tag-blog
-title: SQL_solvesql
+title: [SQL]solvesql
 slug: sql_solvesql
 category: programming
 menu: false
