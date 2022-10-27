@@ -1,6 +1,6 @@
 ---
 layout: tag-blog
-title: PYTHON_Baekjoon
+title: [PYTHON]Baekjoon
 slug: python_baekjoon
 category: programming
 menu: false
