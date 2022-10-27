@@ -1,6 +1,6 @@
 ---
 layout: tag-blog
-title: [SQL] Study
+title: SQL - Study
 slug: sql
 category: programming
 menu: false
