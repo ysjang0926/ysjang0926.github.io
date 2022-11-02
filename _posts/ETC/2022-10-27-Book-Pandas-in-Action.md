@@ -11,16 +11,19 @@ Python으로 데이터 분석을 한다고 하면 필수적으로 쓸 수 밖에
 
 **[판다스 인 액션](http://www.yes24.com/Product/Goods/112208378)** 책은 pandas를 디테일하게 잘 설명한 책이라고 추천 받게 되어 읽어보게 되었다.
 ![image](https://user-images.githubusercontent.com/54492747/199372840-50a621b8-5f7b-42f1-ae1b-ab8ce401df7c.png)
+
 <br>
 
 책에는 기본적인 기초 사용법과 실제 데이터 분석 작업 시 유용하게 사용할 수 있는 다양한 프로세스들이 담겨있고, 책에서 다루는 내용들을 따라할 수 있도록 데이터와 코드가 제공되어 있다.
 * 책의 예제 코드는 jupyter notebook 형태로 제공
-* github 주소 : https://github.com/paskhaver/pandas-in-action
+* github 주소 : [https://github.com/paskhaver/pandas-in-action](https://github.com/paskhaver/pandas-in-action)
+
 <br>
 
 책은 크게 1부와 2부로 나뉘어져있으며, 아마 python을 이용하여 데이터 분석을 조금이라도 할 줄 아는 사람이라면 1부 보다는 2부 위주로 도움이 많이 될 것이라고 생각한다.
 * 1부 기본기 다지기 : pandas에서 활용되는 자료형과 기본적인 매커니즘
 * 2부 응용하기 : 실제 데이터셋을 예제로 하여, pandas에서 제공하는 api를 잘 활용할 수 있는 방법
+
 <br>
 
 R이든 Python이든 매번 구글링하면서 작업을 하지만, 특히 난 pandas의 경우에는 api를 모두 아는 것이 아니라 내가 원하는 데이터를 만들기 위해 비슷한 예시를 참고하여 대입하는 것으로 진행하는 편이다.
