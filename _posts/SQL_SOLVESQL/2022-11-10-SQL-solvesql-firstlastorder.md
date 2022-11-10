@@ -21,6 +21,8 @@ olist_orders_dataset 테이블에서 **첫 주문 일자**와 **마지막 주문
 
 쿼리문은 '이것이 정답이다!'라고 하는 것은 없다고 생각한다. 그래서 다양한 방법으로 결과를 추출할 수 있기 때문에, 가능한 쿼리문을 몇개 적어보았다.
 
+olist_orders_dataset 테이블에서 order_purchase_timestamp 칼럼의 `MIN`(최소), `MAX`(최대) 함수를 사용하고 yyyy-mm-dd 형식으로 구성하여 출력 예시의 컬럼으로 조회하면 된다.
+
 ### 1번 - MySQL
 ```sql  
 select left(min(order_purchase_timestamp),10) as first_order_date
