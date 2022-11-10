@@ -25,6 +25,7 @@ olist_orders_dataset 테이블에서 **2017년 1월 한 달 동안 발생한 주
 
 일자를 추출하는 함수는 여러개가 있지만, 이번에는 `date()`함수와 `strftime()`함수로 쿼리문을 작성하였다.
 * where : olist_orders_dataset 테이블에서 2017년 1월 데이터만 추출한다.
+* is not null : 배송 완료 또는 배송 예정 시각 데이터가 없는 경우를 제외한다.
 * group by : order_purchase_timestamp 칼럼에서 yyyy-mm-dd 형식으로 구성하여 일자별(구매 날짜) 값이 나오도록 한다.
 * case when then : 각 구매 일자별로 order_delivered_customer_date가 order_estimated_delivery_date보다 작거나 큰 경우를 나눈다.
 * order by : 구매 일자 기준으로 오름차순 정렬한다.
@@ -35,7 +36,7 @@ select date(order_purchase_timestamp) as purchase_date
       ,count(case when order_delivered_customer_date < order_estimated_delivery_date then order_id end) as success
       ,count(case when order_delivered_customer_date > order_estimated_delivery_date then order_id end) as fail
 from olist_orders_dataset
-where year(order_purchase_timestamp) = '2017' and month(order_purchase_timestamp) = '01'
+where year(order_purchase_timestamp) = '2017' and month(order_purchase_timestamp) = '01' and order_delivered_customer_date IS NOT NULL and order_estimated_delivery_date IS NOT NULL
 group by date(order_purchase_timestamp)
 order by date(order_purchase_timestamp)
 ```
@@ -46,7 +47,7 @@ select strftime('%Y-%m-%d',order_purchase_timestamp) as purchase_date
       ,count(case when order_delivered_customer_date < order_estimated_delivery_date then order_id end) as success
       ,count(case when order_delivered_customer_date > order_estimated_delivery_date then order_id end) as fail
 from olist_orders_dataset
-where strftime('%Y%m',order_purchase_timestamp) = '201701'
+where strftime('%Y%m',order_purchase_timestamp) = '201701' and order_delivered_customer_date IS NOT NULL and order_estimated_delivery_date IS NOT NULL
 group by strftime('%Y-%m-%d',order_purchase_timestamp)
 order by strftime('%Y-%m-%d',order_purchase_timestamp)
 ```
