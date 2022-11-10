@@ -44,7 +44,7 @@ select strftime('%Y-%m-%d',min(order_purchase_timestamp)) as first_order_date
 from olist_orders_dataset
 ```
 
-<br>
+-------
 
 ### 🚀 깨달은 것
 `strftime()` 날짜 함수는 이번에 처음 알게 되었는데, 지정된 형식에 따라 dattime값을 형식화하는데 사용된다.
