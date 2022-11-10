@@ -16,7 +16,6 @@ use_math: true
 olist_orders_dataset 테이블에서 **첫 주문 일자**와 **마지막 주문 일자**를 조회하는 쿼리를 작성하면 된다.
 
 -------
-<br>
 
 ## 문제 풀이
 
@@ -49,7 +48,6 @@ from olist_orders_dataset
 
 #### Format Description
 | %d | day of the month: 01-31        |
-|----|--------------------------------|
 | %f | fractional seconds: SS.SSS     |
 | %H | hour: 00-24                    |
 | %j | day of the year: 001-366       |
