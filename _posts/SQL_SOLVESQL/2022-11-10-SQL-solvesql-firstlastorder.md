@@ -44,7 +44,7 @@ from olist_orders_dataset
 
 <br>
 
-`strftime()` 날짜 함수는 이번에 처음 알게 되었는데, 지정된 형식에 따라 datatime값을 형식화하는데 사용된다.
+`strftime()` 날짜 함수는 이번에 처음 알게 되었는데, 지정된 형식에 따라 dattime값을 형식화하는데 사용된다.
 
 #### Format Description
  %d | day of the month: 01-31        
