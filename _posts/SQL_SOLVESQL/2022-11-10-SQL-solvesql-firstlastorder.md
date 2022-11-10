@@ -47,19 +47,20 @@ from olist_orders_dataset
 `strftime()` 날짜 함수는 이번에 처음 알게 되었는데, 지정된 형식에 따라 datatime값을 형식화하는데 사용된다.
 
 #### Format Description
-| %d | day of the month: 01-31        |
-| %f | fractional seconds: SS.SSS     |
-| %H | hour: 00-24                    |
-| %j | day of the year: 001-366       |
-| %J | Julian day number              |
-| %m | month: 01-12                   |
-| %M | minute: 00-59                  |
-| %s | seconds since 1970-01-01       |
-| %S | seconds: 00-59                 |
-| %w | day of week 0-6 with Sunday==0 |
-| %W | week of the year: 00-53        |
-| %Y | year: 0000-9999                |
-| %% | %                              |
+ %d | day of the month: 01-31        
+----|--------------------------------
+ %f | fractional seconds: SS.SSS     
+ %H | hour: 00-24                    
+ %j | day of the year: 001-366       
+ %J | Julian day number              
+ %m | month: 01-12                   
+ %M | minute: 00-59                  
+ %s | seconds since 1970-01-01       
+ %S | seconds: 00-59                 
+ %w | day of week 0-6 with Sunday==0 
+ %W | week of the year: 00-53        
+ %Y | year: 0000-9999                
+ %% | %                              
 
 Format이 위와 같기 때문에 datetime 변수를 년-월-일로 하기 위해 다음과 같이 사용하였다. <br>
 ```sql
