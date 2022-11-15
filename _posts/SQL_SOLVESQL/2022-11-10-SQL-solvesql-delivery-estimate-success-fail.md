@@ -41,7 +41,19 @@ group by date(order_purchase_timestamp)
 order by date(order_purchase_timestamp)
 ```
 
-### 2번 - SQLite
+### 2번 - MySQL
+* select에서 사용한 별칭은 group by 에서 쓸 수 있음
+```sql
+select date(order_purchase_timestamp) as purchase_date
+      ,count(case when order_delivered_customer_date <= order_estimated_delivery_date then order_id end) as success
+      ,count(case when order_delivered_customer_date > order_estimated_delivery_date then order_id end) as fail
+from olist_orders_dataset
+where order_purchase_timestamp between '2017-01-01 00:00:00' and '2017-01-31 23:59:59' and order_delivered_customer_date IS NOT NULL and order_estimated_delivery_date IS NOT NULL
+group by purchase_date
+order by purchase_date
+```
+
+### 3번 - SQLite
 ```sql
 select strftime('%Y-%m-%d',order_purchase_timestamp) as purchase_date
       ,count(case when order_delivered_customer_date < order_estimated_delivery_date then order_id end) as success
