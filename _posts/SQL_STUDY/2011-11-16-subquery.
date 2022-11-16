@@ -1,0 +1,114 @@
+---
+layout: post
+title:  "서브쿼리 "
+subtitle:   "SQL BASIC (1)"
+categories: programming
+tags: sql
+comments: true
+---
+
+> 본 내용은 데이터리안 'SQL 데이터 분석 캠프 실전반' 을 수강하며 작성한 내용입니다.📕
+
+### 💻 서브쿼리란?
+* **Sub-Query** 또는 **Inner Query**라고 부르며, 쿼리 안의 쿼리이다.
+* 서브쿼리를 포함하는 쿼리를 **Outer Query**라고 부른다.
+
+간단한 예시로는 다음과 같다.
+* 서브쿼리 : WHERE문에서 IN 뒤의 `SELECT officeCode FROM offices WHERE country = 'USA'`
+* Outer Query : 서브쿼리를 제외한 `SELECCT lastName ~~~ WHERE officeCode IN`
+
+```sql
+SELECT lastName, firstName
+FROM employees
+WHERE officeCode IN (SELECT officeCode FROM offices WHERE country = 'USA')
+```
+---
+
+## 1. WHERE절 서브쿼리
+
+### 1-1. 단일행 서브쿼리 (중요도 : 🎈🎈)
+* 비교연산자와 함께 쓰임(`=`, `>`, `<` 등)
+  * 그렇기 때문에 서브쿼리 결과값은 하나의 값으로 나와야함
+* 예시 : 평균 판매 목표치보다 더 높게 판매 목표치를 설정한 경우
+```sql
+select *
+from sales_target
+where target > (select avg(target) from sales_target)
+```
+
+### 1-2. 다중행 서브쿼리 (중요도 : 🎈🎈)
+* `IN`, `NOT IN` 과 함께 쓰임
+  * 그렇기 때문에 서브쿼리 결과값이 하나 이상의 값으로 나와도 괜찮음
+
+
+### 1-3. 다중컬럼 서브쿼리(중요도 : 🎈)
+
+Q. 평균 영수 금액보다 더 많이 지불한 경우를 모두 출력해주세요.
+
+SELECT day, ROUND(SUM(total\_bill),2)  
+FROM tips  
+GROUP BY day
+
+-- window: control + enter / control+ /  
+-- 쿼리 결과 저장 가능  
+SELECT day, ROUND(SUM(CASE WHEN time='Lunch' then total\_bill ELSE NULL END),2) AS lunch  
+,ROUND(SUM(CASE WHEN time='Dinner' then total\_bill ELSE NULL END),2) AS Dinner  
+FROM tips  
+GROUP BY day
+
+-- IF /CASE WHEN 차이  
+IF(조건, 조건이 참, 조건이 거짓)  
+CASE WHEN 조건 1 THEN 조건 1이 참  
+WHEN 조건 2 THEN 조건 2가 참  
+ELSE 그 외  
+END
+FROM절 서브쿼리
+SELECT \*  
+FROM(  
+SELECT day  
+, SUM(total\_bill) sales  
+FROM tips  
+GROUP BY day  
+) AS daily
+
+-- daily라는 테이블로 부르겠다.
+
+SELECT ROUND(AVG(sales),2) daily\_sales\_avg  
+FROM(  
+SELECT day  
+, SUM(total\_bill) sales  
+FROM tips  
+GROUP BY day  
+) AS daily
+
+-- 테이블 안에 테이블을 넣은 것  
+-- FROM절 에서 AS는 생략 가능하지만 Alias 꼭 적어줘야 함
+WITH 문 (간편)
+WITH daily AS(  
+SELECT day  
+, SUM(total\_bill) sales  
+FROM tips  
+GROUP BY day  
+),weekly AS(  
+쿼리  
+)
+
+SELECT \*  
+FROM daily
+
+-- WITH문은 테이블 이름 붙여줌, 간결하게 만듬  
+-- WITH 다시 안쓰고 weekly AS() 이렇게 써도 가능
+
+
+### ✅ SQL로 하는 3step 작업
+**STEP 1. 선택**
+* FROM절에서 원하는 데이터 집합을 정의한 후, WHERE절이나 HAVING절을 사용하여 ROW를 걸러내는 작업
+    ![image](https://user-images.githubusercontent.com/54492747/158095584-92a914c3-6d82-46f7-9992-249d0a511db2.png)
+
+**STEP 2. 추출**
+* SELECT절에 COLUMN 배열로 COLUMN을 걸러내는 작업
+    ![image](https://user-images.githubusercontent.com/54492747/158095627-e682ad5b-23a0-4d69-b899-67b4408bb7f0.png)
+
+**STEP 3. 가공 추출**
+* 집계합수, GROUP BY절 등으로 COLUMN을 가공하는 작업
+    ![image](https://user-images.githubusercontent.com/54492747/158095662-a543862e-35fd-4343-9313-f316e6f267cd.png)
