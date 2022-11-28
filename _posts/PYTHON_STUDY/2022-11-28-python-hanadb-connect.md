@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "HANA DB 연결 + 데이터 추출"
-subtitle:   "Bakejoon: python 1000"
+subtitle:   "HANA DB - Python"
 categories: programming
 tags: python_study
 comments: true
