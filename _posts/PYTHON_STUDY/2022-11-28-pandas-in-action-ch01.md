@@ -147,15 +147,15 @@ movies[has_dark_in_title]
 ### 5. 데이터 그룹화
 
 * Gross 열의 값이 숫자가 아닌 텍스트로 저장됨 -> $와 ,를 제거하는 과정이 필요함
- * $와 ,를 모두 빈텍스트로 바꾸기 & 부동 소수점 숫자로 변환
- * `replace(현재문자, 바꿀문자)` : 텍스트 바꾸기
- * `astype(float)` : 부동 소수점 숫자로 변환
+  * $와 ,를 모두 빈텍스트로 바꾸기 & 부동 소수점 숫자로 변환
+  * `replace(현재문자, 바꿀문자)` : 텍스트 바꾸기
+  * `astype(float)` : 부동 소수점 숫자로 변환
 ```python
 movies['Gross'] = (movies['Gross'].str.replace("$", "", regex=False).str.replace(",", "", regex=False).astype(float))
 ```
 
 * 목적 : 제작사 당 영화 수
- * `count()` : group별 갯수 계산
+  * `count()` : group별 갯수 계산
 ```python
 # movies.groupby("Studio")["Gross"].count().sort_values(ascending=False)
 studios = movies.groupby("Studio")
@@ -163,14 +163,14 @@ studios["Gross"].count().sort_values(ascending=False)
 ```
 
 * 목적 : 제작사 당 총 수익
- * `sum()` : group별 합계 계산
+  * `sum()` : group별 합계 계산
 ```python
 studios = movies.groupby("Studio")
 studios["Gross"].sum().sort_values(ascending=False)
 ```
 
 * 목적 : 제작사 당 평균 수익
- * `mean()` : group별 평균 계산
+  * `mean()` : group별 평균 계산
 ```python
 studios["Gross"].mean().sort_values(ascending=False)
 ```
