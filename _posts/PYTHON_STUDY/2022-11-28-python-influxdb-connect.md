@@ -38,6 +38,7 @@ def get_ifdb(db, host='<hostname>', port=<port number>, user='<username>', passw
   * `read_sql()`를 사용해 실행하면 DB의 테이블을 Dataframe 형태로 읽어올 수 있음
 
 <br>
+
 ------
 
 ## 예시
