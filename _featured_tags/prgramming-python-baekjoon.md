@@ -4,5 +4,5 @@ title: PYTHON - Baekjoon
 slug: python_baekjoon
 category: programming
 menu: false
-order: 4
+order: 5
 ---
