@@ -1,7 +1,7 @@
 ---
 layout: tag-blog
 title: BOOK
-slug: book
+slug: etc_book
 category: etc
 menu: false
 order: 2
