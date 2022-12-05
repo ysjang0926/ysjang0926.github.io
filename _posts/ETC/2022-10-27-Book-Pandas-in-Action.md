@@ -3,7 +3,7 @@ layout: post
 title:  "[책리뷰] 판다스 인 액션 (feat. 최고의 pandas 가이드 문서)"
 subtitle:   "pandas in action"
 categories: etc
-tags: python 
+tags: etc_book 
 comments: true
 ---
 
