@@ -3,8 +3,7 @@ layout: post
 title:  "제조업에서 데이터 분석이란?"
 subtitle:   "manufacturing_data"
 categories: etc
-tags: work
-tags: manufacturing data analysis
+tags: etc_work
 comments: true
 ---
 
