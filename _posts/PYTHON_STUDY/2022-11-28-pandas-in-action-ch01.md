@@ -69,6 +69,7 @@ movies.dtypes
 
 * 레이블 접근
   * Series의 인덱스 레이블은 4개의 변수임 -> 기존의 행값을 열로 변경하여 표시함
+  
 ```python
 # 인덱스 위치 사용
 movies.iloc[499]
