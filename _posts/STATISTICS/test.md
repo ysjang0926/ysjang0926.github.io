@@ -1,3 +1,8 @@
+* 참고 링크 : https://blog.mathpresso.com/%EC%8B%A4%ED%97%98-tracking-b3e5ba7b3004
+
+
+
+
 실험 의사결정 가이드 자동화 : QXP Tracker
 > 제가 회사에서 솔루션에 도입했던 실험 의사결정 가이드 자동화 과정을 정리하였습니다. 수정~!
 
