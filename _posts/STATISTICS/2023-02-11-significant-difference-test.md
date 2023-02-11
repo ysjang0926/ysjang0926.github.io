@@ -106,13 +106,13 @@ lightGBM 중요도를 통해 생성된 주요 요인 리스트가 통계적으�
 * 우선 데이터의 종류를 센서(=TAG) 리스트와 품질 리스트로 구분하였습니다.
 * 센서값의 경우 최소 1,000개 이상이 존재하기 때문에 충분한 모수를 지니고 있기에, 정규성을 따른다고 가정하였습니다.
 * 품질값이 경우 BATCH 또는 LOT 개수가 많지 않으면 충분한 모수를 지니지 못할 가능성이 있기 때문에, 정규성 검정을 진행하였습니다.
-* 이때 정규성 검정으로는 Sharpiro-Wilk test를 사용하였습니다.
-* 정규성 검정 결과 p-value가 0.05 이상이면 정규성을 따른다고 가정하였습니다.
-* 정규성 
+	* 이때 정규성 검정으로는 Sharpiro-Wilk test를 사용하였습니다.
+	* 정규성 검정 결과 p-value가 0.05 이상이면 정규성을 따른다고 가정하였습니다.
 
-
-##### 정규성 만족한 경우
-* 일케함~
+#### 2. 정규성 가정 여부
+1) 정규성을 가정할 수 있는 경우
+	* ㅇㅇ
+2) 정규성을 가정할 수 없는 경우
 
 
 2. ㅇㅇ
@@ -132,7 +132,7 @@ p-value를 계산하여, p-value가 0.05 이하면 통계적으로 유의미하�
 python의 `scipy` library의 `stats` 함수를 이용하여 구현했고 아래와 같습니다. <br>
 이때 lightGBM은 중요도를 Gain, Split 이렇게 2가지를 제공하며, `Gain`은 모델 정확도에 더 좋으나 솔루션에서는 데이터를 나누는 기준점을 찾는 것이 더 중요하기 때문에 `Split`으로 사용하였습니다.
 
-##### 얘는 얘애~
+#### 얘는 얘애~
 ```python
 import scipy.stats
 
@@ -170,7 +170,7 @@ frames = {'TAGID':col_list,
 df_ttest = pd.DataFrame(frames)
 ```
 
-##### 얘는 얘애~
+#### 얘는 얘애~
 ㅇㅇㅇ
 ```python
 search = 'N000'
@@ -190,7 +190,7 @@ def pvalue_result(df_name):
             return df_name['welch_t_test']
 ```
 
-##### 얘는 얘애~
+#### 얘는 얘애~
 ㅇㅇㅇ
 ```python
 df_ttest['real_pvalue'] = df_ttest.apply(pvalue_result, axis=1)
