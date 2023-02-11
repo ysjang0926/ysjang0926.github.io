@@ -22,14 +22,19 @@
 그렇다면 실제 제조 분석에서는 유의차분석을 언제 사용할까요?
 - 생산 설비에 설치된 **수많은 센서(sensor) 데이터** 중
 - **제품 물성이 좋은 Group과 그렇지 않은 Group 사이에 평균이 차이가 있는 센서**는 어떤 센서이며
-- **제품 물성에 영향력이 있는지**를 확인할 때 필요합니다.
+- 만약 차이가 있다면 **제품 물성에 영향력이 있는지**를 확인할 때 필요합니다.
+
 (여기서 sensor는 어떤 물질의 양이나 온도를 감지하여 측정하는 장치를 말하며, 여기서 측정된 값을 센서값 또는 태그값이라 부릅니다.)
+
+<br>
 
 현장에서 비교(ex.양품/불량품)하고자 하는 생산품을 기준으로 유의차분석 수행을 통해 원인 인자 파악이 가능하다면 좋지 않을까 생각했고, 이러한 기능을 구현한 프로그램을 **유의차분석 솔루션**이라고 부르기로 했습니다.
 
 유의차분석 솔루션을 간단하게 설명하자면 다음과 같습니다.
 * 시스템에 저장된 데이터를 분석하여 제품 품질에 영향을 미치는 주요 원인을 파악하기 위한 프로그램
 * 목적 : 비교(ex.양품/불량품)하고자 하는 그룹 간 유의 인자 탐색 및 시각화
+
+<br>
 
 솔루션을 사용하기 위해서는 **분석을 실행하는 부분**과 **분석 결과를 집계 및 시각화**하는 부분으로 나뉩니다. 이번 글에서는 **분석 결과를 집계**하는 부분을 다루도록 하겠습니다.
 
@@ -38,23 +43,29 @@
 1. 주요 요인 리스트 및 중요도 산출
 2. 대조군/실험군 평균 비교 검정 결과 추출
 
+<br>
+
 ### 1. 주요 요인 리스트 및 중요도 산출
 비교하고자 하는 그룹 간 유의 인자에 대한 중요도는 **LightGBM**에 의해 결정됩니다. <br>
-LightGBMdms GBM 기반의 알고리즘이고, XGBoost(eXtra Gradient Boost)보다 2년 후에 만들어졌으며 XGBoost의 장점은 계승하고 단점은 보완하는 방식으로 개발되었습니다. 가장 큰 장점은 XGBoost와 GBM에 비해 훨씬 학습에 걸리는 시간이 적다는 것이며, 성능상으로 보았을 때에도 XGBoost와 큰 차이가 없습니다. <br>
+LightGBM은 GBM 기반의 알고리즘이고, XGBoost(eXtra Gradient Boost)보다 2년 후에 만들어졌으며 XGBoost의 장점은 계승하고 단점은 보완하는 방식으로 개발되었습니다. 가장 큰 장점은 XGBoost와 GBM에 비해 **훨씬 학습에 걸리는 시간이 적다는 것**이며, 성능상으로 보았을 때에도 XGBoost와 큰 차이가 없습니다. <br>
 센서 데이터의 경우 1초, 1분 등 시계열 데이터로 구성되어 있기 때문에, 비교하고자 하는 그룹 수와 센서 수가 많아질수록 데이터의 양은 방대해집니다. 이러한 이유로 유의차분석 솔루션에서는 모델 정확성보다는 중요도 결과를 빠르게 내는 것이 더 중요하기 때문에, 다른 모델 대비 빠른 시간 내에 학습하여 결과를 산출하는 LightGBM을 선정하게 되었습니다.
+
 <br>
-이와 같은 LightGBM을 python의 `lightgbm` library를 활용하여 구현했고 아래와 같습니다. <br>
-이때 lightGBM은 중요도를 Gain, Split 이렇게 2가지를 제공하며, `Gain`은 모델 정확도에 더 좋으나 솔루션에서는 데이터를 나누는 기준점을 찾는 것이 더 중요하기 때문에 `Split`으로 사용하였습니다.
+
+LightGBM을 python의 `lightgbm` library를 활용하여 구현했고 아래와 같습니다. <br>
+이때 lightGBM은 중요도를 Gain, Split 이렇게 2가지를 제공하며, `Gain`은 모델 정확도에 더 좋으나 솔루션에서는 **데이터를 나누는 기준점을 찾는 것이 더 중요**하기 때문에 `Split`으로 사용하였습니다.
+
 ```python
-# LightGBM 모델에 맞게 Data Set 변환
 import lightgbm as lgb
+
+# LightGBM 모델에 맞게 Data Set 변환
 lgb_dtrain = lgb.Dataset(data = data_x, label = data_y)
 
-# LGBM : Binary Split & Boosting을 얼마나 돌릴지는 100으로 지정
+# LGBM : Binary Split & Boosting을 얼마나 돌릴지는 1000으로 지정
 model = lgb.train(
 params = {"objective": "binary"},
 train_set = lgb_dtrain,
-num_boost_round = 100
+num_boost_round = 1000
 )
 
 # Importance 계산 : type은 Split 사용
@@ -62,8 +73,7 @@ importance_df = (
 pd.DataFrame({
 # 'feature_name': model.feature_name(),
 'TAGID' : x.columns,
-# 'Variable_Importance': model.feature_importance(importance_type = 'gain')
-'Variable_Importance': model.feature_importance(importance_type = 'split'),
+'Variable_Importance': model.feature_importance(importance_type = 'split'), # Gain : model.feature_importance(importance_type = 'gain')
 })
 .sort_values('Variable_Importance', ascending = False)
 .reset_index(drop = True)
@@ -73,13 +83,15 @@ pd.DataFrame({
 <br>
 
 ### 2. 대조군/실험군 평균 비교 검정 결과 추출
-중요도를 통해 생성된 주요 요인 리스트가 통계적으로 유의미하게 차이가 있는지는, 서로 다른 2개 집단 평균 비교 검정을 통하여 확인하였습니다. <br>
-저희가 흔히 알고 있는 검정 방법은 다음과 같습니다.~~수정~~
+lightGBM 중요도를 통해 생성된 주요 요인 리스트가 통계적으로 유의미하게 차이가 있는지는, 서로 다른 2개 집단 평균 비교 검정을 통하여 확인하였습니다. <br>
+두 집단의 평균을 비교할 때는 t-검정이 사용되며, t감정은 다음과 같이 분류됩니다. <br>
 ![유의차분석솔루션_t검정종류](https://user-images.githubusercontent.com/54492747/217399696-30e4362e-ac07-445f-bb39-cc4c62f85fc6.png)
 
-하지만 제조 데이터의 경우, 하나의 BATCH 또는 LOT에 대하여
-- **1번씩만 기록되는 품질 검사결과(2번 이상일 수도 있음)**와
-- **1초, 1분으로 값이 기록되기 때문에 수없이 많은 시계열 데이터인 센서 값**이 있기 때문에
+<br>
+
+제조 데이터의 경우, 하나의 BATCH 또는 LOT에 대하여
+- **1번씩만 기록되는 품질 결과(2번 이상일 수도 있음)**와
+- **1초, 1분으로 값이 기록되기 때문에 수없이 많은 시계열 데이터인 센서값**으로 나뉘어지기 있기 때문에
 - 이에 대한 기준을 설정하는 것이 중요하였습니다. <br>
 
 데이터에 따라 어떤 검정 방식을 사용해야 하는지는 아래와 같은 방식에 의해 결정되도록 하였습니다.
@@ -184,7 +196,7 @@ QANDA Team에서는 실험 플랫폼인 QXP와 metrics store를 만들어서 실
 이제는 admin에 선언한 성공 지표와 가드레일 지표뿐만 아니라, 다른 지표까지 자동으로 집계하도록 개선하는 것을 고민하고 있습니다. 기본적인 가드레일 지표 목록을 구비하고, 이 지표들은 시스템이 자동으로 집계하려고 합니다. 그리고 하나라도 가드레일 지표가 저해되면, 메시지를 발송하도록 하여, 모든 가드레일 지표가 자동으로 확인되기를 기대합니다.
 
 ### Reference
-* [Raghavendra Chalapathy, Sanjay Chawla. “Deep Learning for Anomaly Detection: A Survey.” arXiv, 2019](https://arxiv.org/abs/1901.03407)
+* [[통계분석 언제 뭘 써야하나] 2. t검정의 분류 (두 집단의 평균비교)](https://hsm-edu.tistory.com/1207)
 * [깃헙 블로그 글 - Anomaly Detection 개요](https://hoya012.github.io/blog/anomaly-detection-overview-1/)
 	* 이상치 탐지 분야에 대한 소개 및 주요 문제와 핵심 용어, 산업 현장 적용 사례를 깔끔하게 잘 정리해주셨습니다.
 * [고려대학교 DMQA 연구실 세미나 내용](http://dmqm.korea.ac.kr/activity/seminar/339)
