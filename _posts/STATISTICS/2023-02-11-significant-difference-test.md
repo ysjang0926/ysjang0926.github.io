@@ -22,7 +22,7 @@ use_math: true
 ## 유의차(significant differece) 분석
 **유의차 분석**은 데이터의 평균 또는 비율 등의 차이가 통계적으로 의미가 있는지, 통계 모형을 사용하여 검정(test)하는 분석 기법입니다. <br>
 아래의 그림을 예시로 들면, 수집한 데이터에 대한 group별, condition별 평균값의 차이는 실제로 차이가 있다고 할 수 있는지 판단할 수 있도록 도와주는 역할을 합니다.
-![image](https://user-images.githubusercontent.com/54492747/217399254-28be5e51-475a-453b-8b5e-4b549202d1d6.png)<br>
+![image](https://user-images.githubusercontent.com/54492747/217399254-28be5e51-475a-453b-8b5e-4b549202d1d6.png)
 [출처 : Assessing differences of significance](https://janhove.github.io/analysis/2014/10/28/assessing-differences-of-significance)
 
 <br>
