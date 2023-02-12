@@ -1,4 +1,12 @@
-유의차분석: 주요 요인인자 리스트 산출 및 집계
+---
+layout: post
+title: "유의차분석: 주요 요인인자 리스트 산출 및 집계"
+subtitle: "significant differece analysis"
+categories: data
+tags: stat
+comments: true
+use_math: true
+---
 
 > 제가 회사에서 솔루션에 도입했던 주요 요인인자 리스트 산출 및 집계 과정을 정리한 글입니다.
 
