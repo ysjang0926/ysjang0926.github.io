@@ -217,7 +217,7 @@ df_ttest['real_pvalue'] = df_ttest['real_pvalue'].fillna('N/A')
 
 ### Reference
 * [[통계분석 언제 뭘 써야하나] 2. t검정의 분류 (두 집단의 평균비교)](https://hsm-edu.tistory.com/1207)
-* [[LightGBM] LGBM는 어떻게 사용할까?](https://greatjoy.tistory.com/72))
+* [[LightGBM] LGBM는 어떻게 사용할까?](https://greatjoy.tistory.com/72)
 
 ------
 ### 🔜 Next
