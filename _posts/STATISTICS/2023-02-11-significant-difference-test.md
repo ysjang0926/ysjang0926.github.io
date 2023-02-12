@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "유의차분석: 주요 요인인자 리스트 산출 및 집계"
-subtitle: "significant differece analysis"
+subtitle: "유의차분석: 주요 요인인자 리스트 산출 및 집계"
 categories: data
 tags: stat
 comments: true
