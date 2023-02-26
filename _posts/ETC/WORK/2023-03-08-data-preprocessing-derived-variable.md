@@ -1,6 +1,6 @@
 *---
 layout: post
-title:  "제조업에서 데이터 분석이란?"
+title:  "제조업에서 파생변수 생성이란?"
 subtitle:   "manufacturing_data"
 categories: etc
 tags: etc_work
