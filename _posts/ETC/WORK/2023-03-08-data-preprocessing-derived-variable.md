@@ -17,19 +17,42 @@ https://yeong-jin-data-blog.tistory.com/m
 흔히 알고 있는 데이터 분석 프로세스는 다음과 같습니다. 그 중 데이터 가공(Data Preprocessing)는 **분석을 수행할 때 다양한 원천 데이터 소스를 통해 목적에 맞는 데이터 형태를 만들기 위한 단계**입니다.
 
 
-개인적인 생각이지만, 분석을 하면 할수록 데이터 가공 단계야말로 분석가의 노하우가 매우 중요시 되는 부분이라고 느끼고 있습니다. 그 이유는 데이터 가공을 어떻게 진행했냐에 따라, 분석 효과를 높일 수 있기 때문입니다.
+개인적인 생각이지만, 분석을 하면 할수록 데이터 가공 단계야말로 분석가의 노하우가 매우 중요시 되는 부분이라고 느끼고 있습니다. 그 이유는 데이터 가공을 어떻게 진행했냐에 따라, 의미 있는 분석 결과를 얻거나 성능 좋은 모델을 만들 때 효과를 볼 수 있는 부분이기 때문입니다. <br>
+저도 분석을 진행할 때 데이터 가공 단계에서 많은 시간을 투자하고 있으며, 어떻게 가공을 해서 데이터 특성을 더욱 잘 살릴 수 있을지 고민을 하고 있습니다. 모델을 재구성하거나 분석 가설을 다시 세워서 재진행할 때에도, 데이터 가공 단계부터 다시 시작하는 경우도 있구요!
 
 <br>
 
-## 🎈 데이터 가공의 목적과 의의
+## 🎈 Data Preprocessing 종류
+데이터 가공 단계는 아래의 예시 그림과 같이 정말 다양한 범위를 포함하고 있습니다.
+![image](https://user-images.githubusercontent.com/54492747/221466863-760c9898-e377-4716-8338-5a7ac2750183.png)
+[DATA PREPROCESSING | DATA CLEANING PYTHON](https://ai-ml-analytics.com/data-preprocessing-data-cleaning-python/)
+
+대표적인 Data Preprocessing 방법들은 다음과 같습니다.
+1. 결측값(Missing Value) 처리
+ * 
+3. Feature Scaling
+ * Min-Max Nomarlization, Standardization
+4. 
+* 데이터 추출, 필터링, 그룹핑, 조인 등
+* 이상치 제거, 분포 변환, 표준화, 카테고리화, 차원 축소 등 (Python/R)
+
+* 데이터 전처리 : 결측값, 이상치, Scaling
+* 
+피쳐 엔지니어링 : Raw Data로부터 Feature를 만들거나 재구성하는 과정
+ * Feature Extraction : 주어진 Featrue 바탕으로 새로운 Feature로 재구성
+ * Encoding : 문자를 숫자로 변환
+* 통합  / 정제 / 변환 / 파생변수
 
 
+<br>
+
+## 🎈 파생변수 목적 및 의의
+파생변수는 **기존의 변수를 조합하여 새로운 변수를 만들어 내는 것**을 의미합니다.
 
 우리가 주로 접하게 되는 Kaggle이나 기타 예제 데이터들은 이미 데이터가 정제된 상태로 아주아주 예쁜 데이터입니다. 하지만 실제 우리가 맞닥뜨리게 되는 데이터는 굉장히 raw~ 날 것입니다. 그래서 데이터를 정제하고 분석하기 위한 형태로 만드는데 많은 시간을 할애하게 됩니다.
 
 
-![image](https://user-images.githubusercontent.com/54492747/221466863-760c9898-e377-4716-8338-5a7ac2750183.png)
-[DATA PREPROCESSING | DATA CLEANING PYTHON](https://ai-ml-analytics.com/data-preprocessing-data-cleaning-python/)
+
 
 
 
