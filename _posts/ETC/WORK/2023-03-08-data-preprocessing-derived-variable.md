@@ -1,11 +1,11 @@
-*---
+---
 layout: post
 title:  "제조 데이터 분석에서 파생변수 생성이란?"
 subtitle:   "manufacturing_data"
 categories: etc
 tags: etc_work
 comments: true
----*
+---
 
 https://yeong-jin-data-blog.tistory.com/m
 
@@ -40,7 +40,7 @@ https://yeong-jin-data-blog.tistory.com/m
 ## 🎈 Data Preprocessing 종류
 데이터 가공 단계는 아래의 예시 그림과 같이 정말 다양한 범위를 포함하고 있습니다.
 ![image](https://user-images.githubusercontent.com/54492747/221466863-760c9898-e377-4716-8338-5a7ac2750183.png)
-[DATA PREPROCESSING | DATA CLEANING PYTHON](https://ai-ml-analytics.com/data-preprocessing-data-cleaning-python/)
+[출처 : DATA PREPROCESSING | DATA CLEANING PYTHON](https://ai-ml-analytics.com/data-preprocessing-data-cleaning-python/)
 
 대표적인 Data Preprocessing 방법들은 다음과 같습니다.
 1. 결측치(Missing Value) 처리
@@ -181,13 +181,3 @@ https://yeong-jin-data-blog.tistory.com/m
  
 
 
-* 부족한 점이나 궁금한 점 있으시면 언제든 피드백 부탁드립니다.🙌
-
-<br>
-
-• 모델 구축 과정에서 유의한 파생변수를 만드는 것은 굉장히 중요하다. 그런데 여러 프로젝트나 공모전에서 예측/분류 모델을 만들다 보면 나름의 분석 결과와 도메인 지식으로 도출한 인사이트를 기반으로 파생변수를 만들었는데, 모델 성능에 도움이 되지 않는 경우가 있어서 난감했던 적이 많았다. 이런 경우에는 어떻게 하지? 
-→ 파생변수 생성 과정에서 내가 생각한 근거가 잘못됐을 가능성이 있다. 항상 내 머리를 의심하자. 
-→ 모델 성능이 당장 좋지 않더라도 해당 파생 변수를 포함시키는게 좋을 수도 있다. 추후 데이터나 모델 구조가 바뀌었을 때, 그 변수가 유용하게 사용될 수 있기 때문이다. 
-
-• 그럴듯한 가설과 근거를 기반으로 회귀분석을 했을 때, 예상과 다른 결과가 나온다면 오히려 흥미로운 분석이 가능한 기회일 수도 있다. 
-ex) 잠재 그룹을 찾는 추가 분석을 실시할 수 있음. 예를 들어,  LDA로 잠재 그룹을 나누고 Latent class regression을 실시해보면, 집단별로 다른 유의미한 결과를 찾을 수도 있다. 
