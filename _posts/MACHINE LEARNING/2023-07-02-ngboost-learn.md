@@ -17,8 +17,10 @@ use_math: true
 
 NGBoost에 대해 알아보기 위해서는 Boosting 대표적인 모델인 XGBoost가 빠질 수 없겠죠?<br>
 
-Random Forest는 각 Tree 모델을 독립적으로 만드는 모델입니다.  반면 Boosting은 순차적으로 Tree 모델을 만들어 이전 Tree 모델로부터 더 나은 Tree 모델을 만들어내는 알고리즘입니다. Boosting 알고리즘은 Tree 모델을 기반으로 한 알고리즘으로, Ramdom Forest보다 훨씬 빠른 속도와 더 좋은 예측 능력을 보여줍니다. <br>
-이에 속하는 대표적인 모델로 XGBoost가 있으며, **XGBoost(eXtra Gradient Boost)**는 GBM에서 파생된 Tree 모델 기반의 앙상블 학습 방법입니다. Kaggle 대회에서 상위를 차지한 많은 Top Ranker들이 사용하는 성능이 검증된 Boosting 모델이며, XGBoost 이후 다양한 부스팅 모델이 나왔지만 아직까지 많은 사람들이 CatBoost, LightGBM과 함께 XGBoost를 사용하고 있습니다. 그만큼 인기 있고 대중적인 모델이라 하이퍼파라미터 튜닝, 실제 활용 예시 등 수많은 참고 자료가 존재합니다. 실제로 저도 간단하게 데이터를 확인하기 위해서 퀵하게 XGBoost를 사용해서 검증하기도 하구요!
+Random Forest는 각 Tree 모델을 독립적으로 만드는 모델입니다.  반면 Boosting은 순차적으로 Tree 모델을 만들어 이전 Tree 모델로부터 더 나은 Tree 모델을 만들어내는 알고리즘입니다. Boosting 알고리즘은 Tree 모델을 기반으로 한 알고리즘으로, Random Forest보다 훨씬 빠른 속도와 더 좋은 예측 능력을 보여줍니다. <br>
+
+이에 속하는 대표적인 모델로 XGBoost가 있으며, **XGBoost(eXtra Gradient Boost)**는 GBM에서 파생된 Tree 모델 기반의 앙상블 학습 방법입니다. Kaggle 대회에서 상위를 차지한 많은 Top Ranker들이 사용하는 성능이 검증된 Boosting 모델이며, XGBoost 이후 다양한 부스팅 모델이 나왔지만 아직까지 많은 사람들이 CatBoost, LightGBM과 함께 XGBoost를 사용하고 있습니다. 그만큼 인기 있고 대중적인 모델이라 하이퍼파라미터 튜닝, 실제 활용 예시 등 수많은 참고 자료가 존재합니다. 실제로 저도 간단하게 데이터를 확인하기 위해서 퀵하게 XGBoost를 사용해서 검증하기도 하구요! 
+
 <br>
 
 **NGBoost (Natural Gradient Boost)**도 마찬가지로 GBM 기반의 알고리즘이고, Andrew Ng 교수가 속해 있는 스탠퍼드 대학의 ML Group 연구소에서 2019년 10월 9일에 제안한 새로운 Boosting 알고리즘입니다. XGBoost와 LightGBM 위주로 모델링을 진행 하고 있었는데, 최근에 **분산(variance)을 구하여 불확실성(uncertainty)를 측정할 수 있는 Boosting 알고리즘**  관련하여 구글 검색을 하던 중 NGBoost를 발견하여 공부할 겸 소개해보고자 해당 포스팅을 작성하게 되었습니다.<br>
@@ -47,16 +49,19 @@ NGBoost는 Probabilistic Gradient Boost 기법을 사용하는 확률론적 예�
 ### ✨ 핵심 아이디어
 NGBoost는 **Multiparameter distributional boosting**과 **Natural gradient update** 를 활용합니다. <br>
 1. 우선 Loss function과 유사한 역할을 하는 Scoring rule을 선정합니다.
-	* 이때, P(Y|X=x)가 특정 parametric form을 따른다고 가정합니다.
+	* 이때, P(YㅣX=x)가 특정 parametric form을 따른다고 가정합니다.
+
 2. 이 때 필요한 파라미터인 μ(X)와 σ(X)를 추정하기 위하여 Natural Gradient을 활용하게 됩니다.
 	* Gradient Boosting은 평균과 분산 값에 대한 파라미터 추정이 명확하게 되지 안흐므로, Natural Gradient 방식을 활용하여 실제 최적값에 도달하도록 합니다.
 	* Gradient Descent의 parameter search space에 대한 조정을 진행하여 새로운 공간 상에서 gradient 값과 방향에 대한 탐색을 진행하게 됩니다.
-4. Boosting 알고리즘을 여러번 반복하면서 해당 파라미터들 값들을 동시에 업데이트 시킵니다.
+
+3. Boosting 알고리즘을 여러번 반복하면서 해당 파라미터들 값들을 동시에 업데이트 시킵니다.
 	* 각각의 Boosting Step에서 샘플링된 가중치와 알고리즘의 파라미터에 대한 분포를 추정하여, 해당 분포를 기반으로 예측 모델을 개선하고 불확실성을 고려한 예측을 수행하게 됩니다.
 
+<br>
 ### 📌 NGBoost 구성
 아래의 방법으로 구성되어있으며, 각 구성에 대해 간단히 설명을 진행하도록 하겠습니다.
-![](https://blog.kakaocdn.net/dn/bBRCvc/btqO7hNC6bH/xT26jF46PG99kbkpD0jjs0/img.png)
+![](https://blog.kakaocdn.net/dn/bBRCvc/btqO7hNC6bH/xT26jF46PG99kbkpD0jjs0/img.png) <br>
 
 우선, NGBoost는 위의 그림과 같이 **Base Learners, Probability Distribution, Scoring Rule**로 구성되어 있습니다.
 
@@ -83,22 +88,22 @@ NGBoost는 **Multiparameter distributional boosting**과 **Natural gradient upda
 		* MLE 보다 robust하다고 알려진 scoring 함수입니다.
 		* MLE의 문제점은 log함수를 사용하므로 예상 값과 관측치와의 차이가 많이 날수록 score 값이 급격하게 상승하는 문제점이 있습니다. 이런 문제점을 방지하고자, CRPS를 이용하여 관측치가 평균보다 멀어질 때 보다 완만하게 score 값이 증가하는 것을 반영하고자 했습니다.	![](https://blog.kakaocdn.net/dn/bs2GZE/btqPgHRTZ5S/InwfNZsihYCCZKivrKLvpK/img.png)
 		* 아래의 그림을 보면, CRPS가 극단값 부분에서 MLE에 비해 score 값이 상대적으로 낮음을 확인할 수 있습니다. 
-![](https://blog.kakaocdn.net/dn/cAYibX/btqPlb5YzAG/RQ0gwupr057WedhKGFAKAK/img.png)
+![](https://blog.kakaocdn.net/dn/cAYibX/btqPlb5YzAG/RQ0gwupr057WedhKGFAKAK/img.png) <br>
 
-위 단계를 반복하며 성능을 높여가게 되는데, 이때 수식에서 **Fit Natural Gradient**라고 쓰여져있는 것을 확인할 수 있습니다. 일반적으로 알고 있는 gradient descent 방법에서 왜 **Natural**이 붙여지게 되었을까요? 그 이유는 파라미터가 일반적으로 gradient에 사용하는 distance에서 얻은 결과가 아닌 분포에서 얻은 것이기 때문입니다. 따라서 논문에서는 ∇ 대신 위에 `~`가 표시되어 있는 것을 확인할 수 있습니다.
+위 단계를 반복하며 성능을 높여가게 되는데, 이때 수식에서 **Fit Natural Gradient**라고 쓰여져있는 것을 확인할 수 있습니다. 일반적으로 알고 있는 gradient descent 방법에서 왜 **Natural**이 붙여지게 되었을까요? 그 이유는 파라미터가 일반적으로 gradient에 사용하는 distance에서 얻은 결과가 아닌 분포에서 얻은 것이기 때문입니다. 따라서 논문에서는 ∇ 대신 위에 `~`가 표시되어 있는 것을 확인할 수 있습니다. <br>
 
 > #### 💡 Natural Grdient
 > * 일반적인 Gradient(스텝 사이즈가 일정한 크기를 갖는)와 달리, Natural Gradient는 파라미터의 불변성(invariance)을 고려하여 스케일링된 그레이디언트를 사용합니다.
 > * 일반적인 Gradient는 파라미터 공간에서 일정한 크기의 스텝을 이동하며 최적점을 찾아가는 방식입니다. 그러나 파라미터의 스케일이 서로 다른 경우, 스케일이 큰 파라미터는 작은 파라미터보다 더 큰 영향을 미칠 수 있습니다. 이는 Gradient의 방향을 왜곡시킬 수 있고, 최적점에 수렴하는 데 불필요한 시간을 소요할 수 있습니다.
 > * Natural Gradient는 Loss값에 대한 미분으로 얻은 gradient를 업데이트 한다고 해서(Loss를 minimize하는 gradient), 업데이트 된 분포가 과연 더 좋은 분포인가에 대한 의문에서 출발하였습니다.
-	> 	* 파라미터 공간에서 유클리디안 척도를 사용했을 때에 발생하는 문제는 다음과 같습니다. 
-	* 분산이 고정되어 있고 오직 평균만 파라미터화된 가우시안 분포를 가정합시다.
-	* 두 분포의 평균은 두 그림에서 모두 같지만, 분산은 서로 다릅니다. 분명하게 위 그림보다 아래 그림에서 분포의 차이가 더 크다는 것을 알 수 있습니다.
-	* 하지만 분포의 거리를 유클리디안 거리로 사용한다면, 위 그림과 아래 그림에서 두 분포의 거리는 같습니다. 따라서 오직 파라미터 공간에서만 두 분포를 바라본다면, 이 파라미터들로 만들어지는 분포 간의 정보를 상당 부분 잃게 됩니다.
+	* 파라미터 공간에서 유클리디안 척도를 사용했을 때에 발생하는 문제는 다음과 같습니다. 
+		* 분산이 고정되어 있고 오직 평균만 파라미터화된 가우시안 분포를 가정합시다.
+		* 두 분포의 평균은 두 그림에서 모두 같지만, 분산은 서로 다릅니다. 분명하게 위 그림보다 아래 그림에서 분포의 차이가 더 크다는 것을 알 수 있습니다.
+		* 하지만 분포의 거리를 유클리디안 거리로 사용한다면, 위 그림과 아래 그림에서 두 분포의 거리는 같습니다. 따라서 오직 파라미터 공간에서만 두 분포를 바라본다면, 이 파라미터들로 만들어지는 분포 간의 정보를 상당 부분 잃게 됩니다.
 ![](https://blog.kakaocdn.net/dn/elFbN8/btrtieQ1TTy/ewV5KZziL4aZ1G7mPKbKTk/img.png)
 > * 그렇기 때문에 Natural Gradient는 이러한 의문 해결하기 위해, 파라미터 공간이 아닌 분포 공간에서 가장 가파른 경사를 택하여 step을 취하는 방법을 사용합니다. 파라미터의 분포 공간에 대한 정보를 활용하여 Gradient를 스케일링합니다. 이를 통해 각 파라미터의 스케일에 맞추어 적절한 크기로 이동하여 최적점을 탐색할 수 있습니다.
-	> 	* 즉, Natural Gradient를 사용하면 파라미터의 불변성을 보장하면서 효율적인 최적화를 수행할 수 있습니다.
-> * 이러한 이유로 파라미터 공간이 아닌 분포 공간에서 step을 취하는 방법을 **'자연스럽다'**라고 붙임으로써, **Natural Gradien Descent ** 방법이라 부릅니다.
+	* 즉, Natural Gradient를 사용하면 파라미터의 불변성을 보장하면서 효율적인 최적화를 수행할 수 있습니다.
+> * 이러한 이유로 파라미터 공간이 아닌 분포 공간에서 step을 취하는 방법을 **'자연스럽다'**라고 붙임으로써, **Natural Gradien Descent** 방법이라 부릅니다.
 
 #### 4️⃣ Parameters Update
 위 3가지 단계를 반복하면서, 각 데이터에 해당하는 parameter θ는 다음과 같은 알고리즘으로 학습되어 얻을 수 있습니다. (여기서는  θ = (μ, log  σ) 입니다. ) <br>
@@ -147,13 +152,16 @@ XGBoost와 NGBoost를 비교한 일반적인 차이점은 다음과 같습니다
 NGBoost의 대표적이면서 가장 큰 특징은 바로 확률적 예측이 가능하다는 것입니다. (예측의 불확실성에 대한 측정값 제공) 예측은 언제나 불확실성을 내포하기 때문에, 모델의 예측값에 대한 불확실성을 측정하여 확률 분포를 보고자 할 때 NGBoost가 매우 유용할 것으로 생각됩니다.
 
 아래는 그에 대한 예시입니다. <br>
+![](https://blog.kakaocdn.net/dn/74KYc/btqzr9i1NqY/3vCuofn9VfB4MicSmXYgv1/img.png) <br>
 NGBoost는 Question에 대한 Point Prediction 뿐만 아니라 Probabilisitc Prediction을 보여줍니다. '내일 날씨가 몇 도 이냐?' 에 대한 질문에 73.4일 확률을 표시합니다.
-![](https://blog.kakaocdn.net/dn/74KYc/btqzr9i1NqY/3vCuofn9VfB4MicSmXYgv1/img.png)
 
 ## Conclusion
-NGBoost를 접하고 논문을 읽을 때, Natural Gradient라는 방식에 대해 처음 접하여 수식들이 꽤나 생소했습니다.😂 하지만 기존 모델들의 단점을 해결하기 위하여, 새로운 아이디어를 제안하여 접목시킨 것을 보며 매우 재미있는 모델이라는 생각이 들었습니다. 역시.. 다양한 방면으로 생각하고 적용하는 자세가 무척 중요한 것 같습니다! 다시 한번 깨닫게 되네요!<br>
+NGBoost를 접하고 논문을 읽을 때, Natural Gradient라는 방식에 대해 처음 접하여 수식들이 꽤나 생소했습니다.😂 하지만 기존 모델들의 단점을 해결하기 위하여, 새로운 아이디어를 제안하여 접목시킨 것을 보며 매우 재미있는 모델이라는 생각이 들었습니다. <br>
+역시.. 다양한 방면으로 생각하고 적용하는 자세가 무척 중요한 것 같습니다! 다시 한번 깨닫게 되네요!<br>
 사용된 사례도 많지 않아 조금 더 공부를 해야겠지만, 실무에서도 요긴하게 쓰일 수 있을 것 같아 기대가 됩니다. 다음 포스팅에는 많이 알려진 데이터를 하나 선정하여, 어떤 알고리즘이 더 우수한지 비교해보고자 합니다.
+
 <br>
+
 NGBoost를 아래와 요약하자면 다음과 같습니다.
 * NGBoost는 확률 분포를 반환하는 새로운 Boosting 알고리즘입니다.
 * 일반적인 Gradient 방법이 아닌 Natural Gradient 방법을 적용하여, 파라미터 공간에서의 Gradient를 보다 효율적으로 계산하고 사용합니다.
