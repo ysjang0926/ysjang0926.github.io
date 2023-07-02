@@ -8,8 +8,9 @@ comments: true
 use_math: true
 ---
 
-* 이번 글은 NGBoost에 대해 정리해보았습니다. 다음 포스팅에서는 실데이터에 적용해 어떤 알고리즘이 더 우수한지 비교해보고자 합니다. 🐱‍👤
+* 이번 글은 NGBoost에 대해 정리해보았습니다. 다음 포스팅에서는 실데이터에 적용해 어떤 알고리즘이 더 우수한지 비교해보고자 합니다.🐱‍👤
 * [NGBoost: Natural Gradient Boosting for Probabilistic Prediction](https://arxiv.org/pdf/1910.03225v4.pdf) 논문을 참고하여 정리하였습니다.
+
 ------
 
 ## Introduction
