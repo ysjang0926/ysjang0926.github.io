@@ -27,7 +27,7 @@ use_math: true
 
 ## 📌 AI 논문 및 프로젝트
 
-1. Papers With Code (https://paperswithcode.com/)
+1. **Papers With Code** [(https://paperswithcode.com/)](https://paperswithcode.com/)
 	* 연구자들이 발표한 **논문과 관련 코드 및 데이터를 공유**할 수 있는 플랫폼
 		* **분야별 최신 논문**을 볼 수 있음
 		* 다양한 구현 코드들에 대한 GitHub 링크 & 사용 라이브러리(TensorFlow, PyTorch) 표시 &논문 구현 코드에 대한 참고 링크 有
@@ -35,13 +35,13 @@ use_math: true
 	* 추천 대상자👩‍💻 : 딥러닝 논문 구현 능력을 향상 시키고 싶은 사람
 		* 딥러닝 논문 구현 능력을 향상 시키고 싶다면, 1)논문 읽기와 2)다양한 논문 구현 코드 분석이 필수적입니다. 이때 다른 사람들이 논문을 어떻게 구현했는지 참조하고 싶을 때, Papers With Code 사이트를 이용하면 많은 도움을 받을 수 있습니다.
 
-2. [유튜브] 딥러닝논문읽기모임 (https://youtube.com/@user-ow3gm9zd1b)
+2. **[유튜브] 딥러닝논문읽기모임** [(https://youtube.com/@user-ow3gm9zd1b)](https://youtube.com/@user-ow3gm9zd1b)
 	* AI를 연구하고 있는 대학원생, 교수, 연구원 등이 돌아가며 선정 논문을 설명하는 내용을 담은 **논문 리뷰 영상**
 		* **논문에서 중요한 부분이 무엇인지 핵심을 잘 짚어주며, 발표자료 또한 일부 제공**해줌
 	* 추천 대상자👩‍💻 : 논문 읽는 것에 어려움이 있어, 관련 논문에 대한 핵심내용이 궁금한 사람
 		* 딥러닝은 발전 속도가 대단히 빠르기 때문에, 계속하여 수많은 논문들이 쏟아져 나옵니다. 처음 접하는 분야의 논문을 이해하기 위해선, 그에 대한 선행 연구와 동기를 파악해야 해당 논문의 기술을 자세히 파악할 수 있습니다. 그렇기 때문에 관심 있는 분야의 기본적인 컨셉과 중요한 부분을 캐치하기 위해, 해당 유튜브 채널을 참고하면 무척 도움이 됩니다.
 
-3. 고려대학교 산업경영공학부 DMQA 연구실 (http://dmqm.korea.ac.kr/)
+3. **고려대학교 산업경영공학부 DMQA 연구실** [(http://dmqm.korea.ac.kr/)](http://dmqm.korea.ac.kr/)
 	* 데이터마이닝 및 품질애널리틱스 (Data Mining & Quality Analytics: DMQA) 연구실 홈페이지
 	* 연구실 내부 구성원들의 **연구/프로젝트/세미나 내용**
 		* 'Seminar' 카테고리 : 다양한 주제를 바탕으로 진행된 세미나 내용 열람 가능하며, 발표 자료 및 영상이 공유되어 참고하기 유익함
@@ -50,7 +50,7 @@ use_math: true
 		* 대학원 연구생들이 다양한 주제로 오픈 세미나를 진행하고 있기 때문에, 관심 있는 주제가 있다면 참고하기에 정말 좋은 곳입니다. 양질의 내용을 정리하여, 심지어 영상과 pdf 자료로도 제공하고 있기 때문에 거의 떠먹여(?) 준다고 할 수 있습니다.
 
 
-4. 고려대학교 산업경영공학부 DSBA연구실 (http://dsba.korea.ac.kr/)
+4. **고려대학교 산업경영공학부 DSBA연구실** [(http://dsba.korea.ac.kr/)](http://dsba.korea.ac.kr/)
 	* 데이터과학 및 비즈니스 어낼리틱스 (Data Science & Business Analytics: DSBA) 연구실 홈페이지
 	* 연구실 내부 구성원들의 **연구/프로젝트/세미나 내용**
 		* 'Seminar' 카테고리 : 논문 리뷰로 진행된 세미나 내용 열람 가능하며, 발표 자료 및 영상이 공유되어 참고하기 유익함
@@ -65,11 +65,11 @@ use_math: true
 많은 분들이 데이터 분석을 공부하는 이유는, 내가 현재 업무에서 겪고 있는 어려움과 개선하고 싶은 부분을 데이터를 통해 해결하고 싶기 때문입니다. 그렇지만 실제 데이터를 통해 분석을 진행하게 되면 온라인 강의나 책에서 나오는 내용처럼 결과가 아름답지 않습니다.😭 이건 저도 현재 업무에서 고민하고 있는 부분이며, 다른 많은 회사에서도 마찬가지일 것이라 생각합니다. <br>
 그렇기 때문에 일부 회사들은 회사가 해결하는 문제 및 기술력 공유를 위해 기술 블로그를 운영하고 있으며, **회사 차원에서 어떤 문제를 어떤 방식으로 해결하고 있는지**와 **해당 문제를 해결하는 과정**을 소개하고 있습니다.  개인 공부 블로그 대비 검증된 포스팅이기 때문에, 글을 보는 사람들은 간접적으로 회사 업무를 경험하며 회사의 기술력을 알 수 있는 장점이 있습니다. 회사 내 기술 조직 구성원의 성장을 목적으로 진행되는 것이다보니 양질의 글이 많이 있기 때문에, 저도 시간이 될 때마다 흥미있는 주제의 글들을 보고 있는 편입니다.
 
-1. NCSOFT DANBI (https://danbi-ncsoft.github.io/)
-2. LINE Engineering (https://engineering.linecorp.com/ko/blog)
-3. 카카오엔터프라이즈 Tech& (https://tech.kakaoenterprise.com/)
-4. 쿠팡 Engineering (https://medium.com/coupang-engineering)
-5. SOCAR Tech Blog (https://tech.socarcorp.kr/)
+1. **NCSOFT DANBI** [(https://danbi-ncsoft.github.io/)](https://danbi-ncsoft.github.io/)
+2. **LINE Engineering** [(https://engineering.linecorp.com/ko/blog)](https://engineering.linecorp.com/ko/blog)
+3. **카카오엔터프라이즈 Tech&** [(https://tech.kakaoenterprise.com/)](https://tech.kakaoenterprise.com/)
+4. **쿠팡 Engineering** [(https://medium.com/coupang-engineering)](https://medium.com/coupang-engineering)
+5. **SOCAR Tech Blog** [(https://tech.socarcorp.kr/)](https://tech.socarcorp.kr/)
 
 <br>
 
