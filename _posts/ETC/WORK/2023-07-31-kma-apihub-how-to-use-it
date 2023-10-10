@@ -40,18 +40,92 @@ API란 Application Programming Interface의 약어로, 간단히 말하자면 �
 * JSON(JavaScript Object Notation) : key-value 형태로 tree 구조를 이루고 있으며, 대부분의 데이터 형식을 다 담을 수 있다는 장점이 있어 아마 가장 많이 활용되는 자료구조임
 * XML(Extensible Markup Language) : 다른 종류의 시스템, 특히 인터넷에 연결된 시스템끼리 데이터를 쉽게 주고받을 수 있게 한 HTML의 한계를 극복할 목적으로 만들어짐
 
+그중에서 Open API는 누구나 사용할 수 있도록 공개된 API를 말하며, 하나의 웹사이트에서 자신이 가지고 있는 기능을 이용할 수 있도록 공개한 것입니다.
+* 예시 : 네이버 지도, 구글 맵 등
+
 그럼 이제 Python으로 기상청 API허브를 통해 데이터를 로드하는 작업을 진행해보겠습니다.
 
 <br>
-5️⃣
 
 ## 1️⃣ 기상청 API허브 소개
+기상청은 누구나 손쉽게 방대한 기상기후데이터를 활용하여 새로운 가치를 창출하고자 API허브([(https://apihub.kma.go.kr/)](https://apihub.kma.go.kr/))를 운영하고 있습니다.
+
+### ⛅ 콘텐츠 종류
+기상청 API허브 홈페이지 메인 좌측을 보면 지상 관측자료, 해양 종합관측자료, 천리한 1호 데이터 파일 목록 등 다양한 날씨 정보가 제공됩니다. <br>
+이때 과거 지상에서 관측되었던 일기현상, 기온, 강수, 바람 등의 날씨 데이터가 필요하다면 홈페이지에서 **지상관측**을 눌러 들어가면 됩니다.
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/7d671a70-f78f-4e5a-bfa2-ba71057eec8d)
+
+지상 관측자료에도 다양한 관측 정보가 존재하며, 각 탭을 누르게 되면 설명 및 보유기간이 상세히 적혀있습니다.
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/2cc07347-2851-4fde-9b0e-be2809e87f08)
+
+이번 예시에서는 **종관기상관측(ASOS)**로 진행하도록 하겠습니다.
+
+<br>
+
 ## 2️⃣ 회원가입 및 사용자 API키
+기상청 API허브에서 제공하는 API를 이용하기 위해서는 회원가입 후 인증키를 발급받아야 합니다.
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/93c2249d-8200-4086-ac30-cc9ece780fc3)
+
+### 🔑 사용자 API Key
+데이터를 받아오기 위해서는 사용자에 대한 정보가 필요하며, 이때 사용하는 것이 바로 사용자 개별로 부여되는 API Key입니다. <br>
+발급받은 인증키는 로그인 후 우측 상단에 있는 **마이페이지**에서 확인할 수 있습니다. <br>
+인증키는 가입회원 본인만 사용할 수 있으며, 양도 및 대여가 금지되기 때문에 외부로 유출되지 않도록 조심하는 것이 좋습니다.
+
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/63aa8491-2797-4779-89b7-2c4ce5014213)
+
+위 사진과 같이 개인 회원은 하루 최대 **2,000건** 호출할 수 있으며, 현재 몇 회 호출했는지도 확인할 수 있습니다. (기업 회원은 하루 최대 3,000건)
+
+<br>
+
 ## 3️⃣ 콘텐츠 및 API 호출 URL 구조
+
+종관기상관측(ASOS)
+
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/ede23471-d3ca-47c9-8e29-5dffa4123b97)
+
+
+
+
 ## 4️⃣ 데이터 로드
+
+### Import Module
+```python
+```
+기본적으로 urllib이라는 패키지가 필요하다. urllib 패키지 안에는 다음과 같은 4개의 모듈이 존재한다.
+
+urllib.request : URL base 요청에 관련된 함수와 객체가 있다.
+urllib.parse : 필요한 데이터를 URL에 파싱하기 위한 함수와 객체가 있다.
+urllib.error : urllib.request모듈에 의해 발생한 예외 처리를 위한 모듈이다.(여기서 사용 안함)
+urllib.robotparse : 웹사이트의 robots.txt 파이에 대한 파싱을 위한 모듈이다.(여기서 사용 안함)
+
+### URL 설정
+```python
+```
+간단히 개념적으로 설명하면...
+
+데이터를 가져오려면 먼저 기상청의 ASOS 데이터가 있는 장소에 데이터가 있는지 노크를 해야한다.
+
+노크를 하기 위해선 데이터가 있는 장소를 알아야하니 그 장소를 지정해 주는 작업이 바로 위의 코드이다.
+
+
+
 ## 5️⃣ DB 적재
 
 
+
+
+
+
+
+
+
+
+<br>
+
+### Reference
+* [[Python] 공공데이터 오픈 API를 활용한 기상청 ASOS 데이터 파싱하기](https://jonsyou.tistory.com/71)
+
+--------------------------------------------------------
 
 1. **Papers With Code** [(https://paperswithcode.com/)](https://paperswithcode.com/)
 	* 연구자들이 발표한 **논문과 관련 코드 및 데이터를 공유**할 수 있는 플랫폼
@@ -102,6 +176,7 @@ API란 Application Programming Interface의 약어로, 간단히 말하자면 �
 ### Reference
 *  [[딥러닝] PR12 딥러닝(AI) 논문읽기 모임 발표 영상 (YouTube)](https://blog.naver.com/yo2dh/221282722400)
 * [쏘카에서 기술 블로그를 운영하는 방법](https://tech.socarcorp.kr/data/2023/02/15/how-to-organize-tech-blog.html)
+* [[Python] 공공데이터 오픈 API를 활용한 기상청 ASOS 데이터 파싱하기](https://jonsyou.tistory.com/71)
 
 ----------------------------
 
