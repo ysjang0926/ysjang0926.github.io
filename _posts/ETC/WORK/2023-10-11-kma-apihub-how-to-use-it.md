@@ -132,8 +132,38 @@ from datetime import datetime, timedelta
 * `requests.put()` : PUT Method
 * `requests.delete()` : DELETE Method
 
-### ✅ Weather Function 
-데이터 컬럼명을 지정해주고, 호출 입력인자인 시작시간/종료시간/지점번호/도움말/API 인증키를 입력하면 해당 기간의 날씨 데이터를 불러오는 function을 만듭니다.
+<br>
+
+### ✅ Weather Function
+tm, stn_id, auth에 파라미터 값을 입력하여 데이터를 불러올 수 있지만, function을 구현하면 좀 더 간편하고 보기 좋게 들고 올 수 있기 때문에 function을 만들어보도록 하겠습니다.
+```python
+col_name = ["TM","STN","WD","WS","GST_WD","GST_WS","GST_TM","PA","PS","PT","PR","TEMP","TD","HM","PV"
+            ,"RN","RN_DAY","RN_JUN","RN_INT","SD_HR3","SD_DAY","SD_TOT","WC","WP","WW","CA_TOT","CA_MID","CH_MIN"
+            ,"CT","CT_TOP","CT_MID","CT_LOW","VS","SS","SI","ST_GD","TS","TE_005","TE_01","TE_02","TE_03","ST_SEA","WH","BF","IR","IX"]
+
+headers = {  # 헤더 설정
+    'Content-Type': 'application/json'  # JSON 형식 설정
+}
+
+# 요청할 URL 설정
+domain = "https://apihub.kma.go.kr/api/typ01/url/kma_sfctm3.php?"
+tm = "tm1=202305141200&tm2=202305150000&"
+stn_id = "stn=279&"
+option = "help=0&authKey="
+auth = "XXXXXXXXXXXXXXXX" # 부여받은 API Key 입력
+
+url = domain + tm + stn_id + option + auth
+
+response = requests.get(url, headers=headers)  # GET 요청
+
+text = response.text
+text = text.split("\n")[4:-2]
+
+df = pd.DataFrame(text)[0].str.split(expand=True)
+df.columns = col_name
+```
+
+데이터 컬럼명을 지정해주고, 호출 입력인자인 시작시간/종료시간/지점번호/도움말/API 인증키를 입력하면 해당 기간의 날씨 데이터를 불러오는 function 코드는 다음과 같습니다.
 * tm1 : 시작시간 또는 시작일 → **년월일시분*을 이어서 씀 (ex. 2023-01-01 10시 = 2301011000)
 * tm2 : 종료시간 또는 종료일
 * stn : 국내 지역 지점번호 (ex. 지점번호 152 = 울산 지역)
@@ -247,7 +277,7 @@ df_stn[df_stn["STN_KO"] == '구미']
 dates = pd.date_range('2021-03-08 00:00:00', '2023-05-15 09:00:00', freq = 'H')
 dates = [str(d).replace("-","").replace(" ","").replace(":","")[:-2] for d in dates]
 
-df_all = pd.DataFrame()
+df_weather = pd.DataFrame()
 d_i = 0
 while d_i <= len(dates):
     start_time = dates[d_i]
@@ -258,15 +288,33 @@ while d_i <= len(dates):
     d_i += 720
 
     df = load_weather(start_time, end_time, 279)
-    df_all = pd.concat([df_all, df])
+    df_weather = pd.concat([df_weather, df])
 
-df_all
+df_weather
 ```
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/e4ce2dc0-7eee-474d-9192-1283058716c6)
 
+<br>
+
 ### ✅ 데이터 전처리
+데이터 전처리는 사실 할 것이 별로 없기에, 간단하게 2가지 정도만 진행하려고 합니다.
 
+1. 필요 변수 추출
+* 종관기상관측의 경우 **총 44개의 기상 요소 변수들(기온, 강수, 기압, 습도 등)**이 존재함
+* 이때 모든 기상 요소 변수들을 사용하는 것이 아니라 **중점적으로 보는 변수 위주**로 추출하고자 함
+2. tm 변수 형태 변경
+* 관측시각 변수(tm) 형태는 **년월일시분**으로 되어 있음
+* 센서 데이터와 join하기 위하여 보기좋게 '**YYYY-MM-DD HH:MM:SS**' 형태로 바꿔보고자 함
 
+```python
+# tm 변수 형태 변경 - YYYY:MM:DD HH:MM:SS
+df_weather['TM'] = df_weather['TM'].map(lambda x: datetime.strptime(x, '%Y%m%d%H%M'))
+
+# 필요 변수 추출 - 시간, 온도, 습도, 기압, 강수량
+df_weather[['TM', 'TEMP', 'HM', 'PA', 'RN']] 
+```
+
+<br>
 
 
 ## 5️⃣ DB 적재
@@ -287,67 +335,7 @@ df_all
 * [기상자료개방포털 Open-API 활용하기 - 파이썬초보자도 할 수 있다!](https://blog.naver.com/kma_131/222850549606)
 * [[Pyhon - Crawling] API 활용하여 과거 기상 관측 데이터 불러오기](https://leedakyeong.tistory.com/entry/Python-Crawling-API-%ED%99%9C%EC%9A%A9%ED%95%98%EC%97%AC-%EA%B3%BC%EA%B1%B0-%EA%B8%B0%EC%83%81-%EA%B4%80%EC%B8%A1-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0)
 
---------------------------------------------------------
-
-1. **Papers With Code** [(https://paperswithcode.com/)](https://paperswithcode.com/)
-	* 연구자들이 발표한 **논문과 관련 코드 및 데이터를 공유**할 수 있는 플랫폼
-		* **분야별 최신 논문**을 볼 수 있음
-		* 다양한 구현 코드들에 대한 GitHub 링크 & 사용 라이브러리(TensorFlow, PyTorch) 표시 &논문 구현 코드에 대한 참고 링크 有
-		* 제공하고 있는 데이터set별 SOTA(State-of-the-art) 성능을 보여주는 모델들을 확인할 수 있는 리더보드 有
-	* 추천 대상자👩‍💻 : 딥러닝 논문 구현 능력을 향상 시키고 싶은 사람
-		* 딥러닝 논문 구현 능력을 향상 시키고 싶다면, 1)논문 읽기와 2)다양한 논문 구현 코드 분석이 필수적입니다. 이때 다른 사람들이 논문을 어떻게 구현했는지 참조하고 싶을 때, Papers With Code 사이트를 이용하면 많은 도움을 받을 수 있습니다.
-
-2. **[유튜브] 딥러닝논문읽기모임** [(https://youtube.com/@user-ow3gm9zd1b)](https://youtube.com/@user-ow3gm9zd1b)
-	* AI를 연구하고 있는 대학원생, 교수, 연구원 등이 돌아가며 선정 논문을 설명하는 내용을 담은 **논문 리뷰 영상**
-		* **논문에서 중요한 부분이 무엇인지 핵심을 잘 짚어주며, 발표자료 또한 일부 제공**해줌
-	* 추천 대상자👩‍💻 : 논문 읽는 것에 어려움이 있어, 관련 논문에 대한 핵심내용이 궁금한 사람
-		* 딥러닝은 발전 속도가 대단히 빠르기 때문에, 계속하여 수많은 논문들이 쏟아져 나옵니다. 처음 접하는 분야의 논문을 이해하기 위해선, 그에 대한 선행 연구와 동기를 파악해야 해당 논문의 기술을 자세히 파악할 수 있습니다. 그렇기 때문에 관심 있는 분야의 기본적인 컨셉과 중요한 부분을 캐치하기 위해, 해당 유튜브 채널을 참고하면 무척 도움이 됩니다.
-
-3. **고려대학교 산업경영공학부 DMQA 연구실** [(http://dmqm.korea.ac.kr/)](http://dmqm.korea.ac.kr/)
-	* 데이터마이닝 및 품질애널리틱스 (Data Mining & Quality Analytics: DMQA) 연구실 홈페이지
-	* 연구실 내부 구성원들의 **연구/프로젝트/세미나 내용**
-		* 'Seminar' 카테고리 : 다양한 주제를 바탕으로 진행된 세미나 내용 열람 가능하며, 발표 자료 및 영상이 공유되어 참고하기 유익함
-		* 'Projects' 카테고리 : 연구실에서 진행한 프로젝트 컨셉/목표/결과 요약이 열람 가능하여, 각 프로젝트에 대한 아이디어를 얻기 유익함 
-	* 추천 대상자👩‍💻 : 대학원 연구생들이 세미나 및 프로젝트 내용을 참고하고 싶은 사람
-		* 대학원 연구생들이 다양한 주제로 오픈 세미나를 진행하고 있기 때문에, 관심 있는 주제가 있다면 참고하기에 정말 좋은 곳입니다. 양질의 내용을 정리하여, 심지어 영상과 pdf 자료로도 제공하고 있기 때문에 거의 떠먹여(?) 준다고 할 수 있습니다.
-
-
-4. **고려대학교 산업경영공학부 DSBA연구실** [(http://dsba.korea.ac.kr/)](http://dsba.korea.ac.kr/)
-	* 데이터과학 및 비즈니스 어낼리틱스 (Data Science & Business Analytics: DSBA) 연구실 홈페이지
-	* 연구실 내부 구성원들의 **연구/프로젝트/세미나 내용**
-		* 'Seminar' 카테고리 : 논문 리뷰로 진행된 세미나 내용 열람 가능하며, 발표 자료 및 영상이 공유되어 참고하기 유익함
-		* 'PROJECTS' 카테고리 : 연구실에서 진행한 프로젝트 컨셉/목표/결과 요약이 열람 가능하여, 각 프로젝트에 대한 아이디어를 얻기 유익함 
-	* 추천 대상자👩‍💻 : 대학원 연구생들이 세미나 및 프로젝트 내용을 참고하고 싶은 사람
-		* DMQA 연구실과 더불어 DSBA 연구실 또한 대학원 연구생들이 다양한 주제로 오픈 세미나를 진행하고 있으며, 이에 대한 유용한 자료들(영상, pdf)을 제공하고 있습니다. 관심 있는 주제가 있다면, DMQA와 DSBA 연구실 모두 찾아보시는 것을 추천드립니다.
-
-<br>
-
-## 📌 기술 블로그
-
-많은 분들이 데이터 분석을 공부하는 이유는, 내가 현재 업무에서 겪고 있는 어려움과 개선하고 싶은 부분을 데이터를 통해 해결하고 싶기 때문입니다. 그렇지만 실제 데이터를 통해 분석을 진행하게 되면 온라인 강의나 책에서 나오는 내용처럼 결과가 아름답지 않습니다.😭 이건 저도 현재 업무에서 고민하고 있는 부분이며, 다른 많은 회사에서도 마찬가지일 것이라 생각합니다. <br>
-그렇기 때문에 일부 회사들은 회사가 해결하는 문제 및 기술력 공유를 위해 기술 블로그를 운영하고 있으며, **회사 차원에서 어떤 문제를 어떤 방식으로 해결하고 있는지**와 **해당 문제를 해결하는 과정**을 소개하고 있습니다.  개인 공부 블로그 대비 검증된 포스팅이기 때문에, 글을 보는 사람들은 간접적으로 회사 업무를 경험하며 회사의 기술력을 알 수 있는 장점이 있습니다. 회사 내 기술 조직 구성원의 성장을 목적으로 진행되는 것이다보니 양질의 글이 많이 있기 때문에, 저도 시간이 될 때마다 흥미있는 주제의 글들을 보고 있는 편입니다.
-
-1. **NCSOFT DANBI** [(https://danbi-ncsoft.github.io/)](https://danbi-ncsoft.github.io/)
-2. **LINE Engineering** [(https://engineering.linecorp.com/ko/blog)](https://engineering.linecorp.com/ko/blog)
-3. **카카오엔터프라이즈 Tech&** [(https://tech.kakaoenterprise.com/)](https://tech.kakaoenterprise.com/)
-4. **쿠팡 Engineering** [(https://medium.com/coupang-engineering)](https://medium.com/coupang-engineering)
-5. **SOCAR Tech Blog** [(https://tech.socarcorp.kr/)](https://tech.socarcorp.kr/)
-
-<br>
-
-### Reference
-*  [[딥러닝] PR12 딥러닝(AI) 논문읽기 모임 발표 영상 (YouTube)](https://blog.naver.com/yo2dh/221282722400)
-* [쏘카에서 기술 블로그를 운영하는 방법](https://tech.socarcorp.kr/data/2023/02/15/how-to-organize-tech-blog.html)
-* [[Python] 공공데이터 오픈 API를 활용한 기상청 ASOS 데이터 파싱하기](https://jonsyou.tistory.com/71)
-
 ----------------------------
 
 ### 🔜 Think
-통계학 전공을 했었지만, 머신러닝과 딥러닝은 대학교 3, 4학년과 대학원 때부터 접하여 다소 생소하지만 흥미롭게 다가왔습니다. 수많은 양질의 논문들을 모두 보면서 척척 이해하면 좋겠지만, 능력이 부족하여 다른 분들이 정리해주신 좋은 자료들을 보며 공부할 수 있습니다! 다시 한번 이 자리를 빌어서 제가 참고했던 모든 양질의 글을 쓰신 분들께 감사의 인사를 드립니다👍
 
-<br>
-
-저는 개인적으로 제가 하는 업무가 좋은 의사결정을 하도록 돕는 것이라고 생각합니다. 데이터를 기반으로 성공 확률이 높은 의사결정을 지속적으로 하기 위해서는, 데이터 정의 / 데이터 전처리 / 분석 모델링 등에 대한 다양한 파트의 지식이 필요하죠! <br>
-이때 분석 모델링을 진행할 때 이해도가 높을수록 좋지만 해당 도메인에 대한 전공자가 아닌 이상 한계가 있기 때문에, 분석을 진행함에 있어 아이디어적인 스킬이 매우 중요하다고 생각합니다. 이런 아이디어 스킬은 한순간에 생기는 것이 아니라 계속 누적되어 나타나는 것이구요.😎 <br>
-저도 엉덩이가 무거운 편은 아니라 꾸준히 논문을 다 뜯어보면서 공부는 못하지만, 업무에서 아이디어를 얻기 위해 출퇴근 또는 시간 있을 때 간단하게 읽을 수 있는 부분을 보고자 노력하고 있습니다. <br>
-만약 데이터분석을 공부하고 싶어서 해당 포스팅을 방문하셨다면, 힘찬 응원의 박수를 보내드립니다!👏 저 또한 많이 부족하기에, 저희 함께 조금씩 어제보다 더 나은 오늘을 보낼 수 있길 바랍니다.
