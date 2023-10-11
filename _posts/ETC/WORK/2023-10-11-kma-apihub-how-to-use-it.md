@@ -140,7 +140,7 @@ from datetime import datetime, timedelta
 <br>
 
 ### ✅ Weather Function
-tm, stn_id, auth에 파라미터 값을 입력하여 데이터를 불러올 수 있지만, <br>
+다음의 코드와 같이 tm, stn_id, auth에 파라미터 값을 입력하여 데이터를 불러올 수 있지만, <br>
 function을 구현하면 좀 더 간편하고 보기 좋게 들고 올 수 있기 때문에 function을 만들어보도록 하겠습니다.
 ```python
 col_name = ["TM","STN","WD","WS","GST_WD","GST_WS","GST_TM","PA","PS","PT","PR","TEMP","TD","HM","PV"
@@ -209,6 +209,7 @@ def load_weather(tm1, tm2, stn):
 ```python
 load_weather(202103080000, 202103080500, 108)
 ```
+
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/f8079835-2897-4a22-956e-5236cb666e99) <br>
 
 <br>
@@ -217,7 +218,7 @@ load_weather(202103080000, 202103080500, 108)
 호출된 API의 출력 변수들의 설명, 즉 헤더정보를 보고 싶을 때는 `help` 옵션을 조정하면 됩니다. <br>
 * help = 0 설정 : 헤더정보 미표출
 * help = 1 설정 : 헤더정보 표출
-* 
+  
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/310197ca-6327-4b6a-8135-15e8b7bf24d7) <br>
 
 <br>
@@ -278,7 +279,7 @@ df_stn[df_stn["STN_KO"] == '구미']
 그렇기 때문에 tm1을 21년, tm2를 23년으로 설정하고 데이터를 불러도 tm2 기준으로 720개만 데이터가 호출되는 것을 확인할 수 있습니다.
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/1b7208a3-c1b0-4c90-9250-c4cb07c74964) <br>
 
-720시간 이상 기간의 날씨 데이터를 호출하고 싶다면, loop문을 통해 720시간 단위로 기간을 쪼개어 불러오면 됩니다. <br>
+720시간 이상 기간의 날씨 데이터를 호출하고 싶다면, **loop문을 통해 720시간 단위로 기간을 쪼개어** 여러번 불러오면 됩니다. <br>
 위에서 만든 날씨 데이터 function(load_weather)를 활용하여 2021-03-08 00:00:00부터 2023-05-15 09:00:00까지 구미지역 날씨 데이터를 불러오는 예시 코드는 다음과 같습니다.
 ```python
 dates = pd.date_range('2021-03-08 00:00:00', '2023-05-15 09:00:00', freq = 'H')
