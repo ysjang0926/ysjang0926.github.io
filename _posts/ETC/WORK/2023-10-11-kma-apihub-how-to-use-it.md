@@ -375,6 +375,7 @@ for i,row in output_table.iterrows():
 <br>
 
 ### Reference
+* [기상청 API허브](https://apihub.kma.go.kr/)
 * [[Python] 공공데이터 오픈 API를 활용한 기상청 ASOS 데이터 파싱하기](https://jonsyou.tistory.com/71)
 * [기상자료개방포털 Open-API 활용하기 - 파이썬초보자도 할 수 있다!](https://blog.naver.com/kma_131/222850549606)
 * [[Pyhon - Crawling] API 활용하여 과거 기상 관측 데이터 불러오기](https://leedakyeong.tistory.com/entry/Python-Crawling-API-%ED%99%9C%EC%9A%A9%ED%95%98%EC%97%AC-%EA%B3%BC%EA%B1%B0-%EA%B8%B0%EC%83%81-%EA%B4%80%EC%B8%A1-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0)
