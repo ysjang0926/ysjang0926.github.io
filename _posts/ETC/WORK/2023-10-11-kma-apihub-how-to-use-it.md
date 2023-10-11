@@ -73,39 +73,199 @@ API란 Application Programming Interface의 약어로, 간단히 말하자면 �
 
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/63aa8491-2797-4779-89b7-2c4ce5014213)
 
-위 사진과 같이 개인 회원은 하루 최대 **2,000건** 호출할 수 있으며, 현재 몇 회 호출했는지도 확인할 수 있습니다. (기업 회원은 하루 최대 3,000건)
+위 사진과 같이 개인 회원은 하루 최대 **2,000건** 호출할 수 있으며, 현재 몇 회 호출했는지도 확인 가능합니다. (기업 회원은 하루 최대 3,000건)
 
 <br>
 
 ## 3️⃣ 콘텐츠 및 API 호출 URL 구조
 
-종관기상관측(ASOS)
+제공하는 콘텐츠는 크게 3가지로 구성되어 있습니다.
+1. 데이터 설명 part
+	* 요소, 지점수, 보유기간, 생산주기 등에 대한 설명
+	* URL 발행 및 API 샘플코드 열람 가능
+2. API 호출 URL 정보 part
+	* 데이터를 호출하기 위해 필요한 API 호출 URL
+	* 'API 활용신청' 후 API 사용 가능
+3. API 호출 요청인자 및 출력결과 part
+	* 필수 입력 요청인자 설명
+	* 테이블 변수 설명
 
-![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/ede23471-d3ca-47c9-8e29-5dffa4123b97)
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/62190d45-4cee-4ee9-a0f2-bad08c0a9210)
 
+시간대별 관측자료, 일별 관측자료 등 원하는 데이터의 API 호출 URL 정보를 사용하면 됩니다. <br>
+이때 API 호출 URL 구조는 다음과 같습니다. 호출 입력인자와 사용자 인증키를 추가 파라미터로 입력해서 API를 요청하면 됩니다.
+1. 도메인주소 및 API소스코드
+	* 고정항목으로 변하지 않음
+	* URL 중 '**?**' 바로 직전(**.php**)까지이며, 호출 입력인자와 '?'를 기준으로 구분함
+2. 호출 입력인자(input parameter)
+	* API 호출을 위한 필수 호출인자 입력 부분
+	* 인자와 인자 사이는 '&'를 기준으로 구분
+	* 아래 예시는 tm1에 201512110100, tm2에 201512140000, stn에 104, help에 1을 입력함
+3. 사용자 인증키
+	* API 서비스를 이용하기 위한 인증키
 
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/f3dfe916-7a98-4d75-b62c-1b2303520b55)
 
+호출 입력인자의 경우, 기상청 API허브에 잘 설명이 되어있기 때문에 참고하여 작성하면 됩니다. <br>
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/be936a13-a9b2-483c-8c3a-6e86d57a93ee)
+
+<br>
 
 ## 4️⃣ 데이터 로드
 
-### Import Module
+파이썬(Python)으로 종관기상관측(ASOS)의 **시간자료(기간 조회)** API를 호출하여 **과거 한 시간 단위 지상 관측 날씨 데이터**를 로드해오겠습니다.
+
+### ✅ Import Module
+먼저 필요한 라이브러리를 호출합니다.
 ```python
+import warnings
+warnings.filterwarnings('ignore')
+
+import pandas as pd
+import requests
+from datetime import datetime, timedelta
 ```
-기본적으로 urllib이라는 패키지가 필요하다. urllib 패키지 안에는 다음과 같은 4개의 모듈이 존재한다.
 
-urllib.request : URL base 요청에 관련된 함수와 객체가 있다.
-urllib.parse : 필요한 데이터를 URL에 파싱하기 위한 함수와 객체가 있다.
-urllib.error : urllib.request모듈에 의해 발생한 예외 처리를 위한 모듈이다.(여기서 사용 안함)
-urllib.robotparse : 웹사이트의 robots.txt 파이에 대한 파싱을 위한 모듈이다.(여기서 사용 안함)
+기본적으로 API를 호출하기 위하여 **requests**라는 python용 HTTP 모듈이 필요합니다. requests는 어떤 방식(method)의 HTTP 요청을 하느냐에 따라서 해당하는 이름의 method를 사용하면 됩니다. <br>
+* `requests.get()` : GET Method
+* `requests.post()` : POST Method
+* `requests.put()` : PUT Method
+* `requests.delete()` : DELETE Method
 
-### URL 설정
+### ✅ Weather Function 
+데이터 컬럼명을 지정해주고, 호출 입력인자인 시작시간/종료시간/지점번호/도움말/API 인증키를 입력하면 해당 기간의 날씨 데이터를 불러오는 function을 만듭니다.
+* tm1 : 시작시간 또는 시작일 → **년월일시분*을 이어서 씀 (ex. 2023-01-01 10시 = 2301011000)
+* tm2 : 종료시간 또는 종료일
+* stn : 국내 지역 지점번호 (ex. 지점번호 152 = 울산 지역)
+
 ```python
+# 데이터 컬럼명 지정 : Column Description 그대로 가져옴
+col_name = ["TM","STN","WD","WS","GST_WD","GST_WS","GST_TM"
+            ,"PA","PS","PT","PR","TEMP","TD","HM","PV"
+            ,"RN","RN_DAY","RN_JUN","RN_INT","SD_HR3","SD_DAY","SD_TOT"
+            ,"WC","WP","WW","CA_TOT","CA_MID","CH_MIN"
+            ,"CT","CT_TOP","CT_MID","CT_LOW","VS","SS","SI","ST_GD"
+            ,"TS","TE_005","TE_01","TE_02","TE_03","ST_SEA","WH","BF","IR","IX"]
+
+# 날씨 데이터 function (load_weather)
+def load_weather(tm1, tm2, stn):
+    domain = "https://apihub.kma.go.kr/api/typ01/url/kma_sfctm3.php?"
+    auth_key = "XXXXXXXXXXXXXXXX" # 부여받은 API Key 입력
+    params = {'tm1' : tm1,
+              'tm2' : tm2,
+              'stn' : stn,
+              'help' : 0, # 도움말 없음
+              'authKey' : auth_key}
+
+    response = requests.get(domain, params=params, verify=False)
+
+    text = response.text
+    text = text.split("\n")[4:-2]
+
+    df = pd.DataFrame(text)[0].str.split(expand=True)
+    df.columns = col_name
+
+    return df
 ```
-간단히 개념적으로 설명하면...
 
-데이터를 가져오려면 먼저 기상청의 ASOS 데이터가 있는 장소에 데이터가 있는지 노크를 해야한다.
+이 코드는 지역번호 108번, 2021년 3월 8일 00시부터 05시까지 발생한 ASOS데이터를 받아오라는 의미이고, 아래와 같이 무사히 실행됨을 확인할 수 있습니다.
+```python
+load_weather(202103080000, 202103080500, 108)
+```
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/f8079835-2897-4a22-956e-5236cb666e99)
 
-노크를 하기 위해선 데이터가 있는 장소를 알아야하니 그 장소를 지정해 주는 작업이 바로 위의 코드이다.
+<br>
+
+### ✅ 변수들 설명(헤더정보)
+호출된 API의 출력 변수들의 설명, 즉 헤더정보를 보고 싶을 때는 `help` 옵션을 조정하면 됩니다. <br>
+* help = 0 설정 : 헤더정보 미표출
+* help = 1 설정 : 헤더정보 표출
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/310197ca-6327-4b6a-8135-15e8b7bf24d7)
+
+
+<br>
+
+### ✅ 지상관측 지점정보
+`stn`은 국내 지점번호이며, `tn=152`는 지점번호가 152인 울산 지역에 대한 날씨를 불러오는 코드입니다. <br>
+만약 전체 지역을 모두 불러오고 싶다면 `stn=''`로 전달하면 되며, 전체 97개 지점에 대한 날씨정보가 모두 return 됩니다.
+* 98x6 = 582 rows
+```python
+load_weather(202303080000, 202303080500, '')
+```
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/bd95e2e4-b04b-45b7-9ad9-f1bcf002ee71)
+
+전체 지역이 아니라 특정 지역의 stn 지점번호를 알고 싶을 때는, 지상관측의 가장 마지막 TAB인 **지상관측 지점정보**를 클릭하여 API 호출을 통해 확인하면 됩니다.
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/b0bc8365-8d99-4c66-8610-ccee87cd2c35)
+
+```python
+url = "https://apihub.kma.go.kr/api/typ01/url/stn_inf.php"
+auth_key = "y1b1RctfSY-W9UXLXzmP0A"
+params = {'inf' : 'SFC',
+          'stn' : '',
+          'authKey' : auth_key}
+
+response = requests.get(url, params=params, verify=False)
+
+text = response.text
+text = text.replace("#","").split("\n")
+text = text[1:-2]
+
+for i, l in enumerate(text):
+    l = l.strip().replace(" ",",").split(',')
+    l = [i for i in l if i != '']
+    l = ",".join(l)
+    text[i] = l
+
+
+col_name = text[0].split(',')
+
+df_stn = pd.DataFrame(text[2:])[0].str.split(",",expand=True)
+df_stn = df_stn.drop(14, axis=1)
+df_stn.columns = col_name
+df_stn
+```
+
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/0f78f750-892c-4e77-86e1-2d76c043a80d)
+
+총 97개의 지역명과 지점번호이 존재하니, 위의 코드를 복사하여 실행시킨 뒤 보고 싶은 지역의 지점번호를 찾아서 날씨 데이터를 불러옵니다. <br>
+저의 경우에는 특정 지역들 위주로만 사용해서 지점번호를 외우고 있거나, csv 파일로 저장해서 열람하고 있습니다.
+```python
+df_stn[df_stn["STN_KO"] == '구미']
+```
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/a6fdac56-ee9f-47a0-9ca4-18e649b63c85)
+
+<br>
+
+### ✅ 720시간 이상의 데이터 생성 (feat. While Loop문)
+이때 주의해야할 점은 데이터를 호출할 때 tm2(종료시간)으로부터 **최대 720시간 전**까지만 불러올 수 있습니다.
+그렇기 때문에 tm1을 21년, tm2를 23년으로 설정하고 데이터를 불러도 tm2 기준으로 720개만 데이터가 호출되는 것을 확인할 수 있습니다.
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/1b7208a3-c1b0-4c90-9250-c4cb07c74964)
+
+720시간 이상 기간의 날씨 데이터를 호출하고 싶다면, loop문을 통해 720시간 단위로 기간을 쪼개어 불러오면 됩니다. <br>
+위에서 만든 날씨 데이터 function(load_weather)를 활용하여 2021-03-08 00:00:00부터 2023-05-15 09:00:00까지 구미지역 날씨 데이터를 불러오는 예시 코드는 다음과 같습니다.
+```python
+dates = pd.date_range('2021-03-08 00:00:00', '2023-05-15 09:00:00', freq = 'H')
+dates = [str(d).replace("-","").replace(" ","").replace(":","")[:-2] for d in dates]
+
+df_all = pd.DataFrame()
+d_i = 0
+while d_i <= len(dates):
+    start_time = dates[d_i]
+    if d_i + 719 >= len(dates):
+        end_time = dates[-1]
+    else:
+        end_time = dates[d_i+719]
+    d_i += 720
+
+    df = load_weather(start_time, end_time, 279)
+    df_all = pd.concat([df_all, df])
+
+df_all
+```
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/e4ce2dc0-7eee-474d-9192-1283058716c6)
+
+### ✅ 데이터 전처리
+
 
 
 
@@ -124,6 +284,8 @@ urllib.robotparse : 웹사이트의 robots.txt 파이에 대한 파싱을 위한
 
 ### Reference
 * [[Python] 공공데이터 오픈 API를 활용한 기상청 ASOS 데이터 파싱하기](https://jonsyou.tistory.com/71)
+* [기상자료개방포털 Open-API 활용하기 - 파이썬초보자도 할 수 있다!](https://blog.naver.com/kma_131/222850549606)
+* [[Pyhon - Crawling] API 활용하여 과거 기상 관측 데이터 불러오기](https://leedakyeong.tistory.com/entry/Python-Crawling-API-%ED%99%9C%EC%9A%A9%ED%95%98%EC%97%AC-%EA%B3%BC%EA%B1%B0-%EA%B8%B0%EC%83%81-%EA%B4%80%EC%B8%A1-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B6%88%EB%9F%AC%EC%98%A4%EA%B8%B0)
 
 --------------------------------------------------------
 
