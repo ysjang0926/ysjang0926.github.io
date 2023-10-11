@@ -324,11 +324,47 @@ df_weather[['TM', 'TEMP', 'HM', 'PA', 'RN']]
 
 <br>
 
-
 ## 5️⃣ DB 적재
+DB에 새로운 테이블을 생성한다는 가정 하에, Python에서 HANA DB에 연결하여 날씨 데이터를 I/F하는 코드를 작성하였습니다. <br>
 
+### ✅ DB 스키마 및 테이블명 지정
+```python
+schema = "스키마명"
+tb_nm = "데이터명" 
+```
 
+### ✅ HANA DB 연결
+```python
+from hdbcli import dbapi
+conn = dbapi.connect(
+                            address='172.18.23.69',
+                            port='37715',
+                            user='BNTSYS',
+                            password='Kadmin@12!'
 
+)
+cursor = conn.cursor()
+```
+
+### ✅ 테이블 생성
+HANA DB에 DB스키마와 테이블 이름을 지정하고 테이블을 생성합니다.
+```python
+output_table = df_weather[['TM', 'TEMP', 'HM', 'PA', 'RN']]
+
+val_schema = pd.io.sql.get_schema(output_table, schema=schema, name=tb_nm, con = conn)
+val_schema = val_schema.replace("CREATE TABLE", "CREATE COLUMN TABLE").replace("TEXT", "DOUBLE")
+cursor.execute(val_schema)
+```
+
+### ✅ 테이블 생성
+DataFrame으로부터 데이터를 읽어서 DB에 Insert 해줍니다.
+```python
+for i,row in output_table.iterrows():
+    sql = "INSERT INTO " + schema + "." + tb_nm + " VALUES  ( "+ "?" + ", ?"*(len(row)-1) + " ) "
+    cursor.execute(sql, tuple(row))
+```
+
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/fd053dd8-3870-49d4-beb8-ea055de43775)
 
 
 
