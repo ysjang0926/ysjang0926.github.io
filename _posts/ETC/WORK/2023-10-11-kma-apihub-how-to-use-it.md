@@ -1,4 +1,4 @@
----
+.---
 layout: post
 title:  "[기상청 API허브 사용법] 과거 기상 관측 데이터 가져오기 (feat. Python) "
 subtitle:   "Load historical weather observation data"
@@ -326,28 +326,31 @@ df_weather[['TM', 'TEMP', 'HM', 'PA', 'RN']]
 
 ## 5️⃣ DB 적재
 DB에 새로운 테이블을 생성한다는 가정 하에, Python에서 HANA DB에 연결하여 날씨 데이터를 I/F하는 코드를 작성하였습니다. <br>
+csv 파일로도 받을 수 있지만, 보통 생산 및 품질 정보 등을 DB에 적재하여 사용하고 있기 때문에 분석 데이터셋 구성을 용이하기 위하여 DB로 I/F하는 편입니다. <br>
 
 ### ✅ DB 스키마 및 테이블명 지정
+우선 DB Schema를 지정해주고, 생성하고자 하는 데이터명을 입력해줍니다.
 ```python
 schema = "스키마명"
 tb_nm = "데이터명" 
 ```
 
 ### ✅ HANA DB 연결
+다음으로 사용하고 있는 DB와 연결을 해주면 되는데, 저는 이번 예시에서는 HANA DB로 연결을 하도록 하겠습니다.
 ```python
 from hdbcli import dbapi
 conn = dbapi.connect(
-                            address='172.18.23.69',
-                            port='37715',
-                            user='BNTSYS',
-                            password='Kadmin@12!'
+                            address='db ip',
+                            port='port num',
+                            user='id',
+                            password='pw'
 
 )
 cursor = conn.cursor()
 ```
 
 ### ✅ 테이블 생성
-HANA DB에 DB스키마와 테이블 이름을 지정하고 테이블을 생성합니다.
+HANA DB에 DB스키마와 테이블 이름을 지정하고 테이블을 생성합니다. 아직 데이터가 안들어있는 상태인 빈깡통(?)인 테이블이라고 생각하면 됩니다.
 ```python
 output_table = df_weather[['TM', 'TEMP', 'HM', 'PA', 'RN']]
 
@@ -364,10 +367,8 @@ for i,row in output_table.iterrows():
     cursor.execute(sql, tuple(row))
 ```
 
+위의 모든 과정을 마치면, HANA DB에서 다음과 같이 무사히 데이터가 추가된 것을 확인할 수 있습니다.
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/fd053dd8-3870-49d4-beb8-ea055de43775)
-
-
-
 
 
 
