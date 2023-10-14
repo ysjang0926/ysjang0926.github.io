@@ -334,6 +334,7 @@ csv 파일로도 받을 수 있지만, 보통 생산 및 품질 정보 등을 DB
 schema = "스키마명"
 tb_nm = "데이터명" 
 ```
+<br>
 
 ### ✅ HANA DB 연결
 다음으로 사용하고 있는 DB와 연결을 해주면 되는데, 저는 이번 예시에서는 HANA DB로 연결을 하도록 하겠습니다.
@@ -349,6 +350,8 @@ conn = dbapi.connect(
 cursor = conn.cursor()
 ```
 
+<br>
+
 ### ✅ 테이블 생성
 HANA DB에 DB스키마와 테이블 이름을 지정하고 테이블을 생성합니다. 아직 데이터가 안들어있는 상태인 빈깡통(?)인 테이블이라고 생각하면 됩니다.
 ```python
@@ -358,6 +361,8 @@ val_schema = pd.io.sql.get_schema(output_table, schema=schema, name=tb_nm, con =
 val_schema = val_schema.replace("CREATE TABLE", "CREATE COLUMN TABLE").replace("TEXT", "DOUBLE")
 cursor.execute(val_schema)
 ```
+
+<br>
 
 ### ✅ 테이블 생성
 DataFrame으로부터 데이터를 읽어서 DB에 Insert 해줍니다.
@@ -384,4 +389,4 @@ for i,row in output_table.iterrows():
 ----------------------------
 
 ### 🔜 Think
-
+기상청에서 제공하는 API허브를 통해 
