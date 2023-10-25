@@ -1,4 +1,4 @@
-.---
+---
 layout: post
 title:  "[기상청 API허브 사용법] 과거 기상 관측 데이터 가져오기 (feat. Python) "
 subtitle:   "Load historical weather observation data"
