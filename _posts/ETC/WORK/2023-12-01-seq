@@ -1,0 +1,142 @@
+-   이번 글에서는 시계열 데이터에서 누락된 시간의 범위를 구하는 SQL문을 정리해보았습니다.
+-   종종 이런 케이스가 발생하여 누락된 시간 범위를 구하는 일이 생기는데, 그때마다 빠르게 일처리를 진행해야하는 제자신을 돕기 위해 이 글을 바칩니다. (For Me😂)
+- 간단한 쿼리지만 장황(?)하게 써보았으니, '제조 데이터는 이런 상황도 생기는구나!'하고 가볍게 참고만 해주시면 감사하겠습니다.
+---------
+
+현재 저희 회사는 실시간으로 센서(또는 태그) 데이터를 대표적인 TSDB(Time Series Database)인 📈**InfluxDB**에 적재하고 있습니다.
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/c7fee92d-facb-4f9d-94a2-0de708099a2e)
+
+
+InfluxDB를 간략하게 설명하면 다음과 같습니다.
+* **Time Series Data를 효율적으로 저장하고 조회할 수 있는 데이터베이스**
+	* 데이터 적재와 조회 성능이 우수함
+	* 센서, 로그 데이터와 같은 시계열 데이터를 다루는 환경에 용이
+* **다른 TSDB에 비해 자료와 플러그인이 풍부**
+	* 풍부한 플러그인 생태계를 가지고 있어, 다양한 기능과 연동이 쉬움
+* **데이터가 축적됨에 따라 최적화되도록 설계**
+	* 시간에 따라 파티셔닝하여 저장하기 때문에 입력 부하를 줄일 수 있음
+
+이때 실시간으로 DB에 쌓이는 데이터를 통해 분석을 진행해야 하는데, 초당 수천 수만건의 데이터가 발생하는 환경에서 분석한다는 것은 큰 오버헤드를 발생시킬 수 있습니다. 또한 오버헤드가 발생하여 장애가 발생했을 경우 데이터가 유실될 가능성이 높습니다. 
+<br>
+실제 분석을 진행할 때에는 실시간으로 데이터가 적재되는 DB에서 데이터를 추출하여 분석하면 안되겠죠? 이러한 이유로 따로 분석용 DB를 따로 마련하여, 1초 단위로 쌓이는 데이터를 순시값으로 들고와서 1분 데이터로 집계되도록 되어있습니다. <br>
+
+> **순시값**은 주로 시계열 데이터나 센서 데이터에서 사용되는 용어이며, 시간에 따라 측정되거나 기록된 데이터 중에서 순차적으로 발생한 값 또는 순서를 나타냅니다.
+> 여기에서 순시값은 순간의 시간값으로, **t 순간의 센서(태그)값**을 의미합니다.![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/48da02ea-1d95-4382-9239-5ba704e67391)
+> (사진 출처: [측정값과 각 로깅 조건 작동 설명](https://gastec-soft.com/anasys/korea/ghs8at_measure_condition_k.html))
+
+<br>
+이때 1분 데이터로 집계될 때 일부 시간대 데이터가 누락되는 케이스가 종종 있는데요. <br>
+1~2분 간격으로 간헐적으로 존재한다면 이를 무시하여 분석할 수도 있지만, 기기 이상 등 여러 요소들로 인해 10분 이상의 데이터가 누락된 케이스도 존재하게 됩니다.  <br>
+이때 1분 집계 데이터에서 **이력이 끊기는 일자 및 시간대 집합**을 만들어서, **해당 범위의 1초 데이터를 들고 오려고 합니다.** (1초 데이터를 들고 온 뒤, 1분 데이터로 변환 예정)
+
+<br>
+
+## 단절된 시간대의 구간별 min, max를 구하는 방법
+(예시)
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/7b841dfe-7758-41db-a174-7b9e55898176)
+
+
+## 📍 목표
+시계열 데이터에서 단절된 시간대가 존재하며,
+테이블에서 각 **단절된 시간대의 MIN(시작시간), MAX(종료시간)**을 구하는 효율적인 방법 찾기
+
+<br>
+
+## 🔑 Key Idea
+시간(1분 단위)이 끊기는 날짜 및 시간 집합(기준값) 만들기
+
+<br>
+
+## ⏩ 단절된 시간대의 구간별 min, max를 구하는 과정
+크게 3가지 스텝으로 이루어지며 다음과 같습니다.
+* **STEP 1) 기준 만들기**
+	* `LAG` 함수를 통해, 이전의 위치에 있는 시간대 데이터를 가져오기 (LAG_DATE 변수)
+	* 두 개의 시간을 빼서 시간 차이값 산출 (BEFORE_TIME_DIFF 변수)
+* **STEP 2) GAP이 있는 시작, 종료 시간대 구하기**
+	* 시간 차이값이 1분 초과일 때(=2분 이상) 추출
+* **STEP 3)  단절된 시간대의 구간별 min, max 산출**
+	* LAG_DATE와 DATE 사이 구간이 데이터가 없기 때문에, 해당 구간을 단절된 시간으로 처리하기
+	* LAG_DATE에서 1분을 더하여, 단절된 시간대 min값 산출 (MISSING_START_TIME)
+	* DATE에서 1초를 빼서, 단절된 시간대 max값 산출 (MISSING_END_TIME) 
+
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/a1d4e6c8-5573-4f0a-8956-0544fef0528e)
+
+<br>
+
+## 💻 SQL문
+각 스텝별로 SQL문을 보며, 일부 내용에 대한 부가 설명을 적어보도록 하겠습니다. <br>
+이때 `MY_SCHEMA`와 `MY_TABLE`에 적절한 스키마와 테이블 이름을 사용하여 쿼리를 수정하시면 됩니다. <br>
+
+### 1️⃣ STEP 1) 기준 만들기
+먼저 1분 단위로 순차적으로 존재하는 시계열 데이터에서 누락 값이 있었는지 확인하는 것이 필요합니다. <br>
+그렇기 위해서는 **시간 GAP 발생 기준**을 산출하여, **어떤 시간 구간을 추출하면 될지** 확인하면 되겠죠? <br>
+다양한 방법으로 구할 수 있겠지만, 저는 `LAG`함수를 이용하여 시간 GAP 발생 기준을 구하였습니다.
+> **LAG 함수**
+> * Analytic Function 중 하나로
+> *  
+
+
+1. ㅇㅇㅇㅇㅇ
+2. 
+
+```sql
+SELECT	 LAG(DATE) OVER(ORDER BY DATE) AS LAG_DATE
+		,DATE
+		,SECONDS_BETWEEN(LAG(DATE) OVER(ORDER BY DATE), DATE)/60 AS BEFORE_TIME_DIFF
+FROM MY_SCHEMA.MY_TABLE
+```
+
+(결과 - 예시표)
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/e4a1ed33-01b4-4cf1-b0f5-a969b1160b45)
+
+
+
+
+### 2️⃣ STEP 2) GAP이 있는 시작, 종료 시간대 구하기
+```sql
+```
+
+### 3️⃣ STEP 3)  단절된 시간대의 구간별 min, max 산출
+```sql
+```
+
+
+
+### 🔚 최종 SQL문
+```sql
+SELECT	 LAG_DATE, DATE
+		,BEFORE_TIME_DIFF
+		,BEFORE_TIME_DIFF - 1 AS REAL_TIME_DIFF
+		,CASE WHEN BEFORE_TIME_DIFF > 1 THEN ADD_SECONDS(LAG_DATE, 60)
+			  WHEN BEFORE_TIME_DIFF = 1 THEN ADD_SECONDS(DATE,60)
+			  END AS MISSING_START_TIME
+		,ADD_SECONDS(DATE, -1) AS MISSING_END_TIME
+FROM (
+		SELECT	 LAG(DATE) OVER(ORDER BY DATE) AS LAG_DATE
+				,DATE
+				,SECONDS_BETWEEN(LAG(DATE) OVER(ORDER BY DATE), DATE)/60 AS BEFORE_TIME_DIFF
+		FROM MY_SCHEMA.MY_TABLE
+	)
+WHERE BEFORE_TIME_DIFF > 1
+ORDER BY DATE
+```
+
+
+단절된 순차번호의 구간별 min max을 구하는 방법
+단절된 순차번호의 구간별 min max을 구하는 과정
+
+
+그림과같이각NM의각구간별단절된순차번호의최소값,최대값을구하는효율적인SQL을작성하고자한다.
+  
+
+순시값을 물을때는 주로. 그래프가 나오고. 시간이 주어집니다.
+
+위와같은결과를얻기위한SQL은다음과같다.
+
+
+
+
+를 따로 마련하여 해당 DB를 통해 진행하는 분석 필요성을
+
+가 필요하다고 생각을 하여, 
+
