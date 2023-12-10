@@ -1,3 +1,12 @@
+---
+layout: post
+title:  "[SQL] 시계열 데이터에서 누락된 시간의 범위 구하기"
+subtitle:   "Find missing time ranges in time series data"
+categories: etc
+tags: etc_work
+comments: true
+---
+
 -   이번 글에서는 시계열 데이터에서 누락된 시간의 범위를 구하는 SQL문을 정리해보았습니다.
 -   종종 이런 케이스가 발생하여 누락된 시간 범위를 구하는 일이 생기는데, 그때마다 빠르게 일처리를 진행해야하는 제자신을 돕기 위해 이 글을 바칩니다. (For Me😂)
 - 간단한 쿼리지만 장황(?)하게 써보았으니, '제조 데이터는 이런 상황도 생기는구나!'하고 가볍게 참고만 해주시면 감사하겠습니다.
