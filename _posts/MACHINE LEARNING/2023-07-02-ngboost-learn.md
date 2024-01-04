@@ -163,10 +163,14 @@ NGBoost를 접하고 논문을 읽을 때, Natural Gradient라는 방식에 대�
 <br>
 
 NGBoost를 아래와 요약하자면 다음과 같습니다.
-* NGBoost는 확률 분포를 반환하는 새로운 Boosting 알고리즘입니다.
-* 일반적인 Gradient 방법이 아닌 Natural Gradient 방법을 적용하여, 파라미터 공간에서의 Gradient를 보다 효율적으로 계산하고 사용합니다.
-* NGBoost는 예측 모델에 대한 불확실성을 제공하기 위해 확률적인 방법을 사용합니다.
-	* 이는 예측값의 신뢰도를 평가하고 예측의 불확실성을 고려할 수 있는 장점을 제공합니다. (ex. 예측 구간에 대한 신뢰 구간)
+* NGBoost는 확률 분포를 반환하는 새로운 Boosting 알고리즘
+* 일반적인 Gradient 방법이 아닌 Natural Gradient 방법을 적용하여, 파라미터 공간에서의 Gradient를 보다 효율적으로 계산하고 사용
+	* Parametrization에 invariant한 Natural Gradient를 도입해서 Multiparameter Boosting을 가능하게 함
+* NGBoost는 예측 모델에 대한 불확실성을 제공하기 위해 확률적인 방법을 사용
+	* X가 주어졌을 때의 확률분포를 구성하는 파라미터의 추정을 통해 확률적 예측을 가능하게 함
+  	* 어떤 분포를 가정하더라도 가능하다는 장점이 존재하며, Prior의 분포를 안다고 가정할 때 y의 분포를 제한해서 학습 가능
+	* 이는 예측값의 신뢰도를 평가하고 예측의 불확실성을 고려할 수 있는 장점을 제공 (ex. 예측 구간에 대한 신뢰 구간)
+* 다른 Probailistic Prediction 기법들과 비교하여, 빠르고 / 유연하고(=분포가정) / 성능이 나쁘지 않음
 
 -------
 ### Reference
