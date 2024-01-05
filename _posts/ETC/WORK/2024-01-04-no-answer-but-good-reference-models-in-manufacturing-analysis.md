@@ -306,7 +306,7 @@ DX를 위해서는 무엇보다 **구성원의 역량과 일하는 방식의 변
 <br>
 
 ### Reference
-*  [디지털 트랜스포메이션(DX)에 대한 모든 것](https://gscaltexmediahub.com/future/digital-transformation/concepts-of-dx/)
+* [디지털 트랜스포메이션(DX)에 대한 모든 것](https://gscaltexmediahub.com/future/digital-transformation/concepts-of-dx/)
 * [데이터 분석을 잘하는 사람과 못하는 사람의 결정적 차이](https://brunch.co.kr/@ashashash/133)
 * [[데이터전처리] Outlier(이상치/이상값/특이값/특이치 등) 탐지 방법(detection method)](https://claryk.tistory.com/category/AI%20%26%20%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0/%EB%8D%B0%EC%9D%B4%ED%84%B0%20%EC%A3%BC%EB%AC%BC%EB%9F%AD%28%20%2B%20feature%20engineering%29)
 * [고려대학교 강필성 교수님 수업자료 - Anomaly Detection](https://github.com/pilsung-kang/Machine-Learning-Basics-Bflysoft/blob/master/Lecture%2010_Anomaly%20Detection.pdf)
