@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "정답은 없지만 참고하면 좋은 제조 분석목적에 따른 최적의 모델링과 평가지표"
+title:  "정답은 없지만 참고하면 좋은, 제조 분석의 모델링"
 subtitle:   "Find missing time ranges in time series data"
 categories: etc
 tags: etc_work
