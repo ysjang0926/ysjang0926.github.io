@@ -270,17 +270,17 @@ DX를 위해서는 무엇보다 **구성원의 역량과 일하는 방식의 변
 		* 일반적인 유클리드 거리 측정법은 시계열에 적합하지 않음 (특히, Batch 공정)
 			* 만약 두 시계열이 높은 상관 관계가 있지만, 하나가 한 시간 단계만큼 이동하는 경우 유클리드 거리는 더 멀리 떨어져 있는 것으로 잘못 측정하기 때문
 			* 그렇기 때문에 time sequence를 고려한 모델링을 하는 것이 필요
-4. **평가지표**
-* Binary evaluation metrics
-	* F-score
-	* [MCC(Matthews Correlation Coefficient)](https://choice-life.tistory.com/82)
- * Non-binary evaluation metrics
-	* AUC-ROC <br>
+3. **평가지표**
+	* Binary evaluation metrics
+		* F-score
+		* [MCC(Matthews Correlation Coefficient)](https://choice-life.tistory.com/82)
+ 	* Non-binary evaluation metrics
+		* AUC-ROC <br>
 
 <br>
 
 ## 3️⃣ 분석 수행 사례
-실사례 부분은 시간될 때마다 조금씩 업데이트하겠습니다. 💨
+실사례 부분은 시간될 때마다 조금씩 업데이트하겠습니다🐱‍👤
 
 ### ⬛ 주요 인자 도출(원인 분석)
 * Feed stock, rBHET 품질과 CR-PET 물성의 상관 관계 도출
