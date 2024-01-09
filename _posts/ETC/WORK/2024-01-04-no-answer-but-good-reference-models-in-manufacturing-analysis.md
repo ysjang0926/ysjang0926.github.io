@@ -313,7 +313,7 @@ DX를 위해서는 무엇보다 **구성원의 역량과 일하는 방식의 변
 * [고려대학교 강필성 교수님 수업자료 - Anomaly Detection](https://github.com/pilsung-kang/Machine-Learning-Basics-Bflysoft/blob/master/Lecture%2010_Anomaly%20Detection.pdf)
 * [Isolation Forest 로 이상치 찾기 (+ SHAP로 설명하기)](https://pizzathiefz.github.io/posts/isolation-forest-with-shap/)
 * [[Paper Review] Navigating the Metric Maze: A Taxonomy of Evaluation Metrics for Anomaly Detection in Time Series](http://dsba.korea.ac.kr/seminar/?mod=document&uid=2743)
-* [[Must Have] 데싸노트의 실전에서 통하는 머신러닝](https://goldenrabbit.co.kr/product/must-have-%eb%8d%b0%ec%8b%b8%eb%85%b8%ed%8a%b8%ec%9d%98-%ec%8b%a4%ec%a0%84%ec%97%90%ec%84%9c-%ed%86%b5%ed%95%98%eb%8a%94-%eb%a8%b8%ec%8b%a0%eb%9f%ac%eb%8b%9d
+* [[Must Have] 데싸노트의 실전에서 통하는 머신러닝](https://goldenrabbit.co.kr/product/must-have-%eb%8d%b0%ec%8b%b8%eb%85%b8%ed%8a%b8%ec%9d%98-%ec%8b%a4%ec%a0%84%ec%97%90%ec%84%9c-%ed%86%b5%ed%95%98%eb%8a%94-%eb%a8%b8%ec%8b%a0%eb%9f%ac%eb%8b%9d)
 * [[BASIC] 대회에서 자주 사용되는 평가산식들에 대한 정리✏️ (1) 회귀모델 평가산식](https://dacon.io/forum/405791?dtype=recent)
 * [SK TECH SUMMIT 2023](https://sktechsummit.com/main/main.do)
 * [DSBA 연구실 PROJECTS](http://dsba.korea.ac.kr/projects/)
