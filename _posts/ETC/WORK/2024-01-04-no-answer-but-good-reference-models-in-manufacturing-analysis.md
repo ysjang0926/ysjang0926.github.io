@@ -179,6 +179,7 @@ DX를 위해서는 무엇보다 **구성원의 역량과 일하는 방식의 변
 ### ⬛ 최적 조건 도출
 과거의 best practice 기반으로 **앞으로의 양품 생산을 위한 생산 품종, 라인별 최적 공정 조건 도출 및 적용**합니다. <br>
 ※ best practice : 현업이 생각할 때 최고로 생각되는 물성 조건에 맞는 양품 생산 시기
+
 | ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/1ad0de15-89ab-4aae-a9cb-77f2ed2417da) | 
 |:--:| 
 | [control chart](https://www.qimacros.com/lean-six-sigma-articles/stability-analysis-vs-capability-analysis) |
@@ -205,6 +206,7 @@ DX를 위해서는 무엇보다 **구성원의 역량과 일하는 방식의 변
 
 ### ⬛ 품질, 물성 예측
 품질 불량에 영향을 주는 주요 인자를 분석하여, **현장 적용 가능한 예측 모델링** 개발합니다.
+
 | ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/5a512c48-2b0f-4c70-a6e2-ef31d2cff743)
  | 
 |:--:| 
@@ -236,7 +238,7 @@ DX를 위해서는 무엇보다 **구성원의 역량과 일하는 방식의 변
 	* LSTM(Long Short Term Memory)
 	* SVM(Support Vector Machine)
 3. **평가지표**
-* MAE, RMSE
+* [MAE, NMAE, RMSE](https://dacon.io/forum/405791?dtype=recent)
 * R-Squared
 * Maximum error
 * Accuracy (오차율 계산)
@@ -244,6 +246,7 @@ DX를 위해서는 무엇보다 **구성원의 역량과 일하는 방식의 변
 
 ### ⬛ 설비 장애 예지(이상감지)
 생산 설비나 공정의 안정성을 수치화하여 **이상을 미리 예측**하여, 사전에 파악할 수 있도록 모니터링 합니다.
+
 | ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/0adff696-65c6-4542-9274-5a33e0507848) | 
 |:--:| 
 | @Yeh , Chin Chia Michael, et al. "Online Amnestic Dynamic Time Warping to Allow Real Time Golden Batch Monitoring." |
@@ -271,7 +274,7 @@ DX를 위해서는 무엇보다 **구성원의 역량과 일하는 방식의 변
 * Binary evaluation metrics
 	* F-score
 	* [MCC(Matthews Correlation Coefficient)](https://choice-life.tistory.com/82)
-* Non-binary evaluation metrics
+ * Non-binary evaluation metrics
 	* AUC-ROC <br>
 
 <br>
@@ -309,6 +312,7 @@ DX를 위해서는 무엇보다 **구성원의 역량과 일하는 방식의 변
 * [고려대학교 강필성 교수님 수업자료 - Anomaly Detection](https://github.com/pilsung-kang/Machine-Learning-Basics-Bflysoft/blob/master/Lecture%2010_Anomaly%20Detection.pdf)
 * [Isolation Forest 로 이상치 찾기 (+ SHAP로 설명하기)](https://pizzathiefz.github.io/posts/isolation-forest-with-shap/)
 * [[Paper Review] Navigating the Metric Maze: A Taxonomy of Evaluation Metrics for Anomaly Detection in Time Series](http://dsba.korea.ac.kr/seminar/?mod=document&uid=2743)
-* [[Must Have] 데싸노트의 실전에서 통하는 머신러닝](https://goldenrabbit.co.kr/product/must-have-%eb%8d%b0%ec%8b%b8%eb%85%b8%ed%8a%b8%ec%9d%98-%ec%8b%a4%ec%a0%84%ec%97%90%ec%84%9c-%ed%86%b5%ed%95%98%eb%8a%94-%eb%a8%b8%ec%8b%a0%eb%9f%ac%eb%8b%9d/)
+* [[Must Have] 데싸노트의 실전에서 통하는 머신러닝](https://goldenrabbit.co.kr/product/must-have-%eb%8d%b0%ec%8b%b8%eb%85%b8%ed%8a%b8%ec%9d%98-%ec%8b%a4%ec%a0%84%ec%97%90%ec%84%9c-%ed%86%b5%ed%95%98%eb%8a%94-%eb%a8%b8%ec%8b%a0%eb%9f%ac%eb%8b%9d
+* [[BASIC] 대회에서 자주 사용되는 평가산식들에 대한 정리✏️ (1) 회귀모델 평가산식](https://dacon.io/forum/405791?dtype=recent)
 * [SK TECH SUMMIT 2023](https://sktechsummit.com/main/main.do)
 * [DSBA 연구실 PROJECTS](http://dsba.korea.ac.kr/projects/)
