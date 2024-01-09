@@ -273,9 +273,10 @@ DX를 위해서는 무엇보다 **구성원의 역량과 일하는 방식의 변
 3. **평가지표**
 	* Binary evaluation metrics
 		* F-score
-		* [MCC(Matthews Correlation Coefficient)](https://choice-life.tistory.com/82)
- 	* Non-binary evaluation metrics
+		* [MCC(Matthews Correlation Coefficient)](https://choice-life.tistory.com/82) 
+	* Non-binary evaluation metrics
 		* AUC-ROC <br>
+
 
 <br>
 
