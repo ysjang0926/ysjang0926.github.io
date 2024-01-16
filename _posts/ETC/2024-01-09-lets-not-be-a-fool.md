@@ -1,6 +1,6 @@
-![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/2e5743e4-da86-4404-9016-21744db9f809)![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/766a7435-1ff4-400d-9489-c319f914160d)---
+---
 layout: post
-title:  "더이상 멍청해지는 것을 방지하기 위한 개념 정리글"
+title:  "🚫멍청방지 개념 정리글🚫"
 subtitle:   "Let's not be a fool"
 categories: etc
 tags: 
@@ -10,7 +10,6 @@ comments: true
 - 최근 논문을 읽으려고 하는데, 오랜만의 공부라 그런지 어려워하는 저를 보며 충격을 먹었습니다.
 - 기본 개념조차 까먹고 있어서, 다시 공부 시작하는 겸 정리해보려고 합니다.
 - 이번 글은 제가 다시 보기 위해 쓰는 글이다보니 다소 러프할 수 있습니다😢
-- 멍청이 탈출 기원😱
 
 ---------
 
@@ -93,6 +92,10 @@ comments: true
   * 에이전트(Agent)가 주어진 환경(State)에 대해 어떤 행동(Action)을 취하고, 이로부터 보상(Reward)을 얻으면서 학습을 진행하는 방식
   * 에이전트가 보상을 최대화하는 방식으로 학습이 진행
 
+### ⬛ Holdout method
+데이터셋을 train, test, eval set으로 분할하여 사용하는 모델 선택 방법이다. <br>
+train set으로 모델을 훈련하고, eval set은 모델 선택에 사용하여, test set으로 모델 훈련 뒤 성능 평가에 사용된다.
+
 ### ⬛ 모델 설명
 1. **DNN**
   * 신경망 모형 중 정형데이터 처리에 적합
@@ -104,7 +107,11 @@ comments: true
   * 파라미터
     * 파라미터 선택 방법 : 각 파라미터는 MAE 값이 가장 낮은 지점의 형태 선택
     * ex) activation function : relu, linear / Loss function : MAE / Optimizer : Adam / Learning Rate : 0.001 / Epoch : 500 / Batch size : 6
-2. **1D-CNN (1 Dimensional Convolution Neural Network)**
+2. **CNN**
+  * CNN은 2가지 특징이 있음 → 특징을 추출하는 feature extraction & feature extraction를 통과한 이후에 결과값을 도출해 주는 Classification
+    * feature extraction : Convolution layer와 Pooling layer가 섞여 있는 것
+    * Classification : fully-connected layer로 이루어진 것
+3. **1D-CNN (1 Dimensional Convolution Neural Network)**
   * 시간에 따라 데이터가 구성되는 시계열 데이터에 적합함
   * 1차원 Convolutional Neural Network으로, 인공 신경망의 한 종류
   * 주로 시계열 데이터나 순차적인 데이터에서 패턴을 감지하고 학습하는데 좋은 성능을 보임 (변수 간의 지엽적인 특징을 추출)
@@ -121,11 +128,36 @@ CNN 모델은 1D, 2D, 3D로 나뉘는데, 일반적인 CNN은 보통 이미지 �
 여기서 D는 차원을 뜻하는 dimensional의 약자로, **인풋 데이터 형태에 따라 1D, 2D, 3D 형태의 CNN 모델이 사용**된다.
 * 즉, **입력 데이터의 차원**에 따라 Conv1D, Conv2D, Conv3D를 사용함
 * **합성곱을 진행할 입력 데이터의 차원**을 의미 → 합성곱 진행 방향을 고려해야함
+* 1D, 2D, 3D 기준 : 합성곱이 진행되는 방향 + 합성곱의 결과로 나오는 출력값 
+  * Conv1D : 합성곱 진행 방향이 한 방향(가로)
+    * 합성곱을 진행할 입력 데이터의 차원은 1
+    * sequence 모델과 자연어 처리(NLP)에서 주로 사용
+    * NLP : 각 단어 벡터의 차원 전체에 대해 필터를 적용시키기 위함
+  * Conv2D : 합성곱 진행 방향이 두 방향(가로, 세로)
+    * ex. `tf.keras.layers.Conv2D(64, (3,3), activation='relu', input_shape=(150, 150, 3))`
+    * 차원이 (150, 150, 3)인 image에 대해 두 방향으로만 합성곱을 진행하겠다는 뜻
+    * 150x150 이미지에 3채널이므로, 150x150 matrix에 대해 합성곱을 총 3번(R, G, B) 진행
+    * 즉, 합성곱을 진행할 입력 데이터의 차원은 2이다.
+    * 컴퓨터 비전(Computer Vision, CV)에서 주로 사용
+  * Conv3D : 합성곱 진행 방향이 세 방향(가로, 세로, 높이)
+    * 의료(CT 영상) 분야와 비디오 프로세싱에서 주로 사용
 
-![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/ae26cb3d-ccc9-4a00-8017-e49951a0bf5f)
-(출처: Understanding 1D and 3D Convolution Neural Network | Keras)
+### ⬛ kernel, filter 차이점
+필터는 여러개의 kernel로 구성되어 있으며, 개별 kernel은 필터내에서 서로 다른 값을 가질 수 있다. kernel의 개수가 바로 channel의 개수이다.
+* kernel : sliding window하는 영역에서의 크기 (ex. 4x4)
+* filter : 실제로 kernel이 weighted sum하는 영역의 크기 (ex. 4x4x3)
+* D : kernel이 sliding하는 dimension 크기
+* feature map : 입력 이미지와 필터 간의 convolution 연산의 출력
 
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/92a5e715-8e55-40ad-a261-2d3974f41f31)
 
+#### Kernel size
+Convolution Filter를 Kernel로도 지칭
+* kernel size(크기)라고 하면 면적(가로x세로)을 의미하여 가로와 세로는 서로 다를 수 있지만 보통 일치시킴
+* kernel 크기가 크면 클수록 입력 feature map(또는 원본 이미지)에서 더 큰(또는 더 많은) feature 정보를 가져올 수 있음
+* 큰 사이즈의 kernel로 convolution 연산을 할 경우 훨씬 더 많은 연산량과 파라미터가 필요함
+
+ 
 ### ⬛ 모델 최적화
 * Hyperparameter Tuning
   * Hyperparameter : 모델을 생성할 때, 설정할 수 있는 모델 변수
@@ -137,8 +169,6 @@ CNN 모델은 1D, 2D, 3D로 나뉘는데, 일반적인 CNN은 보통 이미지 �
   * 모든 데이터를 활용하여 k개의 학습과 검증 과정을 거치며 신뢰도 높은 모델을 만들어냄
   * k-fold ensemble : k개의 예측을 평균하여 최종 결과를 도출함
 
-
-
 ### ⬛ Regularization
 과적합을 막기 위해 특정 가중치가 너무 커지지 않도록 제한하는 방식으로 모델 복잡도를 줄이며, L1 규제와 L2 규제가 있다. <br>
 L1에 비해 L2는 이상치나 노이즈가 있는 데이터에 대한 학습에 좋으며, 특히 선형 모델의 일반화에 좋다.
@@ -146,13 +176,23 @@ L1에 비해 L2는 이상치나 노이즈가 있는 데이터에 대한 학습�
 2. L2 규제 : 가중치의 제곱값을 이용
 
 ### ⬛ Activation function
-노드로 들어오는 신호에 대해 신호를 전달할만큼 의미가 있는지 없는지(가중치가 큰지 안큰지) 판단해주는 함수이다. <br>
+딥러닝 네트워크에서는 노드에 들어오는 값들에 대해 곧바로 다음 레이어로 전달하지 않고 주로 비선형 함수를 통과시킨 후 전달한다. <br>
+이때의 함수가 activation function이며, 노드로 들어오는 신호에 대해 신호를 전달할만큼 의미가 있는지 없는지(가중치가 큰지 안큰지) 판단해주는 함수이다. <br>
 대표적으로 시그모이드 함수, ReLU 함수, tanh 함수 등이 있다.
+* ReLU 함수 : 음수는 0으로 통과를 시키고 양수는 그대로 통과
 
-### ⬛ Holdout method
-데이터셋을 train, test, eval set으로 분할하여 사용하는 모델 선택 방법이다. <br>
-train set으로 모델을 훈련하고, eval set은 모델 선택에 사용하여, test set으로 모델 훈련 뒤 성능 평가에 사용된다.
+### ⬛ Pooling
+pooling 목적은 **특징을 강화**하는데 있다. 사용법은 위의 convolution layer랑 비슷하지만, **값들 중 특정값만 유지하고 나머지 값은 버린다**고 생각하면 된다. <br>
+Pooling layer의 종류에는 max pooling, average pooling, overlapping Pooling이 있다. 
+* max polling
+  * 계산양이 감소하기 때문에 연산부하가 줄어듦
+  * size를 줄이는 것이기 때문에 필연적으로 오차가 발생하므로 오버피팅을 약간 줄여줌
+  * back propagation 시 복원이 힘들어서 너무 많이 넣으면 안됨
 
+### Dropout
+신경망 모델을 만들 때 생기는 문제점 중에 대표적인 것이 과적합(Overfitting)이다. <br>
+보통 과적합 문제는 **정규화(Regularization)** 방법으로 많이 해결하고 정규화 방법 중 대표적인 것인 Dropout이다. <br>
+→ 학습 데이터에 과정합되는 상황을 방지하기 위해 **학습 시 특정 확률로 노드들의 값을 0으로 보게 된다**. [주의] 이러한 과정은 학습할 때만 적용되고 예측 혹은 테스트할 때는 적용되지 않아야 한다. 
 
 
 ### ⬛ 성능평가지표
@@ -173,8 +213,8 @@ train set으로 모델을 훈련하고, eval set은 모델 선택에 사용하�
 # 💡 분석 케이스 접근
 ### ⬛ 예측 모델링
 * 딥러닝 모델을 활용한 제품 물성 예측
-  * 목표 KPI를 잡아야함 (ex. 제품 스펙 범위의 10%)
-  * 뿐만 아니라 신뢰성 높은 모델을 확보하기 위해, 다양한 지표를 사용하여 모델을 평가해야함
+  * 목표 KPI 잡기 (ex. 제품 스펙 범위의 20%)
+  * For 신뢰성 높은 모델 확보, 다양한 지표를 사용하여 모델 평가 필요
 
 
 <br>
@@ -208,3 +248,4 @@ Apache Airflow는 프로그래밍 방식으로 워크플로우를 작성, 예약
 * [중심극한정리(CLT; central limit theorem)](https://biology-statistics-programming.tistory.com/72)
 * [Handling imbalanced datasets](http://dmqm.korea.ac.kr/activity/seminar/343)
 * [Conv1D, Conv2D, Conv3D 차이](https://leeejihyun.tistory.com/37)
+* [CNN - Kernel & Feature map](https://woochan-autobiography.tistory.com/876)
