@@ -76,8 +76,6 @@ comments: true
     * python 라이브러리 형태 : smoter함수의 advanced mode를 사용하여 샘플링 해줄 것인지에 대한 세부인자 값들을 수동으로 설정할 수 있음
     * 이때 세부인자 설정 과정에서, 오버샘플링 데이터의 왜도 값을 비교하며 낮은 왜도 값을 가질 때의 세부인자를 선정할 수 있음
 
-
-
 <br>
 
 # 💡 모델링 개념
@@ -95,33 +93,6 @@ comments: true
 ### ⬛ Holdout method
 데이터셋을 train, test, eval set으로 분할하여 사용하는 모델 선택 방법이다. <br>
 train set으로 모델을 훈련하고, eval set은 모델 선택에 사용하여, test set으로 모델 훈련 뒤 성능 평가에 사용된다.
-
-### ⬛ 모델 설명
-1. **DNN**
-  * 신경망 모형 중 정형데이터 처리에 적합
-  * 다층 퍼셉트론(Multi-Layer Perceptron)으로, 인공 신경망의 한 종류
-  * 사람의 신경망과 비슷한 형태로 입력층, 은닉층, 출력층으로 구성됨
-    * input layer : X값 / hidden layer : X값 데이터 특징 추출 / output layer : Y값
-    * ex) 1개의 input layer & 각 5개, 5개 뉴런으로 이루어진 2개의 hidden layer & 1개의 output layer
-  * 각 층의 노드들은 가중치와 활성화 함수를 통해 입력 신호를 변환하고 처리함
-  * 파라미터
-    * 파라미터 선택 방법 : 각 파라미터는 MAE 값이 가장 낮은 지점의 형태 선택
-    * ex) activation function : relu, linear / Loss function : MAE / Optimizer : Adam / Learning Rate : 0.001 / Epoch : 500 / Batch size : 6
-2. **CNN**
-  * CNN은 2가지 특징이 있음 → 특징을 추출하는 feature extraction & feature extraction를 통과한 이후에 결과값을 도출해 주는 Classification
-    * feature extraction : Convolution layer와 Pooling layer가 섞여 있는 것
-    * Classification : fully-connected layer로 이루어진 것
-3. **1D-CNN (1 Dimensional Convolution Neural Network)**
-  * 시간에 따라 데이터가 구성되는 시계열 데이터에 적합함
-  * 1차원 Convolutional Neural Network으로, 인공 신경망의 한 종류
-  * 주로 시계열 데이터나 순차적인 데이터에서 패턴을 감지하고 학습하는데 좋은 성능을 보임 (변수 간의 지엽적인 특징을 추출)
-  * 각각의 층에서 입력 데이터의 부분적인 패턴을 파악하는 일종의 filter 작용을 거침
-  * Layer
-    * convolution layer(Conv1D) : 데이터 특성을 추출하고 패턴을 파악
-    * pooling layer :
-    * fully connected layer :
-    * dropcout layer : 과적합 방지
-    * ex) conv1d : filters=32, kernel_size=100 / Maxpooling1D : pool_size : 2 / Dense : units : 10 / Dropout : 0.1
 
 ### ⬛ 1D-CNN, 2D-CNN, 3D-CNN 차이점
 CNN 모델은 1D, 2D, 3D로 나뉘는데, 일반적인 CNN은 보통 이미지 분류에 사용되는 2D를 통칭한다. <br>
@@ -157,7 +128,7 @@ Convolution Filter를 Kernel로도 지칭
 * kernel 크기가 크면 클수록 입력 feature map(또는 원본 이미지)에서 더 큰(또는 더 많은) feature 정보를 가져올 수 있음
 * 큰 사이즈의 kernel로 convolution 연산을 할 경우 훨씬 더 많은 연산량과 파라미터가 필요함
 
- 
+
 ### ⬛ 모델 최적화
 * Hyperparameter Tuning
   * Hyperparameter : 모델을 생성할 때, 설정할 수 있는 모델 변수
@@ -194,6 +165,8 @@ Pooling layer의 종류에는 max pooling, average pooling, overlapping Pooling�
 보통 과적합 문제는 **정규화(Regularization)** 방법으로 많이 해결하고 정규화 방법 중 대표적인 것인 Dropout이다. <br>
 → 학습 데이터에 과정합되는 상황을 방지하기 위해 **학습 시 특정 확률로 노드들의 값을 0으로 보게 된다**. [주의] 이러한 과정은 학습할 때만 적용되고 예측 혹은 테스트할 때는 적용되지 않아야 한다. 
 
+### ⬛ Class Imbalance
+대부분의 이미지는 negative sample(background) 픽셀수가 많고, positive sample(object)이 적기 때문에 불균형이 존재한다.
 
 ### ⬛ 성능평가지표
 모델의 성능을 평가할 수 있는 지표로, 정확도/정밀도/재현율/F-score 등이 있다.
@@ -208,14 +181,138 @@ Pooling layer의 종류에는 max pooling, average pooling, overlapping Pooling�
   * precision과 recall의 조화평균
   * label의 수가 불균형적일 때, 모델의 성능을 비교적 정확히 평가할 수 있음
 
+### ⬛ AI모델 정확도 vs. 속도 vs. 비용
+AI 모델의 정확도를 높이다 보면, 연산량이 늘어나 속도가 느려지고 비용도 증가하여 사용자에게 안좋은 경험을 제공할 위험이 크다. <br>
+그렇기 때문에 속도/비용도 함께 고려한 효율적인 모델을 만드는 것이 중요하다.
+
+
+### ⬛ 자동 재학습 파이프라인
+모델의 성능 저하는 학습 데이터와 실제 추론 데이터의 분포 차이에 의해 발생한다.(Data Drift) <br>
+그렇기 때문에, 모델 학습과 평가 시에 사용한 데이터 세트과 최신 데이터의 분포가 상이하다면 정확한 추론 결과를 얻을 수 없다. <br>
+실제 추론 환경에서 성능 저하 현상을 방지하기 위해서는 최신 데이터 학습이 필요하다. 이를 대응하기 위해 데이터 수집, 정제, 학습, 배포 과정을 자동을 실행하는 파이프라인이 중요하다.
+* 모델별 특성에 따라 주기와 데이터 학습 window 기준, 학습 데이터 정제 방법이 달라 별도의 학습 파이프라인 동작 필요
+* 모델 배포 이전에 평가 과정을 파이프라인 내에서 수행하여, 자동으로 최신 데이터를 반영하면서 선능 유지하는 것이 가능하도록 해야함
+
+<br>
+
+# 💡 모델 설명
+### ⬛ XGBoost 알고리즘
+gradient boosting 알고리즘을 기반으로 한 ML 모형이다.
+* gradient tree bosting : 간단하지만 정확도가 낮은 모델의 결과값을 결합하여 빠른 속도로 높은 정확도에 도달하는 알고리즘
+
+병렬 처리를 통해 학습 속도가 빠르고 과적합에 대한 규제(regularization) 기능을 갖음과 동시에 ML 모형 중에서는 비교적 높은 예측 성능을 발휘한다.
+* 데이터 분포가 고르지 않은 데이터 양이 적은 부분에 대한 과적합을 방지
+* 빠른 학습을 통해 최신 데이터 학습 주기가 유연하게 변동 가능
+* CatBoost, LightGBM 대비 복합적인 조건에서 발생하는 분석 조건에서의 예측력이 상대적으로 높은 정확도를 나타냄
+
+주로 Y값에 영향을 미치는 변수의 설명력과 플랫폼 초기 구축 용이성을 위해 최적의 모형으로 사용되기도 한다.
+
+
+### ⬛ LSTM + Autoencoder
+
+
+### ⬛ DNN
+다층 퍼셉트론(Multi-Layer Perceptron)으로, 인공 신경망의 한 종류이다.
+* 신경망 모형 중 정형데이터 처리에 적합
+* 사람의 신경망과 비슷한 형태로 입력층, 은닉층, 출력층으로 구성됨
+  * input layer : X값 / hidden layer : X값 데이터 특징 추출 / output layer : Y값
+  * ex) 1개의 input layer & 각 5개, 5개 뉴런으로 이루어진 2개의 hidden layer & 1개의 output layer
+* 각 층의 노드들은 가중치와 활성화 함수를 통해 입력 신호를 변환하고 처리함
+* 파라미터
+  * 파라미터 선택 방법 : 각 파라미터는 MAE 값이 가장 낮은 지점의 형태 선택
+  * ex) activation function : relu, linear / Loss function : MAE / Optimizer : Adam / Learning Rate : 0.001 / Epoch : 500 / Batch size : 6
+
+### ⬛ CNN
+CNN은 2가지 특징이 있다. <br>
+→ 특징을 추출하는 feature extraction & feature extraction를 통과한 이후에 결과값을 도출해 주는 Classification
+* Feature extraction : Convolution layer와 Pooling layer가 섞여 있는 것
+* Classification : fully-connected layer로 이루어진 것
+
+### ⬛ 1D-CNN (1 Dimensional Convolution Neural Network)
+* 시간에 따라 데이터가 구성되는 시계열 데이터에 적합함
+* 1차원 Convolutional Neural Network으로, 인공 신경망의 한 종류
+* 주로 시계열 데이터나 순차적인 데이터에서 패턴을 감지하고 학습하는데 좋은 성능을 보임 (변수 간의 지엽적인 특징을 추출)
+* 각각의 층에서 입력 데이터의 부분적인 패턴을 파악하는 일종의 filter 작용을 거침
+* Layer
+  * Convolution layer(Conv1D) : 필터를 통해 이미지 데이터 특성을 추출하고 패턴을 파악 (필터 : 이미지에서 작은 영역을 선택하여 해당 영역의 정보 추출)
+  * Pooling layer : 특징 강화 + 이미지 크기 줄임
+  * Fully Connected layer(FCN) : 추출된 특징을 이용하여 이미지를 분류
+  * dropcout layer : 과적합 방지
+  * ex) conv1d : filters=32, kernel_size=100 / Maxpooling1D : pool_size : 2 / Dense : units : 10 / Dropout : 0.1
+
+### ⬛ EfficientNet
+모델 성능을 극대화하기 위하여, network의 depth(깊이), width(필터 수), 이미지 resolution 크기를 최적으로 조합한다. <br>
+이때 EfficientNet은 Compound Scaling을 활용하여 타 모델(vgg16, resnet50)보다 더 적은 연산량으로 좋은 성능을 낼 수 있다. 
+* Model Scaling 방법
+  * Width Scaling : layer 너비 넓히기 → channel 증가
+  * Depth Scaling : layer수 늘리기
+  * Resolution Scaling : input의 해상도를 높이기
+  * Compound Scaling : width, depth, resolution을 동시에 고려
+EfficientNet B0~B7가 존재하며, B1~B7은 B0에서 depth, width를 증가시켜서 모델을 생성한다.
+
+### ⬛ SSD(Single Shot Multibox Detector)
+장점과 단점은 다음과 같다.
+* 장점1) 실행 속도 fast : 단일 신경망을 사용하여, 한번의 순전파로 객체를 감지하므로 빠른 실행속도 가능
+* 장점2) 다양한 크기의 박스 생성 : 다양한 크기의 박스를 동시에 예측하여 다양한 크기의 객체 처리 가능
+* 단점1) imbalanced 낮은 예측 : 작은 물체에 대한 정확도가 떨어지며, class imbalance 취약
+
+### ⬛ Faster R-CNN
+장점과 단점은 다음과 같다.
+* 장점1) 정확한 객체 위치 예측 : RPN(Region Proposal Network)을 통해 정확한 객체 위치를 예측
+* 장점2) 높은 정확도 : 정확한 객체 감지에 적합
+* 단점1) 비교적 느린 실행 속도 : 여러 단계의 network를 거쳐서 객체를 감지하기 때문에, 실행 속도가 상대적으로 느림
+* 단점2) 높은 계산 비용 : 실시간 응용에 적합하지 않음
+
+### ⬛ RetinaNet
+One Stage Detector의 빠른 detection 시간의 장점을 가지면서 One Stage Detector의 detection 성능 저하 문제를 개선한 모델이다. <br>
+* 수행시간은 YOLO나 SSD보다 느리지만, Faster R-CNN보다 빠름
+* 수행성능은 타 dectection 모델보다 뛰어나며, 특히 one stage detector보다 작은 object에 대한 detection 능력이 뛰어남
+Focal Loss와 Feature Pyramid Network 특징이 있다.
+* Focal Loss : Cross Entropy를 대체한 Loss Function
+  * 어려운 샘플 or 오분류하는 픽셀값에 가중치를 주어, 모델이 객체에 더 집중하도록 하여 class imbalance 해결
+* FPN(Feature Pyramid Network) : backbone에 적용
+  * 다양한 크기 및 해상도를 가진 물체에 강건한 특징 추출
+
 <br>
 
 # 💡 분석 케이스 접근
+### ⬛ 분석 정의
+* 분석하고자 하는 Y에 대한 정확한 정의 필요 + Y에 영향을 주는 X 인자 또한 필요
+  * 이에 따른 데이터 수집 주기와 측정 방식에 대한 설명 요청
+* 분석 시나리오 기반, 현장에서 생각하는 가설을 데이터로 하나씩 검증하는 방식
+
 ### ⬛ 예측 모델링
 * 딥러닝 모델을 활용한 제품 물성 예측
   * 목표 KPI 잡기 (ex. 제품 스펙 범위의 20%)
   * For 신뢰성 높은 모델 확보, 다양한 지표를 사용하여 모델 평가 필요
 
+### ⬛ 이미지 분류
+* 프로세스 : 결점 발생 이미지 라벨링 → 이미지 전처리 및 분할 → Train Set 이미지로 모델 학습 → Valid Set 이미지로 모델 최종 성능 평가
+* 3가지 방식 존재
+  1. Image Classification : 이미지에 있는 물체가 어떤 class(category)인지 class를 분류
+    * 주로 CNN 기반의 모델을 사용
+  2. Object Detection : 이미지에 있는 모든 물체의 Bounding Box로 탐지 후, 분류
+    * Localization : 이미지 내 object에 bounding box를 생성한 후, 위치 정보 출력 및 분류
+    * Detection : 이미지 내 multi-object의 위치 정보 출력 및 분류
+  3. Image Segmentation : 이미지에 있는 모든 물체의 edge를 찾은 후, 분류
+* 결점 이미지 특징 : gray-scale 이미지
+
+### ⬛ 최적 조건 도출
+* 목표 : 수명에 영향을 주는 요인을 찾고, 수명을 예측하여 생산 수율 향상을 하고자 함
+
+### ⬛ 프로덕트 분석
+데이터를 뭉뚱그려서 봤을 때와 쪼개서 봤을 때의 결과가 다를 수 있고, 기간을 어떻게 보느냐에 따라 해석이 달라지기도 해서 항상 여러 방면에서 종합적으로 분석해서 결론을 내야한다. <br>
+그렇기 때문에 분석 결과에 대한 코멘트를 남기면서, 최대한 편향이 없는 결과가 공유될 수 있도록 노력해야한다.
+1. 서비스 분석 관점
+  * 서비스단에서 발생하는 문제를 정의하고 가설을 세운 후, 그 가설을 서비스 데이터로 검증
+  * 그 결과를 토대로 서비스가 개선되는 방향으로 의사결정을 할 수 있도록 도움
+2. 모델링 관점
+  * 모델이 시장의 수요 공급에 따라 탄력적으로 움직이고 있는지 트래킹 하기 위한 지표 개발
+  * 모델의 pain-point를 찾아 개선안을 제시하여 모델을 고도화
+3. 데이터 관리 운영 업무
+   * 기획이나 사업 부서에서 서비스 데이터를 편하게 볼 수 있도록 대시보드 생성
+   * 그에 필요한 마트 테이블도 만들어 제공
+   * 원천 데이터에 변화가 있을 때 마트테이블에 이를 반영하거나 수정하는 운영성 업무 진행
 
 <br>
 
@@ -249,3 +346,6 @@ Apache Airflow는 프로그래밍 방식으로 워크플로우를 작성, 예약
 * [Handling imbalanced datasets](http://dmqm.korea.ac.kr/activity/seminar/343)
 * [Conv1D, Conv2D, Conv3D 차이](https://leeejihyun.tistory.com/37)
 * [CNN - Kernel & Feature map](https://woochan-autobiography.tistory.com/876)
+* Complex Pattern Jacquard Fabrics Defect Detection Using Convolutional Neural Networks and Multispectral Imaging (2022)
+* Automatic Ship Detection Based on RetinaNet Using Multi-Resolution Gaofen-3 Imagery (2019)
+
