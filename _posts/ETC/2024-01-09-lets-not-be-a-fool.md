@@ -217,13 +217,24 @@ gradient boosting 알고리즘을 기반으로 한 ML 모형이다.
 
 ### ⬛ LSTM + Autoencoder (LSTM-AE)
 AutoEncoder는 원본 데이터를 특징백터(feature)로 압축하고 의미 있는 표현으로 인코딩한 다음 복원(reconstruction)시켜 복원된 데이터가 원본 데이터와 최대한 유사하도록 만든 신경망이다. 그렇기 때문에 labeled 데이터 없이 학습이 가능한 unsupervised 방법이다. <br>
-이때 **AutoEncoder에 LSTM 구조를 추가하여 sequence 데이터를 Self-Supervised 방법으로 학습**하는 것을 LSTM AutoEncoder라고 부른다.
+이때 **AutoEncoder에 LSTM 구조를 추가하여 sequence 또는 time-series 데이터를 Self-Supervised 방법으로 학습**하는 것을 LSTM AutoEncoder라고 부른다. <br>
+→ 인코더와 디코더에 LSTM 신경망을 적용한 Autoencoder
 * Encoder : sequence 데이터를 압축하는 LSTM 모듈
   * sequence 데이터는 차례대로 LSTM 모듈의 input으로 사용되어 feature 벡터로 변환됨
   * feature 벡터는 sequence 데이터를 압축한 형태로 이미지의 모습과 이미지의 이동방향 등의 정보가 포함되어 있음
 * Reconstruction Decoder : Encoder에서 생성된 feature 벡터를 이용하여 input sequence 데이터를 복원하는 LSTM 모듈
   * input sequence의 반대 방향으로 진행
 * Prediction Decoder : Encoder에서 생성된 feature 벡터를 이용하여 input sequence 이후 나올 미래의 이미지 sequence를 생성하는 LSTM 모듈
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/e9fef3a3-b8d4-40c7-857e-a892180c9683)
+
+
+
+Autoencoder는 일반적인 용도인 차원축소(dimension reduction) 뿐만 아니라 이상 탐지(anomaly detection) 분야에도 사용된다.
+* 만약 정상 데이터로만 Autoencoder를 학습하면 원본 데이터와 복원 데이터의 차이인 복원손실 또는 복원오차는 매우 작을 것임
+* 하지만 학습된 모델에 학습에 사용한 데이터와 상이한 특성을 갖는 데이터가 입력된다면 이 데이터는 학습되지 않았기 때문에 복원된 데이터는 원본 데이터와 많은 차이가 발생할 것
+  * LSTM-AE의 성능은 원본 입력 시퀀스와 복원된 시퀀스간의 차이로 평가됨
+* 복원오차가 정해진 임계치(threshold)를 넘게 되면 이상으로 판정
+
 
 LSTM AutoEncoder는 reconstruction task와 prediction task를 함께 학습함으로써 각각의 task만을 학습할 경우 발생하는 단점을 극복할 수 있다. 두가지 task를 함께 학습함으로써 모델이 모든 정보를 저장하지 않고 중요정보(이미지 모습, 이동방향 등)를 feature에 저장하도록 유도할 수 있다. 또한 Sequence 데이터의 모든 시점 정보를 활용하여 학습함으로써 모델이 쉽게 학습할 수 있도록 돕는 역할을 한다.
 * reconstruction task만을 수행하여 모델을 학습할 경우
@@ -552,6 +563,34 @@ Apache Airflow는 프로그래밍 방식으로 워크플로우를 작성, 예약
 
 <br>
 
+# 💡 CRM 캠페인 최적화를 위한 모델링
+> 광고 효율화 : 최소한의 예산으로 우리 광고에 적합한 유저를 찾아 효과적인 광고를 만드는 것
+> 이때, 광고 효율화를 위해서는 타겟, 예산, 노출 위치, 광고 소재 등 고려해야할 포인트가 너무 많음
+
+### ⬛ [ifkakao 발표](https://brunch.co.kr/@lulina724/31)
+* 컨텐츠에 따라 데이터 특성이 다르기에 특정 컨텐츠는 빠른 피드백을 수집하는 것 중요
+
+
+### ⬛ 페이스북 사례
+* 데이터 : 사용자드르이 행동 패턴, 유저가 반응한 광고 유형 등
+* 특정 시간, 노출 위치, 다양한 디바이스에 광고를 뿌려 보고 가자 좋은 경우의 수를 찾고 광고 노출 반복됨
+* **약 7일 동안 50개의 테스트**를 머신러닝 기간으로 봄
+* 캠페인 목표
+  * ex) 트래픽 → 트래픽 건수가 50건 이상 나왔을 때 / 구매 목표 → 구매 결제가 50건 도달했을 때
+  * 7일 기준 : 광고 세트를 생성하고 나서부터 7일이며, 그전에 수정을 하면 수정한 시점부터 다시 7일 시작
+
+#### 최적화
+최적화는 **내가 원하는 행동을 할만한 유저에게 광고를 노출시켜서 확률을 높이는 것**으로 정의할 수 있다.
+* 내가 원하는 행동 = 나의 KPI
+* 최적화를 위해서는 내 KPI가 무엇인지 아는게 중요
+* 확률을 높인다는 것 = 전환율을 높이는 것
+
+캠페인 목표별 게재 최적화 기준에서 가장 많이 실수하는 부분은 **랜딩 페이지 조회**와 **링크 페이지 조회**를 구분하는 것이다.
+* 내가 만들어 놓은 상세 페이지인 랜딩 페이지를 클릭하는 것이 링크를 클릭하고 빠르게 이탈하거나 상세페이지까지 도달하지 않는 트래픽과 구분될 수 있는 수치임
+* **광고 게재 최적화 기준을 랜딩 페이지 조회로 꼭 선택**해야함
+
+<br>
+
 # 💡 Good Answer
 * 내가 가진 궁금증을 바탕으로 데이터분석을 통해 내가 좋아하는 서비스의 성장에 도움이 되는 일을 하고 싶음
 * 사용자분들이 우리 서비스를 더욱 만족하면서 사용할 수 있도록 만들고, 이를 통해서 비즈니스가 성장하고 다시 사용자 만족도가 높아지는 선순환을 만드는 일
@@ -573,6 +612,11 @@ Apache Airflow는 프로그래밍 방식으로 워크플로우를 작성, 예약
   * 스스로 문제 의식을 가지고 실제 데이터를 활용해 해결책을 찾고, 개선하기 위해 실행해본 경험
   * 실제로 어떤 문제를 놓고 왜 그것이 문제라고 생각했고 어떻게 문제를 해결하고 활용했는지
 
+<br>
+
+# 💡 궁금한 부분
+* 비활성 유저들은 로그 데이터가 적어서 모델리잉 어렵고, 콘텐츠 수명이 짧은 편임. 서비스 구현 방식에 따라 다르지만 이럴때는 피드백 속도와 딜레마가 있을 것으로 예상됨. 이건 어떻게 해결하고 있는지?
+  
 
 <br>
 
@@ -590,3 +634,4 @@ Apache Airflow는 프로그래밍 방식으로 워크플로우를 작성, 예약
 * [신뢰구간을 이용한 A/B Test](https://datarian.io/blog/overlapping-ci-in-abtest)
 * [베이지안 A/B 테스트 in Python](https://playinpap.github.io/bayesian-abtest/)
 * [분석 목적에 맞는 고객 세그먼테이션 방법을 찾아서](https://playinpap.github.io/customer-segmentation/)
+* [LSTM-AE를 이용한 시퀀스 데이터 이상 탐지](https://pasus.tistory.com/267)
