@@ -215,7 +215,25 @@ gradient boosting 알고리즘을 기반으로 한 ML 모형이다.
 주로 Y값에 영향을 미치는 변수의 설명력과 플랫폼 초기 구축 용이성을 위해 최적의 모형으로 사용되기도 한다.
 
 
-### ⬛ LSTM + Autoencoder
+### ⬛ LSTM + Autoencoder (LSTM-AE)
+AutoEncoder는 원본 데이터를 특징백터(feature)로 압축하고 의미 있는 표현으로 인코딩한 다음 복원(reconstruction)시켜 복원된 데이터가 원본 데이터와 최대한 유사하도록 만든 신경망이다. 그렇기 때문에 labeled 데이터 없이 학습이 가능한 unsupervised 방법이다. <br>
+이때 **AutoEncoder에 LSTM 구조를 추가하여 sequence 데이터를 Self-Supervised 방법으로 학습**하는 것을 LSTM AutoEncoder라고 부른다.
+* Encoder : sequence 데이터를 압축하는 LSTM 모듈
+  * sequence 데이터는 차례대로 LSTM 모듈의 input으로 사용되어 feature 벡터로 변환됨
+  * feature 벡터는 sequence 데이터를 압축한 형태로 이미지의 모습과 이미지의 이동방향 등의 정보가 포함되어 있음
+* Reconstruction Decoder : Encoder에서 생성된 feature 벡터를 이용하여 input sequence 데이터를 복원하는 LSTM 모듈
+  * input sequence의 반대 방향으로 진행
+* Prediction Decoder : Encoder에서 생성된 feature 벡터를 이용하여 input sequence 이후 나올 미래의 이미지 sequence를 생성하는 LSTM 모듈
+
+LSTM AutoEncoder는 reconstruction task와 prediction task를 함께 학습함으로써 각각의 task만을 학습할 경우 발생하는 단점을 극복할 수 있다. 두가지 task를 함께 학습함으로써 모델이 모든 정보를 저장하지 않고 중요정보(이미지 모습, 이동방향 등)를 feature에 저장하도록 유도할 수 있다. 또한 Sequence 데이터의 모든 시점 정보를 활용하여 학습함으로써 모델이 쉽게 학습할 수 있도록 돕는 역할을 한다.
+* reconstruction task만을 수행하여 모델을 학습할 경우
+  * 모델은 input의 사소한 정보까지 보존하여 Feature 벡터를 생성함
+  * 즉 사소한 정보가 저장될 수 없게 Feature 벡터의 크기를 작게 설정하지 않으면 과적합(overfitting)이 발생하는 단점이 존재함
+* prediction task만을 수행하여 모델을 학습할 경우
+  * 모델은 input의 최근 sequence 정보만을 이용하여 학습함
+  * 일반적으로 prediction에 필요한 정보는 예측하기 전 시점에 가까울수록 상관관계가 높기 때문임
+  * 따라서 과거 시점의 정보를 활용하지 못하는 단점이 존재함
+
 
 
 ### ⬛ DNN
