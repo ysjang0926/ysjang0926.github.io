@@ -150,12 +150,11 @@ time step와 관측치의 개수에 따라 계산 시간이 기하 급수적으�
 <br>
 
 이때 Times series 데이터가 적용 가능 하도록 Density Peak의 개념을 확장한 알고리즘이 **TADPole(Time-series Anytime DP)**입니다.
-* Density Peak
-	* Data type : Multivariate dataset
-	* Input : Distance Matrix (=ED) 
-* TADPole
-	* Data type : Time-series dataset
-	* Input : Distance Matrix(=DTW)
+
+|   | **Density Peak**     | **TADPole**          |
+|:---------:|:--------------------:|:--------------------:|
+| Date type | Multivariate dataset | Time-series dataset  |
+| Input     | Distance Matrix(ED)  | Distance Matrix(DTW) |
 
 <br>
 
