@@ -35,19 +35,20 @@ use_math: true
 	* 즉, 두 시계열 데이터의 complexity가 다를 때를 고려해야하는 것
  ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/3fc3a871-2775-4ba5-b48d-fef4a4cfc877)
 
+<br>
 
 시계열 데이터의 특징을 반영한 방법 중 하나는 **similarity(유사도) 기반의 알고리즘이 주로 사용되는 Clustering 방법**이 있습니다. 
 * 시계열에서의 clustering : 비슷한 시계열 데이터끼리 묶는 것
-* clustering 목표 : 같은 cluster에 속하는 데이터는 최대한 비슷하게, 다른 cluster에 속하는 데이터는 최대한 다르게 cluster 나누기
+* clustering 목표
+	* 같은 cluster에 속하는 데이터는 최대한 비슷하게, 다른 cluster에 속하는 데이터는 최대한 다르게 cluster 나누기 <br>
 
 Clustering에서 **거리**라는 단어가 등장하는데요. 이때 대표적으로 많이 쓰이는 **distance measure**로는 **유클리디언 거리(ED; Euclidean Distance)**가 있습니다.
-![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/216120c5-d230-4b40-b636-86113cb3ab2a)
-
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/b50d981a-79e5-450a-b082-94391a989645) <br>
 
 하지만 유클리디언 거리는 시계열 데이터가 맞지 않습니다. 그 이유로는 시계열 특징 중 하나인 **시간 축에 따른 shift invariance(misalignment)**를 고려해야하기 때문입니다. 아래의 예시를 통해 설명하도록 하겠습니다. <br>
 빨간색과 파란색 시계열은 데이터 간 lag나 tranformation이 있지만,  어느정도 비슷한 패턴을 가지고 있는 것으로 보입니다. 유클리디안 거리(ED)로 두 시계열 간 거리를 재게 된다면, 왼쪽 그림처럼 시계열 특성을 반영하지 못하고 서로 다른 데이터라는 결과값이 나올 것입니다.
 * ED : 시계열 데이터 특성을 반영하지 못함
-![Uploading image.png…]()
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/5b13632d-b6c1-4ebb-b4ac-b56a5a637641) <br>
 
 그렇기 때문에 오른쪽 그림처럼 시계열의 패턴을 고려하면서, 관측치 간의 거리를 정의하고 그 거리를 계산할 수 있는 방법이 따로 필요하게 됩니다. <br>
 * 각 시계열 데이터간의 유사도를 잘 정의하는 것이 중요
@@ -67,19 +68,21 @@ DTW의 핵심은 **두 개의 시계열의 유사도를 토대로 Distance matri
 
 즉, **Distance를 계산하여 Cost matrix를 산출하여 , 임의의 window 내에서 거리의 총합이 최소화되도록 Path를 구하여 유사도를 측정**합니다. 이 계산법을 통해 두 시계열 간 misalignment 해결할 수 있습니다.
 * Cost matrix : 일종의 유사도 행렬 
-![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/dd504b35-26a6-479b-8d85-b978fec63a06)
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/2641ef7e-e709-4c04-8538-0ebe1d318e0c)
+
 
 갑자기 너무 어려워졌죠? 아래의 두 시계열 데이터 예시를 통해 설명하도록 하겠습니다. (seq=10)
 * Time series 1 = [1,6,2,3,0,9,4,3,6,3]
 * Time seires 2 = [1,3,4,9,8,2,1,5,7,3]
-![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/8af9a24c-e5ea-4002-b135-f5f2e0027dd4)
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/b20c59d6-b496-4853-ace7-1ba6b2870c60)
 
 뭔가 비슷하면서도 다른 것 같죠? 두 개의 시계열 데이터 길이가 같기 때문에 유클리디언 거리를 계산하자면 13.27입니다. DTW와 비교하도록 하겠습니다.
 
 시계열 안의 sequence 포인트를 비교할 때 근처 값들을 비교하여 제일 짧은 값(선)을 그어준다고 생각하면 됩니다.
 * ED : seq=2일 때의 두 데이터가 연결
 * DTW : TS1의 seq=3번일 때 데이터가 TS2의 seq=2번일 때 데이터와 연결
-![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/16fcfa47-6027-4278-ae1c-9a23f6b17d37)
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/f33ff28c-ed3d-4ff0-9518-d9d5d3d981d8)
+
 
 그렇다면, TS1과 TS2의 10개의 데이터 간의 유사도를 산출하면 다음과 같습니다.
 ![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/522f5557-9099-4f36-b9d0-245ef7da6276)
