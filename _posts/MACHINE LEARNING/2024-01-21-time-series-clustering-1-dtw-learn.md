@@ -134,18 +134,16 @@ time step와 관측치의 개수에 따라 계산 시간이 기하 급수적으�
 * index=21
 	* index=21 데이터값의 Local density = 2
 	* 2보다 높은 관측치끼리의 거리들을 구했을 때, index=1인 데이터와의 거리가 가장 최소거리 = 0.18
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/cac4aca7-d3b1-4b10-9338-2c5076444515) <br>
 
 위에서 구한 두가지 요약값을 곱하여, 곱한 값에 대해 상위 K개를 군집의 중심으로 선택을 하게 됩니다.
 * `think` local density가 높으면서 더 높은 density와의는 거리가 멀다
 * 즉, 군집의 중심일 가능성 ↑
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/ccfe7216-16fe-4956-8870-ee97dfb7131e) <br>
 
-
-두 가지 요약값을 활용하여 Cluster를 이루기 때문에, 굉장히 간단하면서도 파워풀한 알고리즘입니다. <br>
+Density Peak은 두 가지 요약값을 활용하여 Cluster를 이루기 때문에, 굉장히 간단하면서도 파워풀한 알고리즘입니다. <br>
 하지만 Density Peak에서도 많은 하이퍼파라미터가 존재하기 때문에, 연산량이 발생할 수 밖에 없습니다. (완벽한 방법 X)
-* Hyper-parameter
-	* Cutoff distance
-	* Number of Center
+* Cutoff distance & Number of Center
 
 <br>
 
@@ -161,33 +159,30 @@ time step와 관측치의 개수에 따라 계산 시간이 기하 급수적으�
 # 📈 TADPole Clustering Algorithm  
 Data type이 **Time-series dataset**이고, Input이 **DTW**일 때, 두가지를 고려해야 합니다.
 * 어떻게 DTW를 효율적으로 계산할 것인지
-* 어떻게 Local density와 Minumum Distance from Points of Higher Density를 구할 것인지
+* 어떻게 Local density와 Minumum Distance from Points of Higher Density를 구할 것인지 <br>
  
 ### 효율적인 DTW 계산 방법
 효율적으로 DTW를 계산하는 방법 중 하나는, DTW 연산을 줄이기 위해 Boundary 개념을 도입하는 것입니다. Boundary를 넘어가는 부분에 대해서는 ED로 계산하는 것이죠.
-![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/75930e63-3478-4924-9d5f-7516237d6a12)
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/594389fa-3992-416f-a275-7cb76eba22b2)
 
 Q와 C 시계열 데이터가 있다고 했을 때, U와 L은 Upper & Lower Bound가 됩니다.
 * Lb_matrix = Boundary를 넘어가는 부분만 ED로 계산한 거리
 * Ub_matrix = 유클리디안 거리
-![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/da5e5948-b1d0-4e22-b840-70816f41f39b)
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/b814e92c-0f4d-42b1-9f51-78fa9a99a431)
 
 이때 기존 DTW의 연산을 피하기 위해, 새롭게 DTW 거리를 정의합니다. <br>
 *  매시점의 DTW 거리는 **Lb_matrix ≤ DWT ≤Ub_matirx**로 산출
 * 새로운 방법으로 DTW 거리로 산출하여, 최종 DTW값을 산출
-![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/4d38b8aa-8b6b-4d21-bd4e-5cb041a8c070)
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/46727e66-7d0d-462b-b9a2-5d05f3261d86)
 
 
 ### LD, MD 계산
-DTW를 산출하였으니 
-
 #### (1) Local density
 Local density는 각 데이터 값에 대해 cutoff distance(d_c)보다 작은 거리에 있는 관측치 수입니다. <br>
 매시점의 DTW 거리가 Lb_matrix ≤ DWT ≤Ub_matirx인 것처럼, d_c
 ![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/5966f08e-7dea-446e-9774-57b393941048)
 
-
-(2) Minumum Distance from Points of Higher Density
+#### (2) Minumum Distance from Points of Higher Density
 
 기존 Distance 기반 Clustering 기법보다 훨씬 더 빠른 결과를 가지고 왔다. Density Peak에서 Local density를 계산할 때 사용하는 기법을 활용하여 계산량을 확실하게 줄이는 것을 확인할 수 있었다.
 
