@@ -20,20 +20,20 @@ use_math: true
 *  **scaling and translation invariances**
 	*  scale invariance : 시계열 데이터의 스케일을 아무리 바꾸어도 출력값은 변하지 않는다는 것
 	* translation invariance : 시계열 데이터를 이동시켜도 출력값은 변하지 않는다는 것
-	* scaling and translation invariances : transformation을 했을 때, 물체의 distance measure가 변하지 않는다는 것 
+	* scaling and translation invariances : transformation을 했을 때, 물체의 distance measure가 변하지 않는다는 것
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/9a90c96c-997a-4242-baaa-734a0ff8151d)
 * **shift invariance**
 	* 시점에 대한 왜곡에 따라 발생하는 misalingment에 대해 강건함
 	* 즉, 두 시계열 데이터가 있을 때의 시간축에 따른 시간차 패턴을 고려해야하는 것
 	* misalignment : 축 정렬 오차
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/69260203-7956-436d-a686-d079554e4705)
-
 * **uniform scaling invariance**
-	* 두 시계열 데이터의 lenth가 서로 다를 때, length가 같아야 한다는 것	![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/a943087f-b0aa-4d62-87d6-2329a1b1349e)
+	* 두 시계열 데이터의 lenth가 서로 다를 때, length가 같아야 한다는 것
+ ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/07b6227e-9181-447c-b27c-bc11548b4ece)
 * **complexity invariance**
 	* 두 시계열 데이터의 complexity가 다를 때, noise 정도가 다를 때에 대해 강건함
 	* 즉, 두 시계열 데이터의 complexity가 다를 때를 고려해야하는 것
-![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/503b0f4b-fdc2-4255-8f22-d0e2a0b20ecb)
+ ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/3fc3a871-2775-4ba5-b48d-fef4a4cfc877)
 
 
 시계열 데이터의 특징을 반영한 방법 중 하나는 **similarity(유사도) 기반의 알고리즘이 주로 사용되는 Clustering 방법**이 있습니다. 
