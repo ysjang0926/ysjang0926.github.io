@@ -92,13 +92,11 @@ DTW의 핵심은 **두 개의 시계열의 유사도를 토대로 Distance matri
 * root(15) = 3.87 = DTW값
 * 13.27 = ED값
 * DTW는 ED의 약 1/3 정도 값
-![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/bf4213b6-5871-45a6-a1e4-cacc9660dfd2)
-
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/bf4213b6-5871-45a6-a1e4-cacc9660dfd2) <br>
 
 이때 최소가 되는 path, 즉 선의 거리가 비용(cost)이 되는데요. 선이 길어질수록(=멀리 가야 할수록) 비용이 높아지게 됩니다. <br>
 time step와 관측치의 개수에 따라 계산 시간이 기하 급수적으로 증가하게 됩니다.
-* O(n^2) time 
-* O(n^2) space
+* O(n^2) time & O(n^2) space <br>
 
 이렇게 DTW를 사용하여, 시계열 데이터 간의 유사도를 산출하는 것은 매우 유용하게 사용됩니다. <br>
 하지만 DTW는 그 자체의 연산량이 상당하기 때문에 **computational cost가 매우 높습니다**.  특히 관측치의 증가에 따라 계산 시간이 지수승으로 매우 크게 증가하게 됩니다. <br>
