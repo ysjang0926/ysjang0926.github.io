@@ -27,6 +27,7 @@ use_math: true
 	* 즉, 두 시계열 데이터가 있을 때의 시간축에 따른 시간차 패턴을 고려해야하는 것
 	* misalignment : 축 정렬 오차
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/69260203-7956-436d-a686-d079554e4705)
+
 * **uniform scaling invariance**
 	* 두 시계열 데이터의 lenth가 서로 다를 때, length가 같아야 한다는 것	![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/a943087f-b0aa-4d62-87d6-2329a1b1349e)
 * **complexity invariance**
