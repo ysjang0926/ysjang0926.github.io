@@ -68,35 +68,36 @@ DTW는 단어 뜻 그대로 **‘dynamic하게 시계열을 비틀어서’** �
 DTW의 핵심은 **두 개의 시계열의 유사도를 토대로 Distance matrix를 만든 이후, 유사도의 총합이 최소가 되는 길을 찾는 것**입니다.
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/2641ef7e-e709-4c04-8538-0ebe1d318e0c)
 
-즉, **Distance를 계산하여 Cost matrix를 산출하여 , 임의의 window 내에서 거리의 총합이 최소화되도록 Path를 구하여 유사도를 측정**합니다. 이 계산법을 통해 두 시계열 간 misalignment 해결할 수 있습니다.
+즉, **Distance를 계산하여 Cost matrix를 산출**하여 , 임의의 window 내에서 **거리의 총합이 최소화되도록 Path를 구하여 유사도를 측정**합니다. 이 계산법을 통해 두 시계열 간 misalignment 해결할 수 있습니다.
 * Cost matrix : 일종의 유사도 행렬 
-![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/adb2d057-8d33-47c2-b5ff-b51b217ce670) <br>
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/adb2d057-8d33-47c2-b5ff-b51b217ce670)
+
+<br>
 
 갑자기 너무 어려워졌죠? 아래의 두 시계열 데이터 예시를 통해 설명하도록 하겠습니다. (seq=10)
 * Time series 1 = [1,6,2,3,0,9,4,3,6,3]
 * Time seires 2 = [1,3,4,9,8,2,1,5,7,3]
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/b20c59d6-b496-4853-ace7-1ba6b2870c60)
 
-뭔가 비슷하면서도 다른 것 같은데, 두 개의 시계열 데이터 길이가 같기 때문에 유클리디언 거리를 계산하자면 13.27입니다. DTW와 비교하도록 하겠습니다. <br>
-
-시계열 안의 sequence 포인트를 비교할 때 근처 값들을 비교하여 제일 짧은 값(선)을 그어준다고 생각하면 됩니다.
+뭔가 비슷하면서도 다른 두 데이터인데, 일단 두 개의 시계열 데이터 길이가 같기 때문에 유클리디언 거리를 계산하자면 13.27입니다. <br>
+DTW와 비교하도록 하겠습니다. 시계열 안의 sequence 포인트를 비교할 때 근처 값들을 비교하여 제일 짧은 값(선)을 그어준다고 생각하면 됩니다.
 * ED : seq=2일 때의 두 데이터가 연결
-* DTW : TS1 seq=3번일 때 데이터가 TS2 seq=2번일 때 데이터와 연결
+* DTW : TS1 seq=3번 데이터가 TS2 seq=2번 데이터와 연결
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/f33ff28c-ed3d-4ff0-9518-d9d5d3d981d8)
 
-그렇다면, TS1과 TS2의 10개의 데이터 간의 유사도를 산출하면 다음과 같습니다.
-![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/98728b43-3e78-40cd-ae45-3afa46e5c90b)
+그렇다면 TS1과 TS2의 10개의 데이터 간의 유사도를 산출하면 다음과 같습니다.
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/98728b43-3e78-40cd-ae45-3afa46e5c90b) <br>
 
-처음부터 끝나는 step까지 총합(유사도)이 최소가 되는 path를 설정하면 됩니다. <br>
-위의 핑크색 부분이 최종 경로이며, 모든 칸은 누적거리이기 때문에 마지막 칸의 값에 제곱근을 취한 값이 DTW 값이 됩니다.
-* root(15) = 3.87 = DTW값
-* 13.27 = ED값
-* DTW는 ED의 약 1/3 정도 값
+처음부터 끝나는 step까지 총합(유사도)이 최소가 되는 path를 설정하면 됩니다. 아래의 핑크색 부분이 최종 경로이며, 모든 칸은 누적거리이기 때문에 마지막 칸의 값에 제곱근을 취한 값이 DTW 값이 됩니다.
+* **DTW값** : root(15) = 3.87
+* **ED값** : 13.27 → DTW는 ED의 약 1/3 정도 값
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/bf4213b6-5871-45a6-a1e4-cacc9660dfd2) <br>
 
-이때 최소가 되는 path, 즉 선의 거리가 비용(cost)이 되는데요. 선이 길어질수록(=멀리 가야 할수록) 비용이 높아지게 됩니다. <br>
-time step와 관측치의 개수에 따라 계산 시간이 기하 급수적으로 증가하게 됩니다.
-* O(n^2) time & O(n^2) space <br>
+이때 최소가 되는 path, 즉 **선의 거리가 비용(cost)**이 되는데요. 선이 길어질수록(=멀리 가야 할수록) 비용이 높아지게 됩니다. <br>
+time step와 관측치의 개수에 따라 계산 시간이 기하 급수적으로 증가하게 되는거죠.
+* O(n^2) time & space
+
+<br>
 
 이렇게 DTW를 사용하여, 시계열 데이터 간의 유사도를 산출하는 것은 매우 유용하게 사용됩니다. <br>
 하지만 DTW는 그 자체의 연산량이 상당하기 때문에 **computational cost가 매우 높습니다**.  특히 관측치의 증가에 따라 계산 시간이 지수승으로 매우 크게 증가하게 됩니다. <br>
@@ -107,19 +108,22 @@ time step와 관측치의 개수에 따라 계산 시간이 기하 급수적으�
 ## 📏 DTW 확장 방법 - Density Peak
 연산량을 개선하기 위한 cDTW(Sakeo-Chiba Band), LB_Koegh(Lower bound of Keogh), Density Peak 등의 방법이 있으며, 이번 글에서는 **Density Peak**에 대해서만 간단하게 소개하도록 하겠습니다.
 * cDTW : 연산을 효율적으로 하기 위하여 band를 줌
-	* 누계가 최소가 되는 path위주로만 탐색
+	* 누계가 최소가 되는 path 위주로만 탐색
 * LB_Koeght : lower bound 개념을 도입하여 계산량을 줄임
 	* DTW를 계산하지 않고, 유사한 효과를 얻기 위해 Boundary 개념을 도입
 	* lower/upper bound를 넘어가는 부분에 대해서만 ED로 계산하여 비슷한 효과를 냄
 
-Density Peak은 밀도 기반의 군집화 방법이며, 군집화를 하기 위해 데이터에서 2가지의 요약값을 추출합니다.
+<br>
+
+**Density Peak**은 **밀도 기반의 군집화 방법**이며, 군집화를 하기 위해 데이터에서 2가지의 요약값을 추출합니다.
 1. Local density
-2. Minumum Distance from Points of Higher Density
+2. Minumum Distance from Points of Higher Density <br>
 
 #### 1️⃣ Local Density
 **각 데이터 값에 대해 cutoff distance(d_c)보다 작은 거리에 있는 관측치 수**입니다. <br>
 아래의 그림에서 c는 각 데이터값의 index이고, cutoff distance에 의해 관측치 수를 구할 수 있습니다.
-![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/a0c893f9-162c-4f57-967b-028a3fa5279d)
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/0fb68dc7-eeb8-4ce7-8426-2e1768fc264c)
+
 
 #### 2️⃣ Minimum Distance from Points of Higher Density
 **데이터의 Local density보다 높은 관측치까지의 거리 중 최소거리**입니다. <br>
@@ -134,12 +138,16 @@ Density Peak은 밀도 기반의 군집화 방법이며, 군집화를 하기 위
 위에서 구한 두가지 요약값을 곱하여, 곱한 값에 대해 상위 K개를 군집의 중심으로 선택을 하게 됩니다.
 * `think` local density가 높으면서 더 높은 density와의는 거리가 멀다
 * 즉, 군집의 중심일 가능성 ↑
-![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/520c604f-052a-4f97-a465-09c34e5d2b70)
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/ccfe7216-16fe-4956-8870-ee97dfb7131e) <br>
+
 
 두 가지 요약값을 활용하여 Cluster를 이루기 때문에, 굉장히 간단하면서도 파워풀한 알고리즘입니다. <br>
 하지만 Density Peak에서도 많은 하이퍼파라미터가 존재하기 때문에, 연산량이 발생할 수 밖에 없습니다. (완벽한 방법 X)
-* Cutoff distance
-* Number of Center
+* Hyper-parameter
+	* Cutoff distance
+	* Number of Center
+
+<br>
 
 이때 Times series 데이터가 적용 가능 하도록 Density Peak의 개념을 확장한 알고리즘이 **TADPole(Time-series Anytime DP)**입니다.
 * Density Peak
