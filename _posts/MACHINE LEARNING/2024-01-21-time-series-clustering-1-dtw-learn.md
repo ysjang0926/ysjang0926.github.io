@@ -1,4 +1,35 @@
-![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/a943087f-b0aa-4d62-87d6-2329a1b1349e)
+---
+layout: post
+title:  "Time Series Clustering(1) - Dynamic Time Clustering(DTW)"
+subtitle:   "Time Series Clustering with Dynamic Time Clustering"
+categories: data
+tags: ml
+comments: true
+use_math: true
+---
+
+
+* 이번 글에서는 시계열 데이터 클러스터링에 대해 정리해 보았습니다.
+* 이론 내용 위주로 다루었고, 예시 논문이나 데이터를 통한 코드 예시는 다음 포스팅에서 진행하도록 하겠습니다. (원하는 데이터를 못구했어요😂)
+* 많은 연산을 필요로 하는 DTW의 단점을 해결할 수 있는 알고리즘(tadpole,k-shape clustering)에 대해서도 리뷰하였습니다.
+
+---
+
+# ⏳ Time-series Invariances
+시계열 데이터는 기존의 다변량 데이터과 어떤 차이점이 있을까요? 바로 **시간 개념이 포함**된다는 것입니다. <br>
+따라서 시계열 데이터를 분석을 함에 있어, 시계열적인 특성(scale and translate invariance, shift invariance 등)을 고려해야 합니다. 
+*  **scaling and translation invariances**
+	*  scale invariance : 시계열 데이터의 스케일을 아무리 바꾸어도 출력값은 변하지 않는다는 것
+	* translation invariance : 시계열 데이터를 이동시켜도 출력값은 변하지 않는다는 것
+	* scaling and translation invariances : transformation을 했을 때, 물체의 distance measure가 변하지 않는다는 것 
+![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/7d312e2d-24f2-4976-9255-78f62502f251)
+* **shift invariance**
+	* 시점에 대한 왜곡에 따라 발생하는 misalingment에 대해 강건함
+	* 즉, 두 시계열 데이터가 있을 때의 시간축에 따른 시간차 패턴을 고려해야하는 것
+	* misalignment : 축 정렬 오차
+![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/bbcc257d-3ce7-40fa-b882-09f7ea3eb92d)
+* **uniform scaling invariance**
+	* 두 시계열 데이터의 lenth가 서로 다를 때, length가 같아야 한다는 것	![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/a943087f-b0aa-4d62-87d6-2329a1b1349e)
 * **complexity invariance**
 	* 두 시계열 데이터의 complexity가 다를 때, noise 정도가 다를 때에 대해 강건함
 	* 즉, 두 시계열 데이터의 complexity가 다를 때를 고려해야하는 것
