@@ -161,43 +161,35 @@ Data type이 **Time-series dataset**이고, Input이 **DTW**일 때, 두가지�
 * 어떻게 DTW를 효율적으로 계산할 것인지
 * 어떻게 Local density와 Minumum Distance from Points of Higher Density를 구할 것인지 <br>
  
-### 효율적인 DTW 계산 방법
+### ⬛ 효율적인 DTW 계산 방법
 효율적으로 DTW를 계산하는 방법 중 하나는, DTW 연산을 줄이기 위해 Boundary 개념을 도입하는 것입니다. Boundary를 넘어가는 부분에 대해서는 ED로 계산하는 것이죠.
-![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/594389fa-3992-416f-a275-7cb76eba22b2)
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/594389fa-3992-416f-a275-7cb76eba22b2) <br>
 
 Q와 C 시계열 데이터가 있다고 했을 때, U와 L은 Upper & Lower Bound가 됩니다.
 * Lb_matrix = Boundary를 넘어가는 부분만 ED로 계산한 거리
-* Ub_matrix = 유클리디안 거리
+* UB_matrix = 유클리디안 거리
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/b814e92c-0f4d-42b1-9f51-78fa9a99a431)
 
+<br>
+
 이때 기존 DTW의 연산을 피하기 위해, 새롭게 DTW 거리를 정의합니다. <br>
-*  매시점의 DTW 거리는 **Lb_matrix ≤ DWT ≤Ub_matirx**로 산출
+*  매시점의 DTW 거리는 **Lb_matrix ≤ DWT ≤UB_matirx**로 산출
 * 새로운 방법으로 DTW 거리로 산출하여, 최종 DTW값을 산출
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/46727e66-7d0d-462b-b9a2-5d05f3261d86)
 
+<br>
 
-### LD, MD 계산
+### ⬛ LD, MD 계산
 #### (1) Local density
 Local density는 각 데이터 값에 대해 cutoff distance(d_c)보다 작은 거리에 있는 관측치 수입니다. <br>
-매시점의 DTW 거리가 Lb_matrix ≤ DWT ≤Ub_matirx인 것처럼, d_c
-![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/5966f08e-7dea-446e-9774-57b393941048)
+매시점의 DTW 거리가 Lb_matrix ≤ DTW ≤UB_matirx인 케이스 일 때, d_c보다 작은 거리에 있는 값을 캐치하면 됩니다.
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/2ada9fc2-20ba-42ac-bb13-f32e397bae6c)
+
 
 #### (2) Minumum Distance from Points of Higher Density
+> 해당 부분은 이해가 조금 되지 않아, 마무리 되는대로 내용을 추가하도록 하겠습니다.
 
-기존 Distance 기반 Clustering 기법보다 훨씬 더 빠른 결과를 가지고 왔다. Density Peak에서 Local density를 계산할 때 사용하는 기법을 활용하여 계산량을 확실하게 줄이는 것을 확인할 수 있었다.
-
-DTW를 사용하여 군집화를 수행할때, 좀더 효율적으로 계산을 하기 위한 군집화 기법에 대해 다뤘다. DTW 유사도를 산출하는데 있어 상한과 하한을 정의하여 모든 관측치 간의 유사도를 계산하는것이 아니라 필요한 계산만을 수행하여 계산량을 효과적으로 줄임과 동시에 군집화 시간을 효율적으로 단축시킬수 있는 방법론에 대해 다뤘다.
-
-  
-## K-shape clustering algorithm  
-  
-일반적으로 유사도를 정의함에 있어 DTW가 아닌 cross-correlation을 통해 유사도를 정의하였다. 두 개의 시계열을 시간축을 기준으로 움직이면서 둘 간의 내적이 최대가 되는 값을 두 관측치의 유사도라 정의하고 이를 shape based distane (SBD)라고 정의하였다. 일반적인 과정은 k-means와 유사하지만 거리를 정의함에 있어 두 관측치간의 cross-correlation을 통해 정의하였다는 점이 상당히 인상깊은 부분이라 할 수 있겠다.
-
----
-
-Time series 형태의 데이터는 실제 현실세계에서 많이 발생한다. 이를 분석하기 위해서는 sequence 자체가 가지고 있는 패턴을 고려해야하며, 동시에 시간 축에 따른 misaglinment등을 고려하여 분석을 수행해야한다. 전통적으로 시계열 데이터 군집화를 위해서는 시간적인 보정을 할 수 있는 DTW를 사용하여 Distance matrix를 구성하고 이를 활용하여 거리 기반한 알고리즘(k-means, .. )을 적용한다. 그러나 기반이 되는 DTW는 많은 연산으로 인하여 속도가 느리다는 단점이 있다. 따라서 본 세미나에서는 이러한 DTW의 단점을 해결할 수 time series clustering 기법인 k-shape clustering algorithms과 tadpole algorithm에 대해 리뷰하고자 한다
-
-
+<br>
 -------
 ### Reference
 * [Paparrizos, John, and Luis Gravano. "k-shape: Efficient and accurate clustering of time series." _Proceedings of the 2015 ACM SIGMOD international conference on management of data_. 2015.](https://www.researchgate.net/profile/John-Paparrizos/publication/303801193_k-Shape_Efficient_and_Accurate_Clustering_of_Time_Series/links/645d59654353ba3b3b5c3245/k-Shape-Efficient-and-Accurate-Clustering-of-Time-Series.pdf)
