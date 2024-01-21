@@ -41,12 +41,13 @@ use_math: true
 * clustering 목표 : 같은 cluster에 속하는 데이터는 최대한 비슷하게, 다른 cluster에 속하는 데이터는 최대한 다르게 cluster 나누기
 
 Clustering에서 **거리**라는 단어가 등장하는데요. 이때 대표적으로 많이 쓰이는 **distance measure**로는 **유클리디언 거리(ED; Euclidean Distance)**가 있습니다.
-![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/cef3af31-285c-441a-9916-5823227445e1)
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/216120c5-d230-4b40-b636-86113cb3ab2a)
+
 
 하지만 유클리디언 거리는 시계열 데이터가 맞지 않습니다. 그 이유로는 시계열 특징 중 하나인 **시간 축에 따른 shift invariance(misalignment)**를 고려해야하기 때문입니다. 아래의 예시를 통해 설명하도록 하겠습니다. <br>
 빨간색과 파란색 시계열은 데이터 간 lag나 tranformation이 있지만,  어느정도 비슷한 패턴을 가지고 있는 것으로 보입니다. 유클리디안 거리(ED)로 두 시계열 간 거리를 재게 된다면, 왼쪽 그림처럼 시계열 특성을 반영하지 못하고 서로 다른 데이터라는 결과값이 나올 것입니다.
 * ED : 시계열 데이터 특성을 반영하지 못함
-![image](https://github.com/ysjang0926/WORK_PYTHON/assets/54492747/316bbe00-0594-4467-b5aa-a423effac67d)
+![Uploading image.png…]()
 
 그렇기 때문에 오른쪽 그림처럼 시계열의 패턴을 고려하면서, 관측치 간의 거리를 정의하고 그 거리를 계산할 수 있는 방법이 따로 필요하게 됩니다. <br>
 * 각 시계열 데이터간의 유사도를 잘 정의하는 것이 중요
