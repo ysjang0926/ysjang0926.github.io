@@ -155,6 +155,8 @@ DX를 위해서는 무엇보다 **구성원의 역량과 일하는 방식의 변
 5. **원료 데이터** : 제품 생산을 위해 투입한 원료 데이터
 6. **리드타임 데이터** : 공정 리드타임(체류시간) 데이터 <br>
 
+<br>
+
 ### ⬛ 2.1 주요 인자 도출(원인 분석)
 > 데이터 분석 기반 제조 품질 경쟁력 강화
 
@@ -196,6 +198,8 @@ DX를 위해서는 무엇보다 **구성원의 역량과 일하는 방식의 변
 	* 상관계수
 	* 변수 중요도 <br>
 
+<br>
+
 ### ⬛ 2.2 최적 조건 도출
 > 공정 최적화를 통한 제품 생산성, 안정화 기여
 
@@ -230,6 +234,8 @@ DX를 위해서는 무엇보다 **구성원의 역량과 일하는 방식의 변
 	* 기초통계량 → 데이터 분포 비교
 	* 상관계수
 	* 변수 중요도 <br>
+
+<br>
 
 ### ⬛ 2.3 품질, 물성 예측
 > 비용 감소 및 생산시간 단축을 위한 제품 물성 예측
@@ -272,11 +278,13 @@ DX를 위해서는 무엇보다 **구성원의 역량과 일하는 방식의 변
 	* LSTM(Long Short Term Memory)
 	* SVM(Support Vector Machine)
 3. **평가지표**
-* [MAE, NMAE, RMSE](https://dacon.io/forum/405791?dtype=recent)
-* R-Squared
-* Maximum error
-* Accuracy (오차율 계산)
-* Detection Ratio <br>
+	* [MAE, NMAE, RMSE](https://dacon.io/forum/405791?dtype=recent)
+	* R-Squared
+	* Maximum error
+	* Accuracy (오차율 계산)
+	* Detection Ratio <br>
+
+<br>
 
 ### ⬛ 2.4 설비 장애 예지(이상감지)
 > 비용 감소 및 생산시간 단축을 위한 제품 물성 예측
