@@ -347,6 +347,7 @@ DX를 위해서는 무엇보다 **구성원의 역량과 일하는 방식의 변
 	* 목표 : 주간 공정 품질을 예측하여, 현재 생산량과 Grade 기준 품질 오차 범위 내로 운전가이드 제시하는 모델 생성 <br>
 * [머신 러닝과 데이터 전처리를 활용한 증류탑 온도 예측](https://scienceon.kisti.re.kr/srch/selectPORSrchArticle.do?cn=JAKO202113759911250&dbt=NART)
 	* 목표 : 혼합부탄 증류탑의 데이터 기반 온도 예측 모델 개발 및 최적화
+* [친환경 섬유 소재 개발을 위한 최적 물성 예측 알고리즘에 관한 연구](https://jkiie.org/xml/34976/34976.pdf)
 
 ### ⬛ 설비 장애 예지(이상감지)
 * [LBAD 이상감지 AI 알고리즘 개발 및 양산적용](http://dsba.korea.ac.kr/lbad-%ec%9d%b4%ec%83%81%ea%b0%90%ec%a7%80-ai-%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98-%ea%b0%9c%eb%b0%9c-%eb%b0%8f-%ec%96%91%ec%82%b0%ec%a0%81%ec%9a%a9/)
