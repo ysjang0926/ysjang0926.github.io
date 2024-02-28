@@ -73,7 +73,7 @@ comments: true
 앞으로 매 chapter마다 공부한 내용을 정리한 글을 쓸 예정인데요. 글이 완성될 때마다 포스팅 url 업데이트를 하도록 하겠습니다😊
 
 * **1부 - 기초편) 데이터 가공**
-	* 1장 - 웹에서 주문수를 분석하는 테크닉
+	* [1장 - 웹에서 주문수를 분석하는 테크닉](https://github.com/ysjang0926/Study_Book/blob/main/Python%20Data%20Analysis%20Practice%20Techniques%20100/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D%20%EC%8B%A4%EB%AC%B4%20%ED%85%8C%ED%81%AC%EB%8B%89%20100%20-%201%EC%9E%A5.ipynb)
 	* 2장 - 대리점 데이터를 가공하는 테크닉
 * **2부 - 실전편) 머신러닝**
 	* 3장 - 고객의 전체 모습을 파악하는 테크닉 
