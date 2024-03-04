@@ -141,8 +141,10 @@ join_data = pd.merge(transaction_detail, transaction[["transaction_id", "payment
 </div>
 </details>
 
+<details>
+<summary> ⬛ 데이터 파악하기 </summary>
+<div markdown="1">
 
-#### ⬛ 데이터 파악하기
 데이터 분석을 진행할 때 제일 먼저 살펴봐야할 데이터 파악 방법입니다.
 
 ##### 1. 결측치
@@ -174,8 +176,13 @@ pd.unique(uriage.item_name)
 ```
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/9e7b9802-e23b-4f39-92d3-333e5538b8c2)
 
+</div>
+</details>
 
-#### ⬛ 데이터 집계하기
+<details>
+<summary> ⬛ 데이터 집계하기 </summary>
+<div markdown="1">
+
 ##### 1. groupby
 ```python
 # 리스트형으로 추출됨
@@ -219,7 +226,13 @@ price_sum_data['price']['PC-A']
 ```
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/2dbe600b-ed6c-4548-9576-f4a25062a483)
 
-#### ⬛ 데이터 수정하기
+</div>
+</details>
+
+<details>
+<summary> ⬛ 데이터 수정하기 </summary>
+<div markdown="1">
+
 ##### 1. 대문자 변환
 ```python
 uriage["item_name"] = uriage["item_name"].str.upper()
@@ -254,12 +267,23 @@ uselog_months.rename(columns={"log_id":"count"}, inplace=True)
 del uselog_months["usedate"]
 ```
 
-#### ⬛ 데이터 필터링
+</div>
+</details>
+
+<details>
+<summary> ⬛ 데이터 필터링 </summary>
+<div markdown="1">
+
 ```python
 customer_newer = join_data.loc[(join_data["end_date"] >= pd.to_datetime("20190331")) | (join_data["end_date"].isna())]
 ```
 
-#### ⬛ DATE 타입 변환
+</div>
+</details>
+
+<details>
+<summary> ⬛  DATE 타입 변환 </summary>
+<div markdown="1">
 
 ##### 1. 숫자인지, date인지 확인
 ```python
@@ -290,12 +314,13 @@ use_log["usedate"] = pd.to_datetime(use_log["usedate"])
 use_log["yyyymm"] = use_log["usedate"].dt.strftime("%Y-%m")
 ```
 
+</div>
+</details>
 
+<details>
+<summary> ⬛ LOOP 활용 </summary>
+<div markdown="1">
 
-```python
-```
-
-#### LOOP 활용
 ```python
 # skipna는 NaN의 무시 여부를 설정하여, NaN이 존재할 경우 최소값이 NaN으로 표시됨
 for trg in list(uriage["item_name"].sort_values().unique()):
@@ -304,7 +329,13 @@ for trg in list(uriage["item_name"].sort_values().unique()):
 ```
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/ad93b413-0b52-467e-a37d-00b53567da88)
 
-#### ⬛ 시각화
+</div>
+</details>
+
+<details>
+<summary> ⬛ 시각화 </summary>
+<div markdown="1">
+
 ```python
 import matplotlib.pyplot as plt
 
@@ -331,3 +362,7 @@ plt.plot(list(price_sum_data.index), price_sum_data['price']['PC-E'], label='PC-
 plt.legend()
 ```
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/688d0ae8-8ec0-43e7-84f8-91262eb65c8b)
+
+</div>
+</details>
+
