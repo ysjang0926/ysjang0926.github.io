@@ -103,6 +103,7 @@ comments: true
 #### ⬜ 좋았던 언급들
 * 비즈니스 현장에서의 데이터 분석은 상상처럼 '화려'하지 않고 현장이라서 해야 하는 사소한 업무가 의외로 많습니다.
 * 어떤 데이터를 어떻게 연결해서 활용할 것인가가 데이터 분석가의 역량을 보여주는 부분입니다.
+* 데이터를 적절히 가공해서 가시화하는 것만으로도 많은 정보를 얻을 수 있기 때문에 유능한 데이터 분석 엔지니어는 적절한 데이터 가공 기술을 구사합니다.
 
 <details>
 <summary> ⬛ 경고(warning) 비표시 </summary>
@@ -185,8 +186,7 @@ pd.unique(uriage.item_name)
 
 ##### 1. groupby
 ```python
-# 리스트형으로 추출됨
-join_data.groupby(["payment_month", "item_name"]).sum()[["price", "quantity"]] 
+customer_clustering.groupby(["cluster","routine_flg"], as_index=False).count()[["cluster","routine_flg","customer_id"]]
 ```
 
 만약 집계함수를 여러개를 쓰고 싶을 때는 다음과 같이 사용하면 됩니다.
@@ -257,6 +257,11 @@ for trg in list(uriage.loc[flg_is_null,"item_name"].unique()):
   uriage["item_price"].loc[(flg_is_null)&(uriage["item_name"]==trg)] = price
 ```
 
+또다른 방법으로는, 특정 값을 일괄 넣을 수 있습니다.
+```python
+customer_join["calc_date"] = customer_join["calc_date"].fillna(pd.to_datetime("20190430"))
+```
+
 ##### 4. 변수명 변경
 ```python
 uselog_months.rename(columns={"log_id":"count"}, inplace=True)
@@ -267,6 +272,27 @@ uselog_months.rename(columns={"log_id":"count"}, inplace=True)
 del uselog_months["usedate"]
 ```
 
+##### 6. 조건문
+아래 예시에서는 `where`함수를 통해 4 미만인 경우는 그대로 0을 두고, 4 이상인 경우만 1로 대입합니다.
+```python
+uselog_weekday["routine_flg"] = 0
+uselog_weekday["routine_flg"] = uselog_weekday["routine_flg"].where(uselog_weekday["count"]<4,1)
+```
+
+##### 7. 표준화 처리
+```python
+from sklearn.preprocessing import StandardScaler
+
+sc = StandardScaler()
+customer_clustering_sc = sc.fit_transform(customer_clustering)
+```
+
+##### 8. 결측치 제거
+칼럼을 특정하고 싶을 경우 `subset`에서 제한하면 됩니다.
+```python
+predict_data.dropna(subset=["count_1"])
+```
+
 </div>
 </details>
 
@@ -274,8 +300,16 @@ del uselog_months["usedate"]
 <summary> ⬛ 데이터 필터링 </summary>
 <div markdown="1">
 
+`loc`함수를 통해서 필터링할 수 있습니다.
+
+##### 예제1
 ```python
 customer_newer = join_data.loc[(join_data["end_date"] >= pd.to_datetime("20190331")) | (join_data["end_date"].isna())]
+```
+
+##### 예제2
+```python
+customer_end = customer_join.loc[customer_join["is_deleted"]==1]
 ```
 
 </div>
@@ -314,6 +348,24 @@ use_log["usedate"] = pd.to_datetime(use_log["usedate"])
 use_log["yyyymm"] = use_log["usedate"].dt.strftime("%Y-%m")
 ```
 
+##### 5. weekday 추출
+```python
+use_log["weekday"] = use_log["usedate"].dt.weekday
+```
+
+##### 6. 기간 계산
+```python
+from dateutil.relativedelta import relativedelta
+
+predict_data["period"] = 0
+predict_data["now_date"] = pd.to_datetime(predict_data["연월"], format="%Y%m")
+predict_data["start_date"] = pd.to_datetime(predict_data["start_date"])
+
+for i in range(len(predict_data)):
+  delta = relativedelta(predict_data["now_date"][i], predict_data["start_date"][i])
+  predict_data["period"][i] = int(delta.years*12 + delta.months)
+```
+
 </div>
 </details>
 
@@ -328,6 +380,49 @@ for trg in list(uriage["item_name"].sort_values().unique()):
             + "의 최저가 : " + str(uriage.loc[uriage["item_name"]==trg]["item_price"].min(skipna=False)))
 ```
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/ad93b413-0b52-467e-a37d-00b53567da88)
+
+</div>
+</details>
+
+<details>
+<summary> ⬛ 데이터 전처리 예시 </summary>
+<div markdown="1">
+
+##### 예제1 - 이번달부터 과거 5개월분의 이용 횟수와 다음 달의 이용 횟수
+```python
+year_months = list(uselog_months["연월"].unique())
+
+predict_data = pd.DataFrame()
+
+# 18년 10월 ~ 19년 3월까지 반복하면서, 과거 6개월분의 이용 데이터를 취득해서 추가
+for i in range(6, len(year_months)):
+  tmp = uselog_months.loc[uselog_months["연월"]==year_months[i]]
+  tmp.rename(columns={"count":"count_pred"}, inplace=True) # 예측하고 싶은 달의 데이터
+  for j in range(1,7):
+    tmp_before = uselog_months.loc[uselog_months["연월"]==year_months[i-j]]
+    del tmp_before["연월"]
+    tmp_before.rename(columns={"count":"count_{}".format(j-1)}, inplace=True) # count0이 1개월 전으로, 과거 6개월의 데이터 나열
+    tmp = pd.merge(tmp, tmp_before, on="customer_id", how="left")
+  predict_data = pd.concat([predict_data, tmp], ignore_index=True)
+
+predict_data = predict_data.dropna()
+predict_data = predict_data.reset_index(drop=True)
+```
+
+##### 예제2 - 이번달과 1개월 전의 이용횟수 집계
+```python
+year_months = list(uselog_months["연월"].unique())
+
+uselog = pd.DataFrame()
+for i in range(1, len(year_months)):
+  tmp = uselog_months.loc[uselog_months["연월"]==year_months[i]]
+  tmp.rename(columns={"count":"count_0"}, inplace=True)
+  tmp_before = uselog_months.loc[uselog_months["연월"]==year_months[i-1]]
+  del tmp_before["연월"]
+  tmp_before.rename(columns={"count":"count_1"}, inplace=True)
+  tmp = pd.merge(tmp, tmp_before, on="customer_id", how="left")
+  uselog = pd.concat([uselog, tmp], ignore_index=True)
+```
 
 </div>
 </details>
@@ -358,7 +453,7 @@ plt.plot(list(price_sum_data.index), price_sum_data['price']['PC-A'], label='PC-
 plt.plot(list(price_sum_data.index), price_sum_data['price']['PC-B'], label='PC-B')
 plt.plot(list(price_sum_data.index), price_sum_data['price']['PC-C'], label='PC-C')
 plt.plot(list(price_sum_data.index), price_sum_data['price']['PC-D'], label='PC-D')
-plt.plot(list(price_sum_data.index), price_sum_data['price']['PC-E'], label='PC-E')
+plt.plot(list(price_sum_data.index), price_sum_data['price']['PC-E1'], label='PC-E')
 plt.legend()
 ```
 ![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/688d0ae8-8ec0-43e7-84f8-91262eb65c8b)
