@@ -106,12 +106,16 @@ comments: true
 
 <details>
 <summary> **⬛ 경고(warning) 비표시** </summary>
+<div markdown="1">
 
+<p>
 ```python
 import warnings
 warnings.filterwarnings('ignore')
 ```
+</p>
 
+</div>
 </details>
 
 #### ⬛ 경고(warning) 비표시
