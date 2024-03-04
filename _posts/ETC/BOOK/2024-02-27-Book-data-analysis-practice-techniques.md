@@ -98,4 +98,22 @@ comments: true
 <br>
 
 ## 📒 중요한 부분 요약
+5장까지는 분석보다는 데이터 전처리에 더 신경을 쓴 책이라고 느껴졌습니다. 좋았던 부분도 일부 있었기에, 까먹지말자는 차원에서 따로 정리를 해보았습니다.
+
+#### 경고(warning) 비표시
+
+```python
+import warnings
+warnings.filterwarnings('ignore')
+```
+
+#### 데이터 결합하기
+데이터를 결합하는 방법은 세로로 결합(union)하는 방법과 가로로 결합(join)하는 방법이 있습니다.
+
+1. UNION
+`concat`함수를 사용하며, `ignore_index=True` 하지 않으면 이전 데이터에 있던 인덱스를 그대로 가져오기 때문에, 특별하게 인덱스를 유지해야하는 경우가 아니면 해당 옵션 사용이 필요합니다.
+```python
+transaction = pd.concat([transaction_1, transaction_2], ignore_index=True)
+```
+2. JOIN
 
