@@ -105,17 +105,17 @@ comments: true
 * 어떤 데이터를 어떻게 연결해서 활용할 것인가가 데이터 분석가의 역량을 보여주는 부분입니다.
 
 <details>
-<summary> **⬛ 경고(warning) 비표시** </summary>
-<div markdown="1">
-
-<p>
-```python
-import warnings
-warnings.filterwarnings('ignore')
-```
-</p>
-
-</div>
+<summary> ⬛ 경고(warning) 비표시 </summary>
+	<div markdown="1">
+	
+	<p>
+	```python
+	import warnings
+	warnings.filterwarnings('ignore')
+	```
+	</p>
+	
+	</div>
 </details>
 
 #### ⬛ 경고(warning) 비표시
