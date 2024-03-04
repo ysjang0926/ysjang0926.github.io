@@ -61,7 +61,7 @@ comments: true
 * **3부 - 실전 편(2)**
 	* 최적화 기술 적용 방법 + 경영 현황 개선 방안
 * **4부 - 발전 편**
-	* 이미지 인식 기술과 자연어 처리 기술과 같은 AI기술
+	* 이미지 인식 기술과 자연어 처리 기술과 같은 AI기술 <br>
  	* 데이터화되지 않은 정보를 이용해서 고객의 잠재적인 수요를 파악하는 방법
 
 <br>
@@ -88,11 +88,11 @@ comments: true
 	* [4장 - 고객의 행동을 예측하는 테크닉](https://github.com/ysjang0926/Study_Book/blob/main/Python%20Data%20Analysis%20Practice%20Techniques%20100/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D%20%EC%8B%A4%EB%AC%B4%20%ED%85%8C%ED%81%AC%EB%8B%89%20100%20-%204%EC%9E%A5.ipynb)
 	* [5장 - 회원 탈퇴를 예측하는 테크닉](https://github.com/ysjang0926/Study_Book/blob/main/Python%20Data%20Analysis%20Practice%20Techniques%20100/%ED%8C%8C%EC%9D%B4%EC%8D%AC%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D%20%EC%8B%A4%EB%AC%B4%20%ED%85%8C%ED%81%AC%EB%8B%89%20100%20-%205%EC%9E%A5.ipynb)
 * **3부 - 실전편) 최적화 문제**
-	* 6장 - 물류의 최적경로를 컨설팅하는 테크닉
- 	* 7장 - 물류 네트워크 최적 설계를 위한 테크닉
+	* 6장 - 물류의 최적경로를 컨설팅하는 테크닉 <br>
+ 	* 7장 - 물류 네트워크 최적 설계를 위한 테크닉 <br>
   	* 8장 - 수치 시뮬레이션으로 소비자의 행동을 예측하는 테크닉 
 * **4부 - 발전편) 이미지 처리 / 언어 처리**
-	* 9장 - 잠재고객을 파악하기 위한 이미지 인식 테크닉
+	* 9장 - 잠재고객을 파악하기 위한 이미지 인식 테크닉 <br>
  	* 10장 - 앙케트 분석을 위한 자연어 처리 테크닉  
 
 <br>
