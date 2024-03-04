@@ -100,20 +100,192 @@ comments: true
 ## 📒 중요한 부분 요약
 5장까지는 분석보다는 데이터 전처리에 더 신경을 쓴 책이라고 느껴졌습니다. 좋았던 부분도 일부 있었기에, 까먹지말자는 차원에서 따로 정리를 해보았습니다.
 
-#### 경고(warning) 비표시
+#### ⬜ 좋았던 언급들
+* 비즈니스 현장에서의 데이터 분석은 상상처럼 '화려'하지 않고 현장이라서 해야 하는 사소한 업무가 의외로 많습니다.
+* 어떤 데이터를 어떻게 연결해서 활용할 것인가가 데이터 분석가의 역량을 보여주는 부분입니다.
 
+#### ⬛ 경고(warning) 비표시
 ```python
 import warnings
 warnings.filterwarnings('ignore')
 ```
 
-#### 데이터 결합하기
+#### ⬛ 데이터 결합하기
 데이터를 결합하는 방법은 세로로 결합(union)하는 방법과 가로로 결합(join)하는 방법이 있습니다.
 
-1. UNION
-`concat`함수를 사용하며, `ignore_index=True` 하지 않으면 이전 데이터에 있던 인덱스를 그대로 가져오기 때문에, 특별하게 인덱스를 유지해야하는 경우가 아니면 해당 옵션 사용이 필요합니다.
+##### 1. UNION
+세로로 결합하기 위해서는 `concat`함수를 사용하며, <br>
+`ignore_index=True` 하지 않으면 이전 데이터에 있던 인덱스를 그대로 가져오기 때문에, 특별하게 인덱스를 유지해야하는 경우가 아니면 해당 옵션 사용이 필요합니다.
 ```python
 transaction = pd.concat([transaction_1, transaction_2], ignore_index=True)
 ```
-2. JOIN
 
+##### 2. JOIN
+가로로 결합하기 위해서는 `merge`함수를 사용하며, <br>
+추가하고 싶은 데이터 칼럼이 무엇인지 & 공통되는 데이터 칼럼(key)가 무엇인지 파악하는 것이 중요합니다.
+* on : join key 칼럼
+* how : join 종류
+```python
+join_data = pd.merge(transaction_detail, transaction[["transaction_id", "payment_date", "customer_id"]], on="transaction_id", how="left")
+```
+
+#### ⬛ 데이터 파악하기
+데이터 분석을 진행할 때 제일 먼저 살펴봐야할 데이터 파악 방법입니다.
+
+##### 1. 결측치
+```python
+# 결측치 칼럼 확인
+uriage.isnull().any(axis=0)
+```
+
+```python
+# 결측치 개수 파악
+join_data.isnull().sum()
+```
+
+##### 2. 데이터 범위
+```python
+# 데이터 range 파악
+join_data.describe()
+```
+
+##### 3. 변수 타입
+```python
+# 데이터형 확인
+join_data.dtypes
+```
+
+##### 4. 개별 개수 확인
+```python
+pd.unique(uriage.item_name)
+```
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/9e7b9802-e23b-4f39-92d3-333e5538b8c2)
+
+
+#### ⬛ 데이터 집계하기
+##### 1. groupby
+```python
+# 리스트형으로 추출됨
+join_data.groupby(["payment_month", "item_name"]).sum()[["price", "quantity"]] 
+```
+
+##### 2. pivot
+* index : 행
+* columns : 열
+* values : 집계하고싶은 칼럼
+* aggfunc : 집계 함수
+```python
+price_sum_data = pd.pivot_table(join_data, index='payment_month', columns='item_name', values=['price'], aggfunc='sum')
+price_sum_data
+```
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/2932200a-1030-49e3-9ac8-916b93a0caf9)
+
+이때 가로 값을 뽑고싶을 때는 다음과 같이 추출할 수 있습니다.
+```python
+list(price_sum_data.index)
+```
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/cb1f4892-f192-415c-b99d-bfca9d30b73e)
+
+칼럼은 두개 존재하며 다음과 같이 볼수 있습니다.
+```python
+price_sum_data.columns
+```
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/d72ccf71-47f8-4be5-b899-5437de1c2add)
+
+그렇기 때문에 하나의 칼럼에 대한 값을 추출하기 위해서는 다음과 같이 작성해야 합니다.
+```python
+price_sum_data['price']['PC-A']
+```
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/2dbe600b-ed6c-4548-9576-f4a25062a483)
+
+#### ⬛ 데이터 수정하기
+##### 1. 대문자 변환
+```python
+uriage["item_name"] = uriage["item_name"].str.upper()
+```
+
+##### 2. 공백 제거
+```python
+uriage["item_name"] = uriage["item_name"].str.replace(" ", "")
+```
+
+##### 3.결측치 채워넣기
+책에서는 결측치에 같은 상품의 단가를 이용하여 수정하였습니다.
+```python
+# step1 : null값인 행 뽑기
+flg_is_null = uriage["item_price"].isnull()
+
+# step2 : null인 행의 item_name 추출하기
+# step3 : null이 아닌 행의 item_name 가격 뽑아보기
+# step4 : 위 내용을 loop문을 통해 만들어주기
+for trg in list(uriage.loc[flg_is_null,"item_name"].unique()):
+  price = uriage.loc[(~flg_is_null)&(uriage["item_name"]==trg), "item_price"].max()
+  uriage["item_price"].loc[(flg_is_null)&(uriage["item_name"]==trg)] = price
+```
+
+#### ⬛ DATE 타입 변환
+
+##### 1. 숫자인지, date인지 확인
+```python
+flg_is_serial = kokyaku_daicho["등록일"].astype("str").str.isdigit()
+flg_is_serial.sum() # 22건의 숫자 데이터 존재
+```
+
+##### 2. 숫자를 날짜로 변환
+* `pd.to_timedelta` : 숫자를 날짜로 변환
+* `loc` : 숫자인 부분 추출 (1번 참고)
+```python
+fromSerial = pd.to_timedelta(kokyaku_daicho.loc[flg_is_serial, "등록일"].astype("float"), unit="D") + pd.to_datetime("1900/01/01")
+```
+
+##### 3. 날짜 타입으로 변환
+```python
+fromString = pd.to_datetime(kokyaku_daicho.loc[~flg_is_serial, "등록일"])
+```
+
+##### 4. yyyy-mm 단위로 추출
+```python
+join_data["payment_month"] = join_data["payment_date"].dt.strftime("%Y-%m")
+```
+
+
+
+```python
+```
+
+#### LOOP 활용
+```python
+# skipna는 NaN의 무시 여부를 설정하여, NaN이 존재할 경우 최소값이 NaN으로 표시됨
+for trg in list(uriage["item_name"].sort_values().unique()):
+  print(trg + "의 최고가 : " + str(uriage.loc[uriage["item_name"]==trg]["item_price"].max())
+            + "의 최저가 : " + str(uriage.loc[uriage["item_name"]==trg]["item_price"].min(skipna=False)))
+```
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/ad93b413-0b52-467e-a37d-00b53567da88)
+
+#### ⬛ 시각화
+```python
+import matplotlib.pyplot as plt
+
+fig = plt.figure(figsize=(8,4)) ## 캔버스 생성
+ax = fig.add_subplot() ## 그림 뼈대(프레임) 생성
+ax.plot(join_data[join_data["item_name"]=="PC-A"].groupby("payment_month").sum()["price"],marker='o',label='A') ## 선그래프 생성
+ax.plot(join_data[join_data["item_name"]=="PC-B"].groupby("payment_month").sum()["price"],marker='o',label='B')
+ax.plot(join_data[join_data["item_name"]=="PC-C"].groupby("payment_month").sum()["price"],marker='o',label='C')
+ax.plot(join_data[join_data["item_name"]=="PC-D"].groupby("payment_month").sum()["price"],marker='o',label='D')
+ax.plot(join_data[join_data["item_name"]=="PC-E"].groupby("payment_month").sum()["price"],marker='o',label='E')
+ax.legend() ## 범례
+plt.title("price sum")
+plt.show()
+```
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/065fc424-7a7d-4f66-a620-683a307d8712)
+
+```python
+%matplotlib inline
+plt.plot(list(price_sum_data.index), price_sum_data['price']['PC-A'], label='PC-A')
+plt.plot(list(price_sum_data.index), price_sum_data['price']['PC-B'], label='PC-B')
+plt.plot(list(price_sum_data.index), price_sum_data['price']['PC-C'], label='PC-C')
+plt.plot(list(price_sum_data.index), price_sum_data['price']['PC-D'], label='PC-D')
+plt.plot(list(price_sum_data.index), price_sum_data['price']['PC-E'], label='PC-E')
+plt.legend()
+```
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/688d0ae8-8ec0-43e7-84f8-91262eb65c8b)
