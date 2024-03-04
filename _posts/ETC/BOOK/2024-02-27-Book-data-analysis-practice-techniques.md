@@ -108,6 +108,8 @@ comments: true
 
 <summary> ⬛ 경고(warning) 비표시 </summary>
 
+<div markdown="1">
+
 경고 비표시
 ```python
 import warnings
