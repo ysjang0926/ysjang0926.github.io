@@ -116,13 +116,10 @@ warnings.filterwarnings('ignore')
 </div>
 </details>
 
-#### ⬛ 경고(warning) 비표시
-```python
-import warnings
-warnings.filterwarnings('ignore')
-```
+<details>
+<summary> ⬛ 데이터 결합하기 </summary>
+<div markdown="1">
 
-#### ⬛ 데이터 결합하기
 데이터를 결합하는 방법은 세로로 결합(union)하는 방법과 가로로 결합(join)하는 방법이 있습니다.
 
 ##### 1. UNION
@@ -140,6 +137,10 @@ transaction = pd.concat([transaction_1, transaction_2], ignore_index=True)
 ```python
 join_data = pd.merge(transaction_detail, transaction[["transaction_id", "payment_date", "customer_id"]], on="transaction_id", how="left")
 ```
+
+</div>
+</details>
+
 
 #### ⬛ 데이터 파악하기
 데이터 분석을 진행할 때 제일 먼저 살펴봐야할 데이터 파악 방법입니다.
