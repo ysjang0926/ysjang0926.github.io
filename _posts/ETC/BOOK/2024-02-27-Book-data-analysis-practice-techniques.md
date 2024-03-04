@@ -104,6 +104,16 @@ comments: true
 * 비즈니스 현장에서의 데이터 분석은 상상처럼 '화려'하지 않고 현장이라서 해야 하는 사소한 업무가 의외로 많습니다.
 * 어떤 데이터를 어떻게 연결해서 활용할 것인가가 데이터 분석가의 역량을 보여주는 부분입니다.
 
+<details>
+<summary> #### ⬛ 경고(warning) 비표시</summary>
+
+## 접은 제목
+```python
+import warnings
+warnings.filterwarnings('ignore')
+```
+</details>
+
 #### ⬛ 경고(warning) 비표시
 ```python
 import warnings
@@ -169,6 +179,14 @@ pd.unique(uriage.item_name)
 join_data.groupby(["payment_month", "item_name"]).sum()[["price", "quantity"]] 
 ```
 
+만약 집계함수를 여러개를 쓰고 싶을 때는 다음과 같이 사용하면 됩니다.
+```python
+uselog_customer = uselog_months.groupby("customer_id").agg(["mean","median","max","min"])["count"]
+uselog_customer = uselog_customer.reset_index(drop=False)
+```
+![image](https://github.com/ysjang0926/ysjang0926.github.io/assets/54492747/9004b27a-5795-4e43-a5f3-b38a68ae1892)
+
+
 ##### 2. pivot
 * index : 행
 * columns : 열
@@ -223,6 +241,21 @@ for trg in list(uriage.loc[flg_is_null,"item_name"].unique()):
   uriage["item_price"].loc[(flg_is_null)&(uriage["item_name"]==trg)] = price
 ```
 
+##### 4. 변수명 변경
+```python
+uselog_months.rename(columns={"log_id":"count"}, inplace=True)
+```
+
+##### 5. 변수 제거
+```python
+del uselog_months["usedate"]
+```
+
+#### ⬛ 데이터 필터링
+```python
+customer_newer = join_data.loc[(join_data["end_date"] >= pd.to_datetime("20190331")) | (join_data["end_date"].isna())]
+```
+
 #### ⬛ DATE 타입 변환
 
 ##### 1. 숫자인지, date인지 확인
@@ -246,6 +279,12 @@ fromString = pd.to_datetime(kokyaku_daicho.loc[~flg_is_serial, "등록일"])
 ##### 4. yyyy-mm 단위로 추출
 ```python
 join_data["payment_month"] = join_data["payment_date"].dt.strftime("%Y-%m")
+```
+
+4번의 경우 3번과 같이 진행되어야하기 때문에 다음과 같이 붙여서 set라고 생각하면 됩니다.
+```python
+use_log["usedate"] = pd.to_datetime(use_log["usedate"])
+use_log["yyyymm"] = use_log["usedate"].dt.strftime("%Y-%m")
 ```
 
 
