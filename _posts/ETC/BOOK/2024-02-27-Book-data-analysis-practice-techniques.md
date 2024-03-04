@@ -108,12 +108,10 @@ comments: true
 
 <summary> ⬛ 경고(warning) 비표시 </summary>
 
-~~
 ```python
 import warnings
 warnings.filterwarnings('ignore')
 ```
-~~
 
 </details>
 
