@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "머신러닝 시스템을 단계별로 설계할 수 있는 7단계 접근법"
+title:  "[머신러닝 시스템 설계]머신러닝 시스템을 단계별로 설계할 수 있는 7단계 접근법"
 subtitle:   "A collection of useful sites related to data analysis"
 categories: data
 tags: ml
