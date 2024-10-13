@@ -144,18 +144,22 @@ GS-Score를 산출하기 위해서는 다음과 같은 과정을 거칩니다.
 # 3. 추천시스템 적용
 GS-Score는 스포티파이의 공식 연구에서 구체적으로 활용된 방식이 명시된 바는 없지만, 사용자들의 음악 소비 패턴을 정량적으로 분석하는 유용한 지표로서, 사용자 경험을 더욱 개인화하고 추천 시스템의 정교함을 높이는 데 활용되었을 것이라 추정됩니다. 사용자가 얼마나 다양한 음악을 소비하는지, 혹은 특정한 음악에 집중하는지를 수치화하여 Generalist와 Specialist 사용자 간의 차이를 파악한 정보를 통해, 사용자 경험을 더욱 개인화하여 추천 시스템의 정교함을 높이는 것에 기여하는 것이죠. <br>
 
-### 관련 연구 내용
+## 3.1 관련 연구 내용
 스포티파이는 사용자들이 얼마나 다양한 음악을 듣는지, 그리고 그 음악들이 서로 얼마나 다른지를 평가하기 위해 여러 연구를 진행해왔습니다. <br>
+
 대표적인 연구 중 하나로, “[Algorithmic Effects on the Diversity of Consumption on Spotify](https://www.cs.toronto.edu/~ashton/pubs/alg-effects-spotify-www2020.pdf)”라는 논문이 있습니다. 이 연구는 추천 알고리즘이 사용자들의 음악 소비 패턴과 다양성에 어떤 변화를 가져오는지 분석했습니다. <br>
+
 연구 결과는 개인화된 추천 알고리즘이 도입된 후, 많은 사용자가 음악 소비의 폭을 넓히게 되었다는 것을 보여줍니다. 쉽게 말해, 스포티파이의 추천 알고리즘은 사용자들이 더 다양한 장르와 새로운 아티스트를 탐험할 수 있도록 도와준다는 것입니다. <br>
 ➡️ 사용자의 이전 음악 소비 패턴을 기반으로 사용자 성향에 맞춘 다양한 음악 추천을 제공하여, 콘텐츠 다양성을 높이는 데 기여
 
-### Discover Weekly의 역할
-> Discover Weekly : 매주 사용자의 취향에 맞춰 새로운 음악을 추천해주는 스포티파이의 대표적인 개인화 플레이리스트
+## 3.2 Discover Weekly의 역할
+> **Discover Weekly:**
+> 매주 사용자의 취향에 맞춰 새로운 음악을 추천해주는 스포티파이의 대표적인 개인화 플레이리스트
+
 개인화 알고리즘은 사용자가 새로운 음악을 발견하거나 선호하는 장르를 더 깊이 탐구할 수 있도록 도와줍니다. Discover Weekly와 같은 개인화된 플레이리스트는 이를 위해 설계된 대표적인 기능입니다. <br>
 이 알고리즘 기반의 플레이리스트는 사용자가 기존에 들어보지 않은 음악을 제안하며, 사용자가 새로운 음악을 발견하고 그들의 음악 취향을 확장할 기회를 제공합니다. 예를 들어, 주로 팝 음악을 듣던 사용자가 Discover Weekly를 통해 재즈나 일렉트로닉 음악을 접하게 되면서 음악 소비의 폭이 넓어질 수 있습니다.
 
-### 개인화된 추천 알고리즘
+## 3.3 개인화된 추천 알고리즘
 이 논문에서는 개인화된 추천 알고리즘이 Generalist와 Specialist 두 그룹에 다르게 작용할 수 있음을 강조합니다. <br>
 - **Generalist 사용자** : 다양한 장르와 아티스트의 음악을 추천함으로써 새로운 음악 탐험을 유도
   - 폭넓은 음악적 취향을 가진 Generalist들은 Discover Weekly와 같은 추천 플레이리스트를 통해 더 많은 새로운 음악을 탐험하게 되는 경향이 있음
@@ -164,9 +168,11 @@ GS-Score는 스포티파이의 공식 연구에서 구체적으로 활용된 방
   - 반대로 특정 장르나 아티스트에 집중하는 Specialist 사용자들에게는, 자신이 선호하는 음악 스타일에 깊이 몰입할 수 있는 기회가 더 많이 제공됨
   - 이러한 사용자는 알고리즘 덕분에 자신이 좋아하는 특정 아티스트의 신곡이나 관련 장르의 음악을 더욱 자주 접하게 됨
 
-### 알고리즘의 조정 필요성
-연구 결과는 또한 개인화 추천 알고리즘이 사용자마다 다르게 조정될 필요가 있음을 시사합니다. 모든 사용자에게 똑같은 방식으로 음악을 추천하는 것이 아니라, 그들의 소비 패턴에 맞춰 다양한 전략을 취해야 한다는 것입니다. <br>
+## 3.4 알고리즘의 조정 필요성
+연구 결과는 개인화 추천 알고리즘이 사용자마다 다르게 조정될 필요가 있음을 시사합니다. 모든 사용자에게 똑같은 방식으로 음악을 추천하는 것이 아니라, 그들의 소비 패턴에 맞춰 다양한 전략을 취해야 한다는 것입니다. <br>
+
 Discover Weekly와 같은 추천 시스템은 사용자가 얼마나 새로운 음악을 탐험하고 싶은지, 혹은 얼마나 특정한 음악 스타일을 유지하고 싶은지를 고려해 다양한 방식으로 조정될 수 있습니다. 이때 GS-score는 알고리즘 조정을 더 세밀하게 할 수 있는 기반이 되고, 조정이 잘 될수록 사용자 만족도를 높이는 데 중요한 역할을 하게 되죠. <br>
+
 이를 통해 스포티파이는 Generalist 사용자에게는 폭넓은 추천을 제공하고, Specialist 사용자에게는 깊이 있는 추천을 제공함으로써 사용자 만족도를 극대화할 수 있습니다. 이런 세밀한 접근 방식이 사용자 경험을 향상시키는 데 중요한 역할을 하며, 스포티파이가 지속적으로 사용자들이 음악을 탐험하고 즐길 수 있도록 돕습니다. <br>
 물론 Discover Weekly가 사용자들에게 제공하는 추천이 단순히 기존 취향에 기반한 반복적인 제안이 아니라, 다양한 장르와 아티스트를 아우르는 추천을 제공하기 때문에 가능한 일입니다.
 
@@ -182,11 +188,11 @@ Discover Weekly와 같은 추천 시스템은 사용자가 얼마나 새로운 �
 <br>
 
 ### Reference
-* https://research.atspotify.com/2020/12/algorithmic-effects-on-the-diversity-of-consumption-on-spotify/
-* https://dl.acm.org/doi/abs/10.1145/3366423.3380281
-* https://pdfs.semanticscholar.org/0fe7/0e569caa353e44d4278b1a430d2c0cb4b6a1.pdf
-* https://towardsdatascience.com/how-spotify-understands-your-music-diversity-d3bed2cc3767
-* https://maily.so/atozit/posts/0f259622
+* [스포티파이 테크 블로그 글 - Algorithmic Effects on the Diversity of Consumption on Spotify](https://research.atspotify.com/2020/12/algorithmic-effects-on-the-diversity-of-consumption-on-spotify/)
+* [논문 - Algorithmic Effects on the Diversity of Consumption on Spotify](https://dl.acm.org/doi/abs/10.1145/3366423.3380281)
+* [발표내용 - Algorithmic Effects on the Diversity of Consumption on Spotify] (https://pdfs.semanticscholar.org/0fe7/0e569caa353e44d4278b1a430d2c0cb4b6a1.pdf)
+* [towardsdatascience 글 - How Spotify Understands Your Music Diversity](https://towardsdatascience.com/how-spotify-understands-your-music-diversity-d3bed2cc3767)
+* [포인트오브뷰 글 - 스포티파이가 음악 시장을 장악하는 놀라운 방법](https://maily.so/atozit/posts/0f259622)
 
 
 ----------------------------
