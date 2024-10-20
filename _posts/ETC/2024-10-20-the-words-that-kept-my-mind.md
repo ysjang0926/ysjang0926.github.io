@@ -168,3 +168,11 @@ I was surfing everyday.
 해는 어느 방향에 있어도 아름답다
 <나피디딤 유튜브>
 ```
+
+<br>
+
+# 간직해둘 것
+![image](https://github.com/user-attachments/assets/d6b93387-6ff5-434c-80f2-f541ea83aece)
+
+
+
