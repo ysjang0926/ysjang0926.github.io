@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  나의 멘탈을 지켜준 문장들🏄🏻‍♀️🍋
+title:  나의 멘탈을 지켜준 문장들🏄🏻‍♀️🍋 (feat. Sound body, Sound mind)
 subtitle: "Let's not be a fool"
 categories: etc
 tags:
