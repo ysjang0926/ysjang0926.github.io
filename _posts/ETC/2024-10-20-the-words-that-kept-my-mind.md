@@ -102,7 +102,7 @@ comments: true
 
 <br>
 
-#  Work - Good Answer
+# 🤓 Work - Good Answer
 * 어떤 일을 하고 싶은가요?
   * 내가 가진 궁금증을 바탕으로 데이터분석을 통해 내가 좋아하는 서비스의 성장에 도움이 되는 일을 하고 싶다.
   * 유저들이 우리 서비스를 더욱 만족하면서 사용할 수 있도록 만들고, 이를 통해서 비즈니스가 성장하고 다시 사용자 만족도가 높아지는 선순환을 만드는 일
@@ -198,7 +198,7 @@ I was surfing everyday.
 
 <br>
 
-# 간직해둘 것
+# 📸 간직해둘 것
 ![image](https://github.com/user-attachments/assets/d6b93387-6ff5-434c-80f2-f541ea83aece)
 
 
