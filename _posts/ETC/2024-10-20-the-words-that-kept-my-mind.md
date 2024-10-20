@@ -21,7 +21,7 @@ comments: true
 
 <br> 
 
-## 📓 나의 일기장
+# 📓 나의 일기장
 
 <details>
  <summary>한줄씩 적은 내용들 </summary>
@@ -51,6 +51,7 @@ comments: true
  </div> 
  </details>
 
+<br>
 
 ```
 힘내서 디딘 모든 순간들을 응원하기
@@ -94,7 +95,7 @@ comments: true
 
 <br>
 
-## 📝 인터넷 속 저장해둔 글들
+# 📝 인터넷 속 저장해둔 글들
 
 <details>
  <summary>한문장 </summary>
