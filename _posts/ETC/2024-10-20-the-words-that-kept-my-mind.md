@@ -26,7 +26,7 @@ comments: true
 일하는 것이 제일 재밌다가도 제일 싫어지기도 하지만, 아직까지 제가 하고 있는 일이 재밌어서 다행이에요. 실력을 차곡차곡 잘 쌓아올렸으면 좋겠습니다! <br>
 
 <details>
- <summary> **한줄씩 적은 내용들✍🏻** </summary>
+ <summary> 한줄씩 적은 내용들✍🏻 </summary>
  <div markdown="1">
  
  - 넌 돌아가도 같은 선택을 할거야 (선택하기 두려울 때 나를 용감하게 만드는 말)
@@ -106,7 +106,7 @@ comments: true
 # 📝 인터넷 속 저장해둔 글들
 
 <details>
- <summary>**✍🏻한문장** </summary>
+ <summary> 한문장✍🏻 </summary>
  <div markdown="1">
  
  - 햇빛을 참을 수 없을 때는 햇빛이 되세요
