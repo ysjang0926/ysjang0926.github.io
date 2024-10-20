@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  “나의 멘탈을 지켜준 단어와 문장들🏄🏻‍♀️🍋”
+title:  나의 멘탈을 지켜준 문장들🏄🏻‍♀️🍋
 subtitle: "Let's not be a fool"
 categories: etc
 tags:
