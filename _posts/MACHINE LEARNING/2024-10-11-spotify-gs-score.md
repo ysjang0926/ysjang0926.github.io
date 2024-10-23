@@ -200,7 +200,7 @@ Discover Weekly와 같은 추천 시스템은 사용자가 얼마나 새로운 �
 ### Reference
 * [스포티파이 테크 블로그 글 - Algorithmic Effects on the Diversity of Consumption on Spotify](https://research.atspotify.com/2020/12/algorithmic-effects-on-the-diversity-of-consumption-on-spotify/)
 * [논문 - Algorithmic Effects on the Diversity of Consumption on Spotify](https://dl.acm.org/doi/abs/10.1145/3366423.3380281)
-* [발표내용 - Algorithmic Effects on the Diversity of Consumption on Spotify] (https://pdfs.semanticscholar.org/0fe7/0e569caa353e44d4278b1a430d2c0cb4b6a1.pdf)
+* [발표내용 - Algorithmic Effects on the Diversity of Consumption on Spotify](https://pdfs.semanticscholar.org/0fe7/0e569caa353e44d4278b1a430d2c0cb4b6a1.pdf)
 * [towardsdatascience 글 - How Spotify Understands Your Music Diversity](https://towardsdatascience.com/how-spotify-understands-your-music-diversity-d3bed2cc3767)
 * [포인트오브뷰 글 - 스포티파이가 음악 시장을 장악하는 놀라운 방법](https://maily.so/atozit/posts/0f259622)
 
