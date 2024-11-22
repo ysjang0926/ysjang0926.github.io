@@ -66,58 +66,91 @@ Spotify 플랫폼에서 다루는 주요 objective는 다음과 같은 네 가�
 
 <br><br>
 
-# ䷍ Objectives within Sets
-음악 추천 시스템에서 가장 까다로운 부분 중 하나는 **세션마다 달라지는 곡 구성(objective composition)**에 따라 최적화된 추천을 제공하는 것입니다. 스포티파이의 데이터분석 내용에 따르면, 사용자의 만족도(Short-term User Satisfaction, SAT)와 추천 목표들(Exposure, Discovery) 사이에는 특정한 관계가 존재합니다. 이를 이해하면 더욱 정교한 추천 시스템을 설계할 수 있습니다.
+# ䷍ Objectives within Sets: 세션 기반 음악 추천 최적화
+음악 추천 시스템에서 가장 도전적인 과제 중 하나는 **세션마다 달라지는 곡 구성(objective composition)**에 따라 최적화된 추천을 제공하는 것입니다. 스포티파이의 데이터 분석에 따르면, 사용자의 만족도(Short-term User Satisfaction, SAT)와 추천 목표들(Exposure, Discovery) 사이에는 특정한 관계가 존재하며, 이를 이해하면 더욱 정교한 추천 시스템을 설계할 수 있습니다.
 
 #### 📍 노출(Exposure): 사용자 만족도와 독립적 관계
-스포티파이는 신예 아티스트의 곡을 추천해 노출을 늘리는 것을 중요 objective 중 하나로 설정하고 있습니다. 분석에 따르면, 노출(Exposure) 곡과 사용자 만족도(SAT) 사이에는 유의미한 상관관계가 없는 것으로 나타났습니다. 즉, 사용자가 신예 아티스트의 곡을 들어도 만족도가 특별히 올라가지도, 떨어지지도 않는다는 뜻입니다.
+스포티파이는 신예 아티스트의 곡을 추천해 노출을 늘리는 것을 중요 objective 중 하나로 설정하고 있습니다. 분석에 따르면, Exposure 곡과 SAT 사이에는 유의미한 상관관계가 없는 것으로 나타났습니다. 즉, 사용자가 신예 아티스트의 곡을 듣는다고 해서 만족도가 특별히 올라가지도, 떨어지지도 않는다는 뜻입니다. 이는 신예 아티스트의 노출을 늘리더라도 사용자 경험에는 큰 영향을 미치지 않는다는 것을 의미하며, 이를 전략적으로 활용할 여지가 있습니다.
 
 #### 📍 발견(Discovery): 사용자 만족도에 부정적 영향
-Discovery, 즉 사용자가 이전에 들어본 적 없는 곡이나 아티스트를 추천하는 objective는 다소 도전적인 문제를 제기합니다. 분석에 따르면, Discovery 트랙의 비율이 높을수록 사용자 만족도가 감소하는 경향이 있습니다. 이는 사용자가 익숙하지 않은 음악에 대한 거부감이나 탐색에 대한 부담감 때문일 수 있습니다. <br>
-따라서 Discovery를 포함한 추천은 무작위로 이루어져서는 안 되며, 사용자 경험에 미치는 영향을 신중히 고려해야 합니다.
+Discovery는 사용자가 이전에 들어본 적 없는 곡이나 아티스트를 추천하는 objective입니다. 그러나 이 과정은 다소 까다로운 문제를 제기합니다. 분석에 따르면, Discovery 트랙 비율이 높아질수록 사용자 만족도가 감소하는 경향이 있습니다. <br>
+이러한 결과는 사용자가 익숙하지 않은 음악에 대해 거부감을 가지거나, 새로운 음악 탐색에 부담을 느끼는 경우가 많기 때문일 수 있습니다. 따라서 Discovery 트랙을 포함한 추천은 무작위로 이루어져서는 안 되며, 사용자 경험에 미치는 영향을 세심하게 조율해야 합니다.
 
-#### 📍 세션의 곡 구성(objective composition)에 따라 추천 최적화
-Spotify의 세션 데이터를 살펴보면, 세션마다 곡 구성의 특징이 다릅니다. 어떤 세션은 Discovery 트랙이 많고, 어떤 세션은 Exposure 트랙이 많습니다. 이렇듯 세션의 **곡 구성(objective composition)**이 달라지면, 추천 시스템도 그에 맞게 최적화된 전략이 필요합니다.
+#### 📍 세션 기반 추천 최적화의 필요성
+스포티파이의 세션 데이터를 살펴보면, **세션마다 곡 구성(objective composition)**이 다르다는 것을 알 수 있습니다. 어떤 세션은 Discovery 트랙이 많고, 어떤 세션은 Exposure 트랙이 많습니다. <br>
 * 예시
-  * Discovery 비중이 높은 세션 : 사용자가 부정적인 경험을 하지 않도록 발견 트랙의 적절한 비율을 유지하는 것이 중요
-  * Exposure 비중이 높은 세션 : 노출을 늘리면서도 사용자의 만족도를 떨어뜨리지 않도록 하는 방법을 찾아야함
+  * Discovery 비중이 높은 세션 : 사용자가 부정적인 경험을 피할 수 있도록 discovery 트랙의 적절한 비율을 유지해야함
+  * Exposure 비중이 높은 세션 : exposure를 늘리면서도 사용자의 만족도를 떨어뜨리지 않는 전략이 필요함
+이렇듯 각 세션의 곡 구성에 따라 추천 시스템이 동적으로 적응할 수 있는 메커니즘이 필요합니다.
 
-#### 📍 세션 맞춤 추천의 필요성
-스포티파이는 이러한 문제를 해결하기 위해 Set-awareness를 추천 시스템에 통합하고자 합니다. 이는 세션 내 곡 구성(objective composition)을 분석해, 각각의 세션에 최적화된 곡 추천을 가능하게 합니다. <br>
-다시 말해, 추천 시스템이 각 세션의 고유한 특성에 따라 트랙 순서를 동적으로 조율할 수 있도록 설계된 것입니다.
+#### 📍 Set-awareness 기반 세션 맞춤 추천
+스포티파이는 이러한 문제를 해결하기 위해 Set-awareness를 추천 시스템에 통합하고자 합니다. Set-awareness는 세션 내 곡 구성을 분석해, 세션마다 최적화된 곡 추천을 가능하게 만듭니다. <br>
+다시 말해, 추천시스템이 각 세션의 고유한 특성을 이해하고, 이에 따라 트랙 순서를 동적으로 조율할 수 있도록 설계된 것입니다. 이는 사용자 만족도를 유지하면서도 Discovery 및 Exposure와 같은 플랫폼의 목표를 달성할 수 있는 핵심적인 접근 방식입니다.
 
-<br>
+<br><br>
 
-# Mostra Architecture
-이걸 해결하기 위해 제시된게 바로 아래 내용입니다. <br>
-** [기존의] set transformer encoder + [논문에서 개발한] Multi-Objective Beam Search decoder **
+# 👾 Mostra Architecture
+위의 문제들을 해결하기 위해 제시된 해결책은 바로 아래 두 가지입니다: <br>
+**[기존의] Set Transformer Encoder와 [논문에서 새롭게 개발된] Multi-Objective Beam Search Decoder**
 
 ![end-to-end neural architecture for multi-objective track sequencing](https://github.com/user-attachments/assets/3b57f004-65f2-4f64-ab5d-8fd0305ac461)
 
-## [Training] 곡과 사용자 간의 관계를 모델링하여 곡의 기본 점수를 계산
+<br>
+
+## 💡Training: 곡과 사용자 간의 관계를 모델링하여 곡의 기본 점수를 계산
 ### 1️⃣ Representation Layer
-사용자와 곡의 특징을 input으로 받아 이를 벡터로 표현
-* 사용자(user embeddings) 특성, 곡 특성(learnt track embeddings), joint user–track features이 Representation Layer에 입력됨
+**Representation Layer**는 **사용자와 곡의 특징을 입력으로 받아 이를 벡터로 표현**하는 역할을 합니다. 이 단계는 추천 시스템의 기본 데이터를 학습 가능한 형식으로 변환하는 과정입니다.
+
+#### ✅ 입력 데이터
+Representation Layer에는 다음과 같은 요소들이 입력됩니다:
+* **사용자 특성(user embeddings)**: 사용자의 과거 스트리밍 행동과 선호도를 나타내는 벡터
+* **곡 특성(learnt track embeddings)**: 각 곡의 고유한 특징을 학습한 임베딩 벡터
+* **사용자-곡 조합 특징(joint user–track features)**: 특정 사용자와 곡 간의 상호작용을 나타내는 조합 데이터
+
+#### ✅ 주요 역할
+* 이 레이어는 입력된 데이터를 벡터 형태로 변환함으로써, 다음 단계(Encoder)에서 사용자와 곡 간의 관계를 효과적으로 분석하고 학습할 수 있도록 준비
+* 결과적으로, Representation Layer는 사용자의 취향과 곡의 특성을 통합해 **기초 데이터**를 제공
 
 ### 2️⃣ Set Transformer-based Encoder
-곡들 간의 상호작용을 고려하여 컨텍스트화된 표현 생성
-* 곡 집합(Set)을 input으로 받아, 각 곡의 중요도를 평가하기 위한 Relevance Scores를 계산
-  * _predicted user satisfaction for each user–track pair_
-* Multi-head Self-Attention
-  * 곡들 간의 상호작용 관계를 파악하여, 곡의 컨텍스트를 고려한 임베딩을 생성
-* Feed-Forward Layer (Relevance Scores 계산)
-  * Set Transformer로 생성된 곡 임베딩을 입력받아 각 곡의 Relevance Score를 계산
-  * 컨텍스트화된 곡 representation → 스칼라 점수로 변환 (예: 곡 t1 → 0.96)
+**Set Transformer-based Encoder**는 곡들 간의 상호작용을 고려하여, 각 곡의 컨텍스트를 반영한 표현을 생성하는 역할을 합니다. 이 과정은 곡 집합(Set) 내의 곡들 사이 관계를 학습하여, **Relevance Score(중요도 점수)**를 계산하는 데 중점을 둡니다.
 
-## [Inference] Encoder에서 계산된 Relevance Score를 활용해, Multi-Objectives를 균형있게 고려하며 곡 순서 생성
+#### ✅ 주요 기능
+* **곡 집합(Set)을 input으로 받아, Relevance Scores 계산**
+  * Encoder는 곡들 간의 관계를 분석하여, 각 곡의 중요도를 평가하기 위한 **Relevance Score**를 계산합니다.
+  * 이 점수는 **user–track pair 간의 예상 만족도(predicted user satisfaction)**를 기반으로 생성됩니다.
+
+#### ✅ 세부 구성 요소
+1. **Multi-head Self-Attention**
+  * 곡들 간의 상호작용 관계를 학습하여, 곡의 컨텍스트를 고려한 임베딩을 생성합니다.
+  * 이를 통해 단순한 개별 곡의 특징이 아닌, **곡들이 서로 어떤 맥락에서 의미를 가지는지**를 반영합니다.
+2. **Feed-Forward Layer (Relevance Scores 계산)**
+  * Set Transformer에서 생성된 곡 임베딩을 입력받아, 각 곡의 **Relevance Score**를 계산합니다.
+  * 컨텍스트화된 곡 representation을 **스칼라 점수로 변환**하여 곡의 중요도를 수치화합니다.
+    * 예시: 곡 t1의 Relevance Score → 0.96
+
+<br>
+
+## 💡Inference: Encoder에서 계산된 Relevance Score를 활용해, Multi-Objectives를 균형있게 고려하며 곡 순서 생성
 ### 3️⃣ Multi-Objective Decorator
 > multi-objective 점수(Discovery, Exposure, Boost)를 반영
+
+이 단계에서는 각 곡에 대해 다양한 **objective**를 부여하고, 이를 바탕으로 곡의 최종 점수를 조정합니다. 스포티파이의 **Discovery, Exposure, Boost**와 같은 플랫폼 목표를 반영하여, 추천 곡이 단순히 사용자 만족뿐 아니라 플랫폼의 전략적 목표에도 부합하도록 조율합니다.
+
 * Multi-Objective 추가
   * 각 곡 t1, t2, t3, t4에 대해 세 가지 objective(Discovery, Exposure, Boost)를 부여 (예: t2 exposure)
   * 이 단계에서 곡에 해당하는 objective를 연결해, objective에 따른 추가 점수를 반영함
 
+#### ✅ 작업 프로세스
+1. **곡별 Objective 부여**
+  * 각 곡에 대해 하나 이상의 objective를 부여합니다.
+  * 예: 곡 t2는 Exposure 목표를 충족하도록 설정
+2. **Objective 기반 추가 점수 반영**
+  * 곡별로 부여된 objective에 따라, 해당 곡의 **Relevance Score**에 추가 점수를 반영합니다.
+  * 예: t2의 점수 = 기본 Relevance Score(0.95) + Exposure Objective Score(0.07) = 1.02
+
 ### 4️⃣ Multi-Objective Counterfactual Scoring (Submodular Scoring)
 > 곡의 최종 점수를 조정
+
 * Counterfactual Filtering (ε)
   * 점수가 를 만족하지 않으면 필터링
   * 즉, 특정 임계값(ε) 이하로 점수가 낮은 곡은 제외함
