@@ -91,7 +91,7 @@ Discovery는 사용자가 이전에 들어본 적 없는 곡이나 아티스트�
 
 # 👾 Mostra Architecture
 위의 문제들을 해결하기 위해 제시된 해결책은 바로 아래 두 가지입니다: <br>
-**[기존의] Set Transformer Encoder와 [논문에서 새롭게 개발된] Multi-Objective Beam Search Decoder**
+**[기존의] Set Transformer Encoder + [논문에서 새롭게 개발된] Multi-Objective Beam Search Decoder**
 
 ![end-to-end neural architecture for multi-objective track sequencing](https://github.com/user-attachments/assets/3b57f004-65f2-4f64-ab5d-8fd0305ac461)
 
@@ -109,7 +109,7 @@ Representation Layer에는 다음과 같은 요소들이 입력됩니다:
 
 #### ✅ 주요 역할
 * 이 레이어는 입력된 데이터를 벡터 형태로 변환함으로써, 다음 단계(Encoder)에서 사용자와 곡 간의 관계를 효과적으로 분석하고 학습할 수 있도록 준비
-* 결과적으로, Representation Layer는 사용자의 취향과 곡의 특성을 통합해 **기초 데이터**를 제공
+* 결과적으로, Representation Layer는 사용자의 취향과 곡의 특성을 통합해 **기초 데이터**를 제공 <br>
 
 ### 2️⃣ Set Transformer-based Encoder
 **Set Transformer-based Encoder**는 곡들 간의 상호작용을 고려하여, 각 곡의 컨텍스트를 반영한 표현을 생성하는 역할을 합니다. 이 과정은 곡 집합(Set) 내의 곡들 사이 관계를 학습하여, **Relevance Score(중요도 점수)**를 계산하는 데 중점을 둡니다.
