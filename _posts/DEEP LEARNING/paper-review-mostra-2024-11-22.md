@@ -1,0 +1,58 @@
+---
+layout: post
+title:  "추천 시스템도 고민이 있다: 사용자와 플랫폼 중심의 목표를 모두 만족시킬 수 있을까?"
+subtitle:   "Spotify - Generalist-Specialist Score"
+categories: data
+tags: dl
+comments: true
+use_math: true
+---
+
+- 해당 포스팅은 스포티파이가 음악 추천 시스템에서 사용자, 아티스트, 그리고 플랫폼 간의 목표(objective)를 어떻게 조화롭게 균형 잡는지를 다룬 글입니다. 🎧
+- 특히, 사용자의 단기적 만족뿐만 아니라, 새로운 음악 탐색, 신예 아티스트 노출, 그리고 플랫폼의 전략적 목표를 동시에 달성하기 위해 개발된 Mostra 프레임워크를 소개하고자 합니다.
+- 이 글에서는 Mostra가 각기 다른 목표들 사이에서 **트레이드오프(Trade-off)**를 조정하며, 추천 시스템의 유연성과 실시간 조율 능력을 어떻게 강화했는지에 초점을 맞출 예정입니다.
+
+----------
+
+음악 스트리밍 플랫폼에서는 음악 추천을 할 때 추천할 트랙 리스트를 선정하고 트랙의 순서를 정렬하는 방향으로 진행됩니다. <br>
+이때 직면한 문제는 사용자가 좋아할 곡을 추천해야 하지만 이런 경우에는 인기도 높은 곡들 위주로 추천되기 때문에 곡의 다양성이 줄어든다는 점이죠. 이런 경우는 과연 "좋은 추천"이라고 할 수 있을까요? <br>
+👉🏻 문제점 : 사용자를 기쁘게 하려다 보면 신예 아티스트의 노출이 줄어들고, 플랫폼의 장기적 지속 가능성에도 영향을 미칠 수 있다.
+
+<br>
+
+이번 포스팅에서 다룰 내용은 사용자가 좋아할 곡을 추천해야 하지만, 신예 아티스트를 홍보하거나 플랫폼의 전략적 목표 또한 동시에 충족시키는 방식으로 장기적인 플랫폼의 건강과 지속 가능성을 유지하기 위한 방법입니다. <br>
+이를 위해 스포티파이는 사용자의 만족, 새로운 음악 탐색, 신예 아티스트 노출, 특정 콘텐츠 부각이라는 네 가지 주요 objective를 설정하고, 이러한 목표 간의 상충 관계를 효과적으로 조율할 수 있는 새로운 기술적 방법인 Mostra를 제안합니다. 이 모델은 Set Transformer를 기반으로 하며, Beam Search를 활용해 다양한 objective를 동적으로 조율할 수 있습니다. <br>
+실험을 통해 이 방법이 여러 목표를 균형 있게 달성하면서도 높은 성능을 보인다는 점을 확인했습니다.
+
+논문의 핵심이 "multi-objective 최적화"이다보니, <br>
+각 objective에 대한 설명과 사용자, 아티스트, 플랫폼의 다양한 이해관계를 어떻게 균형있게 조율했는지에 초점을 맞춰 설명 드리도록 하겠습니다.
+
+<br>
+
+# Data Context
+이번 연구는 Spotify의 radio-like music streaming 세션 데이터를 기반으로 진행되었습니다. <br>
+연구에 사용된 데이터는 다음과 같습니다:
+* 사용자 수: 1,000만 명
+* 세션 수: 5억 회
+* 상호작용 수: 10억 건
+* 기간: 7일간의 청취 데이터
+
+<br>
+
+# (Binary) Objectives
+
+
+
+<br>
+
+### Reference
+* [스포티파이 테크 블로그 글 - Mostra: Balancing multiple objectives for music recommendation](https://research.atspotify.com/2022/04/mostra-balancing-multiple-objectives-for-music-recommendation/)
+* [논문 - Mostra: A Flexible Balancing Framework to Trade-off User, Artist and Platform Objectives for Music Sequencing](https://arxiv.org/pdf/2204.10463)
+* [발표내용 - Mostra: A Flexible Balancing Framework to Trade-off User, Artist and Platform Objectives for Music Sequencing](https://e-bug.github.io/assets/pdf/mostra_slides.pdf)
+
+----------------------------
+
+### 🔜 Think
+이번 포스팅에서는 GS-Score와 추천 알고리즘에 대해 다루면서 스포티파이가 어떻게 더 정교한 음악 경험을 제공하려고 하는지 살펴보았습니다.🎧📚 <br>
+요즘 **현재 마주한 이 문제를 어떻게 진단하고, 방향을 어떻게 잡아야 하는가**에 대해서 많은 고민을 하고있거든요. 특히 유저의 성향을 어떤 지표로 담으면 좋을지 많이 고민하고 있다보니, 이런 부분이 매우 재미있게 다가왔습니다. 또 어떤 유저들의 음악 소비 패턴이 있을까 궁금해지네요! 여러분은 어떤 음악적 탐험을 하시는지도 궁금합니다!🎶 <br>
+gs-score를 코드로 어떻게 구현하고, 실제 어떻게 값이 나오는지 확인하고 싶어서 다음 포스팅에서는 실제 구현을 진행해보려고 합니다. 많관부-💫
