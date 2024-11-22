@@ -85,8 +85,43 @@ Spotify의 세션 데이터를 살펴보면, 세션마다 곡 구성의 특징�
 
 ![end-to-end neural architecture for multi-objective track sequencing](https://github.com/user-attachments/assets/3b57f004-65f2-4f64-ab5d-8fd0305ac461)
 
+## [Training] 곡과 사용자 간의 관계를 모델링하여 곡의 기본 점수를 계산
+### 1️⃣ Representation Layer
+사용자와 곡의 특징을 input으로 받아 이를 벡터로 표현
+* 사용자(user embeddings) 특성, 곡 특성(learnt track embeddings), joint user–track features이 Representation Layer에 입력됨
 
+### 2️⃣ Set Transformer-based Encoder
+곡들 간의 상호작용을 고려하여 컨텍스트화된 표현 생성
+* 곡 집합(Set)을 input으로 받아, 각 곡의 중요도를 평가하기 위한 Relevance Scores를 계산
+  * _predicted user satisfaction for each user–track pair_
+* Multi-head Self-Attention
+  * 곡들 간의 상호작용 관계를 파악하여, 곡의 컨텍스트를 고려한 임베딩을 생성
+* Feed-Forward Layer (Relevance Scores 계산)
+  * Set Transformer로 생성된 곡 임베딩을 입력받아 각 곡의 Relevance Score를 계산
+  * 컨텍스트화된 곡 representation → 스칼라 점수로 변환 (예: 곡 t1 → 0.96)
 
+## [Inference] Encoder에서 계산된 Relevance Score를 활용해, Multi-Objectives를 균형있게 고려하며 곡 순서 생성
+### 3️⃣ Multi-Objective Decorator
+> multi-objective 점수(Discovery, Exposure, Boost)를 반영
+* Multi-Objective 추가
+  * 각 곡 t1, t2, t3, t4에 대해 세 가지 objective(Discovery, Exposure, Boost)를 부여 (예: t2 exposure)
+  * 이 단계에서 곡에 해당하는 objective를 연결해, objective에 따른 추가 점수를 반영함
+
+### 4️⃣ Multi-Objective Counterfactual Scoring (Submodular Scoring)
+> 곡의 최종 점수를 조정
+* Counterfactual Filtering (ε)
+  * 점수가 를 만족하지 않으면 필터링
+  * 즉, 특정 임계값(ε) 이하로 점수가 낮은 곡은 제외함
+    * 기존의 좋은 추천을 해치지 않으면서, 새로운 목표를 동시에 달성
+* Submodular MO Beam Scoring
+  * relevance score과 objective score 통합
+  * Relevance Score(rt)에 objective 기반 점수(g(MO))를 추가하여, 최종 점수를 계산함
+→ 예: t2점수=기본점수(0.95)+objective점수(0.07)=1.02
+
+### 5️⃣ Multi-Objective Beam Search
+> 최종적으로 곡 순서를 결정
+* Multi-Objective를 최대화하는 방향으로 순서를 정하고, 다양한 곡 간의 균형을 맞춤
+  * 예: t1 → t2 → t4 순서로 추천
 
 
 # Conclusion
