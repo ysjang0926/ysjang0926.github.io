@@ -183,6 +183,7 @@ Representation Layer에는 다음과 같은 요소들이 입력됩니다:
 
 Inline 수식: $s_{\text{max}} - s_t \leq \epsilon$
 
+Block 수식:
 $$
 s_{\text{max}} - s_t \leq \epsilon
 $$
