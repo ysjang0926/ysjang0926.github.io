@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "추천시스템도 고민이 있다: 사용자와 플랫폼 중심의 목표를 모두 만족시킬 수 있을까?"
+title:  "추천시스템도 고민이 있다: 사용자 만족과 플랫폼 목표, 둘 다 잡기"
 subtitle:   "Spotify - Generalist-Specialist Score"
 categories: data
 tags: dl
@@ -69,6 +69,9 @@ Spotify 플랫폼에서 다루는 주요 objective는 다음과 같은 네 가�
 # ䷍ Objectives within Sets: 세션 기반 음악 추천 최적화
 음악 추천 시스템에서 가장 도전적인 과제 중 하나는 **세션마다 달라지는 곡 구성(objective composition)**에 따라 최적화된 추천을 제공하는 것입니다. 스포티파이의 데이터 분석에 따르면, 사용자의 만족도(Short-term User Satisfaction, SAT)와 추천 목표들(Exposure, Discovery) 사이에는 특정한 관계가 존재하며, 이를 이해하면 더욱 정교한 추천 시스템을 설계할 수 있습니다.
 
+![image](https://github.com/user-attachments/assets/c7b0bd0d-e8c7-4242-8819-2ac61da4f578)
+
+
 #### 📍 노출(Exposure): 사용자 만족도와 독립적 관계
 스포티파이는 신예 아티스트의 곡을 추천해 노출을 늘리는 것을 중요 objective 중 하나로 설정하고 있습니다. 분석에 따르면, Exposure 곡과 SAT 사이에는 유의미한 상관관계가 없는 것으로 나타났습니다. 즉, 사용자가 신예 아티스트의 곡을 듣는다고 해서 만족도가 특별히 올라가지도, 떨어지지도 않는다는 뜻입니다. 이는 신예 아티스트의 노출을 늘리더라도 사용자 경험에는 큰 영향을 미치지 않는다는 것을 의미하며, 이를 전략적으로 활용할 여지가 있습니다.
 
@@ -81,7 +84,7 @@ Discovery는 사용자가 이전에 들어본 적 없는 곡이나 아티스트�
 * 예시
   * Discovery 비중이 높은 세션 : 사용자가 부정적인 경험을 피할 수 있도록 discovery 트랙의 적절한 비율을 유지해야함
   * Exposure 비중이 높은 세션 : exposure를 늘리면서도 사용자의 만족도를 떨어뜨리지 않는 전략이 필요함
-이렇듯 각 세션의 곡 구성에 따라 추천 시스템이 동적으로 적응할 수 있는 메커니즘이 필요합니다.
+이렇듯 각 세션의 곡 구성에 따라 추천 시스템이 동적으로 적응할 수 있는 메커니즘이 필요함
 
 #### 📍 Set-awareness 기반 세션 맞춤 추천
 스포티파이는 이러한 문제를 해결하기 위해 Set-awareness를 추천 시스템에 통합하고자 합니다. Set-awareness는 세션 내 곡 구성을 분석해, 세션마다 최적화된 곡 추천을 가능하게 만듭니다. <br>
@@ -89,15 +92,36 @@ Discovery는 사용자가 이전에 들어본 적 없는 곡이나 아티스트�
 
 <br><br>
 
-# 👾 Mostra Architecture
-위의 문제들을 해결하기 위해 제시된 해결책은 바로 아래 두 가지입니다: <br>
+# 👾 Mostra Architecture: 새로운 Multi-Objective 프레임워크
+스포티파이의 Mostra는 위의 문제들을 해결하기 위해 다음과 같은 기술을 통해 유연한 음악 추천을 가능하게 하는 **Transformer 기반 인코더-디코더 프레임워크**입니다: <br>
 **[기존의] Set Transformer Encoder + [논문에서 새롭게 개발된] Multi-Objective Beam Search Decoder**
+* **1. Transformer-based Encoder-Decoder**  
+  * 곡 집합 내의 상호작용 관계를 학습하고, 곡 순위를 생성하는 데 필요한 컨텍스트를 반영
+* **2. Novel Beam Search Algorithm**  
+  * 기존 빔 서치 방식을 확장해, 여러 objective를 동시에 최적화하며 곡 순서를 동적으로 생성
+* **3. Submodular Multi-Objective Scoring**  
+  * 각 곡에 대해 **Relevance Score**와 **objective-based 점수(Discovery, Exposure, Boost)**를 통합하여 최종 점수를 계산
+* **4. Counterfactual Performance on User Metrics**  
+  * 모델이 추천하는 곡이 사용자 만족도 및 다른 지표에 미치는 영향을 **Counterfactual(가정적 시뮬레이션)** 방식으로 평가
 
-![end-to-end neural architecture for multi-objective track sequencing](https://github.com/user-attachments/assets/3b57f004-65f2-4f64-ab5d-8fd0305ac461)
+![end-to-end neural architecture for multi-objective track sequencing](https://github.com/user-attachments/assets/3b57f004-65f2-4f64-ab5d-8fd0305ac461) <br>
+
+이때 필수 요건(desiderata)은 다음과 같습니다:
+1. **Set-aware method**  
+  * 세션의 곡 구성(객체 간 관계)을 인지하며 최적화된 추천을 제공할 수 있는 방법론
+2. **Multi-Objective decision making**  
+  * 사용자 만족, 창작자 노출, 플랫폼 목표 등 여러 목표를 동시에 고려한 의사 결정 능력
+3. **Dynamic & Flexible Control**  
+  * 다양한 세션 구성에 따라 동적으로 조정 가능하며, 여러 목표 간의 균형을 유연하게 제어할 수 있는 기능
 
 <br>
 
+크게는 **Training**과 **Inference** 두 가지 단계로 나뉘며, 이를 세부적으로 살펴보면 총 5단계로 구성됩니다. 각 단계를 하나씩 설명드리겠습니다.
+
 ## 💡Training: 곡과 사용자 간의 관계를 모델링하여 곡의 기본 점수를 계산
+
+![image](https://github.com/user-attachments/assets/87c7981b-2148-49aa-bb70-67a8a78a145b)
+
 ### 1️⃣ Representation Layer
 **Representation Layer**는 **사용자와 곡의 특징을 입력으로 받아 이를 벡터로 표현**하는 역할을 합니다. 이 단계는 추천 시스템의 기본 데이터를 학습 가능한 형식으로 변환하는 과정입니다.
 
@@ -131,6 +155,9 @@ Representation Layer에는 다음과 같은 요소들이 입력됩니다:
 <br>
 
 ## 💡Inference: Encoder에서 계산된 Relevance Score를 활용해, Multi-Objectives를 균형있게 고려하며 곡 순서 생성
+
+![image](https://github.com/user-attachments/assets/75e12737-33c2-4bac-bd43-70198073b6e0)
+
 ### 3️⃣ Multi-Objective Decorator
 > multi-objective 점수(Discovery, Exposure, Boost)를 반영
 
