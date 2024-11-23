@@ -93,20 +93,20 @@ Discovery는 사용자가 이전에 들어본 적 없는 곡이나 아티스트�
 <br><br>
 
 # 👾 Mostra Architecture: 새로운 Multi-Objective 프레임워크
-스포티파이의 Mostra는 위의 문제들을 해결하기 위해 다음과 같은 기술을 통해 유연한 음악 추천을 가능하게 하는 **Transformer 기반 인코더-디코더 프레임워크**입니다: <br>
-**[기존의] Set Transformer Encoder + [논문에서 새롭게 개발된] Multi-Objective Beam Search Decoder**
+스포티파이의 Mostra는 위의 문제들을 해결하기 위해 다음과 같은 기술을 통해 유연한 음악 추천을 가능하게 하는 **Transformer 기반 인코더-디코더 프레임워크**입니다. <br>
+👉🏻 **[기존의] Set Transformer Encoder + [논문에서 새롭게 개발된] Multi-Objective Beam Search Decoder**
 * **1. Transformer-based Encoder-Decoder**  
   * 곡 집합 내의 상호작용 관계를 학습하고, 곡 순위를 생성하는 데 필요한 컨텍스트를 반영
 * **2. Novel Beam Search Algorithm**  
   * 기존 빔 서치 방식을 확장해, 여러 objective를 동시에 최적화하며 곡 순서를 동적으로 생성
 * **3. Submodular Multi-Objective Scoring**  
-  * 각 곡에 대해 **Relevance Score**와 **objective-based 점수(Discovery, Exposure, Boost)**를 통합하여 최종 점수를 계산
+  * 각 곡에 대해 Relevance Score와 objective-based 점수(Discovery, Exposure, Boost)를 통합하여 최종 점수를 계산
 * **4. Counterfactual Performance on User Metrics**  
-  * 모델이 추천하는 곡이 사용자 만족도 및 다른 지표에 미치는 영향을 **Counterfactual(가정적 시뮬레이션)** 방식으로 평가
+  * 모델이 추천하는 곡이 사용자 만족도 및 다른 지표에 미치는 영향을 Counterfactual(가정적 시뮬레이션) 방식으로 평가
 
-![end-to-end neural architecture for multi-objective track sequencing](https://github.com/user-attachments/assets/3b57f004-65f2-4f64-ab5d-8fd0305ac461) <br>
+![end-to-end neural architecture for multi-objective track sequencing](https://github.com/user-attachments/assets/3b57f004-65f2-4f64-ab5d-8fd0305ac461)
 
-이때 필수 요건(desiderata)은 다음과 같습니다:
+#### 📍 Desiderata (필수 요건)
 1. **Set-aware method**  
   * 세션의 곡 구성(객체 간 관계)을 인지하며 최적화된 추천을 제공할 수 있는 방법론
 2. **Multi-Objective decision making**  
@@ -116,7 +116,7 @@ Discovery는 사용자가 이전에 들어본 적 없는 곡이나 아티스트�
 
 <br>
 
-크게는 **Training**과 **Inference** 두 가지 단계로 나뉘며, 이를 세부적으로 살펴보면 총 5단계로 구성됩니다. 각 단계를 하나씩 설명드리겠습니다.
+Mostra는 크게는 **Training**과 **Inference** 두 가지 단계로 나뉘며, 이를 세부적으로 살펴보면 총 5단계로 구성됩니다. 각 단계를 하나씩 설명드리겠습니다.
 
 ## 💡Training: 곡과 사용자 간의 관계를 모델링하여 곡의 기본 점수를 계산
 
@@ -133,15 +133,18 @@ Representation Layer에는 다음과 같은 요소들이 입력됩니다:
 
 #### ✅ 주요 역할
 * 이 레이어는 입력된 데이터를 벡터 형태로 변환함으로써, 다음 단계(Encoder)에서 사용자와 곡 간의 관계를 효과적으로 분석하고 학습할 수 있도록 준비
-* 결과적으로, Representation Layer는 사용자의 취향과 곡의 특성을 통합해 **기초 데이터**를 제공 <br>
+* 결과적으로, Representation Layer는 사용자의 취향과 곡의 특성을 통합해 **기초 데이터**를 제공
+
+<br>
 
 ### 2️⃣ Set Transformer-based Encoder
 **Set Transformer-based Encoder**는 곡들 간의 상호작용을 고려하여, 각 곡의 컨텍스트를 반영한 표현을 생성하는 역할을 합니다. 이 과정은 곡 집합(Set) 내의 곡들 사이 관계를 학습하여, **Relevance Score(중요도 점수)**를 계산하는 데 중점을 둡니다.
 
 #### ✅ 주요 기능
 * **곡 집합(Set)을 input으로 받아, Relevance Scores 계산**
-  * Encoder는 곡들 간의 관계를 분석하여, 각 곡의 중요도를 평가하기 위한 **Relevance Score**를 계산합니다.
+  * Encoder는 곡들 간의 관계를 분석하여, 각 곡의 중요도를 평가하기 위한 **Relevance Score(=SAT 점수)**를 계산합니다.
   * 이 점수는 **user–track pair 간의 예상 만족도(predicted user satisfaction)**를 기반으로 생성됩니다.
+  * 각 곡에 대해 계산된 Predicted scores(예측 점수)는 추천시스템의 첫번째 단계에서 곡 순위를 결정하는데 사용됩니다.
 
 #### ✅ 세부 구성 요소
 1. **Multi-head Self-Attention**
@@ -164,7 +167,7 @@ Representation Layer에는 다음과 같은 요소들이 입력됩니다:
 이 단계에서는 각 곡에 대해 다양한 **objective**를 부여하고, 이를 바탕으로 곡의 최종 점수를 조정합니다. 스포티파이의 **Discovery, Exposure, Boost**와 같은 플랫폼 목표를 반영하여, 추천 곡이 단순히 사용자 만족뿐 아니라 플랫폼의 전략적 목표에도 부합하도록 조율합니다.
 
 * Multi-Objective 추가
-  * 각 곡 t1, t2, t3, t4에 대해 세 가지 objective(Discovery, Exposure, Boost)를 부여 (예: t2 exposure)
+  * 각 곡 t1, t2, t3, t4에 대해 세 가지 objective(Discovery, Exposure, Boost)를 부여 (예: t2 - exposure)
   * 이 단계에서 곡에 해당하는 objective를 연결해, objective에 따른 추가 점수를 반영함
 
 #### ✅ 작업 프로세스
@@ -175,23 +178,56 @@ Representation Layer에는 다음과 같은 요소들이 입력됩니다:
   * 곡별로 부여된 objective에 따라, 해당 곡의 **Relevance Score**에 추가 점수를 반영합니다.
   * 예: t2의 점수 = 기본 Relevance Score(0.95) + Exposure Objective Score(0.07) = 1.02
 
+<br>
+
+
+Inline 수식: $s_{\text{max}} - s_t \leq \epsilon$
+
+Block 수식:
+$$
+s_{\text{max}} - s_t \leq \epsilon
+$$
+
+
+
 ### 4️⃣ Multi-Objective Counterfactual Scoring (Submodular Scoring)
 > 곡의 최종 점수를 조정
 
-* Counterfactual Filtering (ε)
-  * 점수가 를 만족하지 않으면 필터링
-  * 즉, 특정 임계값(ε) 이하로 점수가 낮은 곡은 제외함
-    * 기존의 좋은 추천을 해치지 않으면서, 새로운 목표를 동시에 달성
-* Submodular MO Beam Scoring
-  * relevance score과 objective score 통합
-  * Relevance Score(rt)에 objective 기반 점수(g(MO))를 추가하여, 최종 점수를 계산함
-→ 예: t2점수=기본점수(0.95)+objective점수(0.07)=1.02
+**Multi-Objective Counterfactual Scoring**은 곡의 최종 점수를 조정하는 과정으로, **Relevance Score**와 **Objective Score**를 통합하여 플랫폼의 다양한 목표를 충족시킵니다. 이 단계에서는 점수 필터링과 Multi-Objective 최적화를 통해 사용자 경험과 플랫폼 전략 간의 균형을 맞추는 데 중점을 둡니다.
+
+#### ✅ 주요 기능
+1. **Counterfactual Filtering(ε)**
+  * 곡의 점수가 특정 임계값(ε)을 만족하지 못하면 필터링하여 제외합니다.
+    * 예를 들어, 다음 곡을 선택할 때 SAT 점수가 일정 임계값(ε) 이하인 곡은 추천 후보에서 제외
+  * 이 과정을 통해 기존의 좋은 추천 품질을 유지하면서도 새로운 objective를 달성할 수 있도록 조율합니다.
+    * 훈련 메트릭(SAT)에 따른 잠재적 손실을 제한 → 추천 품질을 높이는 역할
+2. **Submodular: MO(Multi-Objective) Beam Scoring**
+  * 곡의 **Relevance Score(rt)**와 **Objective 기반 점수(g(MO))**를 통합하여 최종 점수를 계산합니다.
+    * Submodular Scoring 방식으로 여러 objective를 균형 있게 고려하여 점수화
+    * 기존에 선택된 곡들에서 덜 대표된 objectives(ex. Discovery, Boost 등)를 보완할 수 있는 곡을 더 높은 점수로 평가
+  * 계산된 최종 점수는 각 곡이 추천 리스트에서 차지하는 순위를 결정합니다.
+    * 예시: 곡 t2의 최종 점수 = 기본 점수(0.95) + Objective 점수(0.07) = 1.02
+    * multi-objective 간의 조화를 유지하는 데 중점을 둠 → objectives가 고르게 반영된 추천결과 생성
+
+<br>
 
 ### 5️⃣ Multi-Objective Beam Search
 > 최종적으로 곡 순서를 결정
-* Multi-Objective를 최대화하는 방향으로 순서를 정하고, 다양한 곡 간의 균형을 맞춤
-  * 예: t1 → t2 → t4 순서로 추천
+**Multi-Objective Beam Search**는 곡 순서를 최적화하는 과정으로, 다양한 Objective를 최대화하면서 곡 간의 균형을 유지합니다. 이 단계에서는 추천 리스트의 곡 순서를 결정하며, 사용자 만족과 플랫폼 목표를 동시에 충족시키는 데 중점을 둡니다.
 
+#### ✅ 주요 기능
+1. **Multi-Objective 기반 순서 최적화**
+  * 여러 Objective(예: Discovery, Exposure, Boost)를 동시에 고려하여 곡 순서를 최적화합니다
+  * 곡 리스트가 사용자 경험과 플랫폼의 전략적 목표를 균형 있게 반영하도록 설계
+2. **다양성 유지 및 Objectives 조화**
+  * 곡 추천에서 특정 목표(Objective)에 편중되지 않도록, 리스트 내 곡들 간의 균형을 맞춥니다.
+  * 추천 리스트가 사용자와 플랫폼의 다각적인 요구를 만족시킬 수 있도록 정렬
+
+#### ✅ 예시
+* 곡 순서 예시: 곡 t1, t2, t4의 순서로 추천 (t1 → t2 → t4)
+  * 이 순서는 Relevance Score와 Multi-Objective 점수를 통합하여 계산된 결과
+
+<br><br>
 
 # Conclusion
 결국, Spotify는 사용자의 취향 데이터를 기반으로 트랙을 분석하고, 과거의 스트리밍 기록과 같은 데이터(예: Discovery)를 활용해 새로운 곡을 추천합니다. 동시에, Boost 태그와 같은 플랫폼 중심의 전략도 반영해 모든 이해관계자(사용자, 아티스트, 플랫폼)의 목표를 조화롭게 달성하려 노력합니다.
