@@ -149,10 +149,10 @@ Representation Layer에는 다음과 같은 요소들이 입력됩니다:
     * 각 곡의 기본 점수($$s_t$$)를 계산하여 가장 높은 곡을 초기 추천 리스트에 추가
 
 #### ✅ 세부 구성 요소
-1. **Multi-head Self-Attention**
+* **Multi-head Self-Attention**
   * 곡들 간의 상호작용 관계를 학습하여, 곡의 컨텍스트를 고려한 임베딩을 생성합니다.
   * 이를 통해 단순한 개별 곡의 특징이 아닌, **곡들이 서로 어떤 맥락에서 의미를 가지는지**를 반영합니다.
-2. **Feed-Forward Layer (Relevance Scores 계산)**
+* **Feed-Forward Layer (Relevance Scores 계산)**
   * Set Transformer에서 생성된 곡 임베딩을 입력받아, 각 곡의 **Relevance Score**를 계산합니다.
   * 컨텍스트화된 곡 representation을 **스칼라 점수로 변환**하여 곡의 중요도를 수치화합니다.
     * 예시: 곡 t1의 Relevance Score → 0.96
@@ -188,7 +188,7 @@ Representation Layer에는 다음과 같은 요소들이 입력됩니다:
 **Multi-Objective Counterfactual Scoring**은 곡의 최종 점수를 조정하는 과정으로, **Relevance Score**와 **Objective Score**를 통합하여 플랫폼의 다양한 목표를 충족시킵니다. 이 단계에서는 점수 필터링과 Multi-Objective 최적화를 통해 사용자 경험과 플랫폼 전략 간의 균형을 맞추는 데 중점을 둡니다.
 
 #### ✅ 주요 기능
-1. **Counterfactual Filtering(ε)**
+* **Counterfactual Filtering(ε)**
 
   * 곡의 점수가 $$ s_{\text{max}} - s_t \leq \epsilon $$를 넘지 못하면 필터링하여 제외합니다.
     * 예를 들어, 다음 곡을 선택할 때 SAT 점수가 일정 임계값(ε) 이하인 곡은 추천 후보에서 제외
@@ -197,7 +197,7 @@ Representation Layer에는 다음과 같은 요소들이 입력됩니다:
   * 이 과정을 통해 기존의 좋은 추천 품질을 유지하면서도 새로운 objective를 달성할 수 있도록 조율합니다.
     * 훈련 메트릭(SAT)에 따른 잠재적 손실을 제한 → 추천 품질을 높이는 역할
 
-2. **Submodular: MO(Multi-Objective) Beam Scoring**
+* **Submodular: MO(Multi-Objective) Beam Scoring**
   * 남은 후보 곡에 대해 곡의 **Relevance Score($$s_t$$)**와 **Objective 기반 점수($$g(MO)$$)**를 통합하여 최종 점수를 계산합니다.
     * $$s_{\text{final}} = s_t + g(\text{MO}) = s_t + \frac{1}{n} \sum_{j=1}^{J} \sqrt{\sum_{y \in [y \| t]} E_{y,j}}$$
       * $$s_t$$ : 기본 점수 (사용자 만족 기반 점수)
@@ -223,7 +223,7 @@ Representation Layer에는 다음과 같은 요소들이 입력됩니다:
 **Multi-Objective Beam Search**는 곡 순서를 최적화하는 과정으로, 다양한 Objective를 최대화하면서 곡 간의 균형을 유지합니다. 이 단계에서는 추천 리스트의 곡 순서를 결정하며, 사용자 만족과 플랫폼 목표를 동시에 충족시키는 데 중점을 둡니다.
 
 #### ✅ 주요 기능
-1. **Multi-Objective 기반 순서 최적화**
+* **Multi-Objective 기반 순서 최적화**
 
    * Beam Search를 사용하여, 다음 단계에서 여러 후보 곡 조합을 평가한 후 가장 최적의 리스트를 생성합니다.
        * 현재 리스트에 새로운 곡을 추가할 때마다 전체 리스트의 점수를 재계산
@@ -231,7 +231,7 @@ Representation Layer에는 다음과 같은 요소들이 입력됩니다:
    * 여러 Objective(예: Discovery, Exposure, Boost)를 동시에 고려하여 곡 순서를 최적화합니다.
        * 곡 리스트가 사용자 경험과 플랫폼의 전략적 목표를 균형 있게 반영하도록 설계
 
-2. **다양성 유지 및 Objectives 조화**
+* **다양성 유지 및 Objectives 조화**
 
    * 곡 추천에서 특정 목표(Objective)에 편중되지 않도록, 리스트 내 곡들 간의 균형을 맞춥니다.
        * 즉, 이 과정에서 objective의 다양성을 고려하며, 특정 목표에 곡이 과도하게 몰리지 않도록 조정
