@@ -191,7 +191,7 @@ Representation Layer에는 다음과 같은 요소들이 입력됩니다:
 1. **Counterfactual Filtering(ε)**
   * 곡의 점수가 $$ s_{\text{max}} - s_t \leq \epsilon $$를 넘지 못하면 필터링하여 제외합니다.
     * 예를 들어, 다음 곡을 선택할 때 SAT 점수가 일정 임계값(ε) 이하인 곡은 추천 후보에서 제외
-      * 예시: $$s_{\text{max}}=0.95$$ & $$\varepsilon=0.05$$면 $$ s_t < 0.90 $$인 곡은 제외됨
+      * 예시: $$s_{\text{max}}=0.95$$ & $$\varepsilon=0.05$$면 $$ s_t < 0.90$$인 곡은 제외됨
   * 이 과정을 통해 기존의 좋은 추천 품질을 유지하면서도 새로운 objective를 달성할 수 있도록 조율합니다.
     * 훈련 메트릭(SAT)에 따른 잠재적 손실을 제한 → 추천 품질을 높이는 역할
 2. **Submodular: MO(Multi-Objective) Beam Scoring**
@@ -205,7 +205,7 @@ Representation Layer에는 다음과 같은 요소들이 입력됩니다:
     * Submodular Scoring 방식으로 여러 objective를 균형 있게 고려하여 점수화
     * 기존에 선택된 곡들에서 덜 대표된 objectives(ex. Discovery, Boost 등)를 보완할 수 있는 곡을 더 높은 점수로 평가
       * 예시: $$ \sqrt{2}+\sqrt{1}=2.41 > \sqrt{3}=1.73 $$
-      * 이렇게 되면 특정 objective에 3개의 관계가 있는것 보다 다른 두개의 목표에 2개 1개 관계가 있는것이 더 큰 점수를 받음 <br>
+      * 이렇게 되면 특정 objective에 3개의 관계가 있는것 보다 다른 두개의 목표에 2개 1개 관계가 있는것이 더 큰 점수를 받음
   * 계산된 최종 점수는 각 곡이 추천 리스트에서 차지하는 순위를 결정합니다.
     * 예시: 곡 t2의 최종 점수 = 기본 점수(0.95) + Objective 점수(0.07) = 1.02
     * multi-objective 간의 조화를 유지하는 데 중점을 둠 → objectives가 고르게 반영된 추천결과 생성
