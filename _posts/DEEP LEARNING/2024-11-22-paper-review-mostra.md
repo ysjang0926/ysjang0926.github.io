@@ -198,15 +198,13 @@ Representation Layer에는 다음과 같은 요소들이 입력됩니다:
     * 훈련 메트릭(SAT)에 따른 잠재적 손실을 제한 → 추천 품질을 높이는 역할
 
 * **Submodular: MO(Multi-Objective) Beam Scoring**
-  * 남은 후보 곡에 대해 곡의 **Relevance Score($$s_t$$)**와 **Objective 기반 점수($$g(MO)$$)**를 통합하여 최종 점수를 계산합니다.
-    * $$s_{\text{final}} = s_t + g(\text{MO}) = s_t + \frac{1}{n} \sum_{j=1}^{J} \sqrt{\sum_{y \in [y \| t]} E_{y,j}}$$
+  * 남은 후보 곡에 대해 곡의 **Relevance Score($$s_t$$)**와 **Objective 기반 점수($$g(MO)$$)**를 통합하여 최종 점수를 계산합니다. <br> → Submodular Scoring 방식으로 여러 objective를 균형 있게 고려하여 점수화
+    * 수식 : $$s_{\text{final}} = s_t + g(\text{MO}) = s_t + \frac{1}{n} \sum_{j=1}^{J} \sqrt{\sum_{y \in [y \| t]} E_{y,j}}$$
       * $$s_t$$ : 기본 점수 (사용자 만족 기반 점수)
       * $$g(\text{MO})$$ : objective 기반 추가 점수 (서브모듈러 방식)
       * $$n$$ : 현재 추천 리스트에서의 곡 순서 (예: 리스트의 세 번째 곡이면 n=3)
       * $$J$$ : objective 총 개수
       * $$E_{y,j}$$ ​: objective j가 추천 리스트 내에서 얼마나 충족되었는지 누적값
-
-    * Submodular Scoring 방식으로 여러 objective를 균형 있게 고려하여 점수화
 
     * 기존에 선택된 곡들에서 덜 대표된 objectives(ex. Discovery, Boost 등)를 보완할 수 있는 곡을 더 높은 점수로 평가
       * 예시: $$ \sqrt{2}+\sqrt{1}=2.41 > \sqrt{3}=1.73 $$
