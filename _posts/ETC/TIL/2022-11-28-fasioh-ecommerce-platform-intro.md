@@ -3,7 +3,7 @@ layout: post
 title:  "[도메인 겉햝기] 패션 이커머스 플랫폼"
 subtitle:   "Fashion Ecommerce Platform"
 categories: etc
-tags: fashion ecommerce platform
+tags: etc_til fashion ecommerce platform
 comments: true
 ---
 
