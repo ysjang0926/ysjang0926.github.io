@@ -2,10 +2,11 @@
 layout: post
 title:  나의 멘탈을 지켜준 문장들🏄🏻‍♀️🍋 (feat. Sound body, Sound mind)
 subtitle: "Let's not be a fool"
-categories: etc
+categories: think
 tags:
 comments: true
 ---
+
 
 - 항상 '다정함'을 잊지 말자고 다짐하지만, 직장인과 어른이라는 역할을 하다보면 쉽게 잊는 것 같습니다.
 - 삶이라는 파도 속에서 인생은 서핑과 같다고 느끼는 요즘(surfing on wave🏄🏻‍♀️), 소소하게 와닿았던 단어와 문장들을 공유하고자 합니다.
