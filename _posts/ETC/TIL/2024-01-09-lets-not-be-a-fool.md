@@ -3,7 +3,7 @@ layout: post
 title:  "🚫멍청방지 개념 정리글🚫"
 subtitle:   "Let's not be a fool"
 categories: etc
-tags: 
+tags: etc_til
 comments: true
 ---
 
