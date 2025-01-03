@@ -3,9 +3,11 @@ layout: post
 title:  "[Github] 우당탕탕 Github Profile 꾸미기 (feat. README.md 작성)"
 subtitle:   "github readme"
 categories: etc
-tags: github profile
+tags: etc_til github profile
 comments: true
 ---
+
+
 
 * 깃헙을 쓰는 사람이라면, "깃헙 이쁘게 꾸며보고 싶다!"라는 생각을 한번 정도는 하지 않나요?
 * 깔끔하고 심플하게 만드는 것이 목표라서 제 취향으로 간단하게 정리해보았습니다! 생각보다 너무 쉬워요!
