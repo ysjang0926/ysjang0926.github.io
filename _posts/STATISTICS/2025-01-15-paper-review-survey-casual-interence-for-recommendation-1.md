@@ -25,7 +25,7 @@ use_math: true
 
 먼저 Causal Recommendation의 주요 장점과 이를 추천시스템에 적용했을 때 얻을 수 있는 이점을 살펴보겠습니다.
 
-#### **1. Cause and Effect: Beyond Correlation**
+### **1. Cause and Effect: Beyond Correlation**
 대다수의 머신러닝 모델은 변수 간의 관계를 파악할 때 상관관계 분석에 초점을 맞춥니다. 하지만 사용자의 시청 이력, 클릭, 구매와 같은 행동 데이터는 종종 sequential하고 복잡한 영향을 받습니다. 단순한 상관관계만으로는 숨겨진 인사이트를 포착하기 어렵습니다. <br>
 ➡️  인과관계를 파악할 필요 있음
 
@@ -36,7 +36,7 @@ use_math: true
 -   **Controlling for Causality**
 	* 특정 변수(예: 노출 빈도)가 추천 결과에 미치는 영향을 파악하고 이를 통제하면 추천시스템의 성능을 향상시킬 수 있습니다.
 
-#### **2. What-If Analysis: Exploring Alternate Scenarios**
+### **2. What-If Analysis: Exploring Alternate Scenarios**
 추천시스템의 궁극적인 목표는 사용자가 기대하는 콘텐츠를 제공하는 것입니다. 하지만 이 과정에서 발생하는 질문이 있습니다. <br>
 ➡️  **"만약 다른 콘텐츠를 추천했더라면, 사용자의 반응은 달랐을까?"**
 
@@ -49,7 +49,7 @@ use_math: true
 	    -   인과추론은 이러한 비독립성(Non-IID)을 효과적으로 처리할 수 있습니다.
 	    -   결과적으로, 더 일반화된 추천이 가능합니다.
 
-#### **3. Discovering Invariant Features**
+### **3. Discovering Invariant Features**
 인과추론은 특정 상황에 구애받지 않는 불변의 특징을 탐색합니다.
 
 -   **Resilience to Change**
@@ -87,6 +87,8 @@ use_math: true
 -   관찰할 수 없는 상황(예: "다른 콘텐츠를 추천했더라면 사용자가 클릭했을까?")을 모델링해, 추천 시스템의 편향 문제를 완화하고 공정성을 확보합니다.
 -   **활용 사례**: 관찰 데이터에 포함되지 않은 사용자 행동을 추정하여 추천 시스템의 다양성과 설명 가능성을 개선
 	-   예를 들어, 사용자 A가 듣지 않은 곡을 추천 리스트에 포함했을 경우 해당 곡을 좋아했을 가능성을 계산하거나, 특정 장르의 곡이 지나치게 노출되지 않도록 제어합니다.
+
+![image](https://github.com/user-attachments/assets/7c11ff6d-e754-43e7-b72b-75769603accd)
 
 
 <br>
