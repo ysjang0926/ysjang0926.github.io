@@ -129,7 +129,7 @@ with models.DAG(
   - `task_id`: Airflow에서 태스크를 식별하는 ID
   - `http_conn_id`: 미리 설정한 Slack Webhook Connection ID 사용
   - `message`: Slack에 전송할 메시지 내용
-- `artist_fandom_clustering >> send_slack_message`: DAG 실행 후 Slack 메시지 태스크를 실행하도록 설정 (의존성 설정)
+- `model_training >> send_slack_message`: DAG 실행 후 Slack 메시지 태스크를 실행하도록 설정 (의존성 설정)
 
 <br>
 
