@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Airflow 개인 슬랙 채널 알림 설정하기"
+title:  "Airflow에서 슬랙 개인 알림 받기, 쉽고 깔끔하게!"
 subtitle: 
 categories: etc
 tags: etc_work
@@ -12,7 +12,7 @@ comments: true
 - 한눈에 이해할 수 있도록 정리해보았으니, 가볍게 읽어주시길 바랍니다! 🙌
  
 ---------
-Airflow에서 DAG 실행 상태를 내 **개인 슬랙 채널에서만** 받고 싶다면, **Slack Webhook을 직접 설정**하면 됩니다. 하지만 처음 설정하는 분들에게는 Webhook 생성, Airflow와의 연결 과정이 다소 낯설 수 있습니다. <br>
+Airflow에서 DAG 실행 상태를 내 **개인 슬랙 채널에서만** 받고 싶다면, **Slack Webhook을 직접 설정**하면 됩니다. 하지만 저처럼 처음 설정하는 분들에게는 Webhook 생성, Airflow와의 연결 과정이 다소 낯설 수 있습니다. <br>
 이 글에서는 **Slack 채널 생성 → Webhook 연결 → Airflow 설정 변경** 과정을 단계별로 자세히 설명해 보겠습니다. 초보자도 쉽게 따라할 수 있도록 하나씩 차근히 진행해 볼까요? 😊
 
 <br>
@@ -24,6 +24,11 @@ Airflow에서 DAG 실행 상태를 내 **개인 슬랙 채널에서만** 받고 
 
 ### 🔗 Slack Webhook 설정하기
 Webhook을 설정하면 Airflow가 슬랙 채널로 메시지를 보낼 수 있습니다.
+
+> 👩🏻‍💻 **Webhook**이란?
+> Webhook은 서버 간에 데이터를 전달하는 간단한 방법입니다.
+> Slack Webhook을 사용하면 Airflow에서 특정 이벤트가 발생할 때, 자동으로 Slack으로 메시지를 보낼 수 있습니다.
+> 즉, Airflow가 DAG 실행 결과를 Slack에 알릴 수 있도록 Webhook을 설정하는 것입니다.
 
 1. **Slack API 페이지 이동** ([Slack API](https://api.slack.com/apps))
 2. `Create an App` 클릭 → `From Scratch` 선택 → 앱 이름 입력 → 워크스페이스 선택 → `Create App` 클릭
