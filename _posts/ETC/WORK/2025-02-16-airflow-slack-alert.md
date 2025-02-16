@@ -25,9 +25,9 @@ Airflow에서 DAG 실행 상태를 내 **개인 슬랙 채널에서만** 받고 
 ### 🔗 Slack Webhook 설정하기
 Webhook을 설정하면 Airflow가 슬랙 채널로 메시지를 보낼 수 있습니다.
 
-> 👩🏻‍💻 **Webhook**이란?
-> Webhook은 서버 간에 데이터를 전달하는 간단한 방법입니다.
-> Slack Webhook을 사용하면 Airflow에서 특정 이벤트가 발생할 때, 자동으로 Slack으로 메시지를 보낼 수 있습니다.
+> 👩🏻‍💻 **Webhook**이란? <br>
+> Webhook은 서버 간에 데이터를 전달하는 간단한 방법입니다. <br>
+> Slack Webhook을 사용하면 Airflow에서 특정 이벤트가 발생할 때, 자동으로 Slack으로 메시지를 보낼 수 있습니다. <br>
 > 즉, Airflow가 DAG 실행 결과를 Slack에 알릴 수 있도록 Webhook을 설정하는 것입니다.
 
 1. **Slack API 페이지 이동** ([Slack API](https://api.slack.com/apps))
