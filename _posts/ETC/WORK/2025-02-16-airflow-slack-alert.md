@@ -72,7 +72,6 @@ Webhook을 설정하면 Airflow가 슬랙 채널로 메시지를 보낼 수 있�
 SlackWebhookOperator는 Airflow에서 Slack으로 메시지를 전송하는 연산자(Operator)입니다. **Slack의 Incoming Webhook API**를 사용하여 메시지를 보낼 수 있으며, DAG의 실행 상태를 Slack으로 알리는 역할을 합니다. <br>
 이를 활용하면 배치 작업 완료, 오류 발생, 경고 등의 이벤트를 Slack에 자동으로 공유할 수 있어 실시간 모니터링과 작업 상태 확인이 훨씬 편리해집니다.
 
-
 ### 🔹 주요 코드 설명
 ```python
 from airflow.providers.slack.operators.slack_webhook import SlackWebhookOperator
@@ -91,6 +90,9 @@ default_args = {
                                                        owner=OWNER_SLACK_ID)  # DAG 실행 실패 시 슬랙 알림 전송
 }
 ```
+
+> `default_args`는 **DAG에 포함된 모든 Operator에 공통적으로 적용되는 설정 값**입니다. <br>
+> DAG 내 여러 작업(Task)에서 반복적으로 필요한 인자가 있다면 default_args를 사용하면 편리합니다.
 
 ```python
 # DAG 작성 및 Slack 메시지 전송 작업 추가
