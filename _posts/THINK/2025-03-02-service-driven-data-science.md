@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 기술보다 중요한 것: 서비스 성공을 위한 데이터 분석가의 자세
-subtitle: "Let's not be a fool"
+subtitle: 
 categories: think
 tags:
 comments: true
@@ -122,5 +122,3 @@ comments: true
 > **데이터 분석가인 나 자신부터 더 넓은 시야를 가져야겠다.”**
 
 이것이 이번 팀장님의 조언을 통해 얻은 가장 큰 깨달음이다.
-
-
