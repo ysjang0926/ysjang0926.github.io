@@ -1,11 +1,12 @@
 ---
 layout: post
-title: 기술보다 중요한 것: 서비스 성공을 위한 데이터 분석가의 자세
+title: "기술보다 중요한 것: 서비스 성공을 위한 데이터 분석가의 자세"
 subtitle: 
 categories: think
 tags:
 comments: true
 ---
+
 
 얼마 전 팀 회의에서 팀장님께서 하신 말씀이 계속 머릿속을 맴돌았다.
 
