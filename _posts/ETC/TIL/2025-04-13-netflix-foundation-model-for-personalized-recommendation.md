@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "넷플릭스 - 개인화 추천을 위한 파운데이션 모델"
+title:  "Netflix의 추천 파운데이션 모델: 더 이상 '모델'이 아닌 '인프라' 관점으로"
 subtitle:   "Let's not be a fool"
 categories: etc
 tags: etc_til
