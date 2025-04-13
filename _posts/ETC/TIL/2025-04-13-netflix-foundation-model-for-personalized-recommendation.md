@@ -8,7 +8,7 @@ comments: true
 ---
 
 - Netflix의 추천 시스템 아키텍처를 통합하고 확장 가능한 방식으로 재설계한 내용을 다룹니다✍🏻
-- 원본 콘텐츠(Foundation Model for Personalized Recommendation[https://netflixtechblog.com/foundation-model-for-personalized-recommendation-1a0bd8e02d39])를 꼭 읽어보시길 권장 드립니다. 원문을 통해 더욱 깊이 있는 정보를 얻으실 수 있을 거에요😉
+- 원본 콘텐츠((Foundation Model for Personalized Recommendation)[https://netflixtechblog.com/foundation-model-for-personalized-recommendation-1a0bd8e02d39])를 꼭 읽어보시길 권장 드립니다. 원문을 통해 더욱 깊이 있는 정보를 얻으실 수 있을 거에요😉
 
 ---------
 
